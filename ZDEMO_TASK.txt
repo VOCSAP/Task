@@ -1,0 +1,439 @@
+*&---------------------------------------------------------------------*
+*& Report  ZDEMO_TASK
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+REPORT zdemo_task.
+
+
+DATA : gv_grfc TYPE rfcgr.
+DATA : gv_pmax TYPE int4.
+DATA : gv_compteur_pc TYPE i.
+DATA : gv_compteur_get TYPE i.
+DATA : gv_compteur_check TYPE i.
+DATA : gv_compteur_error TYPE i.
+
+SELECTION-SCREEN BEGIN OF BLOCK b1.
+
+PARAMETERS : p_grfc TYPE bdfields-rfcgr.
+PARAMETERS : p_max TYPE int4.
+PARAMETERS : p_row TYPE int4.
+
+SELECTION-SCREEN END OF BLOCK b1.
+
+
+""  --> Routine appeler lors de la fin de Tâche
+FORM form_eot USING iv_function_name TYPE clike
+                    it_result        TYPE zif_task_constant=>ty_t_function_parameters
+                    it_attached_data TYPE zif_task_constant=>ty_t_task_attached_data
+                    iv_error         TYPE flag.
+
+
+ENDFORM.
+
+*----------------------------------------------------------------------*
+*        CLASS LCL_MAIN DEFINIION
+*----------------------------------------------------------------------*
+*
+*----------------------------------------------------------------------*
+CLASS lcl_main DEFINITION FINAL.
+
+*-- Publique
+  PUBLIC SECTION.
+
+***------------------------------------------------------------------***
+**                              TYPES                                 **
+***------------------------------------------------------------------***
+
+*   Déclaration de type
+
+***------------------------------------------------------------------***
+**                           MÉTHODES                                 **
+***------------------------------------------------------------------***
+
+*	Déclaration de méthodes
+
+    METHODS constructor
+      IMPORTING
+        iv_grfc TYPE rfcgr
+        iv_pmax TYPE int4.
+
+    METHODS main.
+
+    METHODS at_eot
+      IMPORTING
+        iv_function_name TYPE funcname OPTIONAL
+        it_result        TYPE zif_task_constant=>ty_t_function_parameters OPTIONAL
+        it_attached_data TYPE zif_task_constant=>ty_t_task_attached_data OPTIONAL
+        iv_error         TYPE flag OPTIONAL.
+
+***------------------------------------------------------------------***
+**                            ATTRIBUTS                               **
+***------------------------------------------------------------------***
+
+*	Déclaration d'attributs
+
+
+*-- Privée
+  PRIVATE SECTION.
+
+***------------------------------------------------------------------***
+**                              TYPES                                 **
+***------------------------------------------------------------------***
+
+*   Déclaration de type
+
+
+***------------------------------------------------------------------***
+**                           MÉTHODES                                 **
+***------------------------------------------------------------------***
+
+*	Déclaration de méthodes
+
+***------------------------------------------------------------------***
+**                            ATTRIBUTS                               **
+***------------------------------------------------------------------***
+
+*	Déclaration d'attributs
+    DATA :
+      mv_grfc     TYPE rfcgr,
+      mv_task_max TYPE int4.
+
+
+ENDCLASS.             "LCL_MAIN DEFINITION
+
+*----------------------------------------------------------------------*
+*         CLASS LCL_MAIN IMPLEMENTATION
+*----------------------------------------------------------------------*
+*
+*----------------------------------------------------------------------*
+CLASS lcl_main IMPLEMENTATION.
+
+  METHOD constructor.
+
+    me->mv_grfc = iv_grfc.
+    me->mv_task_max = iv_pmax.
+
+  ENDMETHOD.
+
+
+  METHOD at_eot.
+
+***------------------------------------------------------------------***
+**                            STRUCTURE                               **
+***------------------------------------------------------------------***
+    DATA :
+      ls_return                TYPE bapiret2,
+      ls_material_general_data TYPE bapimatdoa.
+
+***------------------------------------------------------------------***
+**                            VARIABLES                               **
+***------------------------------------------------------------------***
+    DATA :
+      lv_matnr         TYPE matnr,
+      lv_deletion_flag TYPE bapimatall-del_flag.
+
+***------------------------------------------------------------------***
+**                          FIELD-SYMBOLS                             **
+***------------------------------------------------------------------***
+    FIELD-SYMBOLS :
+      <lfs_value>           TYPE any,
+      <lfs_s_result>        TYPE zif_task_constant=>ty_function_parameters,
+      <lfs_s_attached_data> TYPE zif_task_constant=>ty_task_attached_data.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+    " Suivant le MF appelé
+    CASE iv_function_name.
+
+      WHEN 'Z_FSD_RECH_PRIX_CESSION_MULTI'.
+
+        ADD 1 TO gv_compteur_pc.
+
+      WHEN 'BAPI_MATERIAL_GET_DETAIL'.
+        " Traitement récupérer données Article
+
+        " -----------------------------------------------------------
+        " Récupération des paramètres
+        " -----------------------------------------------------------
+
+        ""  --> Récupération "MATERIAL_GENERAL_DATA"
+        READ TABLE it_result WITH TABLE KEY parameter_name = 'MATERIAL_GENERAL_DATA'
+                                  ASSIGNING <lfs_s_result>.
+        IF sy-subrc EQ 0.
+          ASSIGN <lfs_s_result>-parameter_data->* TO <lfs_value>.
+          IF sy-subrc EQ 0.
+            ls_material_general_data = <lfs_value>.
+
+          ENDIF.
+
+        ENDIF.
+
+        ""  --> Récupération "RETURN"
+        READ TABLE it_result WITH TABLE KEY parameter_name = 'RETURN'
+                                  ASSIGNING <lfs_s_result>.
+        IF sy-subrc EQ 0.
+          ASSIGN <lfs_s_result>-parameter_data->* TO <lfs_value>.
+          IF sy-subrc EQ 0.
+            ls_return = <lfs_value>.
+
+          ENDIF.
+
+        ENDIF.
+
+        " -----------------------------------------------------------
+        " Traitement lors de la récéption
+        " -----------------------------------------------------------
+
+        ADD 1 TO gv_compteur_get.
+
+
+      WHEN 'BAPI_MATERIAL_EXISTENCECHECK'.
+        " Traitement contrôle existence Article
+
+        " -----------------------------------------------------------
+        " Récupération des paramètres
+        " -----------------------------------------------------------
+
+        ""  --> Récupération des données "contexte"
+        READ TABLE it_attached_data WITH TABLE KEY name = 'MATNR'
+                                         ASSIGNING <lfs_s_attached_data>.
+        IF sy-subrc EQ 0.
+          ASSIGN <lfs_s_attached_data>-data->* TO <lfs_value>.
+          IF sy-subrc EQ 0.
+            lv_matnr = <lfs_value>.
+
+          ENDIF.
+
+        ENDIF.
+
+        ""  --> Récupération "DELETION_FLAG"
+        READ TABLE it_result WITH TABLE KEY parameter_name = 'DELETION_FLAG'
+                                  ASSIGNING <lfs_s_result>.
+        IF sy-subrc EQ 0.
+          ASSIGN <lfs_s_result>-parameter_data->* TO <lfs_value>.
+          IF sy-subrc EQ 0.
+            lv_deletion_flag = <lfs_value>.
+
+          ENDIF.
+
+        ENDIF.
+
+        ""  --> Récupération "RETURN"
+        READ TABLE it_result WITH TABLE KEY parameter_name = 'RETURN'
+                                  ASSIGNING <lfs_s_result>.
+        IF sy-subrc EQ 0.
+          ASSIGN <lfs_s_result>-parameter_data->* TO <lfs_value>.
+          IF sy-subrc EQ 0.
+            ls_return = <lfs_value>.
+
+          ENDIF.
+
+        ENDIF.
+
+        " -----------------------------------------------------------
+        " Traitement lors de la récéption
+        " -----------------------------------------------------------
+
+        ADD 1 TO gv_compteur_check.
+
+      WHEN OTHERS.
+        " Autre cas
+        RETURN.
+
+    ENDCASE.
+
+  ENDMETHOD.
+
+  METHOD main.
+
+    DATA :
+      lt_matnr TYPE table_matnr.
+
+    DATA :
+      lo_task_manager    TYPE REF TO zcl_task_manager,
+      lo_task_container  TYPE REF TO zcl_task_container,
+      lo_cx_task_manager TYPE REF TO zcx_task_manager.
+
+    DATA :
+      ls_process_by_form   TYPE ztec_s_task_process_by_form,
+      ls_process_by_method TYPE ztec_s_task_process_by_method.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+    " -----------------------------------------------------------
+    " Initialisation structure pour définir le traitement
+    " à appeler lorsqu'une Tâche se termine
+    " -----------------------------------------------------------
+
+    " Initialisation structure pour appel par Routine
+    ls_process_by_form-repid = sy-repid.      "Programme
+    ls_process_by_form-form  = 'FORM_EOT'.    "Nom de la Routine
+
+    " Initialisation structure pour appel par Méthode
+    ls_process_by_method-instance = me.       "Instance
+    ls_process_by_method-method = 'AT_EOT'.   "Méthode à appeler
+
+    " -----------------------------------------------------------
+    " Création instance gérant la //
+    " -----------------------------------------------------------
+
+    TRY.
+        " Création instance Tâche manager
+        CREATE OBJECT lo_task_manager
+          EXPORTING
+            iv_grfc              = me->mv_grfc
+            iv_task_max          = me->mv_task_max
+*           is_process_by_form   = ls_process_by_form.                 "// Permet d'utiliser une Routine lorsqu'une Tâche se termine
+            is_process_by_method = ls_process_by_method.              "// Permet d'utiliser une Méthode lorsqu'une Tâche se termine
+*          iv_function_name = 'BAPI_MATERIAL_GET_DETAIL'.             "// Si valorisé --> permet de générer des Tâches dédiées à ce MF
+
+
+        " Génération Container
+        lo_task_container = lo_task_manager->task_container_create( ).
+
+        " -----------------------------------------------------------
+        " Traitement d'appel en //
+        " -----------------------------------------------------------
+
+        " Récupération du nombre d'Article spécifié
+        SELECT matnr FROM mara UP TO p_row ROWS
+               INTO TABLE lt_matnr.
+
+        " Parcours l'ensemble des Articles récupéré
+        LOOP AT lt_matnr ASSIGNING FIELD-SYMBOL(<lfs_s_matnr>).
+
+*          " -----------------------------------------------------------
+*          " Initialisation des données pour appel récupération données
+*          " -----------------------------------------------------------
+*
+*          " Initialisation données d'appel via le Container
+*
+*          ""  --> Réinitialisation Container
+*          lo_task_container->reset( ).
+*
+*          ""  --> Ajout paramètre d'import "MATERIAL"
+*          lo_task_container->function_parameter_add(
+*              iv_parameter_name = 'MATERIAL'
+*              ix_parameter_data = <lfs_s_matnr>
+*          ).
+*
+*          ""  --> Ajout paramètre d'export "MATERIAL_GENERAL_DATA"
+*          lo_task_container->function_parameter_add(
+*            iv_parameter_name = 'MATERIAL_GENERAL_DATA'
+**            ix_parameter_data           = ... "Pas besoin de renseigner de "valeur" car c'est un paramètre d'EXPORT. Sauf si :
+**          """" Si la définition du paramètre d'Export est de type générique (ANY TABLE, STANDARD TABLE, etc.)
+**          """" il faut remplir l'un ou l'autre des deux paramètres suivants :
+**            ix_parameter_data = ref #( lt_itab ).
+**            iv_type_for_generic_param = cl_abap_typedescr=>describe_by_data( lt_itab )->absolute_name.
+*          ).
+*
+*          TRY.
+*              " Démarre la Tâche de récupération du détail de l'Article
+*              lo_task_manager->task_start_new(
+*                  iv_function_name  = 'BAPI_MATERIAL_GET_DETAIL'       "// Optionnel dans le cas d'une Tâche dédiée !
+*                  io_task_container = lo_task_container
+*              ).
+*
+*            CATCH zcx_task_manager INTO lo_cx_task_manager.
+*              " Erreur lors de la création du Task Manager
+*              WHILE lo_cx_task_manager->previous IS BOUND. lo_cx_task_manager ?= lo_cx_task_manager->previous. ENDWHILE.
+*              WRITE : /, lo_cx_task_manager->get_text( ).
+*              ADD 1 TO gv_compteur_error.
+*
+*          ENDTRY.
+
+          " -----------------------------------------------------------
+          " Initialisation des données pour appel Contrôle Existence
+          " -----------------------------------------------------------
+
+          "" Exemple avec données contextuelles (liées)
+
+          ""  --> Réinitialisation Container
+          lo_task_container->reset( ).
+
+          " Initialisation données liées à la Tâche
+
+          lo_task_container->attached_data_add(
+              iv_name = 'MATNR'
+              ix_data = <lfs_s_matnr>
+          ).
+
+          " Initialisation données d'appel
+
+          ""  --> Ajout paramètre "MATERIAL" (Import)
+          lo_task_container->function_parameter_add(
+              iv_parameter_name = 'MATERIAL'
+              ix_parameter_data = <lfs_s_matnr>
+          ).
+
+          ""  --> Ajout paramètre "DELETION_FLAG" (Export)
+          lo_task_container->function_parameter_add(
+              iv_parameter_name = 'DELETION_FLAG'
+*             ix_parameter_data = ...      "Pas besoin de renseigner de "valeur" car c'est un paramètre d'EXPORT. Sauf si :
+*             "" la définition du paramètre d'Export est de type générique (ANY TABLE, STANDARD TABLE, etc., CLIKE, NUMERIC, etc...)
+*             "" il faut remplir l'un ou l'autre des deux paramètres suivants :
+*             ix_parameter_data = ref #( lt_itab ).
+*             iv_type_for_none_ddic_param = cl_abap_typedescr=>describe_by_data( lt_itab )->absolute_name.
+          ).
+
+          ""  --> Ajout paramètre d'export "RETURN" (Export)
+          lo_task_container->function_parameter_add(
+              iv_parameter_name = 'RETURN'
+          ).
+
+          TRY.
+              " Démarre la Tâche de contrôle d'existence
+              lo_task_manager->task_start_new(
+                  iv_function_name  = 'BAPI_MATERIAL_EXISTENCECHECK'
+                  io_task_container = lo_task_container
+              ).
+
+            CATCH zcx_task_manager INTO lo_cx_task_manager.
+              " Erreur lors de la création du Task Manager
+              WHILE lo_cx_task_manager->previous IS BOUND. lo_cx_task_manager ?= lo_cx_task_manager->previous. ENDWHILE.
+              WRITE : /, lo_cx_task_manager->get_text( ).
+              ADD 1 TO gv_compteur_error.
+
+          ENDTRY.
+
+        ENDLOOP.
+
+        " Une fois la boucle finie, des traitements asynchrone peuvent être encore en cours de traitement
+        ""  --> Appel méthode pour finaliser les traitements en cours
+        lo_task_manager->task_finish_running( ).
+
+      CATCH zcx_task_manager INTO lo_cx_task_manager.
+        " Erreur lors de la création du Task Manager
+        ADD 1 TO gv_compteur_error.
+
+    ENDTRY.
+
+    WRITE : /, 'Check ', gv_compteur_check.
+    WRITE : /, 'Erreur ', gv_compteur_error.
+    WRITE : /, 'Get ', gv_compteur_get.
+    WRITE : /, 'PC ', gv_compteur_pc.
+
+  ENDMETHOD.
+
+ENDCLASS.
+
+
+START-OF-SELECTION.
+
+  DATA :
+    lo_main TYPE REF TO lcl_main.
+
+  CREATE OBJECT lo_main
+    EXPORTING
+      iv_grfc = p_grfc
+      iv_pmax = p_max.
+
+  lo_main->main( ).

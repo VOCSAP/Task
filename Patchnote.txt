@@ -1,0 +1,26 @@
+1.0 : 
+Version initiale
+2.0 : 
+Correction de bugs et amélioration de la statibilité
+
+3.0 : 
+Ajout support des types génériques de table et structure (côté MF)
+Intégration d'une classe SHM pour contenir les type de définition. Peut être utiliser ailleurs ...
+Correction de bugs et amélioration de la statibilité 
+
+4.0 : 
+Attention, cette mise à jour n'est pas rétro-comptatible. 
+Ajout d'une classe servant de conteneur de données pour le lancement d'une Tâche.
+Cette dernière rend plus aisée l'utilisation du Cadriciel et évite la déclaration des tables
+de type "FUNCTION_PARAMETERS" et "ATTACHED_DATA"
+Ajout d'un paramètre d'appel dans les fonctions de retour permettant de savoir
+si le traitement de parallélisation a été en erreur ou non. (paramètre iv_error).
+
+4.1 : 
+Correction d'un problème lors de l'appel de MF dont la signature contient des paramètres "TABLES"
+
+4.2 : A venir
+Purge de la SHM lors de la fin d'appel des MFs //
+
+5.1 : A venir 
+Ajouter Assistant pour exploitation plus facile de la classe
