@@ -19,8 +19,14 @@ si le traitement de parallélisation a été en erreur ou non. (paramètre iv_error)
 4.1 : 
 Correction d'un problème lors de l'appel de MF dont la signature contient des paramètres "TABLES"
 
-4.2 : A venir
+4.2 : 
+Utilisation du groupe par défaut
+Ajout contrôle Groupe de Serveur
+
+4.3 : A venir
 Purge de la SHM lors de la fin d'appel des MFs //
+
+
 
 5.1 : A venir 
 Ajouter Assistant pour exploitation plus facile de la classe
