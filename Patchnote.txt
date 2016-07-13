@@ -23,10 +23,11 @@ Correction d'un problème lors de l'appel de MF dont la signature contient des pa
 Utilisation du groupe par défaut
 Ajout contrôle Groupe de Serveur
 
-4.3 : A venir
-Purge de la SHM lors de la fin d'appel des MFs //
+4.3 :
+Création d'une nouvelle SHM afin de purger SHM de définition de type lors de la fin d'appel des MFs //
 
-
+4.4 : A venir 
+Optmisation de la purge de la SHM 
 
 5.1 : A venir 
 Ajouter Assistant pour exploitation plus facile de la classe
