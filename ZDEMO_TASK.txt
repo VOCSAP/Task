@@ -8,13 +8,68 @@
 
 REPORT zdemo_task.
 
+TYPES :
+  BEGIN OF ty_layout,
+    machin TYPE c LENGTH 1,
+    bidule TYPE c LENGTH 1,
+    truc   TYPE c LENGTH 1,
+  END OF   ty_layout.
+
+TYPES : ty_t_layout TYPE STANDARD TABLE OF ty_layout
+        WITH NON-UNIQUE KEY primary_key COMPONENTS machin.
+
+TYPES :
+  BEGIN OF ty_complex_in_2,
+    matnr    TYPE matnr,
+    s_layout TYPE ty_layout,
+  END OF   ty_complex_in_2.
+
+TYPES : ty_t_complex_in_2 TYPE STANDARD TABLE OF ty_complex_in_2
+        WITH NON-UNIQUE KEY primary_key COMPONENTS matnr.
+
+TYPES :
+  BEGIN OF ty_complex_in_1,
+    vbeln          TYPE vbeln,
+    t_complex_in_2 TYPE ty_t_complex_in_2,
+  END OF   ty_complex_in_1.
+
+TYPES : ty_t_complex_in_1 TYPE STANDARD TABLE OF ty_complex_in_1
+        WITH NON-UNIQUE KEY primary_key COMPONENTS vbeln.
+
+TYPES :
+  BEGIN OF ty_table_complex_in,
+    matnr        TYPE mara-matnr,
+    zzt_plm_mara TYPE zzt_plm_mara,
+    t_complex_in TYPE ty_t_complex_in_1,
+  END OF   ty_table_complex_in.
+
+TYPES : ty_t_table_complex_in TYPE STANDARD TABLE OF ty_table_complex_in
+        WITH NON-UNIQUE KEY primary_key COMPONENTS matnr.
+
+TYPES :
+  BEGIN OF ty_table_complex_out,
+    matnr TYPE mara-matnr,
+
+  END OF   ty_table_complex_out.
+
+TYPES : ty_t_table_complex_out TYPE STANDARD TABLE OF ty_table_complex_out
+        WITH NON-UNIQUE KEY primary_key COMPONENTS matnr.
+
 
 DATA : gv_grfc TYPE rfcgr.
 DATA : gv_pmax TYPE int4.
 DATA : gv_compteur_pc TYPE i.
+DATA : gv_compteur_pc_before TYPE i.
 DATA : gv_compteur_get TYPE i.
+DATA : gv_compteur_get_before TYPE i.
+DATA : gv_compteur_sql TYPE i.
+DATA : gv_compteur_sql_before TYPE i.
 DATA : gv_compteur_check TYPE i.
+DATA : gv_compteur_check_before TYPE i.
 DATA : gv_compteur_error TYPE i.
+
+DATA : gv_ts_after_check TYPE timestamp.
+DATA : gv_ts_before_check TYPE timestamp.
 
 SELECTION-SCREEN BEGIN OF BLOCK b1.
 
@@ -69,6 +124,11 @@ CLASS lcl_main DEFINITION FINAL.
         it_result        TYPE zif_task_constant=>ty_t_function_parameters OPTIONAL
         it_attached_data TYPE zif_task_constant=>ty_t_task_attached_data OPTIONAL
         iv_error         TYPE flag OPTIONAL.
+
+    METHODS before_task
+      IMPORTING
+        iv_function_name  TYPE funcname OPTIONAL
+        io_task_container TYPE REF TO zcl_task_container OPTIONAL.
 
 ***------------------------------------------------------------------***
 **                            ATTRIBUTS                               **
@@ -141,6 +201,7 @@ CLASS lcl_main IMPLEMENTATION.
 ***------------------------------------------------------------------***
     FIELD-SYMBOLS :
       <lfs_value>           TYPE any,
+      <lfs_t_value>         TYPE ANY TABLE,
       <lfs_s_result>        TYPE zif_task_constant=>ty_function_parameters,
       <lfs_s_attached_data> TYPE zif_task_constant=>ty_task_attached_data.
 
@@ -154,6 +215,19 @@ CLASS lcl_main IMPLEMENTATION.
       WHEN 'Z_FSD_RECH_PRIX_CESSION_MULTI'.
 
         ADD 1 TO gv_compteur_pc.
+
+      WHEN 'ZTEST_OVR_1'.
+        ""  --> Récupération "ET_DATA"
+        READ TABLE it_result WITH TABLE KEY parameter_name = 'ET_DATA'
+                                  ASSIGNING <lfs_s_result>.
+        IF sy-subrc EQ 0.
+          ASSIGN <lfs_s_result>-parameter_data->* TO <lfs_t_value>.
+          IF sy-subrc EQ 0.
+            gv_compteur_sql =  gv_compteur_sql + lines( <lfs_t_value> ).
+
+          ENDIF.
+
+        ENDIF.
 
       WHEN 'BAPI_MATERIAL_GET_DETAIL'.
         " Traitement récupérer données Article
@@ -241,6 +315,62 @@ CLASS lcl_main IMPLEMENTATION.
         " -----------------------------------------------------------
 
         ADD 1 TO gv_compteur_check.
+        GET RUN TIME FIELD gv_ts_after_check.
+
+      WHEN OTHERS.
+        " Autre cas
+        RETURN.
+
+    ENDCASE.
+
+  ENDMETHOD.
+
+  METHOD before_task.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+    " Suivant le MF appelé
+    CASE iv_function_name.
+
+      WHEN 'Z_FSD_RECH_PRIX_CESSION_MULTI'.
+
+*        ADD 1 TO gv_compteur_pc.
+
+      WHEN 'ZTEST_OVR_1'.
+        ""  --> Récupération "ET_DATA"
+*        READ TABLE it_result WITH TABLE KEY parameter_name = 'ET_DATA'
+*                                  ASSIGNING <lfs_s_result>.
+*        IF sy-subrc EQ 0.
+*          ASSIGN <lfs_s_result>-parameter_data->* TO <lfs_t_value>.
+*          IF sy-subrc EQ 0.
+*            gv_compteur_sql =  gv_compteur_sql + lines( <lfs_t_value> ).
+*
+*          ENDIF.
+*
+*        ENDIF.
+
+      WHEN 'BAPI_MATERIAL_GET_DETAIL'.
+        " Traitement récupérer données Article
+
+        " -----------------------------------------------------------
+        " Traitement lors de la récéption
+        " -----------------------------------------------------------
+
+        ADD 1 TO gv_compteur_get_before.
+
+
+      WHEN 'BAPI_MATERIAL_EXISTENCECHECK'.
+        " Traitement contrôle existence Article
+
+        " -----------------------------------------------------------
+        " Traitement lors de la récéption
+        " -----------------------------------------------------------
+
+        ADD 1 TO gv_compteur_check_before.
+        GET RUN TIME FIELD gv_ts_before_check.
+        WAIT UP TO 3 SECONDS.
 
       WHEN OTHERS.
         " Autre cas
@@ -261,8 +391,10 @@ CLASS lcl_main IMPLEMENTATION.
       lo_cx_task_manager TYPE REF TO zcx_task_manager.
 
     DATA :
-      ls_process_by_form   TYPE ztec_s_task_process_by_form,
-      ls_process_by_method TYPE ztec_s_task_process_by_method.
+      ls_after_process_by_form    TYPE ztec_s_task_process_by_form,
+      ls_after_process_by_method  TYPE ztec_s_task_process_by_method,
+      ls_before_process_by_form   TYPE ztec_s_task_process_by_form,
+      ls_before_process_by_method TYPE ztec_s_task_process_by_method.
 
 ***==================================================================***
 **                           TRAITEMENT                               **
@@ -274,25 +406,32 @@ CLASS lcl_main IMPLEMENTATION.
     " -----------------------------------------------------------
 
     " Initialisation structure pour appel par Routine
-    ls_process_by_form-repid = sy-repid.      "Programme
-    ls_process_by_form-form  = 'FORM_EOT'.    "Nom de la Routine
+    ls_after_process_by_form-repid = sy-repid.      "Programme
+    ls_after_process_by_form-form  = 'FORM_EOT'.    "Nom de la Routine
 
     " Initialisation structure pour appel par Méthode
-    ls_process_by_method-instance = me.       "Instance
-    ls_process_by_method-method = 'AT_EOT'.   "Méthode à appeler
+    ls_after_process_by_method-instance = me.       "Instance
+    ls_after_process_by_method-method = 'AT_EOT'.   "Méthode à appeler
+
+    ls_before_process_by_method-instance = me.
+    ls_before_process_by_method-method   = 'BEFORE_TASK'.
 
     " -----------------------------------------------------------
     " Création instance gérant la //
     " -----------------------------------------------------------
 
+    DATA : ls_task_trace_param TYPE ztec_s_task_trace_param.
+
     TRY.
         " Création instance Tâche manager
         CREATE OBJECT lo_task_manager
           EXPORTING
-            iv_grfc              = me->mv_grfc
-            iv_task_max          = me->mv_task_max
-*           is_process_by_form   = ls_process_by_form.                 "// Permet d'utiliser une Routine lorsqu'une Tâche se termine
-            is_process_by_method = ls_process_by_method.              "// Permet d'utiliser une Méthode lorsqu'une Tâche se termine
+            iv_grfc                     = me->mv_grfc
+            iv_task_max                 = me->mv_task_max
+*           is_task_trace_param         = ls_task_trace_param
+*           is_after_process_by_form    = ls_af_terprocess_by_form.            "// Permet d'utiliser une Routine lorsqu'une Tâche se termine
+            is_after_process_by_method  = ls_after_process_by_method           "// Permet d'utiliser une Méthode lorsqu'une Tâche se termine
+            is_before_process_by_method = ls_before_process_by_method.
 *          iv_function_name = 'BAPI_MATERIAL_GET_DETAIL'.             "// Si valorisé --> permet de générer des Tâches dédiées à ce MF
 
 
@@ -303,52 +442,98 @@ CLASS lcl_main IMPLEMENTATION.
         " Traitement d'appel en //
         " -----------------------------------------------------------
 
+        DATA : lt_mara TYPE mara_tab.
+
+        DATA : ls_complex_in_1 TYPE ty_complex_in_1.
+        DATA : ls_complex_in_2 TYPE ty_complex_in_2.
+        DATA : ls_table_complex_in TYPE ty_table_complex_in.
+        DATA : lt_table_complex_in  TYPE ty_t_table_complex_in.
+        DATA : lt_table_complex_out TYPE ty_t_table_complex_out.
+
+        ls_table_complex_in-matnr = '001'.
+        ls_table_complex_in-zzt_plm_mara-observation1 = 'OBSERVATION1'.
+        ls_complex_in_1-vbeln = '92901091'.
+        ls_complex_in_2-matnr = '99191'.
+        ls_complex_in_2-s_layout-bidule = 'C'.
+        APPEND ls_complex_in_2 TO ls_complex_in_1-t_complex_in_2.
+        APPEND ls_complex_in_1 TO ls_table_complex_in-t_complex_in.
+        APPEND ls_table_complex_in TO lt_table_complex_in.
+
         " Récupération du nombre d'Article spécifié
         SELECT matnr FROM mara UP TO p_row ROWS
                INTO TABLE lt_matnr.
 
+        " -----------------------------------------------------------
+        " Initialisation des données pour appel récupération données
+        " -----------------------------------------------------------
+
+        " Initialisation données d'appel via le Container + Utilisation SHM
+
+        GET RUN TIME FIELD DATA(lv_runtime_beg).
+
+*        " Parcours l'ensemble des Articles récupéré
+*        LOOP AT lt_matnr ASSIGNING FIELD-SYMBOL(<lfs_s_matnr>).
+
+        ""  --> Réinitialisation Container
+        lo_task_container->reset( ).
+
+        ""  --> Ajout paramètre d'import "IV_TABLE"
+        lo_task_container->function_parameter_add(
+            iv_parameter_name = 'IV_TABLE'
+            ix_parameter_data = 'MARA'
+        ).
+
+        ""  --> Ajout paramètre d'import "IT_TABLE_FAE"
+        lo_task_container->function_parameter_add(
+          iv_parameter_name = 'IT_TABLE_FAE'
+          ix_parameter_data = lt_table_complex_in
+        ).
+
+        ""  --> Ajout paramètre d'import "IV_SQL_COND"
+        lo_task_container->function_parameter_add(
+          iv_parameter_name = 'IV_SQL_COND'
+          ix_parameter_data = 'MATNR EQ IT_TABLE_FAE-TABLE_LINE'
+        ).
+
+        ""  --> Ajout paramètre d'import "IV_INPUT_1"
+        lo_task_container->function_parameter_add(
+          iv_parameter_name = 'IV_INPUT_1'
+          ix_parameter_data = '09101'
+        ).
+
+        ""  --> Ajout paramètre d'export "ET_DATA"
+        lo_task_container->function_parameter_add(
+          EXPORTING
+            iv_parameter_name = 'ET_DATA'
+            iv_type_for_none_ddic_param = cl_abap_typedescr=>describe_by_data( lt_mara )->absolute_name
+           """" La définition du paramètre d'Export est de type générique (STANDARD TABLE)
+*          """" il faut remplir l'un ou l'autre des deux paramètres suivants :
+*            ix_parameter_data = ref #( lt_itab ).
+*            iv_type_for_generic_param = cl_abap_typedescr=>describe_by_data( lt_itab )->absolute_name.
+        ).
+
+*          ls_task_trace_param-trace_active = ls_task_trace_param-trace_memory = abap_true.
+
+        TRY.
+            " Démarre la Tâche d'utilisation SHM 'ZTEST_OVR_1'
+            lo_task_manager->task_start_new(
+                iv_function_name    = 'ZTEST_OVR_1'
+                io_task_container   = lo_task_container
+                is_task_trace_param = ls_task_trace_param
+            ).
+
+          CATCH zcx_task_manager INTO lo_cx_task_manager.
+            " Erreur lors de la création du Task Manager
+            WHILE lo_cx_task_manager->previous IS BOUND. lo_cx_task_manager ?= lo_cx_task_manager->previous. ENDWHILE.
+            WRITE : /, lo_cx_task_manager->get_text( ).
+            ADD 1 TO gv_compteur_error.
+
+        ENDTRY.
+
+        CLEAR : ls_task_trace_param.
+
         " Parcours l'ensemble des Articles récupéré
         LOOP AT lt_matnr ASSIGNING FIELD-SYMBOL(<lfs_s_matnr>).
-
-*          " -----------------------------------------------------------
-*          " Initialisation des données pour appel récupération données
-*          " -----------------------------------------------------------
-*
-*          " Initialisation données d'appel via le Container
-*
-*          ""  --> Réinitialisation Container
-*          lo_task_container->reset( ).
-*
-*          ""  --> Ajout paramètre d'import "MATERIAL"
-*          lo_task_container->function_parameter_add(
-*              iv_parameter_name = 'MATERIAL'
-*              ix_parameter_data = <lfs_s_matnr>
-*          ).
-*
-*          ""  --> Ajout paramètre d'export "MATERIAL_GENERAL_DATA"
-*          lo_task_container->function_parameter_add(
-*            iv_parameter_name = 'MATERIAL_GENERAL_DATA'
-**            ix_parameter_data           = ... "Pas besoin de renseigner de "valeur" car c'est un paramètre d'EXPORT. Sauf si :
-**          """" Si la définition du paramètre d'Export est de type générique (ANY TABLE, STANDARD TABLE, etc.)
-**          """" il faut remplir l'un ou l'autre des deux paramètres suivants :
-**            ix_parameter_data = ref #( lt_itab ).
-**            iv_type_for_generic_param = cl_abap_typedescr=>describe_by_data( lt_itab )->absolute_name.
-*          ).
-*
-*          TRY.
-*              " Démarre la Tâche de récupération du détail de l'Article
-*              lo_task_manager->task_start_new(
-*                  iv_function_name  = 'BAPI_MATERIAL_GET_DETAIL'       "// Optionnel dans le cas d'une Tâche dédiée !
-*                  io_task_container = lo_task_container
-*              ).
-*
-*            CATCH zcx_task_manager INTO lo_cx_task_manager.
-*              " Erreur lors de la création du Task Manager
-*              WHILE lo_cx_task_manager->previous IS BOUND. lo_cx_task_manager ?= lo_cx_task_manager->previous. ENDWHILE.
-*              WRITE : /, lo_cx_task_manager->get_text( ).
-*              ADD 1 TO gv_compteur_error.
-*
-*          ENDTRY.
 
           " -----------------------------------------------------------
           " Initialisation des données pour appel Contrôle Existence
@@ -404,6 +589,8 @@ CLASS lcl_main IMPLEMENTATION.
 
           ENDTRY.
 
+*          WAIT UP TO 5 SECONDS.
+
         ENDLOOP.
 
         " Une fois la boucle finie, des traitements asynchrone peuvent être encore en cours de traitement
@@ -416,10 +603,17 @@ CLASS lcl_main IMPLEMENTATION.
 
     ENDTRY.
 
-    WRITE : /, 'Check ', gv_compteur_check.
+    GET RUN TIME FIELD DATA(lv_runtime_end).
+    lv_runtime_end = lv_runtime_end - lv_runtime_beg.
+
+    WRITE : /, 'Check ', gv_compteur_check, 'TS :', gv_ts_after_check.
+    WRITE : /, 'Check Before', gv_compteur_check_before, 'TS :', gv_ts_before_check.
     WRITE : /, 'Erreur ', gv_compteur_error.
     WRITE : /, 'Get ', gv_compteur_get.
+    WRITE : /, 'Get Before', gv_compteur_get_before.
     WRITE : /, 'PC ', gv_compteur_pc.
+    WRITE : /, 'SQL lines ', gv_compteur_sql.
+    WRITE : /, 'Times : ', lv_runtime_end.
 
   ENDMETHOD.
 

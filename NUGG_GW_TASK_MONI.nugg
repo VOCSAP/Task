@@ -1,0 +1,1003 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nugget name="GW_TASK_MONI">
+ <TABL TABNAME="ZTASK_GW_SYSTEM_RESOURCE" DDLANGUAGE="F" TABCLASS="INTTAB" DATMIN="0000000000" DATMAX="0000000000" DATAVG="0000000000" LANGDEP="X" DDTEXT="Tâche - Gateway - Ressource Système" AUTHCLASS="00" PROZPUFF="000" EXCLASS="4">
+  <dd09l AS4VERS="0000" SCHFELDANZ="000"/>
+  <dd03p TABNAME="ZTASK_GW_SYSTEM_RESOURCE" FIELDNAME="SYSID" DDLANGUAGE="F" POSITION="0001" ROLLNAME="SYSID" ADMINFIELD="0" INTTYPE="C" INTLEN="000060" DOMNAME="CHAR30" ROUTPUTLEN="000000" HEADLEN="40" SCRLEN1="10" SCRLEN2="20" SCRLEN3="40" DTELMASTER="D" DATATYPE="CHAR" LENG="000030" OUTPUTLEN="000030" DECIMALS="000000" MASK="  CHARE" MASKLEN="0000" DDTEXT="Communication : identification/n°" REPTEXT="ID du système" SCRTEXT_S="ID système" SCRTEXT_M="ID du système" SCRTEXT_L="ID du système" DOMNAME3L="CHAR30" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SYSTEM_RESOURCE" FIELDNAME=".INCLUDE" DDLANGUAGE="F" POSITION="0002" ADMINFIELD="0" INTLEN="000000" PRECFIELD="ZTASK_GW_SYSTEM_RESOURCE_DATA" ROUTPUTLEN="000000" HEADLEN="00" SCRLEN1="00" SCRLEN2="00" SCRLEN3="00" LENG="000000" OUTPUTLEN="000000" DECIMALS="000000" MASK="      S" MASKLEN="0000" DDTEXT="Tâche - Gateway - Ressource Système - Données" DEPTH="00" COMPTYPE="S" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SYSTEM_RESOURCE" FIELDNAME="USER_CONNECTED" DDLANGUAGE="F" POSITION="0003" ROLLNAME="ALEUSERNO" ADMINFIELD="1" INTTYPE="X" INTLEN="000004" ROUTPUTLEN="000000" HEADLEN="10" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="INT4" LENG="000010" OUTPUTLEN="000011" DECIMALS="000000" MASK="  INT4E" MASKLEN="0000" DDTEXT="Nombre utilisateurs connectés" REPTEXT="Utilisat." SCRTEXT_S="Utilisat." SCRTEXT_M="Nbre utilisat." SCRTEXT_L="Nbre d&apos;utilisateurs" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SYSTEM_RESOURCE" FIELDNAME="SESSSION_ACTIV" DDLANGUAGE="F" POSITION="0004" ROLLNAME="SSI_SESSIONS" ADMINFIELD="1" INTTYPE="X" INTLEN="000004" DOMNAME="SSI_INTEGER_TYPE" ROUTPUTLEN="000000" HEADLEN="15" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="INT4" LENG="000010" OUTPUTLEN="000011" DECIMALS="000000" SIGNFLAG="X" MASK="  INT4E" MASKLEN="0000" DDTEXT="Nombre de sessions backend" REPTEXT="Nombre sessions" SCRTEXT_S="Sessions" SCRTEXT_M="Nombre sessions" SCRTEXT_L="Nombre de sessions" DOMNAME3L="SSI_INTEGER_TYPE" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SYSTEM_RESOURCE" FIELDNAME="PROCESS_ACTIV_TOT" DDLANGUAGE="F" POSITION="0005" ROLLNAME="DCPROC" ADMINFIELD="1" INTTYPE="C" INTLEN="000016" DOMNAME="DCPROC" ROUTPUTLEN="000000" HEADLEN="08" SCRLEN1="05" SCRLEN2="08" SCRLEN3="08" DTELMASTER="D" DATATYPE="CHAR" LENG="000008" OUTPUTLEN="000008" DECIMALS="000000" MASK="  CHARE" MASKLEN="0000" DDTEXT="Nombre de process en cours" REPTEXT="Process" SCRTEXT_S="%" SCRTEXT_M="Process" SCRTEXT_L="Process" DOMNAME3L="DCPROC" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SYSTEM_RESOURCE" FIELDNAME="PROCESS_ACTIV_GUI" DDLANGUAGE="F" POSITION="0006" ROLLNAME="DCPROC" ADMINFIELD="1" INTTYPE="C" INTLEN="000016" DOMNAME="DCPROC" ROUTPUTLEN="000000" HEADLEN="08" SCRLEN1="05" SCRLEN2="08" SCRLEN3="08" DTELMASTER="D" DATATYPE="CHAR" LENG="000008" OUTPUTLEN="000008" DECIMALS="000000" MASK="  CHARE" MASKLEN="0000" DDTEXT="Nombre de process en cours" REPTEXT="Process" SCRTEXT_S="%" SCRTEXT_M="Process" SCRTEXT_L="Process" DOMNAME3L="DCPROC" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SYSTEM_RESOURCE" FIELDNAME="PROCESS_ACTIV_RFC" DDLANGUAGE="F" POSITION="0007" ROLLNAME="DCPROC" ADMINFIELD="1" INTTYPE="C" INTLEN="000016" DOMNAME="DCPROC" ROUTPUTLEN="000000" HEADLEN="08" SCRLEN1="05" SCRLEN2="08" SCRLEN3="08" DTELMASTER="D" DATATYPE="CHAR" LENG="000008" OUTPUTLEN="000008" DECIMALS="000000" MASK="  CHARE" MASKLEN="0000" DDTEXT="Nombre de process en cours" REPTEXT="Process" SCRTEXT_S="%" SCRTEXT_M="Process" SCRTEXT_L="Process" DOMNAME3L="DCPROC" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SYSTEM_RESOURCE" FIELDNAME="PROCESS_ACTIV_OTH" DDLANGUAGE="F" POSITION="0008" ROLLNAME="DCPROC" ADMINFIELD="1" INTTYPE="C" INTLEN="000016" DOMNAME="DCPROC" ROUTPUTLEN="000000" HEADLEN="08" SCRLEN1="05" SCRLEN2="08" SCRLEN3="08" DTELMASTER="D" DATATYPE="CHAR" LENG="000008" OUTPUTLEN="000008" DECIMALS="000000" MASK="  CHARE" MASKLEN="0000" DDTEXT="Nombre de process en cours" REPTEXT="Process" SCRTEXT_S="%" SCRTEXT_M="Process" SCRTEXT_L="Process" DOMNAME3L="DCPROC" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SYSTEM_RESOURCE" FIELDNAME="MEMORY_USED_ES" DDLANGUAGE="F" POSITION="0009" ROLLNAME="SSI_MEMSIZE_BRUTTO" ADMINFIELD="1" INTTYPE="P" INTLEN="000011" DOMNAME="ABAP_MSIZE" ROUTPUTLEN="000000" HEADLEN="26" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="DEC" LENG="000020" OUTPUTLEN="000026" DECIMALS="000000" MASK="  DEC E" MASKLEN="0000" DDTEXT="Mémoire occupée dans les segments étendus (ES)" REPTEXT="Mémoire brute" SCRTEXT_S="Mém. brute" SCRTEXT_M="Mémoire brute" SCRTEXT_L="Mémoire brute" DOMNAME3L="ABAP_MSIZE" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SYSTEM_RESOURCE" FIELDNAME="MEMORY_USED_EM" DDLANGUAGE="F" POSITION="0010" ROLLNAME="SSI_MEMSIZE" ADMINFIELD="1" INTTYPE="P" INTLEN="000011" DOMNAME="ABAP_MSIZE" ROUTPUTLEN="000000" HEADLEN="26" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="DEC" LENG="000020" OUTPUTLEN="000026" DECIMALS="000000" MASK="  DEC E" MASKLEN="0000" DDTEXT="Mémoire occupée dans la mémoire étendue (EM)" REPTEXT="Taille de mémoire (nette)" SCRTEXT_S="Mémoire" SCRTEXT_M="Mémoire (nette)" SCRTEXT_L="Mémoire (nette)" DOMNAME3L="ABAP_MSIZE" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SYSTEM_RESOURCE" FIELDNAME="MEMORY_USED_HEAP" DDLANGUAGE="F" POSITION="0011" ROLLNAME="SSI_MEMSIZE_HEAP" ADMINFIELD="1" INTTYPE="P" INTLEN="000011" DOMNAME="ABAP_MSIZE" ROUTPUTLEN="000000" HEADLEN="26" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="DEC" LENG="000020" OUTPUTLEN="000026" DECIMALS="000000" MASK="  DEC E" MASKLEN="0000" DDTEXT="Mémoire occupée dans le heap local du processus" REPTEXT="Mémoire heap" SCRTEXT_S="Mém.heap" SCRTEXT_M="Mémoire heap" SCRTEXT_L="Mémoire heap" DOMNAME3L="ABAP_MSIZE" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SYSTEM_RESOURCE" FIELDNAME="MEMORY_USED_ABAP" DDLANGUAGE="F" POSITION="0012" ROLLNAME="SSI_MEMSIZE_ABAP" ADMINFIELD="1" INTTYPE="P" INTLEN="000011" DOMNAME="ABAP_MSIZE" ROUTPUTLEN="000000" HEADLEN="26" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="DEC" LENG="000020" OUTPUTLEN="000026" DECIMALS="000000" MASK="  DEC E" MASKLEN="0000" DDTEXT="Mémoire occupée par la VM ABAP" REPTEXT="Mémoire ABAP" SCRTEXT_S="Mém. ABAP" SCRTEXT_M="Mémoire ABAP" SCRTEXT_L="Mémoire ABAP" DOMNAME3L="ABAP_MSIZE" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+ </TABL>
+ <TABL TABNAME="ZTASK_GW_SERVER_GROUP" DDLANGUAGE="F" TABCLASS="INTTAB" DATMIN="0000000000" DATMAX="0000000000" DATAVG="0000000000" DDTEXT="Tâche - Gateway - Groupe de Serveur" AUTHCLASS="00" PROZPUFF="000" EXCLASS="4">
+  <dd09l AS4VERS="0000" SCHFELDANZ="000"/>
+  <dd03p TABNAME="ZTASK_GW_SERVER_GROUP" FIELDNAME="SYSID" DDLANGUAGE="F" POSITION="0001" ROLLNAME="SYSID" ADMINFIELD="0" INTTYPE="C" INTLEN="000060" DOMNAME="CHAR30" ROUTPUTLEN="000000" HEADLEN="40" SCRLEN1="10" SCRLEN2="20" SCRLEN3="40" DTELMASTER="D" DATATYPE="CHAR" LENG="000030" OUTPUTLEN="000030" DECIMALS="000000" MASK="  CHARE" MASKLEN="0000" DDTEXT="Communication : identification/n°" REPTEXT="ID du système" SCRTEXT_S="ID système" SCRTEXT_M="ID du système" SCRTEXT_L="ID du système" DOMNAME3L="CHAR30" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SERVER_GROUP" FIELDNAME="GRFC" DDLANGUAGE="F" POSITION="0002" ROLLNAME="RFCGR" ADMINFIELD="0" INTTYPE="C" INTLEN="000040" DOMNAME="RZLLI_ACN" ROUTPUTLEN="000000" HEADLEN="20" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="CHAR" LENG="000020" OUTPUTLEN="000020" DECIMALS="000000" LOWERCASE="X" MASK="  CHARE" MASKLEN="0000" DDTEXT="Groupe de serveurs RFC pour traitement parallèle" REPTEXT="Groupe de serveurs" SCRTEXT_S="Grp.srv." SCRTEXT_M="Groupe serveurs" SCRTEXT_L="Groupe de serveurs" DOMNAME3L="RZLLI_ACN" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SERVER_GROUP" FIELDNAME="IS_ACTIV" DDLANGUAGE="F" POSITION="0003" ROLLNAME="XFELD" ADMINFIELD="0" INTTYPE="C" INTLEN="000002" DOMNAME="XFELD" ROUTPUTLEN="000000" LOGFLAG="X" HEADLEN="00" SCRLEN1="00" SCRLEN2="00" SCRLEN3="00" DTELMASTER="D" DATATYPE="CHAR" LENG="000001" OUTPUTLEN="000001" DECIMALS="000000" VALEXI="X" MASK="  CHARE" MASKLEN="0000" DDTEXT="Case à cocher" DOMNAME3L="XFELD" SHLPORIGIN="F" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SERVER_GROUP" FIELDNAME="QUOTA_MAX_QUEUE" DDLANGUAGE="F" POSITION="0004" ROLLNAME="ARFCQUOTAQ" ADMINFIELD="0" INTTYPE="X" INTLEN="000004" ROUTPUTLEN="000000" HEADLEN="00" SCRLEN1="00" SCRLEN2="00" SCRLEN3="00" DTELMASTER="D" DATATYPE="INT4" LENG="000010" OUTPUTLEN="000011" DECIMALS="000000" MASK="  INT4E" MASKLEN="0000" DDTEXT="Quotas aRFC : quota pour le nombre de requêtes en attente" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SERVER_GROUP" FIELDNAME="QUOTA_MAX_LOGIN" DDLANGUAGE="F" POSITION="0005" ROLLNAME="ARFCQUOTAL" ADMINFIELD="0" INTTYPE="X" INTLEN="000004" ROUTPUTLEN="000000" HEADLEN="00" SCRLEN1="00" SCRLEN2="00" SCRLEN3="00" DTELMASTER="D" DATATYPE="INT4" LENG="000010" OUTPUTLEN="000011" DECIMALS="000000" MASK="  INT4E" MASKLEN="0000" DDTEXT="Quotas aRFC : quota pour le nombre de connexions au système" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SERVER_GROUP" FIELDNAME="QUOTA_MAX_OWN_LG" DDLANGUAGE="F" POSITION="0006" ROLLNAME="ARFCQUOTAO" ADMINFIELD="0" INTTYPE="X" INTLEN="000004" ROUTPUTLEN="000000" HEADLEN="00" SCRLEN1="00" SCRLEN2="00" SCRLEN3="00" DTELMASTER="D" DATATYPE="INT4" LENG="000010" OUTPUTLEN="000011" DECIMALS="000000" MASK="  INT4E" MASKLEN="0000" DDTEXT="Quotas aRFC : quota pour le nombre de connexions propres" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SERVER_GROUP" FIELDNAME="QUOTA_MAX_OWN_WP" DDLANGUAGE="F" POSITION="0007" ROLLNAME="ARFCQUOTAW" ADMINFIELD="0" INTTYPE="X" INTLEN="000004" ROUTPUTLEN="000000" HEADLEN="00" SCRLEN1="00" SCRLEN2="00" SCRLEN3="00" DTELMASTER="D" DATATYPE="INT4" LENG="000010" OUTPUTLEN="000011" DECIMALS="000000" MASK="  INT4E" MASKLEN="0000" DDTEXT="Quotas aRFC : quota pr les PT en mode dialogué utilisés" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SERVER_GROUP" FIELDNAME="QUOTA_MIN_WAIT_D" DDLANGUAGE="F" POSITION="0008" ROLLNAME="ARFCQUOTAV" ADMINFIELD="0" INTTYPE="X" INTLEN="000004" ROUTPUTLEN="000000" HEADLEN="00" SCRLEN1="00" SCRLEN2="00" SCRLEN3="00" DTELMASTER="D" DATATYPE="INT4" LENG="000010" OUTPUTLEN="000011" DECIMALS="000000" MASK="  INT4E" MASKLEN="0000" DDTEXT="Quotas aRFC : nb. PT en mode dialogué libres pr autres util." DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SERVER_GROUP" FIELDNAME="QUOTA_MAX_COM" DDLANGUAGE="F" POSITION="0009" ROLLNAME="ARFCQUOTAC" ADMINFIELD="0" INTTYPE="X" INTLEN="000004" ROUTPUTLEN="000000" HEADLEN="00" SCRLEN1="00" SCRLEN2="00" SCRLEN3="00" DTELMASTER="D" DATATYPE="INT4" LENG="000010" OUTPUTLEN="000011" DECIMALS="000000" MASK="  INT4E" MASKLEN="0000" DDTEXT="Quotas aRFC : quota pour le nombre des entrées de comm." DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SERVER_GROUP" FIELDNAME="QUOTA_MAX_WAIT_T" DDLANGUAGE="F" POSITION="0010" ROLLNAME="ARFCQUOTAT" ADMINFIELD="0" INTTYPE="X" INTLEN="000004" ROUTPUTLEN="000000" HEADLEN="00" SCRLEN1="00" SCRLEN2="00" SCRLEN3="00" DTELMASTER="D" DATATYPE="INT4" LENG="000010" OUTPUTLEN="000011" DECIMALS="000000" MASK="  INT4E" MASKLEN="0000" DDTEXT="Quotas aRFC : quota pour le temps d&apos;attente [s]" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+ </TABL>
+ <TABL TABNAME="ZTASK_GW_APPL_SERVER_RESOURCE" DDLANGUAGE="F" TABCLASS="INTTAB" DATMIN="0000000000" DATMAX="0000000000" DATAVG="0000000000" LANGDEP="X" DDTEXT="Tâche - Gateway - Application Server Ressource" AUTHCLASS="00" PROZPUFF="000" EXCLASS="4">
+  <dd09l AS4VERS="0000" SCHFELDANZ="000"/>
+  <dd03p TABNAME="ZTASK_GW_APPL_SERVER_RESOURCE" FIELDNAME="SYSID" DDLANGUAGE="F" POSITION="0001" ROLLNAME="SYSID" ADMINFIELD="0" INTTYPE="C" INTLEN="000060" DOMNAME="CHAR30" ROUTPUTLEN="000000" HEADLEN="40" SCRLEN1="10" SCRLEN2="20" SCRLEN3="40" DTELMASTER="D" DATATYPE="CHAR" LENG="000030" OUTPUTLEN="000030" DECIMALS="000000" MASK="  CHARE" MASKLEN="0000" DDTEXT="Communication : identification/n°" REPTEXT="ID du système" SCRTEXT_S="ID système" SCRTEXT_M="ID du système" SCRTEXT_L="ID du système" DOMNAME3L="CHAR30" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_APPL_SERVER_RESOURCE" FIELDNAME="APPL_SERVER" DDLANGUAGE="F" POSITION="0002" ROLLNAME="SSI_SERVERNAME_DISP" ADMINFIELD="0" INTTYPE="C" INTLEN="000080" ROUTPUTLEN="000000" HEADLEN="55" SCRLEN1="10" SCRLEN2="20" SCRLEN3="40" DTELMASTER="D" DATATYPE="CHAR" LENG="000040" OUTPUTLEN="000040" DECIMALS="000000" MASK="  CHARE" MASKLEN="0000" DDTEXT="Instance du serveur d&apos;application" REPTEXT="Instance du serveur d&apos;application" SCRTEXT_S="Instance" SCRTEXT_M="Inst. serveur appl." SCRTEXT_L="Instance du serveur d&apos;application" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_APPL_SERVER_RESOURCE" FIELDNAME=".INCLUDE" DDLANGUAGE="F" POSITION="0003" ADMINFIELD="0" INTLEN="000000" PRECFIELD="ZTASK_GW_SYSTEM_RESOURCE_DATA" ROUTPUTLEN="000000" HEADLEN="00" SCRLEN1="00" SCRLEN2="00" SCRLEN3="00" LENG="000000" OUTPUTLEN="000000" DECIMALS="000000" MASK="      S" MASKLEN="0000" DDTEXT="Tâche - Gateway - Ressource Système - Données" DEPTH="00" COMPTYPE="S" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_APPL_SERVER_RESOURCE" FIELDNAME="USER_CONNECTED" DDLANGUAGE="F" POSITION="0004" ROLLNAME="ALEUSERNO" ADMINFIELD="1" INTTYPE="X" INTLEN="000004" ROUTPUTLEN="000000" HEADLEN="10" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="INT4" LENG="000010" OUTPUTLEN="000011" DECIMALS="000000" MASK="  INT4E" MASKLEN="0000" DDTEXT="Nombre utilisateurs connectés" REPTEXT="Utilisat." SCRTEXT_S="Utilisat." SCRTEXT_M="Nbre utilisat." SCRTEXT_L="Nbre d&apos;utilisateurs" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_APPL_SERVER_RESOURCE" FIELDNAME="SESSSION_ACTIV" DDLANGUAGE="F" POSITION="0005" ROLLNAME="SSI_SESSIONS" ADMINFIELD="1" INTTYPE="X" INTLEN="000004" DOMNAME="SSI_INTEGER_TYPE" ROUTPUTLEN="000000" HEADLEN="15" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="INT4" LENG="000010" OUTPUTLEN="000011" DECIMALS="000000" SIGNFLAG="X" MASK="  INT4E" MASKLEN="0000" DDTEXT="Nombre de sessions backend" REPTEXT="Nombre sessions" SCRTEXT_S="Sessions" SCRTEXT_M="Nombre sessions" SCRTEXT_L="Nombre de sessions" DOMNAME3L="SSI_INTEGER_TYPE" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_APPL_SERVER_RESOURCE" FIELDNAME="PROCESS_ACTIV_TOT" DDLANGUAGE="F" POSITION="0006" ROLLNAME="DCPROC" ADMINFIELD="1" INTTYPE="C" INTLEN="000016" DOMNAME="DCPROC" ROUTPUTLEN="000000" HEADLEN="08" SCRLEN1="05" SCRLEN2="08" SCRLEN3="08" DTELMASTER="D" DATATYPE="CHAR" LENG="000008" OUTPUTLEN="000008" DECIMALS="000000" MASK="  CHARE" MASKLEN="0000" DDTEXT="Nombre de process en cours" REPTEXT="Process" SCRTEXT_S="%" SCRTEXT_M="Process" SCRTEXT_L="Process" DOMNAME3L="DCPROC" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_APPL_SERVER_RESOURCE" FIELDNAME="PROCESS_ACTIV_GUI" DDLANGUAGE="F" POSITION="0007" ROLLNAME="DCPROC" ADMINFIELD="1" INTTYPE="C" INTLEN="000016" DOMNAME="DCPROC" ROUTPUTLEN="000000" HEADLEN="08" SCRLEN1="05" SCRLEN2="08" SCRLEN3="08" DTELMASTER="D" DATATYPE="CHAR" LENG="000008" OUTPUTLEN="000008" DECIMALS="000000" MASK="  CHARE" MASKLEN="0000" DDTEXT="Nombre de process en cours" REPTEXT="Process" SCRTEXT_S="%" SCRTEXT_M="Process" SCRTEXT_L="Process" DOMNAME3L="DCPROC" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_APPL_SERVER_RESOURCE" FIELDNAME="PROCESS_ACTIV_RFC" DDLANGUAGE="F" POSITION="0008" ROLLNAME="DCPROC" ADMINFIELD="1" INTTYPE="C" INTLEN="000016" DOMNAME="DCPROC" ROUTPUTLEN="000000" HEADLEN="08" SCRLEN1="05" SCRLEN2="08" SCRLEN3="08" DTELMASTER="D" DATATYPE="CHAR" LENG="000008" OUTPUTLEN="000008" DECIMALS="000000" MASK="  CHARE" MASKLEN="0000" DDTEXT="Nombre de process en cours" REPTEXT="Process" SCRTEXT_S="%" SCRTEXT_M="Process" SCRTEXT_L="Process" DOMNAME3L="DCPROC" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_APPL_SERVER_RESOURCE" FIELDNAME="PROCESS_ACTIV_OTH" DDLANGUAGE="F" POSITION="0009" ROLLNAME="DCPROC" ADMINFIELD="1" INTTYPE="C" INTLEN="000016" DOMNAME="DCPROC" ROUTPUTLEN="000000" HEADLEN="08" SCRLEN1="05" SCRLEN2="08" SCRLEN3="08" DTELMASTER="D" DATATYPE="CHAR" LENG="000008" OUTPUTLEN="000008" DECIMALS="000000" MASK="  CHARE" MASKLEN="0000" DDTEXT="Nombre de process en cours" REPTEXT="Process" SCRTEXT_S="%" SCRTEXT_M="Process" SCRTEXT_L="Process" DOMNAME3L="DCPROC" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_APPL_SERVER_RESOURCE" FIELDNAME="MEMORY_USED_ES" DDLANGUAGE="F" POSITION="0010" ROLLNAME="SSI_MEMSIZE_BRUTTO" ADMINFIELD="1" INTTYPE="P" INTLEN="000011" DOMNAME="ABAP_MSIZE" ROUTPUTLEN="000000" HEADLEN="26" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="DEC" LENG="000020" OUTPUTLEN="000026" DECIMALS="000000" MASK="  DEC E" MASKLEN="0000" DDTEXT="Mémoire occupée dans les segments étendus (ES)" REPTEXT="Mémoire brute" SCRTEXT_S="Mém. brute" SCRTEXT_M="Mémoire brute" SCRTEXT_L="Mémoire brute" DOMNAME3L="ABAP_MSIZE" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_APPL_SERVER_RESOURCE" FIELDNAME="MEMORY_USED_EM" DDLANGUAGE="F" POSITION="0011" ROLLNAME="SSI_MEMSIZE" ADMINFIELD="1" INTTYPE="P" INTLEN="000011" DOMNAME="ABAP_MSIZE" ROUTPUTLEN="000000" HEADLEN="26" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="DEC" LENG="000020" OUTPUTLEN="000026" DECIMALS="000000" MASK="  DEC E" MASKLEN="0000" DDTEXT="Mémoire occupée dans la mémoire étendue (EM)" REPTEXT="Taille de mémoire (nette)" SCRTEXT_S="Mémoire" SCRTEXT_M="Mémoire (nette)" SCRTEXT_L="Mémoire (nette)" DOMNAME3L="ABAP_MSIZE" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_APPL_SERVER_RESOURCE" FIELDNAME="MEMORY_USED_HEAP" DDLANGUAGE="F" POSITION="0012" ROLLNAME="SSI_MEMSIZE_HEAP" ADMINFIELD="1" INTTYPE="P" INTLEN="000011" DOMNAME="ABAP_MSIZE" ROUTPUTLEN="000000" HEADLEN="26" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="DEC" LENG="000020" OUTPUTLEN="000026" DECIMALS="000000" MASK="  DEC E" MASKLEN="0000" DDTEXT="Mémoire occupée dans le heap local du processus" REPTEXT="Mémoire heap" SCRTEXT_S="Mém.heap" SCRTEXT_M="Mémoire heap" SCRTEXT_L="Mémoire heap" DOMNAME3L="ABAP_MSIZE" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_APPL_SERVER_RESOURCE" FIELDNAME="MEMORY_USED_ABAP" DDLANGUAGE="F" POSITION="0013" ROLLNAME="SSI_MEMSIZE_ABAP" ADMINFIELD="1" INTTYPE="P" INTLEN="000011" DOMNAME="ABAP_MSIZE" ROUTPUTLEN="000000" HEADLEN="26" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="DEC" LENG="000020" OUTPUTLEN="000026" DECIMALS="000000" MASK="  DEC E" MASKLEN="0000" DDTEXT="Mémoire occupée par la VM ABAP" REPTEXT="Mémoire ABAP" SCRTEXT_S="Mém. ABAP" SCRTEXT_M="Mémoire ABAP" SCRTEXT_L="Mémoire ABAP" DOMNAME3L="ABAP_MSIZE" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+ </TABL>
+ <TABL TABNAME="ZTASK_GW_SYSTEM_RESOURCE_DATA" DDLANGUAGE="F" TABCLASS="INTTAB" DATMIN="0000000000" DATMAX="0000000000" DATAVG="0000000000" DDTEXT="Tâche - Gateway - Ressource Système - Données" AUTHCLASS="00" PROZPUFF="000" EXCLASS="1">
+  <dd09l AS4VERS="0000" SCHFELDANZ="000"/>
+  <dd03p TABNAME="ZTASK_GW_SYSTEM_RESOURCE_DATA" FIELDNAME="USER_CONNECTED" DDLANGUAGE="F" POSITION="0001" ROLLNAME="ALEUSERNO" ADMINFIELD="0" INTTYPE="X" INTLEN="000004" ROUTPUTLEN="000000" HEADLEN="10" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="INT4" LENG="000010" OUTPUTLEN="000011" DECIMALS="000000" MASK="  INT4E" MASKLEN="0000" DDTEXT="Nombre utilisateurs connectés" REPTEXT="Utilisat." SCRTEXT_S="Utilisat." SCRTEXT_M="Nbre utilisat." SCRTEXT_L="Nbre d&apos;utilisateurs" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SYSTEM_RESOURCE_DATA" FIELDNAME="SESSSION_ACTIV" DDLANGUAGE="F" POSITION="0002" ROLLNAME="SSI_SESSIONS" ADMINFIELD="0" INTTYPE="X" INTLEN="000004" DOMNAME="SSI_INTEGER_TYPE" ROUTPUTLEN="000000" HEADLEN="15" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="INT4" LENG="000010" OUTPUTLEN="000011" DECIMALS="000000" SIGNFLAG="X" MASK="  INT4E" MASKLEN="0000" DDTEXT="Nombre de sessions backend" REPTEXT="Nombre sessions" SCRTEXT_S="Sessions" SCRTEXT_M="Nombre sessions" SCRTEXT_L="Nombre de sessions" DOMNAME3L="SSI_INTEGER_TYPE" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SYSTEM_RESOURCE_DATA" FIELDNAME="PROCESS_ACTIV_TOT" DDLANGUAGE="F" POSITION="0003" ROLLNAME="DCPROC" ADMINFIELD="0" INTTYPE="C" INTLEN="000016" DOMNAME="DCPROC" ROUTPUTLEN="000000" HEADLEN="08" SCRLEN1="05" SCRLEN2="08" SCRLEN3="08" DTELMASTER="D" DATATYPE="CHAR" LENG="000008" OUTPUTLEN="000008" DECIMALS="000000" MASK="  CHARE" MASKLEN="0000" DDTEXT="Nombre de process en cours" REPTEXT="Process" SCRTEXT_S="%" SCRTEXT_M="Process" SCRTEXT_L="Process" DOMNAME3L="DCPROC" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SYSTEM_RESOURCE_DATA" FIELDNAME="PROCESS_ACTIV_GUI" DDLANGUAGE="F" POSITION="0004" ROLLNAME="DCPROC" ADMINFIELD="0" INTTYPE="C" INTLEN="000016" DOMNAME="DCPROC" ROUTPUTLEN="000000" HEADLEN="08" SCRLEN1="05" SCRLEN2="08" SCRLEN3="08" DTELMASTER="D" DATATYPE="CHAR" LENG="000008" OUTPUTLEN="000008" DECIMALS="000000" MASK="  CHARE" MASKLEN="0000" DDTEXT="Nombre de process en cours" REPTEXT="Process" SCRTEXT_S="%" SCRTEXT_M="Process" SCRTEXT_L="Process" DOMNAME3L="DCPROC" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SYSTEM_RESOURCE_DATA" FIELDNAME="PROCESS_ACTIV_RFC" DDLANGUAGE="F" POSITION="0005" ROLLNAME="DCPROC" ADMINFIELD="0" INTTYPE="C" INTLEN="000016" DOMNAME="DCPROC" ROUTPUTLEN="000000" HEADLEN="08" SCRLEN1="05" SCRLEN2="08" SCRLEN3="08" DTELMASTER="D" DATATYPE="CHAR" LENG="000008" OUTPUTLEN="000008" DECIMALS="000000" MASK="  CHARE" MASKLEN="0000" DDTEXT="Nombre de process en cours" REPTEXT="Process" SCRTEXT_S="%" SCRTEXT_M="Process" SCRTEXT_L="Process" DOMNAME3L="DCPROC" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SYSTEM_RESOURCE_DATA" FIELDNAME="PROCESS_ACTIV_OTH" DDLANGUAGE="F" POSITION="0006" ROLLNAME="DCPROC" ADMINFIELD="0" INTTYPE="C" INTLEN="000016" DOMNAME="DCPROC" ROUTPUTLEN="000000" HEADLEN="08" SCRLEN1="05" SCRLEN2="08" SCRLEN3="08" DTELMASTER="D" DATATYPE="CHAR" LENG="000008" OUTPUTLEN="000008" DECIMALS="000000" MASK="  CHARE" MASKLEN="0000" DDTEXT="Nombre de process en cours" REPTEXT="Process" SCRTEXT_S="%" SCRTEXT_M="Process" SCRTEXT_L="Process" DOMNAME3L="DCPROC" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SYSTEM_RESOURCE_DATA" FIELDNAME="MEMORY_USED_ES" DDLANGUAGE="F" POSITION="0007" ROLLNAME="SSI_MEMSIZE_BRUTTO" ADMINFIELD="0" INTTYPE="P" INTLEN="000011" DOMNAME="ABAP_MSIZE" ROUTPUTLEN="000000" HEADLEN="26" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="DEC" LENG="000020" OUTPUTLEN="000026" DECIMALS="000000" MASK="  DEC E" MASKLEN="0000" DDTEXT="Mémoire occupée dans les segments étendus (ES)" REPTEXT="Mémoire brute" SCRTEXT_S="Mém. brute" SCRTEXT_M="Mémoire brute" SCRTEXT_L="Mémoire brute" DOMNAME3L="ABAP_MSIZE" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SYSTEM_RESOURCE_DATA" FIELDNAME="MEMORY_USED_EM" DDLANGUAGE="F" POSITION="0008" ROLLNAME="SSI_MEMSIZE" ADMINFIELD="0" INTTYPE="P" INTLEN="000011" DOMNAME="ABAP_MSIZE" ROUTPUTLEN="000000" HEADLEN="26" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="DEC" LENG="000020" OUTPUTLEN="000026" DECIMALS="000000" MASK="  DEC E" MASKLEN="0000" DDTEXT="Mémoire occupée dans la mémoire étendue (EM)" REPTEXT="Taille de mémoire (nette)" SCRTEXT_S="Mémoire" SCRTEXT_M="Mémoire (nette)" SCRTEXT_L="Mémoire (nette)" DOMNAME3L="ABAP_MSIZE" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SYSTEM_RESOURCE_DATA" FIELDNAME="MEMORY_USED_HEAP" DDLANGUAGE="F" POSITION="0009" ROLLNAME="SSI_MEMSIZE_HEAP" ADMINFIELD="0" INTTYPE="P" INTLEN="000011" DOMNAME="ABAP_MSIZE" ROUTPUTLEN="000000" HEADLEN="26" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="DEC" LENG="000020" OUTPUTLEN="000026" DECIMALS="000000" MASK="  DEC E" MASKLEN="0000" DDTEXT="Mémoire occupée dans le heap local du processus" REPTEXT="Mémoire heap" SCRTEXT_S="Mém.heap" SCRTEXT_M="Mémoire heap" SCRTEXT_L="Mémoire heap" DOMNAME3L="ABAP_MSIZE" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTASK_GW_SYSTEM_RESOURCE_DATA" FIELDNAME="MEMORY_USED_ABAP" DDLANGUAGE="F" POSITION="0010" ROLLNAME="SSI_MEMSIZE_ABAP" ADMINFIELD="0" INTTYPE="P" INTLEN="000011" DOMNAME="ABAP_MSIZE" ROUTPUTLEN="000000" HEADLEN="26" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="DEC" LENG="000020" OUTPUTLEN="000026" DECIMALS="000000" MASK="  DEC E" MASKLEN="0000" DDTEXT="Mémoire occupée par la VM ABAP" REPTEXT="Mémoire ABAP" SCRTEXT_S="Mém. ABAP" SCRTEXT_M="Mémoire ABAP" SCRTEXT_L="Mémoire ABAP" DOMNAME3L="ABAP_MSIZE" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+ </TABL>
+ <WAPA APPLNAME="ZTASK_MON" APPLCLAS="/UI5/CL_UI5_BSP_APPLICATION" APPLEXT="ZTASK_MON" DEVCLASS="$TMP" ORIGLANG="F" MODIFLANG="F" TEXT="Monitoring Système">
+  <page APPLNAME="ZTASK_MON" PAGEKEY=".CLASSPATH" PAGENAME=".classpath" PAGETYPE="X" MIMETYPE="application/octet-stream" BROWSER_CACHE="0 " SERVER_CACHE="0 " LAYOUTLANGU="F" VERSION="A" DEVCLASS="$TMP" LANGU="F">
+   <layout>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;classpath&gt;
+	&lt;classpathentry kind=&quot;src&quot; path=&quot;src&quot;/&gt;
+	&lt;classpathentry kind=&quot;con&quot; path=&quot;org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8&quot;&gt;
+		&lt;attributes&gt;
+			&lt;attribute name=&quot;owner.project.facets&quot; value=&quot;java&quot;/&gt;
+		&lt;/attributes&gt;
+	&lt;/classpathentry&gt;
+	&lt;classpathentry kind=&quot;con&quot; path=&quot;org.eclipse.jst.j2ee.internal.web.container&quot;/&gt;
+	&lt;classpathentry kind=&quot;con&quot; path=&quot;org.eclipse.jst.j2ee.internal.module.container&quot;/&gt;
+	&lt;classpathentry kind=&quot;con&quot; path=&quot;com.sap.ide.ui5.libsclasspathcontainer/SAPUI5 Core Libraries&quot;&gt;
+		&lt;attributes&gt;
+			&lt;attribute name=&quot;org.eclipse.jst.component.dependency&quot; value=&quot;/WEB-INF/lib&quot;/&gt;
+		&lt;/attributes&gt;
+	&lt;/classpathentry&gt;
+	&lt;classpathentry kind=&quot;con&quot; path=&quot;com.sap.ide.ui5.serversidelibsclasspathcontainer/SAPUI5 Server Side Libraries&quot;&gt;
+		&lt;attributes&gt;
+			&lt;attribute name=&quot;org.eclipse.jst.component.dependency&quot; value=&quot;/WEB-INF/lib&quot;/&gt;
+		&lt;/attributes&gt;
+	&lt;/classpathentry&gt;
+	&lt;classpathentry kind=&quot;output&quot; path=&quot;build/classes&quot;/&gt;
+&lt;/classpath&gt;</layout>
+  </page>
+  <page APPLNAME="ZTASK_MON" PAGEKEY=".PROJECT" PAGENAME=".project" PAGETYPE="X" MIMETYPE="application/octet-stream" BROWSER_CACHE="0 " SERVER_CACHE="0 " LAYOUTLANGU="F" VERSION="A" DEVCLASS="$TMP" LANGU="F">
+   <layout>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;projectDescription&gt;
+	&lt;name&gt;ZTASK_MON&lt;/name&gt;
+	&lt;comment&gt;&lt;/comment&gt;
+	&lt;projects&gt;
+	&lt;/projects&gt;
+	&lt;buildSpec&gt;
+		&lt;buildCommand&gt;
+			&lt;name&gt;org.eclipse.wst.jsdt.core.javascriptValidator&lt;/name&gt;
+			&lt;arguments&gt;
+			&lt;/arguments&gt;
+		&lt;/buildCommand&gt;
+		&lt;buildCommand&gt;
+			&lt;name&gt;org.eclipse.jdt.core.javabuilder&lt;/name&gt;
+			&lt;arguments&gt;
+			&lt;/arguments&gt;
+		&lt;/buildCommand&gt;
+		&lt;buildCommand&gt;
+			&lt;name&gt;org.eclipse.wst.common.project.facet.core.builder&lt;/name&gt;
+			&lt;arguments&gt;
+			&lt;/arguments&gt;
+		&lt;/buildCommand&gt;
+		&lt;buildCommand&gt;
+			&lt;name&gt;org.eclipse.wst.validation.validationbuilder&lt;/name&gt;
+			&lt;arguments&gt;
+			&lt;/arguments&gt;
+		&lt;/buildCommand&gt;
+	&lt;/buildSpec&gt;
+	&lt;natures&gt;
+		&lt;nature&gt;org.eclipse.jem.workbench.JavaEMFNature&lt;/nature&gt;
+		&lt;nature&gt;org.eclipse.wst.common.modulecore.ModuleCoreNature&lt;/nature&gt;
+		&lt;nature&gt;org.eclipse.wst.common.project.facet.core.nature&lt;/nature&gt;
+		&lt;nature&gt;org.eclipse.jdt.core.javanature&lt;/nature&gt;
+		&lt;nature&gt;org.eclipse.wst.jsdt.core.jsNature&lt;/nature&gt;
+		&lt;nature&gt;com.sap.ide.ui5.app.plugin.webappnature&lt;/nature&gt;
+	&lt;/natures&gt;
+&lt;/projectDescription&gt;</layout>
+  </page>
+  <page APPLNAME="ZTASK_MON" PAGEKEY=".SETTINGS/.JSDTSCOPE" PAGENAME=".settings/.jsdtscope" PAGETYPE="X" MIMETYPE="application/octet-stream" BROWSER_CACHE="0 " SERVER_CACHE="0 " LAYOUTLANGU="F" VERSION="A" DEVCLASS="$TMP" LANGU="F">
+   <layout>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;classpath&gt;
+	&lt;classpathentry excluding=&quot;**/bower_components/*|**/node_modules/*|**/*.min.js&quot; kind=&quot;src&quot; path=&quot;WebContent&quot;/&gt;
+	&lt;classpathentry kind=&quot;con&quot; path=&quot;org.eclipse.wst.jsdt.launching.JRE_CONTAINER&quot;/&gt;
+	&lt;classpathentry kind=&quot;con&quot; path=&quot;org.eclipse.wst.jsdt.launching.WebProject&quot;&gt;
+		&lt;attributes&gt;
+			&lt;attribute name=&quot;hide&quot; value=&quot;true&quot;/&gt;
+		&lt;/attributes&gt;
+	&lt;/classpathentry&gt;
+	&lt;classpathentry kind=&quot;con&quot; path=&quot;org.eclipse.wst.jsdt.launching.baseBrowserLibrary&quot;/&gt;
+	&lt;classpathentry kind=&quot;con&quot; path=&quot;com.sap.ide.ui5.jsdt.SAPUI5Libraries&quot;/&gt;
+	&lt;classpathentry kind=&quot;output&quot; path=&quot;&quot;/&gt;
+&lt;/classpath&gt;</layout>
+  </page>
+  <page APPLNAME="ZTASK_MON" PAGEKEY=".SETTINGS/ORG.ECLIPSE.JDT.CORE.PREFS" PAGENAME=".settings/org.eclipse.jdt.core.prefs" PAGETYPE="X" MIMETYPE="application/octet-stream" BROWSER_CACHE="0 " SERVER_CACHE="0 " LAYOUTLANGU="F" VERSION="A" DEVCLASS="$TMP" LANGU="F">
+   <layout>eclipse.preferences.version=1
+org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
+org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.8
+org.eclipse.jdt.core.compiler.compliance=1.8
+org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
+org.eclipse.jdt.core.compiler.problem.enumIdentifier=error
+org.eclipse.jdt.core.compiler.source=1.8</layout>
+  </page>
+  <page APPLNAME="ZTASK_MON" PAGEKEY=".SETTINGS/ORG.ECLIPSE.WST.COMMON.COMPONENT" PAGENAME=".settings/org.eclipse.wst.common.component" PAGETYPE="X" MIMETYPE="application/octet-stream" BROWSER_CACHE="0 " SERVER_CACHE="0 " LAYOUTLANGU="F" VERSION="A" DEVCLASS="$TMP" LANGU="F">
+   <layout>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;project-modules id=&quot;moduleCoreId&quot; project-version=&quot;1.5.0&quot;&gt;
+    &lt;wb-module deploy-name=&quot;ZTASK_MON&quot;&gt;
+        &lt;wb-resource deploy-path=&quot;/&quot; source-path=&quot;/WebContent&quot; tag=&quot;defaultRootSource&quot;/&gt;
+        &lt;wb-resource deploy-path=&quot;/WEB-INF/classes&quot; source-path=&quot;/src&quot;/&gt;
+        &lt;property name=&quot;java-output-path&quot; value=&quot;/ZTASK_MON/build/classes&quot;/&gt;
+        &lt;property name=&quot;context-root&quot; value=&quot;ZTASK_MON&quot;/&gt;
+    &lt;/wb-module&gt;
+&lt;/project-modules&gt;</layout>
+  </page>
+  <page APPLNAME="ZTASK_MON" PAGEKEY=".SETTINGS/ORG.ECLIPSE.WST.COMMON.PROJECT.FACET.CORE.XML" PAGENAME=".settings/org.eclipse.wst.common.project.facet.core.xml" PAGETYPE="X" MIMETYPE="text/xml" BROWSER_CACHE="0 " SERVER_CACHE="0 " LAYOUTLANGU="F" VERSION="A" DEVCLASS="$TMP" LANGU="F">
+   <layout>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;faceted-project&gt;
+  &lt;fixed facet=&quot;wst.jsdt.web&quot;/&gt;
+  &lt;installed facet=&quot;java&quot; version=&quot;1.8&quot;/&gt;
+  &lt;installed facet=&quot;jst.web&quot; version=&quot;2.5&quot;/&gt;
+  &lt;installed facet=&quot;wst.jsdt.web&quot; version=&quot;1.0&quot;/&gt;
+  &lt;installed facet=&quot;com.sap.ide.ui5.app.facet&quot; version=&quot;latest&quot;/&gt;
+&lt;/faceted-project&gt;</layout>
+  </page>
+  <page APPLNAME="ZTASK_MON" PAGEKEY=".SETTINGS/ORG.ECLIPSE.WST.JSDT.UI.SUPERTYPE.CONTAINER" PAGENAME=".settings/org.eclipse.wst.jsdt.ui.superType.container" PAGETYPE="X" MIMETYPE="application/octet-stream" BROWSER_CACHE="0 " SERVER_CACHE="0 " LAYOUTLANGU="F" VERSION="A" DEVCLASS="$TMP" LANGU="F">
+   <layout>org.eclipse.wst.jsdt.launching.baseBrowserLibrary</layout>
+  </page>
+  <page APPLNAME="ZTASK_MON" PAGEKEY=".SETTINGS/ORG.ECLIPSE.WST.JSDT.UI.SUPERTYPE.NAME" PAGENAME=".settings/org.eclipse.wst.jsdt.ui.superType.name" PAGETYPE="X" MIMETYPE="application/octet-stream" BROWSER_CACHE="0 " SERVER_CACHE="0 " LAYOUTLANGU="F" VERSION="A" DEVCLASS="$TMP" LANGU="F">
+   <layout>Window</layout>
+  </page>
+  <page APPLNAME="ZTASK_MON" PAGEKEY="UI57E3C1364CB3462ECDA722A7CAD8CD391378E7818" PAGENAME="UI57E3C1364CB3462ECDA722A7CAD8CD391378E7818" PAGETYPE="X" MIMETYPE="application/octet-stream" BROWSER_CACHE="0 " SERVER_CACHE="0 " LAYOUTLANGU="F" VERSION="A" DEVCLASS="$TMP" LANGU="F">
+   <layout>Manifest-Version: 1.0
+Class-Path:&amp;nbsp;</layout>
+  </page>
+  <page APPLNAME="ZTASK_MON" PAGEKEY="UI5C510F2EAEE6FAA7CE096CFB89F5DCFC359C14265" PAGENAME="UI5C510F2EAEE6FAA7CE096CFB89F5DCFC359C14265" PAGETYPE="X" MIMETYPE="application/octet-stream" BROWSER_CACHE="0 " SERVER_CACHE="0 " LAYOUTLANGU="F" VERSION="A" DEVCLASS="$TMP" LANGU="F">
+   <layout>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot; xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd&quot; version=&quot;2.5&quot;&gt;
+  &lt;display-name&gt;ZTASK_MON&lt;/display-name&gt;
+  &lt;servlet&gt;
+    &lt;display-name&gt;ResourceServlet&lt;/display-name&gt;
+    &lt;servlet-name&gt;ResourceServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;com.sap.ui5.resource.ResourceServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;ResourceServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/resources/*&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;ResourceServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/test-resources/*&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+  &lt;context-param&gt;
+    &lt;param-name&gt;com.sap.ui5.resource.DEV_MODE&lt;/param-name&gt;
+    &lt;param-value&gt;false&lt;/param-value&gt;
+  &lt;/context-param&gt;
+  &lt;filter&gt;
+    &lt;display-name&gt;CacheControlFilter&lt;/display-name&gt;
+    &lt;filter-name&gt;CacheControlFilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;com.sap.ui5.resource.CacheControlFilter&lt;/filter-class&gt;
+  &lt;/filter&gt;
+  &lt;filter-mapping&gt;
+    &lt;filter-name&gt;CacheControlFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;*.html&lt;/url-pattern&gt;
+  &lt;/filter-mapping&gt;
+  &lt;filter-mapping&gt;
+    &lt;filter-name&gt;CacheControlFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;*.js&lt;/url-pattern&gt;
+  &lt;/filter-mapping&gt;
+  &lt;filter-mapping&gt;
+    &lt;filter-name&gt;CacheControlFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;*.xml&lt;/url-pattern&gt;
+  &lt;/filter-mapping&gt;
+  &lt;filter-mapping&gt;
+    &lt;filter-name&gt;CacheControlFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;*.json&lt;/url-pattern&gt;
+  &lt;/filter-mapping&gt;
+  &lt;filter-mapping&gt;
+    &lt;filter-name&gt;CacheControlFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;*.css&lt;/url-pattern&gt;
+  &lt;/filter-mapping&gt;
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;SimpleProxyServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;com.sap.ui5.proxy.SimpleProxyServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;SimpleProxyServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/proxy/*&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+  &lt;welcome-file-list&gt;
+    &lt;welcome-file&gt;index.html&lt;/welcome-file&gt;
+  &lt;/welcome-file-list&gt;
+&lt;/web-app&gt;</layout>
+  </page>
+  <page APPLNAME="ZTASK_MON" PAGEKEY="UI5REPOSITORYPATHMAPPING.XML" PAGENAME="UI5RepositoryPathMapping.xml" PAGETYPE="X" MIMETYPE="text/xml" BROWSER_CACHE="0 " SERVER_CACHE="0 " LAYOUTLANGU="F" VERSION="A" DEVCLASS="$TMP" LANGU="F">
+   <layout>&lt;?xml version=&quot;1.0&quot;?&gt;
+
+&lt;UI5RepMapping version=&quot;1.0&quot; xmlns=&quot;sap.ui5.tools.repository.mapping&quot;&gt;
+ &lt;MappingEntries&gt;
+
+  &lt;MappingEntry
+   path              = &quot;.classpath&quot;
+   is_folder         = &quot;&quot;
+   internal_rep      = &quot;B&quot;
+   internal_rep_path = &quot;.classpath&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;.project&quot;
+   is_folder         = &quot;&quot;
+   internal_rep      = &quot;B&quot;
+   internal_rep_path = &quot;.project&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;.settings&quot;
+   is_folder         = &quot;X&quot;
+   internal_rep      = &quot;&quot;
+   internal_rep_path = &quot;&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;.settings/.jsdtscope&quot;
+   is_folder         = &quot;&quot;
+   internal_rep      = &quot;B&quot;
+   internal_rep_path = &quot;.settings/.jsdtscope&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;.settings/org.eclipse.jdt.core.prefs&quot;
+   is_folder         = &quot;&quot;
+   internal_rep      = &quot;B&quot;
+   internal_rep_path = &quot;.settings/org.eclipse.jdt.core.prefs&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;.settings/org.eclipse.wst.common.component&quot;
+   is_folder         = &quot;&quot;
+   internal_rep      = &quot;B&quot;
+   internal_rep_path = &quot;.settings/org.eclipse.wst.common.component&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;.settings/org.eclipse.wst.common.project.facet.core.xml&quot;
+   is_folder         = &quot;&quot;
+   internal_rep      = &quot;B&quot;
+   internal_rep_path = &quot;.settings/org.eclipse.wst.common.project.facet.core.xml&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;.settings/org.eclipse.wst.jsdt.ui.superType.container&quot;
+   is_folder         = &quot;&quot;
+   internal_rep      = &quot;B&quot;
+   internal_rep_path = &quot;.settings/org.eclipse.wst.jsdt.ui.superType.container&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;.settings/org.eclipse.wst.jsdt.ui.superType.name&quot;
+   is_folder         = &quot;&quot;
+   internal_rep      = &quot;B&quot;
+   internal_rep_path = &quot;.settings/org.eclipse.wst.jsdt.ui.superType.name&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;WebContent&quot;
+   is_folder         = &quot;X&quot;
+   internal_rep      = &quot;&quot;
+   internal_rep_path = &quot;&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;WebContent/Component.js&quot;
+   is_folder         = &quot;&quot;
+   internal_rep      = &quot;B&quot;
+   internal_rep_path = &quot;WebContent/Component.js&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;WebContent/META-INF&quot;
+   is_folder         = &quot;X&quot;
+   internal_rep      = &quot;&quot;
+   internal_rep_path = &quot;&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;WebContent/META-INF/MANIFEST.MF&quot;
+   is_folder         = &quot;&quot;
+   internal_rep      = &quot;B&quot;
+   internal_rep_path = &quot;UI57E3C1364CB3462ECDA722A7CAD8CD391378E7818&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;WebContent/WEB-INF&quot;
+   is_folder         = &quot;X&quot;
+   internal_rep      = &quot;&quot;
+   internal_rep_path = &quot;&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;WebContent/WEB-INF/lib&quot;
+   is_folder         = &quot;X&quot;
+   internal_rep      = &quot;&quot;
+   internal_rep_path = &quot;&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;WebContent/WEB-INF/web.xml&quot;
+   is_folder         = &quot;&quot;
+   internal_rep      = &quot;B&quot;
+   internal_rep_path = &quot;UI5C510F2EAEE6FAA7CE096CFB89F5DCFC359C14265&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;WebContent/controller&quot;
+   is_folder         = &quot;X&quot;
+   internal_rep      = &quot;&quot;
+   internal_rep_path = &quot;&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;WebContent/controller/App.controller.js&quot;
+   is_folder         = &quot;&quot;
+   internal_rep      = &quot;B&quot;
+   internal_rep_path = &quot;WebContent/controller/App.controller.js&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;WebContent/controller/Main.controller.js&quot;
+   is_folder         = &quot;&quot;
+   internal_rep      = &quot;B&quot;
+   internal_rep_path = &quot;WebContent/controller/Main.controller.js&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;WebContent/i18n&quot;
+   is_folder         = &quot;X&quot;
+   internal_rep      = &quot;&quot;
+   internal_rep_path = &quot;&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;WebContent/i18n/i18n.properties&quot;
+   is_folder         = &quot;&quot;
+   internal_rep      = &quot;B&quot;
+   internal_rep_path = &quot;WebContent/i18n/i18n.properties&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;WebContent/index.html&quot;
+   is_folder         = &quot;&quot;
+   internal_rep      = &quot;B&quot;
+   internal_rep_path = &quot;WebContent/index.html&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;WebContent/manifest.json&quot;
+   is_folder         = &quot;&quot;
+   internal_rep      = &quot;B&quot;
+   internal_rep_path = &quot;WebContent/manifest.json&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;WebContent/styles.css&quot;
+   is_folder         = &quot;&quot;
+   internal_rep      = &quot;B&quot;
+   internal_rep_path = &quot;WebContent/styles.css&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;WebContent/view&quot;
+   is_folder         = &quot;X&quot;
+   internal_rep      = &quot;&quot;
+   internal_rep_path = &quot;&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;WebContent/view/App.view.xml&quot;
+   is_folder         = &quot;&quot;
+   internal_rep      = &quot;B&quot;
+   internal_rep_path = &quot;WebContent/view/App.view.xml&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;WebContent/view/Main.view.xml&quot;
+   is_folder         = &quot;&quot;
+   internal_rep      = &quot;B&quot;
+   internal_rep_path = &quot;WebContent/view/Main.view.xml&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;WebContent/ztask_monitoring&quot;
+   is_folder         = &quot;X&quot;
+   internal_rep      = &quot;&quot;
+   internal_rep_path = &quot;&quot; /&gt;
+
+  &lt;MappingEntry
+   path              = &quot;src&quot;
+   is_folder         = &quot;X&quot;
+   internal_rep      = &quot;&quot;
+   internal_rep_path = &quot;&quot; /&gt;
+
+ &lt;/MappingEntries&gt;
+&lt;/UI5RepMapping&gt;</layout>
+  </page>
+  <page APPLNAME="ZTASK_MON" PAGEKEY="WEBCONTENT/COMPONENT.JS" PAGENAME="WebContent/Component.js" PAGETYPE="X" MIMETYPE="application/x-javascript" BROWSER_CACHE="0 " SERVER_CACHE="0 " LAYOUTLANGU="F" VERSION="A" DEVCLASS="$TMP" LANGU="F">
+   <layout>jQuery.sap.declare(&quot;com.celio.sap.ZTASK_MON.Component&quot;);
+
+sap.ui.core.UIComponent.extend(&quot;ZTASK_MON.Component&quot;, {
+	
+	metadata : {
+		manifest: &quot;json&quot;
+	},
+
+	init : function () {
+
+		// call the init function of the parent
+		sap.ui.core.UIComponent.prototype.init.apply(this, arguments);
+
+	}
+});</layout>
+  </page>
+  <page APPLNAME="ZTASK_MON" PAGEKEY="WEBCONTENT/CONTROLLER/APP.CONTROLLER.JS" PAGENAME="WebContent/controller/App.controller.js" PAGETYPE="X" MIMETYPE="application/x-javascript" BROWSER_CACHE="0 " SERVER_CACHE="0 " LAYOUTLANGU="F" VERSION="A" DEVCLASS="$TMP" LANGU="F">
+   <layout>sap.ui.define([
+               &quot;sap/ui/core/mvc/Controller&quot;,
+               &quot;sap/ui/core/mvc/XMLView&quot;,
+               &quot;sap/ui/model/odata/v2/ODataModel&quot;,
+               &quot;sap/m/MessageToast&quot;,
+               &quot;ztask_mon/model/appUtils&quot;
+               ], function (Controller, XMLView, ODataModel,MessageToast,appUtils) {
+	&quot;use strict&quot;;
+	return Controller.extend(&quot;ztask_mon.controller.App&quot;, {
+
+		onInit: function () {
+
+			this.oApp = this.getView().byId(&quot;myApp&quot;);
+
+			var oBus = new sap.ui.getCore().getEventBus();
+			oBus.subscribe(&quot;e2e_app&quot;, &quot;EventShowPro&quot;,
+					this.handleEventShowPro, this);
+
+			oBus.subscribe(&quot;e2e_app&quot;, &quot;HomeMenuPress&quot;,
+					this.handleHomeMenuPress, this);
+
+			oBus.subscribe(&quot;e2e_app&quot;, &quot;CreateProPress&quot;,
+					this.handleCreateProPress, this);
+
+			oBus.subscribe(&quot;e2e_app&quot;, &quot;ShowNoDetPro&quot;,
+					this.handleShowNoDetPro, this);
+
+			oBus.subscribe(&quot;e2e_app&quot;, &quot;EventNavBack&quot;,
+					this.handleEventNavBack, this);
+
+			oBus.subscribe(&quot;e2e_app&quot;, &quot;SearchProCompleted&quot;,
+					this.handleSearchProCompleted, this);
+
+
+			// Define path of the OData backend service
+			var sapclient=&quot;&quot;
+				var version = &apos;v1.1&apos;;
+			this.sHostname = &quot;&quot;;
+			//	this.sHostname = &quot;http://femecv01ie1.celio.ad:8000&quot;;
+		//	this.sHostname = &quot;http://floocv01re1.celio.ad:8000&quot;;
+		//			this.sHostname = &quot;http://femecv01de1.celio.ad:8000&quot;;
+			//	sapclient = &quot;?sap-client=210&quot;;
+
+
+			this.aNavPages=[];
+
+			var sODataServiceUrl = this.sHostname+&quot;/sap/opu/odata/sap/ZTASK_MONITORING_SRV&quot;+sapclient;
+			window.sODataServiceUrl = sODataServiceUrl;
+
+			var oODataModel = new sap.ui.model.odata.v2.ODataModel(sODataServiceUrl,
+					{ useBatch : true, disableHeadRequestForToken : true,refreshAfterChange:false});
+			oODataModel.setDefaultBindingMode(&quot;OneWay&quot;);
+
+			oODataModel.attachMetadataFailed(null,function(oEvt)
+					{
+				this.setNoAuthView();
+					}.bind(this),this);
+
+			oODataModel.setDeferredGroups([&quot;SYSTEM&quot;,&quot;READ_SYSTEM&quot;]);
+			oODataModel.setChangeGroups(
+					{ &quot;SYSTEM_RESOURCE&quot;: { groupId: &quot;SYSTEM&quot;},
+						&quot;APPL_SERVER_RESOURCE&quot;:   { groupId: &quot;SYSTEM&quot;},
+						&quot;SERVER_GROUP&quot;:   { groupId: &quot;SYSTEM&quot;} });
+
+			appUtils.setODataModel(oODataModel);		
+			this.getView().setModel(oODataModel);		
+
+//			this.oScr = { topPage:true, sNew : false, edit : false, aVkorg:[],aMsgErr : [],  nbMsgErr :0, bProDet:false,
+//					isWeb:false, iNbItems:0,
+//					proStatus : { ente:&quot;Default&quot;,cond:&quot;Default&quot;,cibl:&quot;Default&quot;,avtg:&quot;Default&quot;,mess:&quot;Default&quot;} };
+
+//			this.oScr.version = version;
+
+//			this.oScr.tSaison = this.initSaisonList();
+
+			this.oScrModel = new sap.ui.model.json.JSONModel(this.oScr);
+			this.oScrModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
+			this.oScrModel.setSizeLimit(100000);
+			this.getView().setModel(this.oScrModel,&quot;scr&quot;);
+
+//			this.byId(&quot;idAmMV_LISTPRO&quot;).setModel(new sap.ui.model.json.JSONModel());
+
+			var oODataWinAmModel = new sap.ui.model.odata.v2.ODataModel(this.sHostname+&quot;/sap/opu/odata/sap/ZWINAM_SRV&quot;);
+			oODataWinAmModel.attachMetadataFailed(null,function(oEvt)
+					{
+				this.setNoAuthView();
+					}.bind(this),this);
+
+			oODataWinAmModel.setDeferredGroups([&quot;SAVE_SEL&quot;,&quot;READ_SEL&quot;]);
+			oODataWinAmModel.setChangeGroups(
+					{ &quot;Variante&quot;: { groupId: &quot;SAVE_SEL&quot;},
+						&quot;VariaSel&quot;: { groupId: &quot;SAVE_SEL&quot;} });
+			this.getView().setModel(oODataWinAmModel,&quot;WinAm&quot;);		
+
+			oODataWinAmModel.read(&quot;/HelpVkorgSet&quot;,
+					{
+				success : function(oDataRes, resp)
+				{
+					this.oScr. aVkorg = oDataRes.results;
+				}.bind(this)
+					});
+
+			oODataWinAmModel.read(&quot;/UserParamsSet(&apos;PRO&apos;)&quot;,
+					{
+				success : function(oDataRes, resp)
+				{
+					if(!oDataRes.AuthApp)
+					{
+						this.setNoAuthView();
+					}else
+					{
+						var oModel = new sap.ui.model.json.JSONModel(oDataRes);
+						this.getView().setModel(oModel,&quot;usr&quot;);
+
+						this.switchView(&apos;HOME&apos;);
+
+						sap.ui.getCore().getEventBus().publish(&quot;e2e_app&quot;,
+						&quot;AppInit&quot;);
+					}
+				}.bind(this),
+				error : function(err)					
+				{
+					appUtils.showErrorMessage(appUtils.getMsgErrorHttp(err));
+					this.setNoConnexionView();
+				}.bind(this)
+					});
+
+		},
+
+
+		setNoConnexionView:function(){
+			this.switchView(&quot;NO_CONNEXION&quot;);
+		},
+
+		setNoAuthView:function(){
+			this.switchView(&quot;NO_AUTH&quot;);
+		},
+
+		handleEventNavBack:function()
+		{
+			this.oApp.back();			
+		},
+
+		switchView:function(sCodeView,bNavBack){			
+			this.oApp.to(this.byId(&quot;idAmMV_&quot;+sCodeView));			
+
+		},
+
+
+		initSaisonList:function()
+		{
+			var curYear = new Date().getFullYear() - 2000;
+			var tSaison = [{&quot;saison&quot;:&quot;&quot;}];
+
+			for (var i=1;i&gt;-5;i--)
+			{
+				var sYear = ( curYear + i );
+				tSaison.push({&quot;saison&quot;:sYear+&quot;E&quot;});
+				tSaison.push({&quot;saison&quot;:sYear+&quot;H&quot;});
+			}
+			return tSaison;			
+		},
+
+		handlePressListPro: function(oEvent) {
+			var oItem = oEvent.getSource();
+			var oShell = this.getView().byId(&quot;myShell&quot;);
+			var bState = oShell.getShowPane();
+			oShell.setShowPane(!bState);
+			oItem.setShowMarker(!bState);
+			oItem.setSelected(!bState);
+		},
+
+		handlePressProCreate: function() {
+			this.switchView(&apos;DETPRO&apos;);
+
+			sap.ui.getCore().getEventBus().publish(&quot;e2e_app&quot;,
+					&quot;LoadDetailPro&quot;, {
+				CodePro : &apos;NEW&apos;
+			});
+		},
+
+		handleShowNoDetPro: function() {
+			this.switchView(&apos;NO_DETPRO&apos;);
+		},
+
+		handleCreateProPress:function(sCannelID, sEvtId, oData) {
+			this.switchView(&apos;DETPRO&apos;);
+
+			sap.ui.getCore().getEventBus().publish(&quot;e2e_app&quot;,
+					&quot;LoadDetailPro&quot;, {
+				CodePro : &apos;NEW&apos;,
+				ProModel : oData.ProModel
+			});
+		},
+
+		handleLogoffPress : function(oEvent){
+			jQuery.ajax({url:this.sHostname+&quot;/sap/public/bc/icf/logoff&quot;,&amp;nbsp;&amp;nbsp;
+				async:false}).complete(function (){location.reload();&amp;nbsp;&amp;nbsp;
+				});&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+		},
+
+		handleHomePress : function(){
+			this.switchView(&apos;HOME&apos;);
+		},
+
+		handleEventShowPro:function(sCannelID, sEvtId, oData) {
+			this.switchView(&apos;DETPRO&apos;);
+			sap.ui.getCore().getEventBus().publish(&quot;e2e_app&quot;,
+					&quot;LoadDetailPro&quot;, {
+				CodePro : oData.CodePro,				
+				isCopy : oData.isCopy
+			});
+		},
+
+		handleSearchProCompleted:function(sCannelID, sEvtId, oData) {
+			this.oScr.lstModel = false;
+			this.oScrModel.refresh();
+			this.byId(&quot;idAmMV_LISTPRO&quot;).setModel(new sap.ui.model.json.JSONModel(oData.oDataRes));
+			this.switchView(&apos;LISTPRO&apos;);
+		},
+
+		handleHomeMenuPress:function(sCannelID, sEvtId, oData) {
+			switch(oData.sMenu)
+			{
+			case &apos;CREATE_PRO&apos;:
+				this.handlePressProCreate();
+				break;
+			case &apos;SEARCHPRO&apos;:
+				this.switchView(&apos;SEARCHPRO&apos;);
+				break;
+			case &apos;LIST_DETPRO&apos;:
+				this.callListPro(false,false);				
+				break;
+			case &apos;LIST_MODEL&apos;:
+				this.callListPro(true,false);		
+				break;
+			}
+		},
+
+		handleNavigate:function(oControlEvent){
+			var sToId = oControlEvent.getParameter(&quot;toId&quot;);
+			if(sToId.indexOf(&quot;idAmMV_LISTPRO&quot;)&gt;-1 &amp;&amp; oControlEvent.getParameter(&quot;isBack&quot;))
+			{
+				this.callListPro(false,true);		
+			}
+		},
+
+		callListPro:function(bLstModel,bNoSwitch)
+		{
+			var oODataModel = this.getView().getModel();
+
+			this.oScr.lstModel = bLstModel;
+			this.oScrModel.refresh();
+			oODataModel.read(&quot;/ProEnteteSet&quot;,
+					{
+				//filters : [new sap.ui.model.Filter(&quot;Statut&quot;, bLstModel?&quot;EQ&quot;:&quot;NE&quot;, &quot;6&quot;)],
+				success : function(oDataRes, resp)
+				{
+					this.byId(&quot;idAmMV_LISTPRO&quot;).getModel().setData(oDataRes);
+					this.byId(&quot;idAmMV_LISTPRO&quot;).getController().showView(bNoSwitch);
+					if(!bNoSwitch)
+					{
+						this.switchView(&apos;LISTPRO&apos;);
+					}
+				}.bind(this),
+				error : function(err)					
+				{
+					appUtils.showErrorMessage(appUtils.getMsgErrorHttp(err));
+				}
+					});
+		}
+
+	});
+});</layout>
+  </page>
+  <page APPLNAME="ZTASK_MON" PAGEKEY="WEBCONTENT/CONTROLLER/MAIN.CONTROLLER.JS" PAGENAME="WebContent/controller/Main.controller.js" PAGETYPE="X" MIMETYPE="application/x-javascript" BROWSER_CACHE="0 " SERVER_CACHE="0 " LAYOUTLANGU="F" VERSION="A" DEVCLASS="$TMP" LANGU="F">
+   <layout>sap.ui.controller(&quot;ZTASK_MON.Main&quot;, {
+
+	/**
+	 * Called when a controller is instantiated and its View controls (if
+	 * available) are already created. Can be used to modify the View before it
+	 * is displayed, to bind event handlers and do other one-time
+	 * initialization.
+	 *&amp;nbsp;
+	 * @memberOf ZTASK_MON.Main
+	 */
+	onInit : function() {
+		var oODataZtaskMonModel = new sap.ui.model.odata.v2.ODataModel(
+				this.sHostname + &quot;/sap/opu/odata/sap/ZTASK_MONITORING_SRV&quot;);
+	},
+
+/**
+ * Similar to onAfterRendering, but this hook is invoked before the controller&apos;s
+ * View is re-rendered (NOT before the first rendering! onInit() is used for
+ * that one!).
+ *&amp;nbsp;
+ * @memberOf ZTASK_MON.Main
+ */
+// onBeforeRendering: function() {
+//
+// },
+/**
+ * Called when the View has been rendered (so its HTML is part of the document).
+ * Post-rendering manipulations of the HTML could be done here. This hook is the
+ * same one that SAPUI5 controls get after being rendered.
+ *&amp;nbsp;
+ * @memberOf ZTASK_MON.Main
+ */
+// onAfterRendering: function() {
+//
+// },
+/**
+ * Called when the Controller is destroyed. Use this one to free resources and
+ * finalize activities.
+ *&amp;nbsp;
+ * @memberOf ZTASK_MON.Main
+ */
+// onExit: function() {
+//
+// }
+});</layout>
+  </page>
+  <page APPLNAME="ZTASK_MON" PAGEKEY="WEBCONTENT/I18N/I18N.PROPERTIES" PAGENAME="WebContent/i18n/i18n.properties" PAGETYPE="X" MIMETYPE="application/octet-stream" BROWSER_CACHE="0 " SERVER_CACHE="0 " LAYOUTLANGU="F" VERSION="A" DEVCLASS="$TMP" LANGU="F">
+   <layout># App Descriptor
+appTitle=Monitoring Système
+appDescription=Monitoring Système
+
+# HomePage
+homePageTitle=Monitoring Système
+
+#Modèle
+ammdModelDelete=Modèle supprimé
+
+# Textes généraux
+genDelete=Supprimer
+genCancel=Annuler
+genYes=Oui
+genNo=Non
+genActionCancelled=Action annulée
+
+
+# Messages
+
+# Type de messages
+
+# Type de réponse
+
+
+# Tooltips
+# Value Help
+
+#Controls
+
+#Messages Généraux
+noConnectText=Connection au serveur de données impossible
+noConnectDesc=Vérifier votre connection et actualiser la page.
+noAuthApp=Vous n\u2019êtes pas autorisés à utiliser cette application
+noAuthModel=Vous n\u2019êtes pas autorisés à modifier les modèles</layout>
+  </page>
+  <page APPLNAME="ZTASK_MON" PAGEKEY="WEBCONTENT/INDEX.HTML" PAGENAME="WebContent/index.html" MIMETYPE="text/html" BROWSER_CACHE="0 " SERVER_CACHE="0 " LAYOUTLANGU="F" VERSION="A" DEVCLASS="$TMP" LANGU="F">
+   <layout>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+&lt;meta http-equiv=&apos;Content-Type&apos; content=&apos;text/html;charset=UTF-8&apos; /&gt;
+
+&lt;script id=&quot;sap-ui-bootstrap&quot; src=&quot;resources/sap-ui-core.js&quot;
+	data-sap-ui-appCacheBuster=&quot;./&quot; data-sap-ui-preload=&quot;async&quot;
+	data-sap-ui-libs=&quot;sap.ui.commons&quot; data-sap-ui-theme=&quot;sap_bluecrystal&quot;
+	data-sap-ui-resourceroots=&apos;{&amp;nbsp;
+				&quot;ZTASK_MON&quot;: &quot;./&quot;
+			}&apos;&gt;
+	
+&lt;/script&gt;
+
+&lt;!-- add sap.ui.table,sap.ui.ux3 and/or other libraries to &apos;data-sap-ui-libs&apos; if required --&gt;
+
+&lt;!-- 		&lt;script&gt;
+				sap.ui.localResources(&quot;ZTASK_MON&quot;);
+				var view = sap.ui.view({id:&quot;idMain1&quot;, viewName:&quot;ZTASK_MON.view.Main&quot;, type:sap.ui.core.mvc.ViewType.XML});
+				view.placeAt(&quot;content&quot;);
+		&lt;/script&gt; --&gt;
+&lt;script&gt;
+	sap.ui.getCore().attachInit(function() {
+		new sap.ui.core.ComponentContainer({
+			name : &quot;ZTASK_MON&quot;,
+			height : &quot;100%&quot;
+		}).placeAt(&quot;content&quot;);
+	});
+&lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body class=&quot;sapUiBody&quot; id=&quot;content&quot;&gt;
+	&lt;div id=&quot;busyIndicator&quot; style=&quot;min-height: 100%&quot; class=&quot;myHomeView&quot;&gt;
+	&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</layout>
+  </page>
+  <page APPLNAME="ZTASK_MON" PAGEKEY="WEBCONTENT/MANIFEST.JSON" PAGENAME="WebContent/manifest.json" PAGETYPE="X" MIMETYPE="application/octet-stream" BROWSER_CACHE="0 " SERVER_CACHE="0 " LAYOUTLANGU="F" VERSION="A" DEVCLASS="$TMP" LANGU="F">
+   <layout>{
+  &quot;_version&quot;: &quot;1.1.0&quot;,
+  &quot;sap.app&quot;: {
+	&quot;_version&quot;: &quot;1.1.0&quot;,
+	&quot;id&quot;: &quot;com.celio.sap.ZTASK_MON&quot;,
+	&quot;type&quot;: &quot;application&quot;,
+	&quot;i18n&quot;: &quot;i18n/i18n.properties&quot;,
+	&quot;title&quot;: &quot;Title&quot;,
+	&quot;description&quot;: &quot;Description&quot;,
+	&quot;applicationVersion&quot;: {
+	  &quot;version&quot;: &quot;0.0.1&quot;
+	},
+	&quot;ach&quot;: &quot;CA-UI5-DOC&quot;
+  },
+  &quot;sap.ui&quot;: {
+	&quot;_version&quot;: &quot;1.1.0&quot;,
+	&quot;technology&quot;: &quot;UI5&quot;,
+	&quot;deviceTypes&quot;: {
+	  &quot;desktop&quot;: true,
+	  &quot;tablet&quot;: true,
+	  &quot;phone&quot;: true
+	},
+	&quot;supportedThemes&quot;: [
+	  &quot;sap_bluecrystal&quot;
+	]
+  },
+  &quot;sap.ui5&quot;: {
+	&quot;_version&quot;: &quot;1.1.0&quot;,
+	&quot;rootView&quot;: &quot;ZTASK_MON.view.Main&quot;,
+	&quot;dependencies&quot;: {
+	  &quot;minUI5Version&quot;: &quot;1.30&quot;,
+	  &quot;libs&quot;: {
+		&quot;sap.m&quot;: {},
+		&quot;sap.ui.comp&quot; : {},
+		&quot;sap.ui.layout&quot; : {},
+		&quot;sap.suite.ui.commons&quot; : {}		
+	  }
+	  	  	&amp;nbsp;&amp;nbsp;
+	},
+	&quot;models&quot;: {
+	  &quot;i18n&quot;: {
+		&quot;type&quot;: &quot;sap.ui.model.resource.ResourceModel&quot;,
+		&quot;settings&quot;: {
+		  &quot;bundleName&quot;: &quot;ZTASK_MON.i18n.i18n&quot;
+		}
+	  }
+	},
+	&quot;resources&quot;: {
+		  &quot;css&quot;: [
+			{
+			  &quot;uri&quot;: &quot;styles.css&quot;
+			}
+		  ]
+	}
+  }
+}</layout>
+  </page>
+  <page APPLNAME="ZTASK_MON" PAGEKEY="WEBCONTENT/STYLES.CSS" PAGENAME="WebContent/styles.css" PAGETYPE="X" MIMETYPE="text/css" BROWSER_CACHE="0 " SERVER_CACHE="0 " LAYOUTLANGU="F" VERSION="A" DEVCLASS="$TMP" LANGU="F">
+   <layout>html {
+	height: 100%;
+}
+
+body {
+	min-height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.zBoldTitle {
+	font-size: 110%;
+	font-weight: bold;
+}
+
+.myTokenExclude {
+	background: #ECA9A9;
+}
+
+.myHomeView {
+	background-color: transparent;
+	background-image: linear-gradient(to bottom, #2da9b1 0, #178299 50%, #1a4c7d 100%);
+}
+
+.myLoaderImage {
+	width: 120px;
+	-webkit-animation: spin 4s linear infinite;
+	-moz-animation: spin 4s linear infinite;
+	animation: spin 4s linear infinite;
+}
+
+@-moz-keyframes spin { 100% {
+	-moz-transform: rotate(360deg);
+}
+
+}
+@-webkit-keyframes spin { 100% {
+	-webkit-transform: rotate(360deg);
+}
+
+}
+@keyframes spin { 100% {
+	-webkit-transform: rotate(360deg);
+	transform: rotate(360deg);
+}
+
+}
+.myCenteredInDiv {
+	height: 10px;
+	width: 50%;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}</layout>
+  </page>
+  <page APPLNAME="ZTASK_MON" PAGEKEY="WEBCONTENT/VIEW/APP.VIEW.XML" PAGENAME="WebContent/view/App.view.xml" PAGETYPE="X" MIMETYPE="text/xml" BROWSER_CACHE="0 " SERVER_CACHE="0 " LAYOUTLANGU="F" VERSION="A" DEVCLASS="$TMP" LANGU="F">
+   <layout>&lt;core:View xmlns:core=&quot;sap.ui.core&quot; xmlns:mvc=&quot;sap.ui.core.mvc&quot;
+	xmlns=&quot;sap.ui.commons&quot; controllerName=&quot;ZTASK_MON.controller.App&quot;
+	xmlns:html=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+	&lt;App id=&quot;myApp&quot; height=&quot;100%&quot; width=&quot;100%&quot; navigate=&quot;handleNavigate&quot;&gt;
+		&lt;pages&gt;
+			&lt;Page id=&quot;idAmINIT_PAGE&quot; showHeader=&quot;false&quot; enableScrolling=&quot;false&quot;
+				backgroundDesign=&quot;Solid&quot; class=&quot;myHomeView&quot;&gt;
+				&lt;HBox alignItems=&quot;Center&quot; justifyContent=&quot;Center&quot; fitContainer=&quot;true&quot;&gt;
+					&lt;Image src=&quot;img/celioText.png&quot; /&gt;
+					&lt;Image src=&quot;img/celioStar.png&quot; class=&quot;myLoaderImage&quot; /&gt;
+				&lt;/HBox&gt;
+			&lt;/Page&gt;
+			&lt;mvc:XMLView viewName=&quot;ZTASK_MON.view.App&quot; id=&quot;idAmMV_App&quot;
+				width=&quot;100%&quot; height=&quot;100%&quot; /&gt;
+&lt;!-- 			&lt;mvc:XMLView viewName=&quot;zwinpro.view.ListProDetail&quot; id=&quot;idAmMV_LISTPRO&quot;
+				width=&quot;100%&quot; height=&quot;100%&quot; /&gt;
+			&lt;mvc:XMLView viewName=&quot;zwinpro.view.DetPro&quot; id=&quot;idAmMV_DETPRO&quot;
+				width=&quot;100%&quot; height=&quot;100%&quot; /&gt;
+			&lt;mvc:XMLView viewName=&quot;zwinpro.view.comp.NoConnection&quot;
+				id=&quot;idAmMV_NO_CONNEXION&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;
+			&lt;mvc:XMLView viewName=&quot;zwinpro.view.comp.NoAuth&quot; id=&quot;idAmMV_NO_AUTH&quot;
+				width=&quot;100%&quot; height=&quot;100%&quot; /&gt;
+			&lt;mvc:XMLView viewName=&quot;zwinpro.view.SearchPro&quot; id=&quot;idAmMV_SEARCHPRO&quot;
+				width=&quot;100%&quot; height=&quot;100%&quot; /&gt; --&gt;
+
+		&lt;/pages&gt;
+	&lt;/App&gt;
+&lt;/core:View&gt;</layout>
+  </page>
+  <page APPLNAME="ZTASK_MON" PAGEKEY="WEBCONTENT/VIEW/MAIN.VIEW.XML" PAGENAME="WebContent/view/Main.view.xml" PAGETYPE="X" MIMETYPE="text/xml" BROWSER_CACHE="0 " SERVER_CACHE="0 " LAYOUTLANGU="F" VERSION="A" DEVCLASS="$TMP" LANGU="F">
+   <layout>&lt;core:View xmlns:core=&quot;sap.ui.core&quot; xmlns:mvc=&quot;sap.ui.core.mvc&quot;
+	xmlns=&quot;sap.ui.commons&quot; controllerName=&quot;ZTASK_MON.controller.Main&quot;
+	xmlns:html=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+
+	&lt;Page id=&quot;Main&quot; enableScrolling=&quot;false&quot; busyIndicatorDelay=&quot;0&quot;
+		title=&quot;Monitoring&quot; class=&quot;sapUiContentPadding&quot; visible=&quot;true&quot;&gt;
+
+		&lt;customHeader&gt;
+			&lt;Toolbar&gt;
+				&lt;Button id=&quot;Back&quot; icon=&quot;sap-icon://nav-back&quot; press=&quot;handleNavBack&quot; /&gt;
+				&lt;Text width=&quot;2em&quot; /&gt;
+
+			&lt;/Toolbar&gt;
+		&lt;/customHeader&gt;
+	&lt;/Page&gt;
+
+&lt;/core:View&gt;</layout>
+  </page>
+ </WAPA>
+</nugget>
