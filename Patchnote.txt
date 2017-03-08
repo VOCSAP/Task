@@ -30,5 +30,17 @@ Création d'une nouvelle SHM afin de purger SHM de définition de type lors de la 
 Ajout Activation Trace
 Ajout table paramétrage activation Trace + Purge SHM par MF
 
-5.1 : A venir 
+<-- Fin de rétro-comptatible --> 
+L'implémentation des versions suivantes obligent à revoir les programmes utilisant le cadriciel
+
+6.0 : 
+Gain de 30% de perfomance + réduction 350% empreinte mémoire : Compression données avant appel RFC
+
+<-- Fin de rétro-comptatible --> 
+L'implémentation des versions suivantes obligent à revoir les programmes utilisant le cadriciel
+
+7.0 :
+Possibilité d'appeller des méthodes statiques en // 
+
+7.1 : A venir 
 Ajouter Assistant pour exploitation plus facile de la classe
