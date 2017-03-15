@@ -1,15 +1,19 @@
 1.0 : 
 Version initiale
+
 2.0 : 
 Correction de bugs et amélioration de la statibilité
 
 3.0 : 
 Ajout support des types génériques de table et structure (côté MF)
-Intégration d'une classe SHM pour contenir les type de définition. Peut être utiliser ailleurs ...
+Intégration d'une classe SHM pour contenir les type de définition. 
 Correction de bugs et amélioration de la statibilité 
 
+<-- Fin de rétro-comptatible V3.0 --> 
+L'implémentation des versions suivantes obligent à revoir les programmes utilisant le cadriciel
+<-- Fin de rétro-comptatible V3.0 --> 
+
 4.0 : 
-Attention, cette mise à jour n'est pas rétro-comptatible. 
 Ajout d'une classe servant de conteneur de données pour le lancement d'une Tâche.
 Cette dernière rend plus aisée l'utilisation du Cadriciel et évite la déclaration des tables
 de type "FUNCTION_PARAMETERS" et "ATTACHED_DATA"
@@ -20,27 +24,32 @@ si le traitement de parallélisation a été en erreur ou non. (paramètre iv_error)
 Correction d'un problème lors de l'appel de MF dont la signature contient des paramètres "TABLES"
 
 4.2 : 
-Utilisation du groupe par défaut
+Ajout possibilité d'utiliser le Groupe de Serveur par défaut
 Ajout contrôle Groupe de Serveur
 
 4.3 :
-Création d'une nouvelle SHM afin de purger SHM de définition de type lors de la fin d'appel des MFs //
+Création d'une nouvelle SHM afin de purger la SHM de définition de type lors de la fin d'appel des MFs //
 
 5.0 :
 Ajout Activation Trace
 Ajout table paramétrage activation Trace + Purge SHM par MF
 
-<-- Fin de rétro-comptatible --> 
+<-- Fin de rétro-comptatible V5.0 --> 
 L'implémentation des versions suivantes obligent à revoir les programmes utilisant le cadriciel
+<-- Fin de rétro-comptatible V5.0 -->
 
 6.0 : 
 Gain de 30% de perfomance + réduction 350% empreinte mémoire : Compression données avant appel RFC
 
-<-- Fin de rétro-comptatible --> 
+<-- Fin de rétro-comptatible V6.0 --> 
 L'implémentation des versions suivantes obligent à revoir les programmes utilisant le cadriciel
+<-- Fin de rétro-comptatible V6.0 --> 
 
 7.0 :
 Possibilité d'appeller des méthodes statiques en // 
 
-7.1 : A venir 
+7.1 : 
+Corrections de bug 
+
+7.2 : A venir 
 Ajouter Assistant pour exploitation plus facile de la classe
