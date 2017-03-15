@@ -81,10 +81,10 @@ SELECTION-SCREEN END OF BLOCK b1.
 
 
 ""  --> Routine appeler lors de la fin de Tâche
-FORM form_eot USING iv_function_name TYPE clike
-                    it_result        TYPE zif_task_constant=>ty_t_function_parameters
-                    it_attached_data TYPE zif_task_constant=>ty_t_task_attached_data
-                    iv_error         TYPE flag.
+FORM form_eot USING is_task_call_process TYPE ztec_s_task_call_process
+                    it_result            TYPE zif_task_constant=>ty_t_function_parameters
+                    it_attached_data     TYPE zif_task_constant=>ty_t_task_attached_data
+                    iv_error             TYPE flag.
 
 
 ENDFORM.
@@ -120,15 +120,15 @@ CLASS lcl_main DEFINITION FINAL.
 
     METHODS at_eot
       IMPORTING
-        iv_function_name TYPE funcname OPTIONAL
-        it_result        TYPE zif_task_constant=>ty_t_function_parameters OPTIONAL
-        it_attached_data TYPE zif_task_constant=>ty_t_task_attached_data OPTIONAL
-        iv_error         TYPE flag OPTIONAL.
+        is_task_call_process TYPE ztec_s_task_call_process
+        it_result            TYPE zif_task_constant=>ty_t_function_parameters OPTIONAL
+        it_attached_data     TYPE zif_task_constant=>ty_t_task_attached_data OPTIONAL
+        iv_error             TYPE flag OPTIONAL.
 
     METHODS before_task
       IMPORTING
-        iv_function_name  TYPE funcname OPTIONAL
-        io_task_container TYPE REF TO zcl_task_container OPTIONAL.
+        is_task_call_process TYPE ztec_s_task_call_process
+        io_task_container    TYPE REF TO zcl_task_container OPTIONAL.
 
 ***------------------------------------------------------------------***
 **                            ATTRIBUTS                               **
@@ -210,7 +210,7 @@ CLASS lcl_main IMPLEMENTATION.
 ***==================================================================***
 
     " Suivant le MF appelé
-    CASE iv_function_name.
+    CASE is_task_call_process-function_name.
 
       WHEN 'Z_FSD_RECH_PRIX_CESSION_MULTI'.
 
@@ -319,7 +319,27 @@ CLASS lcl_main IMPLEMENTATION.
 
       WHEN OTHERS.
         " Autre cas
-        RETURN.
+
+    ENDCASE.
+
+    CASE is_task_call_process-class_name.
+
+      WHEN 'ZCL_OVR_TEST_1'.
+
+        CASE is_task_call_process-method_name.
+
+          WHEN 'ONE'.
+            IF sy-subrc EQ 0.
+
+            ENDIF.
+
+          WHEN OTHERS.
+            " Autres
+        ENDCASE.
+
+      WHEN OTHERS.
+        " Autres
+
 
     ENDCASE.
 
@@ -332,24 +352,31 @@ CLASS lcl_main IMPLEMENTATION.
 ***==================================================================***
 
     " Suivant le MF appelé
-    CASE iv_function_name.
+    CASE is_task_call_process-function_name.
 
       WHEN 'Z_FSD_RECH_PRIX_CESSION_MULTI'.
 
 *        ADD 1 TO gv_compteur_pc.
 
       WHEN 'ZTEST_OVR_1'.
-        ""  --> Récupération "ET_DATA"
-*        READ TABLE it_result WITH TABLE KEY parameter_name = 'ET_DATA'
-*                                  ASSIGNING <lfs_s_result>.
-*        IF sy-subrc EQ 0.
-*          ASSIGN <lfs_s_result>-parameter_data->* TO <lfs_t_value>.
-*          IF sy-subrc EQ 0.
-*            gv_compteur_sql =  gv_compteur_sql + lines( <lfs_t_value> ).
+        " Modification données d'appel
+*        io_task_container->attached_data_add(
+*            iv_name = 'BEFORE'
+*            ix_data = abap_true
+*        ).
+**        io_task_container->attached_data_add(
+**          EXPORTING
+**            iv_name =     " Donnée contextuelle - Nom
+***            ix_data =     " Donnée contextuelle - Valeur
+**        ).
 *
-*          ENDIF.
+*        " Exemple de suppression des données
+*        DATA : lot_matnr TYPE REF TO table_matnr.
+*        lot_matnr ?= io_task_container->function_parameter_get( 'IT_TABLE_FAE2' ).
+**        FREE : lot_matnr->*.
 *
-*        ENDIF.
+*        " Exemple de suppression de paramètre
+*        io_task_container->function_parameter_delete( 'IT_TABLE_FAE3' ).
 
       WHEN 'BAPI_MATERIAL_GET_DETAIL'.
         " Traitement récupérer données Article
@@ -370,7 +397,7 @@ CLASS lcl_main IMPLEMENTATION.
 
         ADD 1 TO gv_compteur_check_before.
         GET RUN TIME FIELD gv_ts_before_check.
-        WAIT UP TO 3 SECONDS.
+*        WAIT UP TO 3 SECONDS.
 
       WHEN OTHERS.
         " Autre cas
@@ -383,12 +410,12 @@ CLASS lcl_main IMPLEMENTATION.
   METHOD main.
 
     DATA :
-      lt_matnr TYPE table_matnr.
+      lt_matnr TYPE mara_tab.
 
     DATA :
-      lo_task_manager    TYPE REF TO zcl_task_manager,
-      lo_task_container  TYPE REF TO zcl_task_container,
-      lo_cx_task_manager TYPE REF TO zcx_task_manager.
+      lo_task_manager   TYPE REF TO zcl_task_manager,
+      lo_task_container TYPE REF TO zcl_task_container,
+      lo_cx_exception   TYPE REF TO cx_root.
 
     DATA :
       ls_after_process_by_form    TYPE ztec_s_task_process_by_form,
@@ -420,23 +447,60 @@ CLASS lcl_main IMPLEMENTATION.
     " Création instance gérant la //
     " -----------------------------------------------------------
 
-    DATA : ls_task_trace_param TYPE ztec_s_task_trace_param.
+    DATA : ls_task_process_configuration TYPE zcl_task_manager=>ty_task_process_configuration.
+    DATA : ls_task_manager_configuration TYPE zcl_task_manager=>ty_task_manager_configuration.
+
+    " Initialisation de la configuration du Manager de Tâche
+    ls_task_manager_configuration-grfc = me->mv_grfc.
+    ls_task_manager_configuration-task_max = me->mv_task_max.
+*    ls_task_manager_configuration-global_configuration-funcname = '...'. "Si renseigné activation du mode dédié
+
+    " Configuration de l'utilisation de la SHM
+    ls_task_manager_configuration-global_configuration-shm_management = abap_true.
+
+    " Configuration de Trace
+*    ls_task_manager_configuration-global_configuration-task_trace_param-trace_active = abap_true.
+*    ls_task_manager_configuration-global_configuration-task_trace_param-trace_memory = abap_true.
+
+***==================================================================***
+    " Résultat d'essai méthode de compression
+    " Compression off    = Mem allocated : 26,874 + Runtime : 782 079
+    " Compression off    = Mem allocated : 26,898 + Runtime : 979 196
+    " Compression off    = Mem allocated : 26,898 + Runtime : 832 852
+    " Compression local  = Mem allocated : 8,42   + Runtime : 727 480
+    " Compression local  = Mem allocated : 8,39   + Runtime : 567 420
+    " Compression local  = Mem allocated : 8,38   + Runtime : 581 081
+    " Compression global = Mem allocated : 8,14   + Runtime : 562 613
+    " Compression global = Mem allocated : 8,10   + Runtime : 563 668
+    " Compression global = Mem allocated : 8,10   + Runtime : 560 351
+***==================================================================***
+
+    " Configuration de la compression
+*    ls_task_manager_configuration-global_configuration-task_compress_param-data_compress_global = abap_true.       "Un dossier global
+    ls_task_manager_configuration-global_configuration-task_compress_param-data_compress_line_by_line = abap_true.  "Un dossier par entrée
+
+    " Utilisation routine
+*    ls_task_manager_configuration-global_configuration-process_by_form-before-form = 'BEFORE_TASK'.
+*    ls_task_manager_configuration-global_configuration-process_by_form-before-repid = sy-repid.
+*    ls_task_manager_configuration-global_configuration-process_by_form-after-repid = sy-repid.
+*    ls_task_manager_configuration-global_configuration-process_by_form-after-form = 'AT_EOT'.
+
+    " Utilisation méthode
+    ls_task_manager_configuration-global_configuration-process_by_method-before-instance = me.
+    ls_task_manager_configuration-global_configuration-process_by_method-before-method = 'BEFORE_TASK'.
+    ls_task_manager_configuration-global_configuration-process_by_method-after-instance = me.
+    ls_task_manager_configuration-global_configuration-process_by_method-after-method = 'AT_EOT'.
 
     TRY.
         " Création instance Tâche manager
         CREATE OBJECT lo_task_manager
           EXPORTING
-            iv_grfc                     = me->mv_grfc
-            iv_task_max                 = me->mv_task_max
-*           is_task_trace_param         = ls_task_trace_param
-*           is_after_process_by_form    = ls_af_terprocess_by_form.            "// Permet d'utiliser une Routine lorsqu'une Tâche se termine
-            is_after_process_by_method  = ls_after_process_by_method           "// Permet d'utiliser une Méthode lorsqu'une Tâche se termine
-            is_before_process_by_method = ls_before_process_by_method.
-*          iv_function_name = 'BAPI_MATERIAL_GET_DETAIL'.             "// Si valorisé --> permet de générer des Tâches dédiées à ce MF
-
+            is_task_manager_configuration = ls_task_manager_configuration.    " Configuration du Manager de Tâche
+*            iv_overload_compress_conf     =     " Ne pas utiliser la configuration de compression par défaut
+*            iv_overload_shm_management    =     " Ne pas utiliser la conf de gestion de la SHM par défaut
 
         " Génération Container
-        lo_task_container = lo_task_manager->task_container_create( ).
+        lo_task_container = lo_task_manager->container_task_create( ).
 
         " -----------------------------------------------------------
         " Traitement d'appel en //
@@ -450,18 +514,15 @@ CLASS lcl_main IMPLEMENTATION.
         DATA : lt_table_complex_in  TYPE ty_t_table_complex_in.
         DATA : lt_table_complex_out TYPE ty_t_table_complex_out.
 
-        ls_table_complex_in-matnr = '001'.
-        ls_table_complex_in-zzt_plm_mara-observation1 = 'OBSERVATION1'.
-        ls_complex_in_1-vbeln = '92901091'.
-        ls_complex_in_2-matnr = '99191'.
-        ls_complex_in_2-s_layout-bidule = 'C'.
-        APPEND ls_complex_in_2 TO ls_complex_in_1-t_complex_in_2.
-        APPEND ls_complex_in_1 TO ls_table_complex_in-t_complex_in.
-        APPEND ls_table_complex_in TO lt_table_complex_in.
+        IF NOT p_row IS INITIAL.
+          " Récupération du nombre d'Article spécifié
+          SELECT * FROM mara UP TO p_row ROWS
+                 INTO TABLE lt_matnr.
 
-        " Récupération du nombre d'Article spécifié
-        SELECT matnr FROM mara UP TO p_row ROWS
-               INTO TABLE lt_matnr.
+        ELSE.
+          SELECT * FROM mara INTO TABLE lt_matnr.
+
+        ENDIF.
 
         " -----------------------------------------------------------
         " Initialisation des données pour appel récupération données
@@ -483,23 +544,67 @@ CLASS lcl_main IMPLEMENTATION.
             ix_parameter_data = 'MARA'
         ).
 
+
+*          ls_table_complex_in-matnr = <lfs_s_matnr>.
+*          ls_table_complex_in-zzt_plm_mara-observation1 = 'OBSERVATION1'.
+*          ls_complex_in_1-vbeln = '92901091'.
+*          ls_complex_in_2-matnr = '99191'.
+*          ls_complex_in_2-s_layout-bidule = 'C'.
+*          APPEND ls_complex_in_2 TO ls_complex_in_1-t_complex_in_2.
+*          APPEND ls_complex_in_1 TO ls_table_complex_in-t_complex_in.
+*          APPEND ls_table_complex_in TO lt_table_complex_in.
+
         ""  --> Ajout paramètre d'import "IT_TABLE_FAE"
         lo_task_container->function_parameter_add(
           iv_parameter_name = 'IT_TABLE_FAE'
-          ix_parameter_data = lt_table_complex_in
+          ix_parameter_data = lt_matnr
+*            ix_parameter_data = lt_table_complex_in
         ).
+
+*##############################################################
+************** TEST POUR LA COMPRESSION **********************
+        ""  --> Ajout paramètre d'import "IT_TABLE_FAE"
+        lo_task_container->function_parameter_add(
+          iv_parameter_name = 'IT_TABLE_FAE2'
+          ix_parameter_data = lt_matnr
+*            ix_parameter_data = lt_table_complex_in
+        ).
+        ""  --> Ajout paramètre d'import "IT_TABLE_FAE"
+        lo_task_container->function_parameter_add(
+          iv_parameter_name = 'IT_TABLE_FAE3'
+          ix_parameter_data = lt_matnr
+*            ix_parameter_data = lt_table_complex_in
+        ).
+        ""  --> Ajout paramètre d'import "IT_TABLE_FAE"
+        lo_task_container->function_parameter_add(
+          iv_parameter_name = 'IT_TABLE_FAE4'
+          ix_parameter_data = lt_matnr
+*            ix_parameter_data = lt_table_complex_in
+        ).        ""  --> Ajout paramètre d'import "IT_TABLE_FAE"
+        lo_task_container->function_parameter_add(
+          iv_parameter_name = 'IT_TABLE_FAE5'
+          ix_parameter_data = lt_matnr
+*            ix_parameter_data = lt_table_complex_in
+        ).        ""  --> Ajout paramètre d'import "IT_TABLE_FAE"
+        lo_task_container->function_parameter_add(
+          iv_parameter_name = 'IT_TABLE_FAE6'
+          ix_parameter_data = lt_matnr
+*            ix_parameter_data = lt_table_complex_in
+        ).
+************** TEST POUR LA COMPRESSION **********************
+*##############################################################
 
         ""  --> Ajout paramètre d'import "IV_SQL_COND"
         lo_task_container->function_parameter_add(
           iv_parameter_name = 'IV_SQL_COND'
-          ix_parameter_data = 'MATNR EQ IT_TABLE_FAE-TABLE_LINE'
+          ix_parameter_data = 'MATNR EQ IT_TABLE_FAE-MATNR'
         ).
 
-        ""  --> Ajout paramètre d'import "IV_INPUT_1"
-        lo_task_container->function_parameter_add(
-          iv_parameter_name = 'IV_INPUT_1'
-          ix_parameter_data = '09101'
-        ).
+*        ""  --> Ajout paramètre d'import "IV_INPUT_1"
+*        lo_task_container->function_parameter_add(
+*          iv_parameter_name = 'IV_INPUT_1'
+*          ix_parameter_data = '09101'
+*        ).
 
         ""  --> Ajout paramètre d'export "ET_DATA"
         lo_task_container->function_parameter_add(
@@ -512,26 +617,109 @@ CLASS lcl_main IMPLEMENTATION.
 *            iv_type_for_generic_param = cl_abap_typedescr=>describe_by_data( lt_itab )->absolute_name.
         ).
 
-*          ls_task_trace_param-trace_active = ls_task_trace_param-trace_memory = abap_true.
+*        " Surchage de la configuration lors de l'appel
+*        "" --> Modification de la configuration de la compression
+*        ls_task_process_configuration-task_compress_param-data_compress_global = abap_true.
+*        ls_task_process_configuration-task_compress_param-data_compress_line_by_line = abap_false.
+*
+*        "" --> Modification de la trace
+*        ls_task_process_configuration-task_trace_param-trace_active = abap_false.
+*        ls_task_process_configuration-task_trace_param-trace_memory = abap_true.
 
         TRY.
             " Démarre la Tâche d'utilisation SHM 'ZTEST_OVR_1'
             lo_task_manager->task_start_new(
-                iv_function_name    = 'ZTEST_OVR_1'
-                io_task_container   = lo_task_container
-                is_task_trace_param = ls_task_trace_param
+                iv_function_name      = 'ZTEST_OVR_1'
+                io_task_container     = lo_task_container
+                is_task_configuration = ls_task_process_configuration
             ).
 
-          CATCH zcx_task_manager INTO lo_cx_task_manager.
+          CATCH zcx_task_manager INTO lo_cx_exception.
             " Erreur lors de la création du Task Manager
-            WHILE lo_cx_task_manager->previous IS BOUND. lo_cx_task_manager ?= lo_cx_task_manager->previous. ENDWHILE.
-            WRITE : /, lo_cx_task_manager->get_text( ).
+            WHILE lo_cx_exception->previous IS BOUND. lo_cx_exception ?= lo_cx_exception->previous. ENDWHILE.
+            WRITE : /, lo_cx_exception->get_text( ).
             ADD 1 TO gv_compteur_error.
 
         ENDTRY.
 
-        CLEAR : ls_task_trace_param.
+        TRY.
+            lo_task_container->reset( ).
+            " Ajout IV_IMPORTING
+            lo_task_container->function_parameter_add(
+              EXPORTING
+                iv_parameter_name = 'IV_IMPORTING'
+                ix_parameter_data = lt_matnr[ 1 ]-matnr
+            ).
+            " Ajout IS_IMPORTING
+            lo_task_container->function_parameter_add(
+              EXPORTING
+                iv_parameter_name = 'IS_IMPORTING'
+                ix_parameter_data = lt_matnr[ 1 ]
+            ).
+            " Ajout IT_IMPORTING
+            lo_task_container->function_parameter_add(
+              EXPORTING
+                iv_parameter_name = 'IT_IMPORTING'
+                ix_parameter_data = lt_matnr
+            ).
+            " Ajout CV_CHANGING
+            lo_task_container->function_parameter_add(
+              EXPORTING
+                iv_parameter_name = 'CV_CHANGING'
+                ix_parameter_data = lt_matnr[ 3 ]-matnr
+            ).
+            " Ajout CS_CHANGING
+            lo_task_container->function_parameter_add(
+              EXPORTING
+                iv_parameter_name = 'CS_CHANGING'
+                ix_parameter_data = lt_matnr[ 3 ]
+            ).
+            " Ajout CT_CHANGING
+            lo_task_container->function_parameter_add(
+              EXPORTING
+                iv_parameter_name = 'CT_CHANGING'
+                ix_parameter_data = lt_matnr
+            ).
+            " Ajout EV_EXPORTING
+            lo_task_container->function_parameter_add(
+              EXPORTING
+                iv_parameter_name = 'EV_EXPORTING'
+            ).
+            " Ajout ES_EXPORTING
+            lo_task_container->function_parameter_add(
+              EXPORTING
+                iv_parameter_name = 'ES_EXPORTING'
+            ).
+            " Ajout ET_EXPORTING
+            lo_task_container->function_parameter_add(
+              EXPORTING
+                iv_parameter_name = 'ET_EXPORTING'
+            ).
+            " Ajout RV_RETURNING
+            lo_task_container->function_parameter_add(
+              EXPORTING
+                iv_parameter_name = 'RV_RETURNING'
+            ).
 
+            " Démarre la Tâche d'utilisation SHM 'ZCL_TEST_OVR_1=>ONE'
+            lo_task_manager->task_start_new(
+                iv_class_name         = 'ZCL_OVR_TEST_1'
+                iv_method_name        = 'ONE'
+                io_task_container     = lo_task_container
+                is_task_configuration = ls_task_process_configuration
+            ).
+
+          CATCH zcx_task_manager INTO lo_cx_exception.
+            " Erreur lors de la création du Task Manager
+            WHILE lo_cx_exception->previous IS BOUND. lo_cx_exception ?= lo_cx_exception->previous. ENDWHILE.
+            WRITE : /, lo_cx_exception->get_text( ).
+            ADD 1 TO gv_compteur_error.
+
+        ENDTRY.
+
+        CLEAR : ls_task_process_configuration.
+
+        FREE : lt_matnr.
         " Parcours l'ensemble des Articles récupéré
         LOOP AT lt_matnr ASSIGNING FIELD-SYMBOL(<lfs_s_matnr>).
 
@@ -581,10 +769,10 @@ CLASS lcl_main IMPLEMENTATION.
                   io_task_container = lo_task_container
               ).
 
-            CATCH zcx_task_manager INTO lo_cx_task_manager.
+            CATCH zcx_task_manager INTO lo_cx_exception.
               " Erreur lors de la création du Task Manager
-              WHILE lo_cx_task_manager->previous IS BOUND. lo_cx_task_manager ?= lo_cx_task_manager->previous. ENDWHILE.
-              WRITE : /, lo_cx_task_manager->get_text( ).
+              WHILE lo_cx_exception->previous IS BOUND. lo_cx_exception ?= lo_cx_exception->previous. ENDWHILE.
+              WRITE : /, lo_cx_exception->get_text( ).
               ADD 1 TO gv_compteur_error.
 
           ENDTRY.
@@ -597,7 +785,7 @@ CLASS lcl_main IMPLEMENTATION.
         ""  --> Appel méthode pour finaliser les traitements en cours
         lo_task_manager->task_finish_running( ).
 
-      CATCH zcx_task_manager INTO lo_cx_task_manager.
+      CATCH zcx_task_manager INTO lo_cx_exception.
         " Erreur lors de la création du Task Manager
         ADD 1 TO gv_compteur_error.
 
