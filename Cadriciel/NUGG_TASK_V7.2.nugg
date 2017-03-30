@@ -10733,7 +10733,7 @@ ENDMETHOD.</source>
   <localTypes>*&quot;* use this source file for any type of declarations (class
 *&quot;* definitions, interfaces or type declarations) you need for
 *&quot;* components in the private section</localTypes>
-  <localMacros></localMacros>
+  <localMacros/>
   <attribute CLSNAME="ZCL_TYPE_DEF_AREAHANDLE_AREA" CMPNAME="AREA_NAME" VERSION="1" LANGU="F" DESCRIPT="Name of an Area Class" EXPOSURE="2" STATE="1" EDITORDER="1 " ATTDECLTYP="2" ATTVALUE="&apos;ZCL_TYPE_DEF_AREAHANDLE_AREA&apos;" ATTEXPVIRT="0" TYPTYPE="1" TYPE="SHM_AREA_NAME" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
   <attribute CLSNAME="ZCL_TYPE_DEF_AREAHANDLE_AREA" CMPNAME="ROOT" VERSION="1" LANGU="F" DESCRIPT="SHM: Model of a Data Class" EXPOSURE="2" STATE="1" EDITORDER="2 " ATTDECLTYP="0" ATTRDONLY="X" ATTEXPVIRT="0" TYPTYPE="3" TYPE="ZCL_TYPE_DEF_AREAHANDLE_ROOT" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
   <attribute CLSNAME="ZCL_TYPE_DEF_AREAHANDLE_AREA" CMPNAME="_CLIENT_DEPENDENT" VERSION="1" LANGU="F" EXPOSURE="0" STATE="1" EDITORDER="5 " ATTDECLTYP="2" ATTVALUE="ABAP_FALSE" ATTEXPVIRT="0" TYPTYPE="1" TYPE="ABAP_BOOL" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
@@ -11873,7 +11873,7 @@ ENDMETHOD.</source>
   <localTypes>*&quot;* use this source file for any type of declarations (class
 *&quot;* definitions, interfaces or type declarations) you need for
 *&quot;* components in the private section</localTypes>
-  <localMacros></localMacros>
+  <localMacros/>
   <attribute CLSNAME="ZCL_TASK_SHM_AREA" CMPNAME="AREA_NAME" VERSION="1" LANGU="F" DESCRIPT="Name of an Area Class" EXPOSURE="2" STATE="1" EDITORDER="1 " ATTDECLTYP="2" ATTVALUE="&apos;ZCL_TASK_SHM_AREA&apos;" ATTEXPVIRT="0" TYPTYPE="1" TYPE="SHM_AREA_NAME" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
   <attribute CLSNAME="ZCL_TASK_SHM_AREA" CMPNAME="ROOT" VERSION="1" LANGU="F" DESCRIPT="SHM: Model of a Data Class" EXPOSURE="2" STATE="1" EDITORDER="2 " ATTDECLTYP="0" ATTRDONLY="X" ATTEXPVIRT="0" TYPTYPE="3" TYPE="ZCL_TASK_SHM_ROOT" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
   <attribute CLSNAME="ZCL_TASK_SHM_AREA" CMPNAME="_CLIENT_DEPENDENT" VERSION="1" LANGU="F" EXPOSURE="0" STATE="1" EDITORDER="5 " ATTDECLTYP="2" ATTVALUE="ABAP_FALSE" ATTEXPVIRT="0" TYPTYPE="1" TYPE="ABAP_BOOL" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
@@ -13434,4 +13434,2565 @@ ENDCLASS.
  <TTYP TYPENAME="ZTEC_T_FUNCTION_PARAMETERS" DDLANGUAGE="F" ROWTYPE="ZTEC_S_FUNCTION_PARAMETERS" ROWKIND="S" DATATYPE="STRU" LENG="000000" DECIMALS="000000" ACCESSMODE="T" KEYDEF="D" KEYKIND="N" KEYFDCOUNT="0000" DDTEXT="Type de table paramètre d&apos;appel Statique" TYPELEN="000352" CTLENG="000000" CTDECIMALS="000000" OCCURS="00000"/>
  <TTYP TYPENAME="ZTEC_T_METHOD_PARAMETERS" DDLANGUAGE="F" ROWTYPE="ZTEC_S_METHOD_PARAMETERS" ROWKIND="S" DATATYPE="STRU" LENG="000000" DECIMALS="000000" ACCESSMODE="T" KEYDEF="D" KEYKIND="N" KEYFDCOUNT="0000" DDTEXT="Méthode : Type de table paramétres d&apos;appel Statique" TYPELEN="000344" CTLENG="000000" CTDECIMALS="000000" OCCURS="00000"/>
  <TTYP TYPENAME="ZTEC_T_TASK_CALL_PROCESS" DDLANGUAGE="F" ROWTYPE="ZTEC_S_TASK_CALL_PROCESS" ROWKIND="S" DATATYPE="STRU" LENG="000000" DECIMALS="000000" ACCESSMODE="T" KEYDEF="D" KEYKIND="N" KEYFDCOUNT="0000" DDTEXT="Tâche - Type de Table de Traitement à lancer" TYPELEN="000242" CTLENG="000000" CTDECIMALS="000000" OCCURS="00000"/>
+ <FUGR SPRAS="F" AREA="ZTEC_TASK_PARALLEL" AREAT="GF Traitement Tâche Paralléle">
+  <mainprogram NAME="SAPLZTEC_TASK_PARALLEL" VARCL="X" DBAPL="S" DBNA="D$" SUBC="F" APPL="S" RMAND="100" RLOAD="F" FIXPT="X" LDBNAME="D$S" UCCHECK="X">
+   <textPool/>
+   <source>*******************************************************************
+*   System-defined Include-files.                                 *
+*******************************************************************
+  INCLUDE LZTEC_TASK_PARALLELTOP.            &quot; Global Data
+  INCLUDE LZTEC_TASK_PARALLELUXX.            &quot; Function Modules
+
+*******************************************************************
+*   User-defined Include-files (if necessary).                    *
+*******************************************************************
+* INCLUDE LZTEC_TASK_PARALLELF...            &quot; Subroutines
+* INCLUDE LZTEC_TASK_PARALLELO...            &quot; PBO-Modules
+* INCLUDE LZTEC_TASK_PARALLELI...            &quot; PAI-Modules
+* INCLUDE LZTEC_TASK_PARALLELE...            &quot; Events
+* INCLUDE LZTEC_TASK_PARALLELP...            &quot; Local class implement.
+* INCLUDE LZTEC_TASK_PARALLELT99.            &quot; ABAP Unit tests
+
+INCLUDE lztec_task_parallelf01.
+
+INCLUDE lztec_task_parallelf02.</source>
+  </mainprogram>
+  <includeprograms>
+   <include NAME="LZTEC_TASK_PARALLELF01" VARCL="X" SUBC="I" APPL="S" RMAND="100" RLOAD="F" UCCHECK="X">
+    <include_source>*----------------------------------------------------------------------*
+***INCLUDE LZTEC_TASK_PARALLELF01.
+*----------------------------------------------------------------------*
+*&amp;---------------------------------------------------------------------*
+*&amp; Include         : LZTEC_TASK_PARALLELF01                            *
+*&amp; Module Fonction : Z_TASK_CALL_PROCESS                               *
+*&amp; Groupe Fonction : ZTEC_TASK_PARALELL                                *
+*&amp; Description     : Include pour routine sur Appel MF                 *
+*                                                                      *
+*&amp;---------------------------------------------------------------------*
+*&amp;---------------------------------------------------------------------*
+*&amp; Créé par     : Olivier Véhier                                       *
+*                                                                      *
+*&amp; Créé le      : 22/07/2015                                           *
+*                                                                      *
+*&amp;---------------------------------------------------------------------*
+*&amp;---------------------------------------------------------------------*
+*&amp; Liste des modifications                                             *
+*&amp; Auteur      Date       Signature  Objet de la modification          *
+*&amp;---------------------------------------------------------------------*
+*&amp;---------------------------------------------------------------------*
+*                                                                      *
+
+
+*&amp;---------------------------------------------------------------------*
+*&amp;      Form  FUNCTION_CALL_PROCESS
+*&amp;---------------------------------------------------------------------*
+*       Appel d&apos;un Module Fonction
+*----------------------------------------------------------------------*
+*      --&gt; IV_FUNCTION_NAME                 Module Fonction à exécuter
+*      --&gt; IT_FUNCTION_PARAMETERS           Table des paramètres d&apos;appels
+*      --&gt; IV_FUNCTION_DATA_COMPRESSED      Données d&apos;appe compressées
+*      --&gt; IS_TASK_DATA_COMPRESS_PARAM      Type de Compression
+*      &lt;-- ET_TASK_RESULT                   Données de retour
+*      &lt;-- EV_TASK_RESULT_DATA_COMPRESSED   Données de retour compressées
+*----------------------------------------------------------------------*
+FORM function_call_process USING iv_function_name               TYPE rs38l_fnam
+                                 it_function_parameters         TYPE ztec_t_function_parameters
+                                 iv_function_data_compressed    TYPE xstring
+                                 is_task_data_compress_param    TYPE ztec_s_task_compress_param
+                        CHANGING et_task_result                 TYPE ztec_t_function_parameters
+                                 ev_task_result_data_compressed TYPE xstring.
+
+***------------------------------------------------------------------***
+**                             TABLES                                 **
+***------------------------------------------------------------------***
+  DATA :
+    lt_table_data TYPE ty_t_table_data,
+    lt_exceptions TYPE abap_func_excpbind_tab,
+    lt_parameters TYPE abap_func_parmbind_tab.
+
+***------------------------------------------------------------------***
+**                            VARIABLES                               **
+***------------------------------------------------------------------***
+  DATA :
+    lv_subrc TYPE sy-subrc.                                 &quot;#EC NEEDED
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+  CLEAR   : ev_task_result_data_compressed.
+  REFRESH : et_task_result.
+
+  TRY.
+      &quot; -----------------------------------------------------------
+      &quot; Initialisation tables paramètres d&apos;appel Dynamique
+      &quot; -----------------------------------------------------------
+
+      &quot; Initialisation des paramètres dynamique
+      PERFORM func_dynamic_parameters_set USING iv_function_name
+                                                it_function_parameters
+                                                iv_function_data_compressed
+                                       CHANGING lt_table_data   &quot;Sert à stocker les références des données
+                                                lt_parameters
+                                                lt_exceptions.
+
+    CATCH cx_root.                                       &quot;#EC CATCH_ALL
+      &quot; Une erreur est survenue
+      &quot;&quot;  --&gt; Arrêt du traitement
+      MESSAGE ID zif_task_constant=&gt;mc_message_class_id
+            TYPE &apos;E&apos;                                        &quot;#EC NOTEXT
+          NUMBER 501                                        &quot;#EC NOTEXT
+            WITH iv_function_name
+         RAISING dynamic_convert_error.
+
+  ENDTRY.
+
+  IF lt_exceptions[] IS INITIAL.
+    &quot; -----------------------------------------------------------
+    &quot; Gestion des Exceptions // Afin d&apos;éviter toute erreur
+    &quot; -----------------------------------------------------------
+    PERFORM func_exception_table_set USING iv_function_name
+                                  CHANGING lt_exceptions.
+
+  ENDIF.
+
+  TRY.
+      &quot; -----------------------------------------------------------
+      &quot; Appel du MF
+      &quot; -----------------------------------------------------------
+
+      &quot; Appel du MF avec paramètres dynamique
+      CALL FUNCTION iv_function_name
+        PARAMETER-TABLE lt_parameters
+        EXCEPTION-TABLE lt_exceptions.
+      lv_subrc = sy-subrc.
+
+    CATCH cx_root INTO DATA(lo_cx_exception).
+      &quot; Une erreur est survenue lors de l&apos;appel
+      &quot;&quot;  --&gt; Arrêt du traitement
+      MESSAGE ID zif_task_constant=&gt;mc_message_class_id
+            TYPE &apos;E&apos;                                        &quot;#EC NOTEXT
+          NUMBER 502                                        &quot;#EC NOTEXT
+            WITH iv_function_name
+                 lo_cx_exception-&gt;get_text( )
+         RAISING dynamic_call_error.
+
+  ENDTRY.
+
+  &quot; -----------------------------------------------------------
+  &quot; Initialisation table de retour
+  &quot; -----------------------------------------------------------
+
+  &quot; Conserve uniquement les paramètres d&apos;Export / Changing / Table (vue du MF)
+  DELETE lt_parameters WHERE kind EQ abap_func_exporting.
+  IF NOT lt_parameters[] IS INITIAL.
+    &quot; Initialisation table de retour
+    PERFORM func_result_set USING lv_subrc
+                                  lt_parameters
+                                  lt_exceptions
+                                  it_function_parameters
+                                  is_task_data_compress_param
+                         CHANGING et_task_result
+                                  ev_task_result_data_compressed.
+
+  ENDIF.
+
+ENDFORM.
+
+*&amp;---------------------------------------------------------------------*
+*&amp;      Form  FUNC_DYNAMIC_PARAMETERS_SET
+*&amp;---------------------------------------------------------------------*
+*       Initialisation des paramètres dynamique d&apos;appel
+*----------------------------------------------------------------------*
+*      --&gt; IV_FUNCTION_NAME             Nom du MF à appeler
+*      --&gt; IT_FUNCTION_PARAMETERS       Table paramètre statique
+*      --&gt; IV_FUNCTION_DATA_COMPRESSED  Données comprimées
+*      &lt;-- ET_TABLE_DATA                Table stockage paramètre
+*      &lt;-- ET_PARAMETERS                Table paramètre dynamique
+*      &lt;-- ET_EXCEPTIONS                Table exception dynamique
+*----------------------------------------------------------------------*
+FORM func_dynamic_parameters_set USING iv_function_name            TYPE rs38l_fnam &quot;#EC NEEDED
+                                       it_function_parameters      TYPE ztec_t_function_parameters
+                                       iv_function_data_compressed TYPE xstring
+                              CHANGING et_table_data               TYPE ty_t_table_data
+                                       et_parameters               TYPE abap_func_parmbind_tab
+                                       et_exceptions               TYPE abap_func_excpbind_tab.
+
+***------------------------------------------------------------------***
+**                            STRUCTURE                               **
+***------------------------------------------------------------------***
+  DATA :
+    ls_exceptions TYPE abap_func_excpbind,
+    ls_parameters TYPE abap_func_parmbind,
+    ls_table_data TYPE ty_table_data.
+
+***------------------------------------------------------------------***
+**                            INSTANCES                               **
+***------------------------------------------------------------------***
+  DATA :
+    lo_abap_zip        TYPE REF TO cl_abap_zip,
+    lo_type_descr      TYPE REF TO cl_abap_typedescr,
+    lo_cx_exception    TYPE REF TO cx_root,
+    lo_type_definition TYPE REF TO zcl_type_definition.
+
+***------------------------------------------------------------------***
+**                            VARIABLES                               **
+***------------------------------------------------------------------***
+  DATA :
+        lv_data_decompress TYPE xstring.
+
+***------------------------------------------------------------------***
+**                          FIELD-SYMBOLS                             **
+***------------------------------------------------------------------***
+  FIELD-SYMBOLS :
+    &lt;lfs_value_data&gt; TYPE any.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+  FREE : et_parameters, et_exceptions, et_table_data.
+
+  &quot; -----------------------------------------------------------
+  &quot; Pré-Traitement
+  &quot; -----------------------------------------------------------
+
+  IF NOT iv_function_data_compressed IS INITIAL.
+    &quot; Données compressées
+    &quot;&quot;  --&gt; Chargement dossier compressées
+    CREATE OBJECT lo_abap_zip.
+    lo_abap_zip-&gt;support_unicode_names = abap_true.
+    lo_abap_zip-&gt;load(
+      EXPORTING
+        zip             = iv_function_data_compressed
+      EXCEPTIONS
+        zip_parse_error = 1
+        OTHERS          = 2
+    ).
+    IF sy-subrc NE 0.
+      &quot; Une erreur est survenue // Les données sont illisibles
+      &quot;&quot;  --&gt; Arrêt du traitement
+      RETURN.
+
+    ENDIF.
+
+  ENDIF.
+
+  &quot; -----------------------------------------------------------
+  &quot; Conversion des paramètres &quot;statiques&quot; en &quot;dynamique&quot;
+  &quot; -----------------------------------------------------------
+
+  &quot; Parcours l&apos;ensemble des paramètres &quot;statique&quot;
+  LOOP AT it_function_parameters ASSIGNING FIELD-SYMBOL(&lt;lfs_s_function_parameters&gt;).
+
+    CLEAR    : ls_parameters, ls_exceptions, ls_table_data, lv_data_decompress.
+    UNASSIGN : &lt;lfs_value_data&gt;.
+
+    &quot; Contrôle cohérence du Type
+    cl_abap_typedescr=&gt;describe_by_name(
+      EXPORTING
+        p_name         = &lt;lfs_s_function_parameters&gt;-value_type
+      EXCEPTIONS
+        type_not_found = 1
+        OTHERS         = 2
+    ).
+    IF sy-subrc NE 0.
+      &quot; Type non défini dans le RTTS du système
+      &quot;&quot;  --&gt; On va le charger depuis la mémoire partagée
+      IF NOT lo_type_definition IS BOUND.
+        &quot; Récupération instance courante
+        lo_type_definition = zcl_type_definition=&gt;get_instance( ).
+
+      ENDIF.
+
+      TRY.
+          &quot; Récupération de la définition du Type
+          lo_type_descr = lo_type_definition-&gt;definition_type_get( &lt;lfs_s_function_parameters&gt;-value_type ).
+
+        CATCH zcx_type_definition INTO lo_cx_exception.
+          &quot; Erreur lors de la récupération de la définition du Type
+          &quot;&quot;  --&gt; Lève une Exception
+          WHILE lo_cx_exception-&gt;previous IS BOUND. lo_cx_exception = lo_cx_exception-&gt;previous. ENDWHILE.
+          RAISE EXCEPTION TYPE zcx_task_call
+            EXPORTING
+              previous = lo_cx_exception.
+
+      ENDTRY.
+
+      &quot;&quot;  --&gt; Création de la zone Typée
+      CREATE DATA ls_table_data-value TYPE (lo_type_descr-&gt;absolute_name).
+
+    ELSE.
+      &quot;&quot;  --&gt; Création de la zone typée
+      IF &lt;lfs_s_function_parameters&gt;-parameter_kind EQ zif_task_constant=&gt;mc_parameter_kind_tables.
+        &quot; Paramètre Table
+        CREATE DATA ls_table_data-value TYPE STANDARD TABLE OF (&lt;lfs_s_function_parameters&gt;-value_type).
+
+      ELSE.
+        &quot; Paramètre &lt;&gt; Table
+        CREATE DATA ls_table_data-value TYPE (&lt;lfs_s_function_parameters&gt;-value_type).
+
+      ENDIF.
+
+    ENDIF.
+
+    &quot; Initialisation pointeur sur la donnée
+    ASSIGN ls_table_data-value-&gt;* TO &lt;lfs_value_data&gt;.
+
+    &quot; Suivant le Type de Paramètre (Signature)
+    CASE &lt;lfs_s_function_parameters&gt;-parameter_kind.
+
+      WHEN zif_task_constant=&gt;mc_parameter_kind_importing.
+        &quot; Cas d&apos;un paramètre d&apos;Export (vue MF)
+        &quot;&quot;  --&gt; Les paramètres d&apos;Export non pas à être rempli !
+
+      WHEN zif_task_constant=&gt;mc_parameter_kind_exception.
+        &quot; Cas d&apos;une Exception
+        &quot;&quot;  --&gt; Ajout de l&apos;Exception
+        ls_exceptions-name  = &lt;lfs_s_function_parameters&gt;-parameter_name.
+        ls_exceptions-value = lines( et_exceptions ) + 1.
+        INSERT ls_exceptions INTO TABLE et_exceptions.
+
+        &quot;&quot;  --&gt; Passe à l&apos;itération suivante
+        CONTINUE.
+
+      WHEN OTHERS.
+        &quot; Autre type de paramètre
+        IF &lt;lfs_s_function_parameters&gt;-value_is_compressed_global EQ abap_true
+        OR NOT &lt;lfs_s_function_parameters&gt;-value_data_xml         IS INITIAL.
+          &quot; Données &quot;complexe&quot; stockées sous forme XML
+          &quot;&quot;  --&gt; Suivant méthode de compression
+          CASE abap_true.
+
+            WHEN &lt;lfs_s_function_parameters&gt;-value_is_compressed_local.
+              &quot; Compression ligne à ligne
+              &quot;&quot;  --&gt; Création instance compression
+              CREATE OBJECT lo_abap_zip.
+              lo_abap_zip-&gt;support_unicode_names = abap_true.
+
+              &quot;&quot;  --&gt; Lecture dossier compressé
+              lo_abap_zip-&gt;load(
+                EXPORTING
+                  zip             = &lt;lfs_s_function_parameters&gt;-value_data_xml
+                EXCEPTIONS
+                  zip_parse_error = 1
+                  OTHERS          = 2
+              ).
+              IF sy-subrc EQ 0.
+                &quot; Aucune erreur
+                &quot;&quot;  --&gt; Récupération données décompressées
+                lo_abap_zip-&gt;get(
+                  EXPORTING
+                    index                   = 1
+                  IMPORTING
+                    content                 = lv_data_decompress
+                  EXCEPTIONS
+                    zip_index_error         = 1
+                    zip_decompression_error = 2
+                    OTHERS                  = 3
+                ).
+
+              ENDIF.
+              IF sy-subrc NE 0.
+                &quot; Une erreur est survenue
+                &quot;&quot;  --&gt; Réinitialisation données
+                CLEAR : lv_data_decompress.
+
+              ENDIF.
+
+            WHEN &lt;lfs_s_function_parameters&gt;-value_is_compressed_global.
+              &quot; Compression globale
+              &quot;&quot;  --&gt; Décompression des données
+              lo_abap_zip-&gt;get(
+                EXPORTING
+                  name                    = CONV string( &lt;lfs_s_function_parameters&gt;-parameter_name )
+                IMPORTING
+                  content                 = lv_data_decompress
+                EXCEPTIONS
+                  zip_index_error         = 1
+                  zip_decompression_error = 2
+                  OTHERS                  = 3
+              ).
+              IF sy-subrc NE 0.
+                &quot; Une erreur est survenue
+                &quot;&quot;  --&gt; Réinitialisation données
+                CLEAR : lv_data_decompress.
+
+              ENDIF.
+
+            WHEN OTHERS.
+              &quot; Autres
+              &quot;&quot;  --&gt; Pas de décompression // Rien à faire
+              lv_data_decompress = &lt;lfs_s_function_parameters&gt;-value_data_xml.
+
+          ENDCASE.
+
+          IF NOT lv_data_decompress IS INITIAL.
+            &quot;&quot; --&gt; Restructuration des données
+            CALL TRANSFORMATION id
+                     SOURCE XML lv_data_decompress
+                         RESULT data = &lt;lfs_value_data&gt;.
+
+          ENDIF.
+
+        ELSEIF NOT &lt;lfs_s_function_parameters&gt;-value_data IS INITIAL.
+          &quot; Type Elémentaire
+          &quot;&quot;  --&gt; Initialisation des données
+          &lt;lfs_value_data&gt; = &lt;lfs_s_function_parameters&gt;-value_data.
+
+        ELSE.                                               &quot;#EC NEEDED
+          &quot; Autre cas
+          &quot;&quot;  --&gt; ToDo : Ajouter ici les autres cas
+
+        ENDIF.
+
+    ENDCASE.
+
+    &quot;&quot;  --&gt; Création d&apos;une entrée permettant de stocker les paramètres d&apos;appel Dynamique
+    ls_table_data-name = &lt;lfs_s_function_parameters&gt;-parameter_name.                &quot;Nom du paramètre
+    INSERT ls_table_data INTO TABLE et_table_data.                                  &quot;Ajout dans table de paramètre
+
+    &quot;&quot;  --&gt; Initialisation table paramètre d&apos;appel dynamique
+    ls_parameters-name  = &lt;lfs_s_function_parameters&gt;-parameter_name.     &quot;Nom du paramètre
+    ls_parameters-kind  = &lt;lfs_s_function_parameters&gt;-parameter_kind.     &quot;Type (ABAP) du paramètre
+    ls_parameters-value = REF #( &lt;lfs_value_data&gt; ).                      &quot;Référence sur le contenu
+    INSERT ls_parameters INTO TABLE et_parameters.                        &quot;Ajout du paramètre dynamique
+
+  ENDLOOP.
+
+  &quot; -----------------------------------------------------------
+  &quot; Fin de traitement
+  &quot; -----------------------------------------------------------
+
+  IF lo_type_definition IS BOUND.
+    TRY.
+        &quot; Libération Token Mémoire Partagée
+        lo_type_definition-&gt;definition_type_finish( ).
+
+      CATCH zcx_type_definition.                        &quot;#EC NO_HANDLER
+        &quot; Erreur libération mémoire
+
+    ENDTRY.
+
+  ENDIF.
+
+ENDFORM.                    &quot; DYNAMIC_PARAMETERS_SET
+
+*&amp;---------------------------------------------------------------------*
+*&amp;      Form  FUNC_EXCEPTION_TABLE_SET
+*&amp;---------------------------------------------------------------------*
+*       Initialisation table d&apos;Exception
+*----------------------------------------------------------------------*
+*      --&gt; IV_FUNCTION_NAME     Nom du MF
+*      &lt;-&gt; CT_EXCEPTIONS        Table des Exceptions
+*----------------------------------------------------------------------*
+FORM func_exception_table_set USING iv_function_name TYPE clike
+                           CHANGING ct_exceptions    TYPE abap_func_excpbind_tab.
+
+***------------------------------------------------------------------***
+**                             TABLES                                 **
+***------------------------------------------------------------------***
+  DATA :
+    lt_fupararef_exception TYPE ty_t_fupararef_exception.
+
+***------------------------------------------------------------------***
+**                            STRUCTURE                               **
+***------------------------------------------------------------------***
+  DATA :
+    ls_exception           TYPE abap_func_excpbind,
+    ls_fupararef_exception TYPE ty_fupararef_exception.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+  &quot; -----------------------------------------------------------
+  &quot; Récupération des Exceptions du MF
+  &quot; -----------------------------------------------------------
+
+  &quot; Récupération position première occurence associée au MF
+  READ TABLE gt_fupararef_exception WITH KEY funcname = iv_function_name
+                                TRANSPORTING NO FIELDS
+                                      BINARY SEARCH.
+  IF sy-subrc NE 0.
+    &quot; Aucune Exception
+    SELECT funcname parameter pposition FROM fupararef
+                                  INTO TABLE lt_fupararef_exception ##TOO_MANY_ITAB_FIELDS
+                                       WHERE funcname  EQ iv_function_name
+                                         AND paramtype EQ &apos;X&apos;.
+    IF sy-subrc NE 0.
+      &quot; Création d&apos;une entrée afin de ne pas rechercher à nouveau les données
+      ls_fupararef_exception-funcname  = iv_function_name.
+      ls_fupararef_exception-not_found = abap_true.
+      INSERT ls_fupararef_exception INTO TABLE gt_fupararef_exception.
+
+    ELSE.
+      &quot; Ajout des entrées
+      INSERT LINES OF lt_fupararef_exception INTO TABLE gt_fupararef_exception.
+      FREE : lt_fupararef_exception.
+
+    ENDIF.
+
+    &quot; Récupération position première occurence
+    READ TABLE gt_fupararef_exception WITH KEY funcname = iv_function_name
+                                 TRANSPORTING NO FIELDS
+                                       BINARY SEARCH.
+
+  ENDIF.
+
+  IF sy-subrc NE 0.
+    &quot; Aucune Exception trouvée
+    &quot;&quot;  --&gt; Supprime toutes les exceptions présentes
+    FREE : ct_exceptions.
+
+    &quot;&quot;  --&gt; Arrêt du traitement
+    RETURN.
+
+  ENDIF.
+
+  &quot; -----------------------------------------------------------
+  &quot; Récupération des Exceptions du MF
+  &quot; -----------------------------------------------------------
+
+  &quot; Parcours l&apos;ensemble des Exceptions
+  LOOP AT gt_fupararef_exception ASSIGNING FIELD-SYMBOL(&lt;lfs_s_fupararef_exception&gt;)
+                                      FROM sy-tabix.
+
+    CLEAR : ls_exception.
+
+    IF &lt;lfs_s_fupararef_exception&gt;-not_found EQ abap_true.
+      &quot; Aucune Exception
+      &quot;&quot;  --&gt; Supprime toutes les exceptions présentes (au cas où)
+      FREE : ct_exceptions.
+
+      &quot;&quot;  --&gt; Arrêt du traitement
+      RETURN.
+
+    ENDIF.
+
+    IF &lt;lfs_s_fupararef_exception&gt;-funcname NE iv_function_name.
+      &quot; On ne traite plus le même MF
+      &quot;&quot;  --&gt; Arrêt de la boucle
+      EXIT.
+
+    ENDIF.
+
+    &quot; Recherche si l&apos;Exception est déjà renseigné
+    READ TABLE ct_exceptions WITH TABLE KEY name = &lt;lfs_s_fupararef_exception&gt;-parameter
+                               TRANSPORTING NO FIELDS.
+    IF sy-subrc NE 0.
+      &quot; Exception non ajoutée
+      &quot;&quot;  --&gt; Ajout de l&apos;Exception
+      ls_exception-name = &lt;lfs_s_fupararef_exception&gt;-parameter.
+      ls_exception-value = lines( ct_exceptions ) + 1.
+      INSERT ls_exception INTO TABLE ct_exceptions.
+
+    ENDIF.
+
+  ENDLOOP.      &quot;Fin de parcours des Exceptions
+
+ENDFORM.                    &quot; FUNC_EXCEPTION_TABLE_SET
+
+*&amp;---------------------------------------------------------------------*
+*&amp;      Form  FUNC_RESULT_SET
+*&amp;---------------------------------------------------------------------*
+*       Initialisation paramètre de retour
+*----------------------------------------------------------------------*
+*      --&gt; IV_SUBRC                        Code retour MF
+*      --&gt; IT_PARAMETERS                   Table paramètres d&apos;appel
+*      --&gt; IT_EXCEPTIONS                   Table Exception
+*      --&gt; IT_FUNCTION_PARAMETERS          Table paramètre statique
+*      --&gt; IS_TASK_DATA_COMPRESS_PARAM     Méthode de Compression
+*      &lt;-- ET_TASK_RESULT                  Table de retour (statique)
+*      &lt;-- EV_TASK_RESULT_DATA_COMPRESSED  Données compressées
+*----------------------------------------------------------------------*
+FORM func_result_set USING iv_subrc                       TYPE sy-subrc
+                           it_parameters                  TYPE abap_func_parmbind_tab
+                           it_exceptions                  TYPE abap_func_excpbind_tab
+                           it_function_parameters         TYPE ztec_t_function_parameters
+                           is_task_data_compress_param    TYPE ztec_s_task_compress_param
+                  CHANGING et_task_result                 TYPE ztec_t_function_parameters
+                           ev_task_result_data_compressed TYPE xstring.
+
+***------------------------------------------------------------------***
+**                            STRUCTURE                               **
+***------------------------------------------------------------------***
+  DATA :
+    ls_result TYPE ztec_s_function_parameters.
+
+***------------------------------------------------------------------***
+**                            INSTANCES                               **
+***------------------------------------------------------------------***
+  DATA :
+        lo_abap_zip TYPE REF TO cl_abap_zip.
+
+***------------------------------------------------------------------***
+**                          FIELD-SYMBOLS                             **
+***------------------------------------------------------------------***
+  FIELD-SYMBOLS :
+    &lt;lfs_value&gt; TYPE any.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+  FREE  : et_task_result.
+  CLEAR : ev_task_result_data_compressed.
+
+  &quot; -----------------------------------------------------------
+  &quot; Pré-Traitement
+  &quot; -----------------------------------------------------------
+
+  IF NOT is_task_data_compress_param IS INITIAL.
+    &quot; Activation de la Compression globale ou Ligne par Ligne
+    &quot;&quot;  --&gt; Création instance de Compression
+    CREATE OBJECT lo_abap_zip.
+
+  ENDIF.
+
+  &quot; -----------------------------------------------------------
+  &quot; Alimentation table de retour
+  &quot; -----------------------------------------------------------
+
+  &quot; Constitution table de sortie
+  LOOP AT it_parameters ASSIGNING FIELD-SYMBOL(&lt;lfs_s_parameters&gt;).
+
+    CLEAR : ls_result.
+
+    &quot; Récupération données associé au paramètre
+    READ TABLE it_function_parameters WITH KEY parameter_name = &lt;lfs_s_parameters&gt;-name
+                                     ASSIGNING FIELD-SYMBOL(&lt;lfs_s_function_parameters&gt;).
+    IF sy-subrc NE 0.
+      &quot; Pas de correspondance // Cas ne devant pas se produire
+      &quot;&quot;  --&gt; Passe à l&apos;itération suivante
+      CONTINUE.
+
+    ENDIF.
+
+    &quot; Initialisation données du paramètre
+    ls_result-parameter_name = &lt;lfs_s_function_parameters&gt;-parameter_name.
+    ls_result-parameter_kind = &lt;lfs_s_function_parameters&gt;-parameter_kind.
+
+    &quot; Initialisation données du contenu du paramètre
+    ls_result-value_kind = &lt;lfs_s_function_parameters&gt;-value_kind.
+    ls_result-value_type = &lt;lfs_s_function_parameters&gt;-value_type.
+
+    &quot; Initialisation pointeur sur les données
+    ASSIGN &lt;lfs_s_parameters&gt;-value-&gt;* TO &lt;lfs_value&gt;.
+
+    &quot; Suivant le type de données
+    CASE &lt;lfs_s_function_parameters&gt;-value_kind.
+
+      WHEN cl_abap_typedescr=&gt;kind_elem.
+        &quot; Elementaire
+        &quot;&quot;  --&gt; Initialisation de la données
+        ls_result-value_data = &lt;lfs_value&gt;.
+
+      WHEN OTHERS.
+        &quot; Cas structure complexe
+        TRY.
+            &quot;&quot;  --&gt; Initialisation des données sous format XML
+            CALL TRANSFORMATION id
+                         SOURCE data = &lt;lfs_value&gt;
+                     RESULT XML ls_result-value_data_xml.
+
+          CATCH cx_root.                  &quot;#EC CATCH_ALL #EC NO_HANDLER
+            &quot; Erreur conversion en XML
+
+        ENDTRY.
+
+        IF NOT is_task_data_compress_param IS INITIAL.
+          &quot; Compression des données activée
+          IF NOT lo_abap_zip IS BOUND.
+            &quot;&quot;  --&gt; Création instance Compression
+            CREATE OBJECT lo_abap_zip.
+
+          ENDIF.
+
+          &quot;&quot;  --&gt; Ajout de la données dans dossier compression
+          lo_abap_zip-&gt;add(
+              name    = CONV string( &lt;lfs_s_function_parameters&gt;-parameter_name )
+              content = ls_result-value_data_xml
+          ).
+
+          &quot;&quot;  --&gt; Suivant le type de compression
+          CASE abap_true.
+
+            WHEN is_task_data_compress_param-data_compress_line_by_line.
+              &quot; Compression à la ligne
+              &quot;&quot;  --&gt; Récupération données compressées
+              ls_result-value_data_xml = lo_abap_zip-&gt;save( ).
+
+              &quot;&quot;  --&gt; Initialisation indicateur données compressées ligne à ligne
+              ls_result-value_is_compressed_local = abap_true.
+
+              &quot;&quot;  --&gt; Libération instance Compression
+              FREE : lo_abap_zip.
+
+            WHEN is_task_data_compress_param-data_compress_global.
+              &quot; Compression globale
+              &quot;&quot;  --&gt; Libération contenu données
+              FREE : ls_result-value_data_xml.
+
+              &quot;&quot;  --&gt; Initialisation indicateur données compressées globale
+              ls_result-value_is_compressed_global = abap_true.
+
+            WHEN OTHERS.
+              &quot; Autres
+
+          ENDCASE.      &quot;Fin test Type de Compression
+
+        ENDIF.          &quot;Fin test Compression données active
+
+    ENDCASE.
+
+    &quot; Ajout dans la table de sortie
+    APPEND ls_result TO et_task_result.
+
+  ENDLOOP.
+
+  &quot; -----------------------------------------------------------
+  &quot; Alimentation table de retour
+  &quot; -----------------------------------------------------------
+
+  &quot; -----------------------------------------------------------
+  &quot; Post-Traitement
+  &quot; -----------------------------------------------------------
+
+  IF is_task_data_compress_param-data_compress_global EQ abap_true.
+    &quot; Donneés compressées au global
+    &quot;&quot;  --&gt; Réstitution du dossier de compression
+    ev_task_result_data_compressed = lo_abap_zip-&gt;save( ).
+
+  ENDIF.
+
+ENDFORM.                    &quot; FUNC_RESULT_SET</include_source>
+   </include>
+   <include NAME="LZTEC_TASK_PARALLELF02" VARCL="X" SUBC="I" APPL="S" RMAND="200" RLOAD="F" UCCHECK="X">
+    <include_source>*----------------------------------------------------------------------*
+***INCLUDE LZTEC_TASK_PARALLELF02.
+*----------------------------------------------------------------------*
+*&amp;---------------------------------------------------------------------*
+*&amp; Include         : LZTEC_TASK_PARALLELF02                            *
+*&amp; Module Fonction : Z_TASK_CALL_PROCESS                               *
+*&amp; Groupe Fonction : ZTEC_TASK_PARALELL                                *
+*&amp; Description     : Include pour routine sur Appel Méthode Statique   *
+*                                                                      *
+*&amp;---------------------------------------------------------------------*
+*&amp;---------------------------------------------------------------------*
+*&amp; Créé par     : Olivier Véhier                                       *
+*                                                                      *
+*&amp; Créé le      : 22/07/2015                                           *
+*                                                                      *
+*&amp;---------------------------------------------------------------------*
+*&amp;---------------------------------------------------------------------*
+*&amp; Liste des modifications                                             *
+*&amp; Auteur      Date       Signature  Objet de la modification          *
+*&amp;---------------------------------------------------------------------*
+*&amp;---------------------------------------------------------------------*
+*                                                                      *
+
+*&amp;---------------------------------------------------------------------*
+*&amp;      Form  METHOD_CALL_PROCESS
+*&amp;---------------------------------------------------------------------*
+*       Appel d&apos;une Métode Statique
+*----------------------------------------------------------------------*
+*      --&gt; IV_CLASS_NAME                    Classe
+*      --&gt; IV_METHOD_NAME                   Méthode Statique
+*      --&gt; IT_METHOD_PARAMETERS             Table des paramètres d&apos;appels
+*      --&gt; IV_METHOD_DATA_COMPRESSED        Données d&apos;appe compressées
+*      --&gt; IS_TASK_DATA_COMPRESS_PARAM      Type de Compression
+*      &lt;-- ET_TASK_RESULT                   Données de retour
+*      &lt;-- EV_TASK_RESULT_DATA_COMPRESSED   Données de retour compressées
+*----------------------------------------------------------------------*
+FORM method_call_process USING iv_class_name                  TYPE seoclsname
+                               iv_method_name                 TYPE seocpdname
+                               it_method_parameters           TYPE ztec_t_function_parameters
+                               iv_method_data_compressed      TYPE xstring
+                               is_task_data_compress_param    TYPE ztec_s_task_compress_param
+                      CHANGING et_task_result                 TYPE ztec_t_function_parameters
+                               ev_task_result_data_compressed TYPE xstring.
+
+***------------------------------------------------------------------***
+**                             TABLES                                 **
+***------------------------------------------------------------------***
+  DATA :
+    lt_table_data       TYPE ty_t_table_data,
+    lt_exceptions       TYPE abap_excpbind_tab,
+    lt_parameters       TYPE abap_parmbind_tab,
+    lt_exceptions_class TYPE ty_t_exceptions_class.
+
+***------------------------------------------------------------------***
+**                            VARIABLES                               **
+***------------------------------------------------------------------***
+  DATA :
+    lv_subrc             TYPE sy-subrc,                     &quot;#EC NEEDED
+    lv_sconame           TYPE seosubco-sconame,
+    lv_exception_by_meth TYPE xsdboolean.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+  CLEAR   : ev_task_result_data_compressed.
+  REFRESH : et_task_result.
+
+  TRY.
+      &quot; -----------------------------------------------------------
+      &quot; Initialisation tables paramètres d&apos;appel Dynamique
+      &quot; -----------------------------------------------------------
+
+      &quot; Initialisation des paramètres dynamique
+      PERFORM meth_dynamic_parameters_set USING iv_class_name
+                                                iv_method_name
+                                                it_method_parameters
+                                                iv_method_data_compressed
+                                       CHANGING lt_table_data   &quot;Sert à stocker les références des données
+                                                lt_parameters
+                                                lt_exceptions.
+
+    CATCH cx_root.                                       &quot;#EC CATCH_ALL
+      &quot; Une erreur est survenue
+      &quot;&quot;  --&gt; Arrêt du traitement
+      MESSAGE ID zif_task_constant=&gt;mc_message_class_id
+            TYPE &apos;E&apos;                                        &quot;#EC NOTEXT
+          NUMBER 006                                        &quot;#EC NOTEXT
+         RAISING dynamic_convert_error.
+
+  ENDTRY.
+
+  IF lt_exceptions[] IS INITIAL.
+    &quot; -----------------------------------------------------------
+    &quot; Gestion des Exceptions // Afin d&apos;éviter toute erreur
+    &quot; -----------------------------------------------------------
+    PERFORM meth_exception_table_set USING iv_class_name
+                                           iv_method_name
+                                  CHANGING lt_exceptions
+                                           lt_exceptions_class.
+
+  ENDIF.
+
+  TRY.
+      &quot; -----------------------------------------------------------
+      &quot; Appel du MF
+      &quot; -----------------------------------------------------------
+
+      &quot; Appel du MF avec paramètres dynamique
+      CALL METHOD (iv_class_name)=&gt;(iv_method_name)
+        PARAMETER-TABLE lt_parameters
+        EXCEPTION-TABLE lt_exceptions.
+      lv_subrc = sy-subrc.
+
+    CATCH cx_root INTO DATA(lo_cx_exception).
+      &quot; Une erreur est survenue durant l&apos;exécution de la méthode
+      &quot;&quot;  --&gt; Il faut différencier l&apos;erreur générée par la méthode
+      &quot;&quot;      de l&apos;erreur générée par l&apos;appel de la méthode
+      &quot;&quot;  --&gt; Récupération du nom de la classe d&apos;exception
+      lv_sconame = cl_abap_classdescr=&gt;get_class_name( lo_cx_exception ).
+      lv_sconame = lv_sconame+7.  &quot;Conserve uniquement le nom de la classe
+
+      &quot;&quot;  --&gt; Recherche si cette classe est gérée par la méthode
+      READ TABLE lt_exceptions_class WITH TABLE KEY table_line = lv_sconame
+                                       TRANSPORTING NO FIELDS.
+      IF sy-subrc NE 0.
+        &quot; Non gérée par la Méthode
+        WHILE lo_cx_exception-&gt;previous IS BOUND.
+          &quot;&quot;  --&gt; On remonte dans la pile d&apos;exception
+          lo_cx_exception = lo_cx_exception-&gt;previous.
+
+          &quot;&quot;  --&gt; Récupération du nom de la classe d&apos;exception
+          lv_sconame = cl_abap_classdescr=&gt;get_class_name( lo_cx_exception ).
+          lv_sconame = lv_sconame+7.  &quot;Conserve uniquement le nom de la classe
+
+          &quot;&quot;  --&gt; Recherche si cette classe est gérée par la méthode
+          READ TABLE lt_exceptions_class WITH TABLE KEY table_line = lv_sconame
+                                           TRANSPORTING NO FIELDS.
+          IF sy-subrc EQ 0.
+            &quot; Exception gérée par la méthode
+            &quot;&quot;  --&gt; Initialisation indicateur Exception gérée par la méthode
+            lv_exception_by_meth = abap_true.
+
+            &quot;&quot;  --&gt; Arrêt de la boucle
+            EXIT.
+
+          ENDIF.
+
+        ENDWHILE.
+
+      ELSE.
+        &quot; Exception gérée par la Méthode
+        &quot;&quot;  --&gt; Initialisation indicateur Exception gérée par la méthode
+        lv_exception_by_meth = abap_true.
+
+      ENDIF.
+
+      IF lv_exception_by_meth EQ abap_true.
+        &quot; Une Exception gérée par la méthode est survenue
+        &quot;&quot;  --&gt; Transmet l&apos;Exception en retour
+        lo_cx_exception-&gt;get_text( ).
+        MESSAGE ID sy-msgid TYPE sy-msgty
+            NUMBER sy-msgno
+              WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4
+           RAISING during_process_error.
+
+      ELSE.
+        &quot; Une Exception non gérée par la méthode est survenue
+        &quot;&quot;  --&gt; Arrêt du traitement
+        MESSAGE ID zif_task_constant=&gt;mc_message_class_id
+              TYPE &apos;E&apos;                                      &quot;#EC NOTEXT
+            NUMBER 502                                      &quot;#EC NOTEXT
+              WITH |{ iv_class_name }=&gt;{ iv_method_name }|  &quot;#EC NOTEXT
+                   lo_cx_exception-&gt;get_text( )
+           RAISING dynamic_call_error.
+
+      ENDIF.
+
+  ENDTRY.
+
+  &quot; -----------------------------------------------------------
+  &quot; Initialisation table de retour
+  &quot; -----------------------------------------------------------
+
+  &quot; Conserve uniquement les paramètres d&apos;Export / Changing / Table / Retour (vue Méthode)
+  DELETE lt_parameters WHERE kind EQ cl_abap_objectdescr=&gt;exporting.
+  IF NOT lt_parameters[] IS INITIAL.
+    &quot; Initialisation table de retour
+    PERFORM meth_result_set USING lt_parameters
+                                  it_method_parameters
+                                  is_task_data_compress_param
+                         CHANGING et_task_result
+                                  ev_task_result_data_compressed.
+
+  ENDIF.
+
+ENDFORM.
+
+*&amp;---------------------------------------------------------------------*
+*&amp;      Form  METH_DYNAMIC_PARAMETERS_SET
+*&amp;---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*      --&gt; IV_CLASS_NAME              Classe
+*      --&gt; IV_METHOD_NAME             Méthode
+*      --&gt; IT_METHOD_PARAMETERS       Table paramètre statique
+*      --&gt; IV_METHOD_DATA_COMPRESSED  Données comprimées
+*      &lt;-- ET_PARAMETERS              Table paramètre dynamique
+*      &lt;-- ET_EXCEPTIONS              Table exception dynamique
+*----------------------------------------------------------------------*
+FORM meth_dynamic_parameters_set USING iv_class_name             TYPE seoclsname
+                                       iv_method_name            TYPE seocpdname
+                                       it_method_parameters      TYPE ztec_t_function_parameters
+                                       iv_method_data_compressed TYPE xstring
+                              CHANGING et_table_data             TYPE ty_t_table_data
+                                       et_parameters             TYPE abap_parmbind_tab
+                                       et_exceptions             TYPE abap_excpbind_tab.
+
+***------------------------------------------------------------------***
+**                            STRUCTURE                               **
+***------------------------------------------------------------------***
+  DATA :
+    ls_table_data TYPE ty_table_data,
+    ls_exceptions TYPE abap_excpbind,
+    ls_parameters TYPE abap_parmbind.
+
+***------------------------------------------------------------------***
+**                            INSTANCES                               **
+***------------------------------------------------------------------***
+  DATA :
+    lo_abap_zip        TYPE REF TO cl_abap_zip,
+    lo_type_descr      TYPE REF TO cl_abap_typedescr,
+    lo_cx_exception    TYPE REF TO cx_root,
+    lo_type_definition TYPE REF TO zcl_type_definition.
+
+***------------------------------------------------------------------***
+**                            VARIABLES                               **
+***------------------------------------------------------------------***
+  DATA :
+        lv_data_decompress TYPE xstring.
+
+***------------------------------------------------------------------***
+**                          FIELD-SYMBOLS                             **
+***------------------------------------------------------------------***
+  FIELD-SYMBOLS :
+    &lt;lfs_value_data&gt; TYPE any.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+  REFRESH : et_parameters, et_exceptions, et_table_data.
+
+  &quot; -----------------------------------------------------------
+  &quot; Pré-Traitement
+  &quot; -----------------------------------------------------------
+
+  IF NOT iv_method_data_compressed IS INITIAL.
+    &quot; Données compressées
+    &quot;&quot;  --&gt; Chargement dossier compressées
+    CREATE OBJECT lo_abap_zip.
+    lo_abap_zip-&gt;support_unicode_names = abap_true.
+    lo_abap_zip-&gt;load(
+      EXPORTING
+        zip             = iv_method_data_compressed
+      EXCEPTIONS
+        zip_parse_error = 1
+        OTHERS          = 2
+    ).
+    IF sy-subrc NE 0.
+      &quot; Une erreur est survenue // Les données sont illisibles
+      &quot;&quot;  --&gt; Arrêt du traitement
+      RETURN.
+
+    ENDIF.
+
+  ENDIF.
+
+  &quot; -----------------------------------------------------------
+  &quot; Conversion des paramètres &quot;statiques&quot; en &quot;dynamique&quot;
+  &quot; -----------------------------------------------------------
+
+  &quot; Parcours l&apos;ensemble des paramètres &quot;statique&quot;
+  LOOP AT it_method_parameters ASSIGNING FIELD-SYMBOL(&lt;lfs_s_method_parameters&gt;).
+
+    CLEAR    : ls_parameters, ls_exceptions, ls_table_data, lv_data_decompress.
+    UNASSIGN : &lt;lfs_value_data&gt;.
+
+    &quot; Contrôle cohérence du Type
+    cl_abap_typedescr=&gt;describe_by_name(
+      EXPORTING
+        p_name         = &lt;lfs_s_method_parameters&gt;-value_type
+      EXCEPTIONS
+        type_not_found = 1
+        OTHERS         = 2
+    ).
+    IF sy-subrc NE 0.
+      &quot; Type non défini dans le RTTS du système
+      &quot;&quot;  --&gt; On va le charger depuis la mémoire partagée
+      IF NOT lo_type_definition IS BOUND.
+        &quot; Récupération instance courante
+        lo_type_definition = zcl_type_definition=&gt;get_instance( ).
+
+      ENDIF.
+
+      TRY.
+          &quot; Récupération de la définition du Type
+          lo_type_descr = lo_type_definition-&gt;definition_type_get( &lt;lfs_s_method_parameters&gt;-value_type ).
+
+        CATCH zcx_type_definition INTO lo_cx_exception.
+          &quot; Erreur lors de la récupération de la définition du Type
+          &quot;&quot;  --&gt; Lève une Exception
+          WHILE lo_cx_exception-&gt;previous IS BOUND. lo_cx_exception = lo_cx_exception-&gt;previous. ENDWHILE.
+          RAISE EXCEPTION TYPE zcx_task_call
+            EXPORTING
+              previous = lo_cx_exception.
+
+      ENDTRY.
+
+      &quot;&quot;  --&gt; Création de la zone Typée
+      CREATE DATA ls_table_data-value TYPE (lo_type_descr-&gt;absolute_name).
+
+    ELSE.
+      &quot;&quot;  --&gt; Création de la zone typée
+      CREATE DATA ls_table_data-value TYPE (&lt;lfs_s_method_parameters&gt;-value_type).
+
+    ENDIF.
+
+    &quot; Initialisation pointeur sur la donnée
+    ASSIGN ls_table_data-value-&gt;* TO &lt;lfs_value_data&gt;.
+
+    &quot; Suivant le Type du paramètre (Signature)
+    CASE &lt;lfs_s_method_parameters&gt;-parameter_kind.
+
+      WHEN cl_abap_objectdescr=&gt;importing.
+        &quot; Cas d&apos;un paramètre d&apos;Export (Vu Méthode)
+        &quot;&quot;  --&gt; Les paramètres d&apos;Export non pas à être rempli !
+
+      WHEN OTHERS.
+        &quot; Autre type de paramètre
+        IF &lt;lfs_s_method_parameters&gt;-value_is_compressed_global EQ abap_true
+        OR NOT &lt;lfs_s_method_parameters&gt;-value_data_xml         IS INITIAL.
+          &quot; Données &quot;complexe&quot; stockées sous forme XML
+          &quot;&quot;  --&gt; Suivant méthode de compression
+          CASE abap_true.
+
+            WHEN &lt;lfs_s_method_parameters&gt;-value_is_compressed_local.
+              &quot; Compression ligne à ligne
+              &quot;&quot;  --&gt; Création instance compression
+              CREATE OBJECT lo_abap_zip.
+              lo_abap_zip-&gt;support_unicode_names = abap_true.
+
+              &quot;&quot;  --&gt; Lecture dossier compressé
+              lo_abap_zip-&gt;load(
+                EXPORTING
+                  zip             = &lt;lfs_s_method_parameters&gt;-value_data_xml
+                EXCEPTIONS
+                  zip_parse_error = 1
+                  OTHERS          = 2
+              ).
+              IF sy-subrc EQ 0.
+                &quot; Aucune erreur
+                &quot;&quot;  --&gt; Récupération données décompressées
+                lo_abap_zip-&gt;get(
+                  EXPORTING
+                    index                   = 1
+                  IMPORTING
+                    content                 = lv_data_decompress
+                  EXCEPTIONS
+                    zip_index_error         = 1
+                    zip_decompression_error = 2
+                    OTHERS                  = 3
+                ).
+
+              ENDIF.
+              IF sy-subrc NE 0.
+                &quot; Une erreur est survenue
+                &quot;&quot;  --&gt; Réinitialisation données
+                CLEAR : lv_data_decompress.
+
+              ENDIF.
+
+            WHEN &lt;lfs_s_method_parameters&gt;-value_is_compressed_global.
+              &quot; Compression globale
+              &quot;&quot;  --&gt; Décompression des données
+              lo_abap_zip-&gt;get(
+                EXPORTING
+                  name                    = CONV string( &lt;lfs_s_method_parameters&gt;-parameter_name )
+                IMPORTING
+                  content                 = lv_data_decompress
+                EXCEPTIONS
+                  zip_index_error         = 1
+                  zip_decompression_error = 2
+                  OTHERS                  = 3
+              ).
+              IF sy-subrc NE 0.
+                &quot; Une erreur est survenue
+                &quot;&quot;  --&gt; Réinitialisation données
+                CLEAR : lv_data_decompress.
+
+              ENDIF.
+
+            WHEN OTHERS.
+              &quot; Autres
+              &quot;&quot;  --&gt; Pas de décompression // Rien à faire
+              lv_data_decompress = &lt;lfs_s_method_parameters&gt;-value_data_xml.
+
+          ENDCASE.
+
+          IF NOT lv_data_decompress IS INITIAL.
+            &quot;&quot; --&gt; Restructuration des données
+            CALL TRANSFORMATION id
+                     SOURCE XML lv_data_decompress
+                         RESULT data = &lt;lfs_value_data&gt;.
+
+          ENDIF.
+
+        ELSEIF NOT &lt;lfs_s_method_parameters&gt;-value_data IS INITIAL.
+          &quot; Type Elémentaire
+          &quot;&quot;  --&gt; Initialisation des données
+          &lt;lfs_value_data&gt; = &lt;lfs_s_method_parameters&gt;-value_data.
+
+        ELSE.                                               &quot;#EC NEEDED
+          &quot; Autre cas
+          &quot;&quot;  --&gt; ToDo : Ajouter ici les autres cas
+
+        ENDIF.
+
+    ENDCASE.
+
+    &quot;&quot;  --&gt; Création d&apos;une entrée permettant de stocker les paramètres d&apos;appel Dynamique
+    ls_table_data-name = &lt;lfs_s_method_parameters&gt;-parameter_name.                &quot;Nom du paramètre
+    INSERT ls_table_data INTO TABLE et_table_data.                                  &quot;Ajout dans table de paramètre
+
+    &quot;&quot;  --&gt; Initialisation table paramètre d&apos;appel dynamique
+    ls_parameters-name  = &lt;lfs_s_method_parameters&gt;-parameter_name.    &quot;Nom du paramètre
+    ls_parameters-kind  = &lt;lfs_s_method_parameters&gt;-parameter_kind.    &quot;Type (ABAP) du paramètre
+    ls_parameters-value = REF #( &lt;lfs_value_data&gt; ).                   &quot;Référence sur le contenu
+    INSERT ls_parameters INTO TABLE et_parameters.                     &quot;Ajout du paramètre dynamique
+
+  ENDLOOP.
+
+  &quot; -----------------------------------------------------------
+  &quot; Fin de traitement
+  &quot; -----------------------------------------------------------
+
+  IF lo_type_definition IS BOUND.
+    TRY.
+        &quot; Libération Token Mémoire Partagée
+        lo_type_definition-&gt;definition_type_finish( ).
+
+      CATCH zcx_type_definition.                        &quot;#EC NO_HANDLER
+        &quot; Erreur libération mémoire
+
+    ENDTRY.
+
+  ENDIF.
+
+ENDFORM.
+
+*&amp;---------------------------------------------------------------------*
+*&amp;      Form  METH_EXCEPTION_TABLE_SET
+*&amp;---------------------------------------------------------------------*
+*       Initialisation table d&apos;Exception
+*----------------------------------------------------------------------*
+*      --&gt; IV_CLASS_NAME        Classe
+*      --&gt; IV_METHOD_NAME       Méthode
+*      &lt;-&gt; CT_EXCEPTIONS        Table des Exceptions classique
+*      &lt;-- ET_EXCEPTIONS_CLASS  Table des Exceptions basées sur Classe
+*----------------------------------------------------------------------*
+FORM meth_exception_table_set USING iv_class_name       TYPE seoclsname
+                                    iv_method_name      TYPE seocpdname
+                           CHANGING ct_exceptions       TYPE abap_excpbind_tab
+                                    et_exceptions_class TYPE ty_t_exceptions_class.
+
+***------------------------------------------------------------------***
+**                             TABLES                                 **
+***------------------------------------------------------------------***
+  DATA :
+    lt_seosubco_exception TYPE ty_t_seosubco_exception.
+
+***------------------------------------------------------------------***
+**                            STRUCTURE                               **
+***------------------------------------------------------------------***
+  DATA :
+    ls_exception          TYPE abap_excpbind,
+    ls_seosubco_exception TYPE ty_seosubco_exception.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+  REFRESH : et_exceptions_class.
+
+  &quot; -----------------------------------------------------------
+  &quot; Récupération des Exceptions de la Méthode
+  &quot; -----------------------------------------------------------
+
+  &quot; Récupération position première occurence associée à la Méthode
+  READ TABLE gt_seosubco_exception WITH KEY clsname = iv_class_name
+                                            cmpname = iv_method_name
+                               TRANSPORTING NO FIELDS
+                                     BINARY SEARCH.
+  IF sy-subrc NE 0.
+    &quot; Aucune Exception
+    SELECT main~clsname, main~cmpname, main~sconame, def~mtdnewexc
+           FROM seosubco     AS main
+     INNER JOIN seocompodf   AS def
+             ON def~clsname  EQ main~clsname
+            AND def~cmpname  EQ main~cmpname
+          WHERE main~clsname EQ @iv_class_name
+            AND main~cmpname EQ @iv_method_name
+            AND main~scotype EQ &apos;1&apos; &quot;Exception &quot;#EC NOTEXT
+            AND def~version  EQ &apos;1&apos; &quot;Actif &quot;#EC NOTEXT
+     INTO TABLE @lt_seosubco_exception. ##TOO_MANY_ITAB_FIELDS
+    IF sy-subrc NE 0.
+      &quot; Création d&apos;une entrée afin de ne pas rechercher à nouveau les données
+      ls_seosubco_exception-clsname   = iv_class_name.
+      ls_seosubco_exception-cmpname   = iv_method_name.
+      ls_seosubco_exception-not_found = abap_true.
+      INSERT ls_seosubco_exception INTO TABLE gt_seosubco_exception.
+
+    ELSE.
+      &quot; Ajout des entrées
+      INSERT LINES OF lt_seosubco_exception INTO TABLE gt_seosubco_exception.
+      FREE : lt_seosubco_exception.
+
+    ENDIF.
+
+    &quot; Récupération position première occurence
+    READ TABLE gt_seosubco_exception WITH KEY clsname = iv_class_name
+                                              cmpname = iv_method_name
+                                 TRANSPORTING NO FIELDS
+                                       BINARY SEARCH.
+
+  ENDIF.
+
+  IF sy-subrc NE 0.
+    &quot; Aucune Exception trouvée
+    &quot;&quot;  --&gt; Supprime toutes les exceptions présentes
+    FREE : ct_exceptions.
+
+    &quot;&quot;  --&gt; Arrêt du traitement
+    RETURN.
+
+  ENDIF.
+
+  &quot; -----------------------------------------------------------
+  &quot; Récupération des Exceptions du MF
+  &quot; -----------------------------------------------------------
+
+  &quot; Parcours l&apos;ensemble des Exceptions
+  LOOP AT gt_seosubco_exception ASSIGNING FIELD-SYMBOL(&lt;lfs_s_seosubco_exception&gt;)
+                                     FROM sy-tabix.
+
+    CLEAR : ls_exception.
+
+    IF &lt;lfs_s_seosubco_exception&gt;-not_found EQ abap_true.
+      &quot; Aucune Exception
+      &quot;&quot;  --&gt; Supprime toutes les exceptions présentes (au cas où)
+      FREE : ct_exceptions.
+
+      &quot;&quot;  --&gt; Arrêt du traitement
+      RETURN.
+
+    ENDIF.
+
+    IF &lt;lfs_s_seosubco_exception&gt;-clsname NE iv_class_name
+    OR &lt;lfs_s_seosubco_exception&gt;-cmpname NE iv_method_name.
+      &quot; On ne traite plus la même Méthode
+      &quot;&quot;  --&gt; Arrêt de la boucle
+      EXIT.
+
+    ENDIF.
+
+    IF &lt;lfs_s_seosubco_exception&gt;-mtdnewexc EQ abap_false.
+      &quot; Exception &quot;classique&quot;
+      &quot;&quot;  --&gt; Recherche si l&apos;Exception est déjà renseigné
+      READ TABLE ct_exceptions WITH TABLE KEY name = &lt;lfs_s_seosubco_exception&gt;-sconame
+                                 TRANSPORTING NO FIELDS.
+      IF sy-subrc NE 0.
+        &quot; Exception non ajoutée
+        &quot;&quot;  --&gt; Ajout de l&apos;Exception
+        ls_exception-name = &lt;lfs_s_seosubco_exception&gt;-sconame.
+        ls_exception-value = lines( ct_exceptions ) + 1.
+        INSERT ls_exception INTO TABLE ct_exceptions.
+
+      ENDIF.
+
+    ELSE.
+      &quot; Exception basée sur classe
+      &quot;&quot;  --&gt; Ajout de la Classe d&apos;Exception
+      INSERT &lt;lfs_s_seosubco_exception&gt;-sconame INTO TABLE et_exceptions_class.
+
+    ENDIF.
+
+  ENDLOOP.      &quot;Fin de parcours des Exceptions
+
+ENDFORM.
+
+*&amp;---------------------------------------------------------------------*
+*&amp;      Form  METH_RESULT_SET
+*&amp;---------------------------------------------------------------------*
+*       Initialisation paramètre de retour
+*----------------------------------------------------------------------*
+*      --&gt; IT_PARAMETERS                   Table des paramètres d&apos;appel
+*      --&gt; IT_METHOD_PARAMETERS            Table des paramètres statiques
+*      --&gt; IS_TASK_DATA_COMPRESS_PARAM     Méthode de Compression
+*      &lt;-- ET_TASK_RESULT                  Table de retour (statique)
+*      &lt;-- EV_TASK_RESULT_DATA_COMPRESSED  Données compressées
+*----------------------------------------------------------------------*
+FORM meth_result_set USING it_parameters                   TYPE abap_parmbind_tab
+                           it_method_parameters            TYPE ztec_t_function_parameters
+                           is_task_data_compress_param     TYPE ztec_s_task_compress_param
+                  CHANGING et_task_result                  TYPE ztec_t_function_parameters
+                           ev_task_result_data_compressed  TYPE xstring.
+
+***------------------------------------------------------------------***
+**                            STRUCTURE                               **
+***------------------------------------------------------------------***
+  DATA :
+    ls_result TYPE ztec_s_function_parameters.
+
+***------------------------------------------------------------------***
+**                            INSTANCES                               **
+***------------------------------------------------------------------***
+  DATA :
+        lo_abap_zip TYPE REF TO cl_abap_zip.
+
+***------------------------------------------------------------------***
+**                          FIELD-SYMBOLS                             **
+***------------------------------------------------------------------***
+  FIELD-SYMBOLS :
+    &lt;lfs_value&gt; TYPE any.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+  FREE  : et_task_result.
+  CLEAR : ev_task_result_data_compressed.
+
+  &quot; -----------------------------------------------------------
+  &quot; Pré-Traitement
+  &quot; -----------------------------------------------------------
+
+  IF NOT is_task_data_compress_param IS INITIAL.
+    &quot; Activation de la Compression globale ou Ligne par Ligne
+    &quot;&quot;  --&gt; Création instance de Compression
+    CREATE OBJECT lo_abap_zip.
+
+  ENDIF.
+
+  &quot; -----------------------------------------------------------
+  &quot; Alimentation table de retour
+  &quot; -----------------------------------------------------------
+
+  &quot; Constitution table de sortie
+  LOOP AT it_parameters ASSIGNING FIELD-SYMBOL(&lt;lfs_s_parameters&gt;).
+
+    CLEAR : ls_result.
+
+    &quot; Récupération données associé au paramètre
+    READ TABLE it_method_parameters WITH KEY parameter_name = &lt;lfs_s_parameters&gt;-name
+                                   ASSIGNING FIELD-SYMBOL(&lt;lfs_s_method_parameters&gt;).
+    IF sy-subrc NE 0.
+      &quot; Pas de correspondance // Cas ne devant pas se produire
+      &quot;&quot;  --&gt; Passe à l&apos;itération suivante
+      CONTINUE.
+
+    ENDIF.
+
+    &quot; Initialisation données du paramètre
+    ls_result-parameter_name = &lt;lfs_s_method_parameters&gt;-parameter_name.
+    ls_result-parameter_kind = &lt;lfs_s_method_parameters&gt;-parameter_kind.
+
+    &quot; Initialisation données du contenu du paramètre
+    ls_result-value_kind = &lt;lfs_s_method_parameters&gt;-value_kind.
+    ls_result-value_type = &lt;lfs_s_method_parameters&gt;-value_type.
+
+    &quot; Initialisation pointeur sur les données
+    ASSIGN &lt;lfs_s_parameters&gt;-value-&gt;* TO &lt;lfs_value&gt;.
+
+    &quot; Suivant le type de données
+    CASE &lt;lfs_s_method_parameters&gt;-value_kind.
+
+      WHEN cl_abap_typedescr=&gt;kind_elem.
+        &quot; Elementaire
+        &quot;&quot;  --&gt; Initialisation de la données
+        ls_result-value_data = &lt;lfs_value&gt;.
+
+      WHEN OTHERS.
+        &quot; Cas structure complexe
+        TRY.
+            &quot;&quot;  --&gt; Initialisation des données sous format XML
+            CALL TRANSFORMATION id
+                         SOURCE data = &lt;lfs_value&gt;
+                     RESULT XML ls_result-value_data_xml.
+
+          CATCH cx_root.                  &quot;#EC CATCH_ALL #EC NO_HANDLER
+            &quot; Erreur conversion en XML
+
+        ENDTRY.
+
+        IF NOT is_task_data_compress_param IS INITIAL.
+          &quot; Compression des données activée
+          IF NOT lo_abap_zip IS BOUND.
+            &quot;&quot;  --&gt; Création instance Compression
+            CREATE OBJECT lo_abap_zip.
+
+          ENDIF.
+
+          &quot;&quot;  --&gt; Ajout de la données dans dossier compression
+          lo_abap_zip-&gt;add(
+              name    = CONV string( &lt;lfs_s_method_parameters&gt;-parameter_name )
+              content = ls_result-value_data_xml
+          ).
+
+          &quot;&quot;  --&gt; Suivant le type de compression
+          CASE abap_true.
+
+            WHEN is_task_data_compress_param-data_compress_line_by_line.
+              &quot; Compression à la ligne
+              &quot;&quot;  --&gt; Récupération données compressées
+              ls_result-value_data_xml = lo_abap_zip-&gt;save( ).
+
+              &quot;&quot;  --&gt; Initialisation indicateur données compressées ligne à ligne
+              ls_result-value_is_compressed_local = abap_true.
+
+              &quot;&quot;  --&gt; Libération instance Compression
+              FREE : lo_abap_zip.
+
+            WHEN is_task_data_compress_param-data_compress_global.
+              &quot; Compression globale
+              &quot;&quot;  --&gt; Libération contenu données
+              FREE : ls_result-value_data_xml.
+
+              &quot;&quot;  --&gt; Initialisation indicateur données compressées globale
+              ls_result-value_is_compressed_global = abap_true.
+
+            WHEN OTHERS.
+              &quot; Autres
+
+          ENDCASE.      &quot;Fin test Type de Compression
+
+        ENDIF.          &quot;Fin test Compression données active
+
+    ENDCASE.
+
+    &quot; Ajout dans la table de sortie
+    APPEND ls_result TO et_task_result.
+
+  ENDLOOP.
+
+  &quot; -----------------------------------------------------------
+  &quot; Post-Traitement
+  &quot; -----------------------------------------------------------
+
+  IF is_task_data_compress_param-data_compress_global EQ abap_true.
+    &quot; Donneés compressées au global
+    &quot;&quot;  --&gt; Réstitution du dossier de compression
+    ev_task_result_data_compressed = lo_abap_zip-&gt;save( ).
+
+  ENDIF.
+
+ENDFORM.</include_source>
+   </include>
+   <include NAME="LZTEC_TASK_PARALLELTOP" VARCL="X" DBAPL="S" DBNA="D$" SUBC="I" APPL="S" RMAND="100" FIXPT="X" LDBNAME="D$S" UCCHECK="X">
+    <include_source>FUNCTION-POOL ztec_task_parallel.           &quot;MESSAGE-ID ..
+
+
+***------------------------------------------------------------------***
+**                              MACCRO                                **
+***------------------------------------------------------------------***
+
+
+***------------------------------------------------------------------***
+**                             CLASSES                                **
+***------------------------------------------------------------------***
+
+
+***------------------------------------------------------------------***
+**                              TYPES                                 **
+***------------------------------------------------------------------***
+
+&quot; Déclaration de type pour stockage contenu de table
+TYPES :
+  BEGIN OF ty_table_data,
+    name  TYPE        typename,
+    value TYPE REF TO data,
+  END OF   ty_table_data.
+
+TYPES : ty_t_table_data TYPE SORTED TABLE OF ty_table_data
+                             WITH UNIQUE KEY primary_key COMPONENTS name.
+
+
+&quot; Déclaration de type pour stockage définition champ
+TYPES:
+  BEGIN OF ty_data_type_descr,
+    component  TYPE        string,
+    data_descr TYPE REF TO cl_abap_datadescr,
+  END OF   ty_data_type_descr .
+TYPES:
+  ty_t_data_type_descr TYPE SORTED TABLE OF ty_data_type_descr
+                                      WITH UNIQUE KEY primary_key COMPONENTS component.
+
+TYPES : ty_t_exceptions_class TYPE SORTED TABLE OF seosubco-sconame
+        WITH UNIQUE KEY primary_key COMPONENTS table_line.
+
+&quot; Déclaration de type pour stockage paramètre d&apos;Exception
+TYPES :
+  BEGIN OF ty_fupararef_exception,
+    funcname  TYPE fupararef-funcname,
+    parameter TYPE fupararef-parameter,
+    pposition TYPE fupararef-pposition,
+    not_found TYPE xsdboolean,
+  END OF   ty_fupararef_exception.
+
+TYPES : ty_t_fupararef_exception TYPE SORTED TABLE OF ty_fupararef_exception
+                                      WITH UNIQUE KEY primary_key COMPONENTS funcname parameter.
+
+TYPES :
+  BEGIN OF ty_seosubco_exception,
+    clsname   TYPE seosubco-clsname,
+    cmpname   TYPE seosubco-cmpname,
+    sconame   TYPE seosubco-sconame,
+    mtdnewexc TYPE seocompodf-mtdnewexc,
+    not_found TYPE xsdboolean,
+  END OF   ty_seosubco_exception.
+
+TYPES : ty_t_seosubco_exception TYPE SORTED TABLE OF ty_seosubco_exception
+        WITH UNIQUE KEY primary_key COMPONENTS clsname cmpname sconame.
+
+
+***------------------------------------------------------------------***
+**                           CONSTANTES                               **
+***------------------------------------------------------------------***
+CONSTANTS :
+  gc_table_line TYPE string VALUE &apos;TABLE_LINE&apos;.
+
+***------------------------------------------------------------------***
+**                             RANGES                                 **
+***------------------------------------------------------------------***
+
+
+***------------------------------------------------------------------***
+**                             TABLES                                 **
+***------------------------------------------------------------------***
+DATA :
+  gt_seosubco_exception  TYPE ty_t_seosubco_exception,      &quot;#EC NEEDED
+  gt_fupararef_exception TYPE ty_t_fupararef_exception.     &quot;#EC NEEDED
+
+
+***------------------------------------------------------------------***
+**                            STRUCTURE                               **
+***------------------------------------------------------------------***
+
+
+***------------------------------------------------------------------***
+**                            INSTANCES                               **
+***------------------------------------------------------------------***
+
+
+***------------------------------------------------------------------***
+**                            VARIABLES                               **
+***------------------------------------------------------------------***
+
+
+***------------------------------------------------------------------***
+**                          FIELD-SYMBOLS                             **
+***------------------------------------------------------------------***
+* INCLUDE LZTEC_TASK_PARALLELD...            &quot; Local class definition</include_source>
+   </include>
+  </includeprograms>
+  <functionmodules>
+   <functionmodule NAME="Z_CONVERT_TABLE_DYN_TO_STATIC" STEXT="Conversion table dynamique en statique">
+    <importing PARAMETER="IT_DATA" OPTIONAL="X" REFERENCE="X" TYP="ANY TABLE"/>
+    <importing PARAMETER="IOT_DATA" OPTIONAL="X" REFERENCE="X" TYP="REF TO DATA" REF_CLASS="X"/>
+    <importing PARAMETER="IV_SUB_DATA_GUID" OPTIONAL="X" TYP="SYSUUID_C32"/>
+    <exporting PARAMETER="ET_CONTENT_STATIC" REFERENCE="X" TYP="ZTEC_T_CONTENT_DATA"/>
+    <exporting PARAMETER="ET_CONTENT_RAW" REFERENCE="X" TYP="SRM_T_BINTAB"/>
+    <exporting PARAMETER="ET_CONTENT_XSTRING" REFERENCE="X" TYP="XSTRINGTAB"/>
+    <documentation PARAMETER="IT_DATA" KIND="P" STEXT="Table de donnÃ©es" INDEX=" 001"/>
+    <documentation PARAMETER="IOT_DATA" KIND="P" STEXT="Table de donnÃ©es (RÃ©fÃ©rence)" INDEX=" 002"/>
+    <documentation PARAMETER="IV_SUB_DATA_GUID" KIND="P" STEXT="GUID Sous-Ã‰lÃ©ment" INDEX=" 003"/>
+    <documentation PARAMETER="ET_CONTENT_STATIC" KIND="P" STEXT="Type de table contenu de table" INDEX=" 004"/>
+    <documentation PARAMETER="ET_CONTENT_RAW" KIND="P" STEXT="Table binaire" INDEX=" 005"/>
+    <documentation PARAMETER="ET_CONTENT_XSTRING" KIND="P" STEXT="Table with XStrings" INDEX=" 006"/>
+    <fm_source_new>***------------------------------------------------------------------***
+**                             TABLES                                 **
+***------------------------------------------------------------------***
+  DATA :
+    lt_content_static  TYPE ztec_t_content_data,
+    lt_data_type_descr TYPE ty_t_data_type_descr.
+
+***------------------------------------------------------------------***
+**                            STRUCTURE                               **
+***------------------------------------------------------------------***
+  DATA :
+    ls_content_data    TYPE ztec_s_content_data,
+    ls_data_type_descr TYPE ty_data_type_descr.
+
+***------------------------------------------------------------------***
+**                            INSTANCES                               **
+***------------------------------------------------------------------***
+  DATA :
+    lo_elem_descr   TYPE REF TO cl_abap_elemdescr,
+    lo_table_descr  TYPE REF TO cl_abap_tabledescr,
+    lo_struct_descr TYPE REF TO cl_abap_structdescr.
+
+***------------------------------------------------------------------***
+**                          FIELD-SYMBOLS                             **
+***------------------------------------------------------------------***
+  FIELD-SYMBOLS :
+    &lt;lfs_t_table&gt; TYPE ANY TABLE.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+  FREE : et_content_xstring, et_content_static, et_content_raw.
+
+  IF iot_data IS BOUND.
+    &quot; Initialisation &quot;pointeur&quot; sur les données
+    ASSIGN iot_data-&gt;* TO &lt;lfs_t_table&gt;.
+
+  ELSEIF it_data IS SUPPLIED.
+    &quot; Utilisation table passée en paramètre
+    ASSIGN it_data TO &lt;lfs_t_table&gt;.
+
+  ELSE.
+    &quot; Aucun paramètre
+    &quot;&quot;  --&gt; Arrêt du traitement
+    RETURN.
+
+  ENDIF.
+  IF NOT &lt;lfs_t_table&gt; IS ASSIGNED.
+    &quot; Erreur lors de l&apos;initialisation du pointeur
+    &quot;&quot;  --&gt; Arrêt du traitement
+    RETURN.
+
+  ENDIF.
+
+  &quot; Récupération composition de la table
+  lo_table_descr ?= cl_abap_tabledescr=&gt;describe_by_data( &lt;lfs_t_table&gt; ).
+  TRY.
+      &quot; Récupération composition de la table
+      lo_struct_descr ?= lo_table_descr-&gt;get_table_line_type( ).
+
+    CATCH cx_sy_move_cast_error.
+      &quot; Erreur move-cast // Il s&apos;agit peut-être d&apos;une table de type élémentaire
+      TRY.
+          lo_elem_descr ?= lo_table_descr-&gt;get_table_line_type( ).
+
+        CATCH cx_root. &quot;#EC CATCH_ALL
+          &quot; Erreur
+          &quot;&quot;  --&gt; Arrêt du traitement
+          RETURN.
+
+      ENDTRY.
+
+    CATCH cx_root. &quot;#EC CATCH_ALL
+      &quot; Erreur
+      &quot;&quot;  --&gt; Arrêt du traitement
+      RETURN.
+
+  ENDTRY.
+
+  &quot; Parcours l&apos;ensemble des données
+  LOOP AT &lt;lfs_t_table&gt; ASSIGNING FIELD-SYMBOL(&lt;lfs_s_table&gt;).
+
+    CLEAR : ls_content_data.
+    FREE : lt_content_static.
+
+    &quot; Initialisation numéro de ligne
+    ls_content_data-line = sy-tabix.
+
+    IF iv_sub_data_guid IS SUPPLIED.
+      &quot; Initialisation GUID de Sous-élément
+      ls_content_data-sub_data_guid = iv_sub_data_guid.
+
+    ENDIF.
+
+    IF lo_elem_descr IS BOUND.
+      &quot; Cas d&apos;un type de table élémentaire
+      ls_content_data-fieldname = gc_table_line.
+      ls_content_data-fieldtype = lo_elem_descr-&gt;absolute_name.
+      ls_content_data-fieldkind = lo_elem_descr-&gt;kind.
+      ls_content_data-value     = &lt;lfs_s_table&gt;.
+
+      IF et_content_static IS SUPPLIED.
+        &quot; Ajout dans la table &quot;Statique&quot; classique
+        INSERT ls_content_data INTO TABLE et_content_static.
+
+      ENDIF.
+
+    ELSEIF lo_struct_descr IS BOUND.
+
+      &quot; Parcours l&apos;ensemble des champs de la structure
+      LOOP AT lo_struct_descr-&gt;components ASSIGNING FIELD-SYMBOL(&lt;lfs_s_components&gt;).
+
+        &quot; Récupération du champ correspondant
+        ASSIGN COMPONENT &lt;lfs_s_components&gt;-name OF STRUCTURE &lt;lfs_s_table&gt;
+                                                           TO FIELD-SYMBOL(&lt;lfs_s_source&gt;).
+        IF sy-subrc NE 0.
+          &quot; Pas de correspondance // Ne devrais pas se produire
+          &quot;&quot;  --&gt; Passe à l&apos;itération suivante
+          CONTINUE.
+
+        ENDIF.
+
+        &quot; Initialisation Nom du champ
+        ls_content_data-fieldname = &lt;lfs_s_components&gt;-name.
+
+        &quot; Récupération de la composition du champ
+        READ TABLE lt_data_type_descr WITH TABLE KEY component = &lt;lfs_s_components&gt;-name
+                                           ASSIGNING FIELD-SYMBOL(&lt;lfs_s_data_type_descr&gt;).
+        IF sy-subrc NE 0.
+          &quot; Pas encore récupérée
+          &quot;&quot;  --&gt; Création novelle entrée
+          ls_data_type_descr-component   = &lt;lfs_s_components&gt;-name.
+          ls_data_type_descr-data_descr ?= cl_abap_datadescr=&gt;describe_by_data( &lt;lfs_s_source&gt; ).
+          INSERT ls_data_type_descr INTO TABLE lt_data_type_descr ASSIGNING &lt;lfs_s_data_type_descr&gt;.
+
+        ENDIF.
+
+        &quot; Initialisation Type (DDIC) du champ
+        ls_content_data-fieldtype = &lt;lfs_s_data_type_descr&gt;-data_descr-&gt;absolute_name.
+
+        &quot; Initialisation Type (ABAP) de champ
+        ls_content_data-fieldkind = &lt;lfs_s_data_type_descr&gt;-data_descr-&gt;kind.
+
+        &quot; Suivant le type de champ
+        CASE &lt;lfs_s_data_type_descr&gt;-data_descr-&gt;kind.
+
+          WHEN cl_abap_typedescr=&gt;kind_ref.
+            &quot; Instance
+            &quot;&quot;  --&gt; ToDo : Ajouter traitement
+
+          WHEN cl_abap_typedescr=&gt;kind_class
+            OR cl_abap_typedescr=&gt;kind_intf.
+            &quot; Classe
+            &quot;&quot;  --&gt; ToDo : Ajouter traitement
+
+          WHEN cl_abap_typedescr=&gt;kind_table.
+            &quot; Table
+            TRY.
+                &quot;&quot;  --&gt; Génération ID Unique
+                ls_content_data-value = cl_system_uuid=&gt;create_uuid_c32_static( ).
+
+              CATCH cx_uuid_error.
+                &quot;&quot; --&gt; Génération nombre aléatoire
+                ls_content_data-value = CONV sysuuid_c32( cl_abap_random=&gt;seed( ) ).
+
+            ENDTRY.
+
+            &quot;&quot;  --&gt; Appel récursif pour type &quot;complexe&quot;
+            CALL FUNCTION &apos;Z_CONVERT_TABLE_DYN_TO_STATIC&apos;
+              EXPORTING
+                it_data           = &lt;lfs_s_source&gt;
+                iv_sub_data_guid  = CONV sysuuid_c32( ls_content_data-value )
+              IMPORTING
+                et_content_static = lt_content_static.
+            INSERT LINES OF lt_content_static INTO TABLE et_content_static.
+
+          WHEN cl_abap_typedescr=&gt;kind_elem.
+            &quot; Type élémentaire
+            &quot;&quot;  --&gt; Initialisation de la valeur
+            ls_content_data-value = &lt;lfs_s_source&gt;.
+
+          WHEN cl_abap_typedescr=&gt;kind_struct.
+            &quot; Structure
+            TRY.
+                &quot;&quot;  --&gt; Génération ID Unique
+                ls_content_data-value = cl_system_uuid=&gt;create_uuid_c32_static( ).
+
+              CATCH cx_uuid_error.
+                &quot;&quot; --&gt; Génération nombre aléatoire
+                ls_content_data-value = CONV sysuuid_c32( cl_abap_random=&gt;seed( ) ).
+
+            ENDTRY.
+
+            &quot;&quot;  --&gt; Appel récursif pour type &quot;complexe&quot;
+            CALL FUNCTION &apos;Z_CONVERT_STRUCT_DYN_TO_STATIC&apos;
+              EXPORTING
+                is_data           = &lt;lfs_s_source&gt;
+                iv_sub_data_guid  = CONV sysuuid_c32( ls_content_data-value )
+              IMPORTING
+                et_content_static = lt_content_static.
+            INSERT LINES OF lt_content_static INTO TABLE et_content_static.
+
+          WHEN OTHERS.
+            &quot; Autre
+            &quot;&quot;  --&gt; ToDo : Traiter les autres cas
+            CONTINUE.
+
+        ENDCASE.
+
+        IF et_content_static IS SUPPLIED.
+          &quot; Ajout dans la table &quot;Statique&quot; classique
+          INSERT ls_content_data INTO TABLE et_content_static.
+
+        ENDIF.
+
+      ENDLOOP.        &quot;Fin parcours des champs de la table
+
+    ENDIF.            &quot;Fin de test du type de table
+
+  ENDLOOP.            &quot;Fin de parcours des données</fm_source_new>
+   </functionmodule>
+   <functionmodule NAME="Z_CONVERT_TABLE_STATIC_TO_DYN" STEXT="Conversion table statique en dynamique">
+    <importing PARAMETER="IV_TYPE" OPTIONAL="X" TYP="CLIKE"/>
+    <importing PARAMETER="IV_SUB_DATA_GUID" OPTIONAL="X" TYP="SYSUUID_C32"/>
+    <importing PARAMETER="IT_CONTENT_STATIC" OPTIONAL="X" REFERENCE="X" TYP="ZTEC_T_CONTENT_DATA"/>
+    <importing PARAMETER="IT_CONTENT_RAW" OPTIONAL="X" REFERENCE="X" TYP="SRM_T_BINTAB"/>
+    <importing PARAMETER="IT_CONTENT_XSTRING" OPTIONAL="X" REFERENCE="X" TYP="XSTRINGTAB"/>
+    <exporting PARAMETER="ET_DATA" REFERENCE="X" TYP="ANY TABLE"/>
+    <exporting PARAMETER="EOT_DATA" REFERENCE="X" TYP="REF TO DATA" REF_CLASS="X"/>
+    <changing PARAMETER="CT_DATA" OPTIONAL="X" REFERENCE="X" TYP="ANY TABLE"/>
+    <changing PARAMETER="COT_DATA" OPTIONAL="X" REFERENCE="X" TYP="REF TO DATA" REF_CLASS="X"/>
+    <documentation PARAMETER="IV_TYPE" KIND="P" STEXT="Type de table" INDEX=" 001"/>
+    <documentation PARAMETER="IV_SUB_DATA_GUID" KIND="P" STEXT="GUID Sous-Ã‰lÃ©ment" INDEX=" 002"/>
+    <documentation PARAMETER="IT_CONTENT_STATIC" KIND="P" STEXT="Type de table contenu de table" INDEX=" 003"/>
+    <documentation PARAMETER="IT_CONTENT_RAW" KIND="P" STEXT="Table binaire" INDEX=" 004"/>
+    <documentation PARAMETER="IT_CONTENT_XSTRING" KIND="P" STEXT="Table with XStrings" INDEX=" 005"/>
+    <documentation PARAMETER="ET_DATA" KIND="P" INDEX=" 006"/>
+    <documentation PARAMETER="EOT_DATA" KIND="P" STEXT="Table dynamique" INDEX=" 007"/>
+    <documentation PARAMETER="CT_DATA" KIND="P" INDEX=" 008"/>
+    <documentation PARAMETER="COT_DATA" KIND="P" INDEX=" 009"/>
+    <fm_source_new>***------------------------------------------------------------------***
+**                            INSTANCES                               **
+***------------------------------------------------------------------***
+  DATA :
+    lot_data       TYPE REF TO data,
+    los_data       TYPE REF TO data,
+    lo_table_descr TYPE REF TO cl_abap_tabledescr.
+
+***------------------------------------------------------------------***
+**                            VARIABLES                               **
+***------------------------------------------------------------------***
+  DATA :
+    lv_tabix TYPE sy-tabix.
+
+***------------------------------------------------------------------***
+**                          FIELD-SYMBOLS                             **
+***------------------------------------------------------------------***
+  FIELD-SYMBOLS :
+    &lt;lfs_s_data&gt;           TYPE            any,
+    &lt;lfs_t_data&gt;           TYPE ANY TABLE,
+    &lt;lfs_sub_data&gt;         TYPE            any,
+    &lt;lfs_s_content_static&gt; TYPE            ztec_s_content_data.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+  FREE : eot_data, et_data.
+
+  &quot; -----------------------------------------------------------
+  &quot; Contrôle paramètre d&apos;Import
+  &quot; -----------------------------------------------------------
+
+  IF  it_content_raw     IS SUPPLIED
+  AND it_content_static  IS SUPPLIED
+  AND it_content_xstring IS SUPPLIED.
+    &quot; Un seul paramètre doit être renseigné
+    RETURN.
+
+  ENDIF.
+
+  &quot; -----------------------------------------------------------
+  &quot; Création et Alimentation de la table de sortie
+  &quot; -----------------------------------------------------------
+
+  IF eot_data IS SUPPLIED.
+    &quot; Gestion par référence
+    &quot;&quot;  --&gt; Rcupération composition de la table
+    lo_table_descr ?= cl_abap_typedescr=&gt;describe_by_name( iv_type ).
+
+    &quot;&quot;  --&gt; Création de la table
+    CREATE DATA eot_data TYPE (lo_table_descr-&gt;absolute_name).
+
+    &quot;&quot;  --&gt; Initialisation pointeur sur les données de la table
+    ASSIGN eot_data-&gt;* TO &lt;lfs_t_data&gt;.
+
+  ELSEIF et_data IS SUPPLIED.
+    &quot; Gestion par table de données
+    &quot;&quot;  --&gt; Initialisation pointeur sur les données de la table
+    ASSIGN et_data TO &lt;lfs_t_data&gt;.
+
+    &quot;&quot;  --&gt; Rcupération composition de la table
+    lo_table_descr ?= cl_abap_typedescr=&gt;describe_by_data( &lt;lfs_t_data&gt; ).
+
+  ELSEIF cot_data IS SUPPLIED.
+    &quot; Gestion par référence déjà créé
+    &quot;&quot;  --&gt; Initialisation pointeur sur les données de la table
+    ASSIGN cot_data-&gt;* TO &lt;lfs_t_data&gt;.
+
+    &quot;&quot;  --&gt; Rcupération composition de la table
+    lo_table_descr ?= cl_abap_typedescr=&gt;describe_by_data( &lt;lfs_t_data&gt; ).
+
+  ELSEIF ct_data IS SUPPLIED.
+    &quot; Gestion par table de données
+    &quot;&quot;  --&gt; Initialisation pointeur sur les données de la table
+    ASSIGN ct_data TO &lt;lfs_t_data&gt;.
+
+    &quot;&quot;  --&gt; Rcupération composition de la table
+    lo_table_descr ?= cl_abap_typedescr=&gt;describe_by_data( &lt;lfs_t_data&gt; ).
+
+  ENDIF.
+
+  IF it_content_static IS SUPPLIED.
+    &quot; Utilisation table statique
+    IF NOT iv_sub_data_guid IS INITIAL.
+      &quot; GUID de Sous-Elément valorisé
+      &quot;&quot;  --&gt; Récupération position première occurence
+      READ TABLE it_content_static WITH KEY sub_data_guid = iv_sub_data_guid
+                               TRANSPORTING NO FIELDS BINARY SEARCH.
+      IF sy-subrc EQ 0.
+        &quot; Première position déterminée
+        &quot;&quot;  --&gt; Initialisation Index
+        lv_tabix = sy-tabix.
+
+      ELSE.
+        &quot; Aucune correspondance
+        &quot;&quot;  --&gt; Arrêt du traitement
+        RETURN.
+
+      ENDIF.
+
+    ELSE.
+      &quot; Il ne s&apos;agit pas d&apos;un Sous-Elément
+      &quot;&quot; --&gt; Initialisation Index première entrée
+      lv_tabix = 1.
+
+    ENDIF.
+
+    LOOP AT it_content_static ASSIGNING &lt;lfs_s_content_static&gt;
+                                   FROM lv_tabix.
+
+      IF &lt;lfs_s_content_static&gt;-sub_data_guid NE iv_sub_data_guid.
+        &quot; On ne traite pas le bon sous-élement
+        &quot;&quot;  --&gt; Passe à l&apos;itération suivante
+        EXIT.
+
+      ENDIF.
+
+      AT NEW line.
+        &quot; A chaque changement de ligne
+        IF &lt;lfs_s_data&gt; IS ASSIGNED AND NOT &lt;lfs_s_data&gt; IS INITIAL.
+          &quot;&quot;  --&gt; Ajout de la l&apos;entrée
+          INSERT &lt;lfs_s_data&gt; INTO TABLE &lt;lfs_t_data&gt;.
+
+        ENDIF.
+
+        &quot;&quot;  --&gt; Réinitialisation des données
+        CREATE DATA los_data TYPE LINE OF (lo_table_descr-&gt;absolute_name).
+        ASSIGN los_data-&gt;* TO &lt;lfs_s_data&gt;.
+
+      ENDAT.
+
+      &quot; Initialisation pointeur sur champ de la structure
+      IF &lt;lfs_s_content_static&gt;-fieldname EQ gc_table_line.
+        &quot; Cas d&apos;une table de type élémentaire
+        &lt;lfs_s_data&gt; = &lt;lfs_s_content_static&gt;-value.
+
+      ELSE.
+        &quot; Cas d&apos;une structure &quot;complexe&quot;
+        ASSIGN COMPONENT &lt;lfs_s_content_static&gt;-fieldname OF STRUCTURE &lt;lfs_s_data&gt;
+                                                                    TO FIELD-SYMBOL(&lt;lfs_value_target&gt;).
+        IF sy-subrc NE 0.
+          &quot; Pas de correspondance // Ce cas ne devrais pas se produire
+          &quot;&quot;  --&gt; Passe à l&apos;itération suivante
+          CONTINUE.
+
+        ENDIF.
+
+        &quot; Suivant le type de champ
+        CASE &lt;lfs_s_content_static&gt;-fieldkind.
+
+          WHEN cl_abap_typedescr=&gt;kind_ref.
+            &quot; Instance
+            &quot;&quot;  --&gt; ToDo : Ajouter traitement
+
+          WHEN cl_abap_typedescr=&gt;kind_class
+            OR cl_abap_typedescr=&gt;kind_intf.
+            &quot; Classe
+            &quot;&quot;  --&gt; ToDo : Ajouter traitement
+
+          WHEN cl_abap_typedescr=&gt;kind_table.
+            &quot; Table
+            &quot;&quot;  --&gt; Appel récursif pour type &quot;complexe&quot;
+            CALL FUNCTION &apos;Z_CONVERT_TABLE_STATIC_TO_DYN&apos;
+              EXPORTING
+                iv_type           = &lt;lfs_s_content_static&gt;-fieldtype
+                iv_sub_data_guid  = CONV sysuuid_c32( &lt;lfs_s_content_static&gt;-value )
+                it_content_static = it_content_static
+              IMPORTING
+                eot_data          = lot_data.
+
+            &quot;&quot;  --&gt; Alimentation de la zone
+            ASSIGN lot_data-&gt;* TO &lt;lfs_sub_data&gt;.
+            &lt;lfs_value_target&gt; = &lt;lfs_sub_data&gt;.
+
+          WHEN cl_abap_typedescr=&gt;kind_elem.
+            &quot; Type élémentaire
+            &quot;&quot;  --&gt; Initialisation de la valeur
+            &lt;lfs_value_target&gt; = &lt;lfs_s_content_static&gt;-value.
+
+          WHEN cl_abap_typedescr=&gt;kind_struct.
+            &quot; Structure
+            &quot;&quot;  --&gt; Appel récursif pour type &quot;complexe&quot;
+            CALL FUNCTION &apos;Z_CONVERT_STRUCT_STATIC_TO_DYN&apos;
+              EXPORTING
+                iv_type           = &lt;lfs_s_content_static&gt;-fieldtype
+                iv_sub_data_guid  = CONV sysuuid_c32( &lt;lfs_s_content_static&gt;-value )
+                it_content_static = it_content_static
+              IMPORTING
+                eos_data          = los_data.
+
+            &quot;&quot;  --&gt; Alimentation de la zone
+            ASSIGN los_data-&gt;* TO &lt;lfs_sub_data&gt;.
+            &lt;lfs_value_target&gt; = &lt;lfs_sub_data&gt;.
+
+          WHEN OTHERS.
+            &quot; Autre
+            &quot;&quot;  --&gt; ToDo : Traiter les autres cas
+            CONTINUE.
+
+        ENDCASE.
+
+      ENDIF.
+
+    ENDLOOP.
+
+    IF &lt;lfs_s_data&gt; IS ASSIGNED AND NOT &lt;lfs_s_data&gt; IS INITIAL.
+      &quot;&quot;  --&gt; Ajout de la l&apos;entrée
+      INSERT &lt;lfs_s_data&gt; INTO TABLE &lt;lfs_t_data&gt;.
+
+    ENDIF.
+
+  ENDIF.</fm_source_new>
+   </functionmodule>
+   <functionmodule NAME="Z_CONVERT_STRUCT_DYN_TO_STATIC" STEXT="Conversion structure dynamique en statique">
+    <importing PARAMETER="IS_DATA" OPTIONAL="X" REFERENCE="X" TYP="ANY"/>
+    <importing PARAMETER="IOS_DATA" OPTIONAL="X" REFERENCE="X" TYP="REF TO DATA" REF_CLASS="X"/>
+    <importing PARAMETER="IV_SUB_DATA_GUID" OPTIONAL="X" REFERENCE="X" TYP="SYSUUID_C32"/>
+    <exporting PARAMETER="ET_CONTENT_STATIC" REFERENCE="X" TYP="ZTEC_T_CONTENT_DATA"/>
+    <documentation PARAMETER="IS_DATA" KIND="P" STEXT="Structure de donnÃ©es" INDEX=" 001"/>
+    <documentation PARAMETER="IOS_DATA" KIND="P" STEXT="Structure de donnÃ©es (RÃ©fÃ©rence)" INDEX=" 002"/>
+    <documentation PARAMETER="IV_SUB_DATA_GUID" KIND="P" STEXT="16 Byte UUID in 16 Bytes (Raw Format)" INDEX=" 003"/>
+    <documentation PARAMETER="ET_CONTENT_STATIC" KIND="P" STEXT="Type de table contenu de table" INDEX=" 004"/>
+    <fm_source_new>***------------------------------------------------------------------***
+**                             TABLES                                 **
+***------------------------------------------------------------------***
+  DATA :
+    lt_content_static  TYPE ztec_t_content_data,
+    lt_data_type_descr TYPE ty_t_data_type_descr.
+
+***------------------------------------------------------------------***
+**                            STRUCTURE                               **
+***------------------------------------------------------------------***
+  DATA :
+    ls_content_data    TYPE ztec_s_content_data,
+    ls_data_type_descr TYPE ty_data_type_descr.
+
+***------------------------------------------------------------------***
+**                            INSTANCES                               **
+***------------------------------------------------------------------***
+  DATA :
+    lo_elem_descr   TYPE REF TO cl_abap_elemdescr,
+    lo_struct_descr TYPE REF TO cl_abap_structdescr.
+
+***------------------------------------------------------------------***
+**                          FIELD-SYMBOLS                             **
+***------------------------------------------------------------------***
+  FIELD-SYMBOLS :
+    &lt;lfs_s_structure&gt; TYPE any.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+  FREE : et_content_static.
+
+  &quot; -----------------------------------------------------------
+  &quot; Récupération composante de la Structure
+  &quot; -----------------------------------------------------------
+
+  IF ios_data IS BOUND.
+    &quot; Initialisation &quot;pointeur&quot; sur les données
+    ASSIGN ios_data-&gt;* TO &lt;lfs_s_structure&gt;.
+
+  ELSEIF is_data IS SUPPLIED.
+    &quot; Utilisation structure passée en paramètre
+    ASSIGN is_data TO &lt;lfs_s_structure&gt;.
+
+  ELSE.
+    &quot; Aucun paramètre
+    &quot;&quot;  --&gt; Arrêt du traitement
+    RETURN.
+
+  ENDIF.
+  IF NOT &lt;lfs_s_structure&gt; Is ASSIGNED.
+    &quot; Erreur lors de l&apos;initialisation du pointeur
+    &quot;&quot;  --&gt; Arrêt du traitement
+    RETURN.
+
+  ENDIF.
+
+  TRY.
+      &quot; Récupération composition de la structure
+      lo_struct_descr ?= cl_abap_structdescr=&gt;describe_by_data( &lt;lfs_s_structure&gt; ).
+
+    CATCH cx_sy_move_cast_error.
+      &quot; Erreur move-cast // Il s&apos;agit peut-être d&apos;une table de type élémentaire
+      TRY.
+          lo_elem_descr ?= cl_abap_structdescr=&gt;describe_by_data( &lt;lfs_s_structure&gt; ).
+
+        CATCH cx_root. &quot;#EC CATCH_ALL
+          &quot; Erreur
+          &quot;&quot;  --&gt; Arrêt du traitement
+          RETURN.
+
+      ENDTRY.
+
+    CATCH cx_root. &quot;#EC CATCH_ALL
+      &quot; Erreur
+      &quot;&quot;  --&gt; Arrêt du traitement
+      RETURN.
+
+  ENDTRY.
+
+  &quot; -----------------------------------------------------------
+  &quot; Initialisation table de données statique
+  &quot; -----------------------------------------------------------
+
+  IF lo_elem_descr IS BOUND.
+    &quot; Cas d&apos;un type de table élémentaire
+    ls_content_data-fieldname = gc_table_line.
+    ls_content_data-fieldtype = lo_elem_descr-&gt;absolute_name.
+    ls_content_data-fieldkind = lo_elem_descr-&gt;kind.
+    ls_content_data-value     = &lt;lfs_s_structure&gt;.
+
+    IF et_content_static IS SUPPLIED.
+      &quot; Ajout dans la table &quot;Statique&quot; classique
+      INSERT ls_content_data INTO TABLE et_content_static.
+
+    ENDIF.
+
+  ELSEIF lo_struct_descr IS BOUND.
+
+    &quot; Parcours l&apos;ensemble des champs de la structure
+    LOOP AT lo_struct_descr-&gt;components ASSIGNING FIELD-SYMBOL(&lt;lfs_s_components&gt;).
+
+      FREE : lt_content_static.
+
+      &quot; Récupération du champ correspondant
+      ASSIGN COMPONENT &lt;lfs_s_components&gt;-name OF STRUCTURE &lt;lfs_s_structure&gt;
+                                                         TO FIELD-SYMBOL(&lt;lfs_s_source&gt;).
+      IF sy-subrc NE 0.
+        &quot; Pas de correspondance // Ne devrais pas se produire
+        &quot;&quot;  --&gt; Passe à l&apos;itération suivante
+        CONTINUE.
+
+      ENDIF.
+
+      &quot; Initialisation Nom du champ
+      ls_content_data-fieldname = &lt;lfs_s_components&gt;-name.
+
+      &quot; Récupération de la composition du champ
+      READ TABLE lt_data_type_descr WITH TABLE KEY component = &lt;lfs_s_components&gt;-name
+                                         ASSIGNING FIELD-SYMBOL(&lt;lfs_s_data_type_descr&gt;).
+      IF sy-subrc NE 0.
+        &quot; Pas encore récupérée
+        &quot;&quot;  --&gt; Création novelle entrée
+        ls_data_type_descr-component   = &lt;lfs_s_components&gt;-name.
+        ls_data_type_descr-data_descr ?= cl_abap_datadescr=&gt;describe_by_data( &lt;lfs_s_source&gt; ).
+        INSERT ls_data_type_descr INTO TABLE lt_data_type_descr ASSIGNING &lt;lfs_s_data_type_descr&gt;.
+
+      ENDIF.
+
+      &quot; Initialisation Type (DDIC) du champ
+      ls_content_data-fieldtype = &lt;lfs_s_data_type_descr&gt;-data_descr-&gt;absolute_name.
+
+      &quot; Initialisation Type (ABAP) de champ
+      ls_content_data-fieldkind = &lt;lfs_s_data_type_descr&gt;-data_descr-&gt;kind.
+
+      &quot; Suivant le type de champ
+      CASE &lt;lfs_s_data_type_descr&gt;-data_descr-&gt;kind.
+
+        WHEN cl_abap_typedescr=&gt;kind_ref.
+          &quot; Instance
+          &quot;&quot;  --&gt; ToDo : Ajouter traitement
+
+        WHEN cl_abap_typedescr=&gt;kind_class
+          OR cl_abap_typedescr=&gt;kind_intf.
+          &quot; Classe
+          &quot;&quot;  --&gt; ToDo : Ajouter traitement
+
+        WHEN cl_abap_typedescr=&gt;kind_table.
+          &quot; Table
+          TRY.
+              &quot;&quot;  --&gt; Génération ID Unique
+              ls_content_data-value = cl_system_uuid=&gt;create_uuid_c32_static( ).
+
+            CATCH cx_uuid_error.
+              &quot;&quot; --&gt; Génération nombre aléatoire
+              ls_content_data-value = CONV sysuuid_c32( cl_abap_random=&gt;seed( ) ).
+
+          ENDTRY.
+
+          &quot;&quot;  --&gt; Appel récursif pour type &quot;complexe&quot;
+          CALL FUNCTION &apos;Z_CONVERT_TABLE_DYN_TO_STATIC&apos;
+            EXPORTING
+              it_data           = &lt;lfs_s_source&gt;
+              iv_sub_data_guid  = CONV sysuuid_c32( ls_content_data-value )
+            IMPORTING
+              et_content_static = lt_content_static.
+          INSERT LINES OF lt_content_static INTO TABLE et_content_static.
+
+        WHEN cl_abap_typedescr=&gt;kind_elem.
+          &quot; Type élémentaire
+          &quot;&quot;  --&gt; Initialisation de la valeur
+          ls_content_data-value = &lt;lfs_s_source&gt;.
+
+        WHEN cl_abap_typedescr=&gt;kind_struct.
+          &quot; Structure
+          TRY.
+              &quot;&quot;  --&gt; Génération ID Unique
+              ls_content_data-value = cl_system_uuid=&gt;create_uuid_c32_static( ).
+
+            CATCH cx_uuid_error.
+              &quot;&quot; --&gt; Génération nombre aléatoire
+              ls_content_data-value = CONV sysuuid_c32( cl_abap_random=&gt;seed( ) ).
+
+          ENDTRY.
+
+          &quot;&quot;  --&gt; Appel récursif pour type &quot;complexe&quot;
+          CALL FUNCTION &apos;Z_CONVERT_STRUCT_DYN_TO_STATIC&apos;
+            EXPORTING
+              is_data           = &lt;lfs_s_source&gt;
+              iv_sub_data_guid  = CONV sysuuid_c32( ls_content_data-value )
+            IMPORTING
+              et_content_static = lt_content_static.
+          INSERT LINES OF lt_content_static INTO TABLE et_content_static.
+
+        WHEN OTHERS.
+          &quot; Autre
+          &quot;&quot;  --&gt; ToDo : Traiter les autres cas
+          CONTINUE.
+
+      ENDCASE.
+
+      IF et_content_static IS SUPPLIED.
+        &quot; Ajout dans la table &quot;Statique&quot; classique
+        INSERT ls_content_data INTO TABLE et_content_static.
+
+      ENDIF.
+
+    ENDLOOP.        &quot;Fin parcours des champs de la table
+
+  ENDIF.            &quot;Fin de test du type de table</fm_source_new>
+   </functionmodule>
+   <functionmodule NAME="Z_CONVERT_STRUCT_STATIC_TO_DYN" STEXT="Conversion table statique en dynamique">
+    <importing PARAMETER="IV_TYPE" TYP="CLIKE"/>
+    <importing PARAMETER="IV_SUB_DATA_GUID" OPTIONAL="X" TYP="SYSUUID_C32"/>
+    <importing PARAMETER="IT_CONTENT_STATIC" REFERENCE="X" TYP="ZTEC_T_CONTENT_DATA"/>
+    <exporting PARAMETER="ES_DATA" REFERENCE="X" TYP="ANY"/>
+    <exporting PARAMETER="EOS_DATA" REFERENCE="X" TYP="REF TO DATA" REF_CLASS="X"/>
+    <documentation PARAMETER="IV_TYPE" KIND="P" STEXT="Type de table" INDEX=" 001"/>
+    <documentation PARAMETER="IV_SUB_DATA_GUID" KIND="P" STEXT="GUID Sous-Ã‰lÃ©ment" INDEX=" 002"/>
+    <documentation PARAMETER="IT_CONTENT_STATIC" KIND="P" STEXT="Type de table contenu de table" INDEX=" 003"/>
+    <documentation PARAMETER="ES_DATA" KIND="P" INDEX=" 004"/>
+    <documentation PARAMETER="EOS_DATA" KIND="P" STEXT="Structure dynamique" INDEX=" 005"/>
+    <fm_source_new>***------------------------------------------------------------------***
+**                            INSTANCES                               **
+***------------------------------------------------------------------***
+  DATA :
+    los_data        TYPE REF TO data,
+    lot_data        TYPE REF TO data,
+    lo_struct_descr TYPE REF TO cl_abap_structdescr.
+
+***------------------------------------------------------------------***
+**                          FIELD-SYMBOLS                             **
+***------------------------------------------------------------------***
+  FIELD-SYMBOLS :
+    &lt;lfs_s_data&gt;   TYPE any,
+    &lt;lfs_sub_data&gt; TYPE any.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+  FREE : eos_data, es_data.
+
+  &quot; -----------------------------------------------------------
+  &quot; Création et Alimentation de la table de sortie
+  &quot; -----------------------------------------------------------
+
+  &quot; Rcupération composition de la structure
+  lo_struct_descr ?= cl_abap_typedescr=&gt;describe_by_name( iv_type ).
+
+  IF eos_data IS SUPPLIED.
+    &quot; Gestion par référence
+    &quot;&quot;  --&gt; Création de la structure
+    CREATE DATA eos_data TYPE (lo_struct_descr-&gt;absolute_name).
+
+    &quot;&quot;  --&gt; Initialisation pointeur sur les données de la structure
+    ASSIGN eos_data-&gt;* TO &lt;lfs_s_data&gt;.
+
+  ELSE.
+    &quot; Gestion &quot;simple&quot;
+    &quot;&quot;  --&gt; Initialisation pointeur sur les données de la structure
+    ASSIGN es_data TO &lt;lfs_s_data&gt;.
+
+  ENDIF.
+
+  &quot; -----------------------------------------------------------
+  &quot; Alimentation de la structure de sortie
+  &quot; -----------------------------------------------------------
+
+  &quot; Utilisation table statique
+  LOOP AT it_content_static ASSIGNING FIELD-SYMBOL(&lt;lfs_s_content_static&gt;).
+
+    &quot; Initialisation pointeur sur champ de la structure
+    IF &lt;lfs_s_content_static&gt;-fieldname EQ gc_table_line.
+      &quot; Cas d&apos;une table de type élémentaire
+      &lt;lfs_s_data&gt; = &lt;lfs_s_content_static&gt;-value.
+
+    ELSE.
+      &quot; Cas d&apos;une structure &quot;complexe&quot;
+      ASSIGN COMPONENT &lt;lfs_s_content_static&gt;-fieldname OF STRUCTURE &lt;lfs_s_data&gt;
+                                                                  TO FIELD-SYMBOL(&lt;lfs_value_target&gt;).
+      IF sy-subrc NE 0.
+        &quot; Pas de correspondance // Ce cas ne devrais pas se produire
+        &quot;&quot;  --&gt; Passe à l&apos;itération suivante
+        CONTINUE.
+
+      ENDIF.
+
+      &quot; Suivant le type de champ
+      CASE &lt;lfs_s_content_static&gt;-fieldkind.
+
+        WHEN cl_abap_typedescr=&gt;kind_ref.
+          &quot; Instance
+          &quot;&quot;  --&gt; ToDo : Ajouter traitement
+
+        WHEN cl_abap_typedescr=&gt;kind_class
+          OR cl_abap_typedescr=&gt;kind_intf.
+          &quot; Classe
+          &quot;&quot;  --&gt; ToDo : Ajouter traitement
+
+        WHEN cl_abap_typedescr=&gt;kind_table.
+          &quot; Table
+          &quot;&quot;  --&gt; Appel récursif pour type &quot;complexe&quot;
+          CALL FUNCTION &apos;Z_CONVERT_TABLE_STATIC_TO_DYN&apos;
+            EXPORTING
+              iv_type           = &lt;lfs_s_content_static&gt;-fieldtype
+              iv_sub_data_guid  = CONV sysuuid_c32( &lt;lfs_s_content_static&gt;-value )
+              it_content_static = it_content_static
+            IMPORTING
+              eot_data          = lot_data.
+
+          &quot;&quot;  --&gt; Alimentation de la zone
+          ASSIGN lot_data-&gt;* TO &lt;lfs_sub_data&gt;.
+          &lt;lfs_value_target&gt; = &lt;lfs_sub_data&gt;.
+
+        WHEN cl_abap_typedescr=&gt;kind_elem.
+          &quot; Type élémentaire
+          &quot;&quot;  --&gt; Initialisation de la valeur
+          &lt;lfs_value_target&gt; = &lt;lfs_s_content_static&gt;-value.
+
+        WHEN cl_abap_typedescr=&gt;kind_struct.
+          &quot; Structure
+          &quot;&quot;  --&gt; Appel récursif pour type &quot;complexe&quot;
+          CALL FUNCTION &apos;Z_CONVERT_STRUCT_STATIC_TO_DYN&apos;
+            EXPORTING
+              iv_type           = &lt;lfs_s_content_static&gt;-fieldtype
+              iv_sub_data_guid  = CONV sysuuid_c32( &lt;lfs_s_content_static&gt;-value )
+              it_content_static = it_content_static
+            IMPORTING
+              eos_data          = los_data.
+
+          &quot;&quot;  --&gt; Alimentation de la zone
+          ASSIGN los_data-&gt;* TO &lt;lfs_sub_data&gt;.
+          &lt;lfs_value_target&gt; = &lt;lfs_sub_data&gt;.
+
+        WHEN OTHERS.
+          &quot; Autre
+          &quot;&quot;  --&gt; ToDo : Traiter les autres cas
+          CONTINUE.
+
+      ENDCASE.
+
+    ENDIF.
+
+  ENDLOOP.</fm_source_new>
+   </functionmodule>
+   <functionmodule NAME="Z_TASK_CALL_PROCESS" REMOTE="R" STEXT="Appel traitement //">
+    <importing PARAMETER="IS_TASK_CALL_PROCESS" TYP="ZTEC_S_TASK_CALL_PROCESS"/>
+    <importing PARAMETER="IT_TASK_CALL_PARAMETERS" TYP="ZTEC_T_FUNCTION_PARAMETERS"/>
+    <importing PARAMETER="IV_TASK_CALL_DATA_COMPRESSED" OPTIONAL="X" TYP="ASR_CONTAINER_CONTENT"/>
+    <importing PARAMETER="IS_TASK_DATA_COMPRESS_PARAM" TYP="ZTEC_S_TASK_COMPRESS_PARAM"/>
+    <exporting PARAMETER="ET_TASK_RESULT" TYP="ZTEC_T_FUNCTION_PARAMETERS"/>
+    <exporting PARAMETER="EV_TASK_RESULT_DATA_COMPRESSED" TYP="XSTRING"/>
+    <exceptions EXCEPTION="DYNAMIC_CONVERT_ERROR"/>
+    <exceptions EXCEPTION="CALL_PROCESS_ERROR"/>
+    <exceptions EXCEPTION="DURING_PROCESS_ERROR"/>
+    <documentation PARAMETER="IS_TASK_CALL_PROCESS" KIND="P" STEXT="Tâche - Traitement à lancer" INDEX=" 001"/>
+    <documentation PARAMETER="IT_TASK_CALL_PARAMETERS" KIND="P" STEXT="Type de table paramètre d&apos;appel Statique" INDEX=" 002"/>
+    <documentation PARAMETER="IV_TASK_CALL_DATA_COMPRESSED" KIND="P" STEXT="Contenu d&apos;un conteneur de données" INDEX=" 003"/>
+    <documentation PARAMETER="IS_TASK_DATA_COMPRESS_PARAM" KIND="P" STEXT="Tâche - Paramètres de compression" INDEX=" 004"/>
+    <documentation PARAMETER="ET_TASK_RESULT" KIND="P" STEXT="Table paramètres d&apos;appel statique" INDEX=" 005"/>
+    <documentation PARAMETER="EV_TASK_RESULT_DATA_COMPRESSED" KIND="P" STEXT="Données compressées" INDEX=" 006"/>
+    <documentation PARAMETER="DYNAMIC_CONVERT_ERROR" KIND="X" STEXT="Erreur lors de la conversion des paramètres dynamiques" INDEX=" 007"/>
+    <documentation PARAMETER="CALL_PROCESS_ERROR" KIND="X" STEXT="Erreur lors de l&apos;appel du traitement" INDEX=" 008"/>
+    <documentation PARAMETER="DURING_PROCESS_ERROR" KIND="X" STEXT="Erreur lors du traitement à appeler" INDEX=" 009"/>
+    <fm_source_new>*&amp;---------------------------------------------------------------------*
+*&amp; Module Fonction : Z_TASK_CALL_PROCESS                               *
+*&amp; Groupe Fonction : ZTEC_TASK_PARALELL                                *
+*&amp; Description     : Appel traitement                                  *
+*                                                                      *
+*&amp;---------------------------------------------------------------------*
+*&amp;---------------------------------------------------------------------*
+*&amp; Créé par     : Olivier Véhier                                       *
+*                                                                      *
+*&amp; Créé le      : 22/07/2015                                           *
+*                                                                      *
+*&amp;---------------------------------------------------------------------*
+*&amp;---------------------------------------------------------------------*
+*&amp; Liste des modifications                                             *
+*&amp; Auteur      Date       Signature  Objet de la modification          *
+*&amp;---------------------------------------------------------------------*
+*&amp;---------------------------------------------------------------------*
+*                                                                      *
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+  CLEAR   : ev_task_result_data_compressed.
+  REFRESH : et_task_result.
+
+  IF NOT is_task_call_process-function_name IS INITIAL.
+    &quot; -----------------------------------------------------------
+    &quot; Appel d&apos;un Module Fonction
+    &quot; -----------------------------------------------------------
+
+    &quot; Appel du Module Fonction
+    PERFORM function_call_process USING is_task_call_process-function_name
+                                        it_task_call_parameters
+                                        iv_task_call_data_compressed
+                                        is_task_data_compress_param
+                               CHANGING et_task_result
+                                        ev_task_result_data_compressed.
+
+
+  ELSEIF NOT is_task_call_process-class_name  IS INITIAL
+     AND NOT is_task_call_process-method_name IS INITIAL.
+    &quot; -----------------------------------------------------------
+    &quot; Appel d&apos;une Méthode Statique
+    &quot; -----------------------------------------------------------
+
+    &quot; Appel de la Méthode Statique
+    PERFORM method_call_process USING is_task_call_process-class_name
+                                      is_task_call_process-method_name
+                                      it_task_call_parameters
+                                      iv_task_call_data_compressed
+                                      is_task_data_compress_param
+                             CHANGING et_task_result
+                                      ev_task_result_data_compressed.
+
+  ELSE.
+    &quot; Aucun traitement à exécuter
+    &quot;&quot;  --&gt; Arrêt du traitement
+    RETURN.
+
+  ENDIF.</fm_source_new>
+   </functionmodule>
+   <functionmodule NAME="Z_TASK_TRACE_SAVE_TO_DB" REMOTE="R" STEXT="Trace Tâche - Sauvegarde dans la DB">
+    <importing PARAMETER="IT_ZTASK_TRACE" TYP="ZTASK_TRACE_H_T"/>
+    <importing PARAMETER="IV_COMMIT" OPTIONAL="X" TYP="FLAG"/>
+    <exporting PARAMETER="EV_SUBRC" TYP="SY-SUBRC"/>
+    <documentation PARAMETER="IT_ZTASK_TRACE" KIND="P" STEXT="Trace Tâche - Type de table" INDEX=" 001"/>
+    <documentation PARAMETER="IV_COMMIT" KIND="P" STEXT="Commit des données ?" INDEX=" 002"/>
+    <documentation PARAMETER="EV_SUBRC" KIND="P" STEXT="Zone système ABAP : code retour des instructions ABAP" INDEX=" 003"/>
+    <fm_source>***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+  &quot; -----------------------------------------------------------
+  &quot; Contrôle des données
+  &quot; -----------------------------------------------------------
+
+  IF it_ztask_trace[] IS INITIAL.
+    &quot; Aucune données
+    &quot;&quot;  --&gt; Arrêt du traitement
+    RETURN.
+
+  ENDIF.
+
+  TRY.
+      &quot; -----------------------------------------------------------
+      &quot; Sauvegarde les Traces d&apos;exécution des Tâches
+      &quot; -----------------------------------------------------------
+
+      &quot; Modification données en DB
+      MODIFY ztask_trace_h FROM TABLE it_ztask_trace.
+      ev_subrc = sy-subrc.
+
+      IF iv_commit EQ abap_true.
+        &quot; Commit
+        COMMIT WORK.
+
+      ENDIF.
+
+    CATCH cx_root. &quot;#EC CATCH_ALL
+      &quot; Une erreur est survenue
+      &quot;&quot;  --&gt; Initialisation code retour en erreur
+      ev_subrc = 4.
+
+  ENDTRY.</fm_source>
+   </functionmodule>
+  </functionmodules>
+ </FUGR>
 </nugget>
