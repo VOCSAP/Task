@@ -2801,453 +2801,6 @@ ENDMETHOD.</source>
 *&quot;* in the implementation part of the class</localMacros>
   <inheritance CLSNAME="ZCX_TASK_WIZARD" REFCLSNAME="CX_DYNAMIC_CHECK" VERSION="1" STATE="1"/>
  </CLAS>
- <PROG NAME="ZTASK_TEMPLATE" VARCL="X" SUBC="I" RSTAT="T" RMAND="200" RLOAD="F" UCCHECK="X">
-  <textPool>
-   <language SPRAS="F">
-    <textElement ID="R" ENTRY="Tâche - Template" LENGTH="16 "/>
-   </language>
-  </textPool>
-  <source>&quot;#ANCHOR-WIZARD_SIGN-INCLUDE-BEG#
-*----------------------------------------------------------------------*
-*   Include généré à partir de l&apos;Assistant
-*   Le #DATUM#, par #UNAME#
-*   Include a été généré avec l&apos;assistant de création
-*   de parallélisation.
-*----------------------------------------------------------------------*
-&quot;#ANCHOR-WIZARD_SIGN-INCLUDE-END#
-&quot;#ANCHOR-TASK_TEMPLATE-BEG#
-*----------------------------------------------------------------------*
-*       CLASS LCL_TASK_TEMPLATE DEFINIION
-*----------------------------------------------------------------------*
-*   Classe générée à partir de l&apos;Assistant
-*   Le #DATUM#, par #UNAME#
-*   Cette classe a été générée avec l&apos;assistant de création
-*   de parallélisation.
-*----------------------------------------------------------------------*
-CLASS lcl_task_template DEFINITION FINAL CREATE PRIVATE.
-
-*-- Publique
-  PUBLIC SECTION.
-
-***------------------------------------------------------------------***
-**                              TYPES                                 **
-***------------------------------------------------------------------***
-
-*   Déclaration de type
-
-***------------------------------------------------------------------***
-**                           MÉTHODES                                 **
-***------------------------------------------------------------------***
-
-*	Déclaration de méthodes
-
-    &quot;#ANCHOR-AT_SELECTION_SCREEN_OUTPUT-DEF-BEG#
-    &quot; Modification Ecran de Sélection
-    CLASS-METHODS at_selection_screen_output.
-    &quot;#ANCHOR-AT_SELECTION_SCREEN_OUTPUT-DEF-END#
-
-    &quot; Création Instance
-    CLASS-METHODS factory
-      RETURNING VALUE(ro_task) TYPE REF TO lcl_task_template.
-
-    &quot; Tâche - Lancement d&apos;une nouvelle Tâche
-    METHODS task_start_new
-      IMPORTING
-        !iv_function_name          TYPE rs38l_fnam OPTIONAL
-        !iv_class_name             TYPE seoclsname OPTIONAL
-        !iv_method_name            TYPE seomtdname OPTIONAL
-        !is_task_configuration     TYPE zcl_task_manager=&gt;ty_task_process_configuration OPTIONAL
-        !io_task_container         TYPE REF TO zcl_task_container OPTIONAL
-        !iv_overload_compress_conf TYPE xsdboolean OPTIONAL
-      RAISING
-        zcx_task_manager .
-
-    &quot; Tâche - Traitement de fin
-    METHODS task_finish_running.
-
-    &quot; Container - Création
-    METHODS task_container_get
-      RETURNING VALUE(ro_task_container) TYPE REF TO zcl_task_container.
-
-    &quot; Handler - Evènement Fin d&apos;une Tâche
-    METHODS at_eot                                          &quot;#EC CALLED
-      IMPORTING
-        !is_task_call_process TYPE ztec_s_task_call_process
-        !it_result            TYPE zif_task_constant=&gt;ty_t_function_parameters OPTIONAL
-        !it_attached_data     TYPE zif_task_constant=&gt;ty_t_task_attached_data OPTIONAL
-        !iv_error             TYPE xsdboolean OPTIONAL.
-
-    &quot; Handler - Evènement Traitement avant début de lancement d&apos;une Tâche
-    METHODS before_task                                     &quot;#EC CALLED
-      IMPORTING
-        !is_task_call_process TYPE ztec_s_task_call_process
-        !io_task_container    TYPE REF TO zcl_task_container OPTIONAL.
-
-***------------------------------------------------------------------***
-**                            ATTRIBUTS                               **
-***------------------------------------------------------------------***
-
-*	Déclaration d&apos;attributs
-
-
-*-- Privée
-  PRIVATE SECTION.
-
-***------------------------------------------------------------------***
-**                              TYPES                                 **
-***------------------------------------------------------------------***
-
-*   Déclaration de type
-
-    TYPES :
-      BEGIN OF ty_selection_criteria,
-        parallel_activ       TYPE xsdboolean,
-        server_default       TYPE xsdboolean,
-        server_user          TYPE bdfields-rfcgr,
-        task_number          TYPE int4,
-        task_trace           TYPE xsdboolean,
-        task_manage_shm      TYPE xsdboolean,
-        task_compress_activ  TYPE xsdboolean,
-        task_compress_line   TYPE xsdboolean,
-        task_compress_global TYPE xsdboolean,
-      END OF   ty_selection_criteria.
-
-***------------------------------------------------------------------***
-**                           MÉTHODES                                 **
-***------------------------------------------------------------------***
-
-*	Déclaration de méthodes
-
-    &quot; Constructeur
-    METHODS constructor
-      IMPORTING
-        !is_task_manager_configuration TYPE zcl_task_manager=&gt;ty_task_manager_configuration
-      RAISING
-        zcx_task_manager.
-
-***------------------------------------------------------------------***
-**                            ATTRIBUTS                               **
-***------------------------------------------------------------------***
-
-*	Déclaration d&apos;attributs
-
-    DATA : mo_task_manager TYPE REF TO zcl_task_manager.
-    DATA : ms_selection_criteria TYPE ty_selection_criteria.
-
-ENDCLASS.             &quot;LCL_TASK_TEMPLATE DEFINITION
-
-*----------------------------------------------------------------------*
-*       CLASS LCL_TASK_TEMPLATE IMPLEMENTATION
-*----------------------------------------------------------------------*
-*
-*----------------------------------------------------------------------*
-CLASS lcl_task_template IMPLEMENTATION.
-
-  &quot;#ANCHOR-AT_SELECTION_SCREEN_OUTPUT-IMPL-BEG#
-  METHOD at_selection_screen_output.
-
-***==================================================================***
-**                           TRAITEMENT                               **
-***==================================================================***
-
-    &quot; -----------------------------------------------------------
-    &quot; Sélection des données
-    &quot; -----------------------------------------------------------
-
-    LOOP AT SCREEN.
-
-      &quot; Suivant le Groupe d&apos;élèment
-      CASE screen-group1.
-
-        WHEN &apos;ALL&apos;.                                         &quot;#EC NOTEXT
-          &quot; Groupe &apos;TOUS&apos;
-          &quot;&quot;  --&gt; (Dés)Active les paramètres de configuration de la parallélisation
-          screen-input = SWITCH int1( p_tact
-            WHEN abap_true THEN 1   &quot;Active la saisie  // Activation Parallélisation
-            ELSE 0                  &quot;Désactive la saisie
-          ).
-
-          &quot; Suivant le Paramètre
-          CASE screen-name.
-
-            WHEN &apos;P_GRFC&apos;.                                  &quot;#EC NOTEXT
-              &quot; Groupe de Serveur
-              &quot;&quot;  --&gt; (Dés)Active la saisie de la zone Groupe de Serveur
-              screen-input = SWITCH int1( boolc( p_tact EQ abap_true AND p_grfc_r EQ abap_true )
-                WHEN abap_true THEN 1 &quot;Active la saisie  // Activation Parallélisation &amp; Groupe de Serveur spécifique
-                ELSE 0                &quot;Désactive la saisie
-              ).
-
-            WHEN &apos;P_TCOMPL&apos;                                 &quot;#EC NOTEXT
-              OR &apos;P_TCOMPG&apos;.                                &quot;#EC NOTEXT
-              &quot; Méthode de Compression
-              &quot;&quot;  --&gt; (Dés)Active la saisie de la Méthode de Compression
-              screen-input = SWITCH int1( boolc( p_tact EQ abap_true AND p_tcomp EQ abap_true )
-                WHEN abap_true THEN 1 &quot;Active la saisie  // Activation Parallélisation &amp; Compression Active
-                ELSE 0                &quot;Désactive la saisie
-              ).
-
-            WHEN OTHERS.
-              &quot; Autre
-
-          ENDCASE.
-
-        WHEN OTHERS.
-          &quot; Autres
-          &quot;&quot;  --&gt; Passe à l&apos;Itération Suivante
-          CONTINUE.
-
-      ENDCASE.
-
-      MODIFY SCREEN.
-
-    ENDLOOP.
-
-  ENDMETHOD.
-  &quot;#ANCHOR-AT_SELECTION_SCREEN_OUTPUT-IMPL-END#
-
-  METHOD factory.
-
-***------------------------------------------------------------------***
-**                            STRUCTURE                               **
-***------------------------------------------------------------------***
-    DATA :
-          ls_task_manager_configuration TYPE zcl_task_manager=&gt;ty_task_manager_configuration.
-
-***==================================================================***
-**                           TRAITEMENT                               **
-***==================================================================***
-
-    &quot; -----------------------------------------------------------
-    &quot; Initialisation paramètre de configuration
-    &quot; -----------------------------------------------------------
-
-    &quot; Initialisation données relatives aux ressources de parallélisation
-    ls_task_manager_configuration-grfc               = #grfc#.
-    ls_task_manager_configuration-task_max           = #task_max#.
-    ls_task_manager_configuration-use_server_default = #use_server_default#.
-
-    &quot; Initialisation données relatives aux traitements - Fin d&apos;une Tâche
-    ls_task_manager_configuration-global_configuration-process_by_method-after-instance = ro_task.
-    ls_task_manager_configuration-global_configuration-process_by_method-after-method   = &apos;AT_EOT&apos;. &quot;#EC NOTEXT
-
-    &quot; Initialisation données relatives aux traitements - Avant lancement d&apos;une Tâche
-    ls_task_manager_configuration-global_configuration-process_by_method-before-instance = ro_task.
-    ls_task_manager_configuration-global_configuration-process_by_method-before-method   = &apos;BEFORE_TASK&apos;. &quot;#EC NOTEXT
-
-    &quot; Initialisation données relatives à la configuration
-    ls_task_manager_configuration-global_configuration-shm_management = #shm_management#.
-    ls_task_manager_configuration-global_configuration-task_compress_activ = #compress_activ#.
-    ls_task_manager_configuration-global_configuration-task_compress_param-data_compress_global       = #compress_g#.
-    ls_task_manager_configuration-global_configuration-task_compress_param-data_compress_line_by_line = #compress_l#.
-
-    &quot; Initialisation données relatives aux traces
-    ls_task_manager_configuration-global_configuration-task_trace_param-trace_active = #task_trace#.
-    ls_task_manager_configuration-global_configuration-task_trace_param-trace_memory = #task_trace#.
-
-    &quot; -----------------------------------------------------------
-    &quot; Création instance Manager de Tâche
-    &quot; -----------------------------------------------------------
-
-    &quot; Création instance du Manager de Tâche
-    CREATE OBJECT ro_task
-      EXPORTING
-        is_task_manager_configuration = ls_task_manager_configuration.
-
-  ENDMETHOD.
-
-  METHOD constructor.
-
-***==================================================================***
-**                           TRAITEMENT                               **
-***==================================================================***
-
-    TRY.
-        &quot; -----------------------------------------------------------
-        &quot; Création du Manager de Tâche
-        &quot; -----------------------------------------------------------
-
-        &quot; Création de l&apos;instance du Manager de Tâche
-        CREATE OBJECT me-&gt;mo_task_manager
-          EXPORTING
-            is_task_manager_configuration = is_task_manager_configuration.
-
-      CATCH zcx_task_manager INTO DATA(lo_cx_exception).
-        &quot; Une erreur est survenue
-        &quot;&quot;  --&gt; Lève une Exception
-        RAISE EXCEPTION TYPE zcx_task_manager
-          EXPORTING
-            previous = lo_cx_exception.
-
-    ENDTRY.
-
-  ENDMETHOD.
-
-  METHOD task_start_new.
-
-***==================================================================***
-**                           TRAITEMENT                               **
-***==================================================================***
-
-    TRY.
-        &quot; -----------------------------------------------------------
-        &quot; Lancement d&apos;une Nouvelle Tâche
-        &quot; -----------------------------------------------------------
-
-        &quot; Lancement d&apos;une Tâche
-        me-&gt;mo_task_manager-&gt;task_start_new(
-            iv_function_name          = iv_function_name
-            iv_class_name             = iv_class_name
-            iv_method_name            = iv_method_name
-            is_task_configuration     = is_task_configuration
-            io_task_container         = io_task_container
-            iv_overload_compress_conf = iv_overload_compress_conf
-        ).
-
-      CATCH zcx_task_manager INTO DATA(lo_cx_exception).
-        &quot; Une erreur est survenue
-        &quot;&quot;  --&gt; Lève une Exception
-        RAISE EXCEPTION TYPE zcx_task_manager
-          EXPORTING
-            previous = lo_cx_exception.
-
-    ENDTRY.
-
-  ENDMETHOD.
-
-  METHOD task_finish_running.
-
-***==================================================================***
-**                           TRAITEMENT                               **
-***==================================================================***
-
-    &quot; -----------------------------------------------------------
-    &quot; Attente fin de toutes les Tâches
-    &quot; -----------------------------------------------------------
-
-    &quot; Traitement de Fin
-    me-&gt;mo_task_manager-&gt;task_finish_running( ).
-
-  ENDMETHOD.
-
-  METHOD task_container_get.
-
-***==================================================================***
-**                           TRAITEMENT                               **
-***==================================================================***
-
-    &quot; -----------------------------------------------------------
-    &quot; Création instance Container de données
-    &quot; -----------------------------------------------------------
-
-    &quot; Création Container
-    ro_task_container = me-&gt;mo_task_manager-&gt;container_task_create( ).
-
-  ENDMETHOD.
-
-  METHOD at_eot.
-
-***------------------------------------------------------------------***
-**                          FIELD-SYMBOLS                             **
-***------------------------------------------------------------------***
-    FIELD-SYMBOLS :
-      &lt;lfs_value&gt;           TYPE any,
-      &lt;lfs_t_value&gt;         TYPE ANY TABLE,
-      &lt;lfs_s_result&gt;        TYPE zif_task_constant=&gt;ty_function_parameters,
-      &lt;lfs_s_attached_data&gt; TYPE zif_task_constant=&gt;ty_task_attached_data.
-
-***==================================================================***
-**                           TRAITEMENT                               **
-***==================================================================***
-
-    &quot;#ANCHOR-AT_EOT#
-  ENDMETHOD.
-
-  METHOD before_task.
-
-***==================================================================***
-**                           TRAITEMENT                               **
-***==================================================================***
-
-    &quot;#ANCHOR-BEFORE_TASK#
-  ENDMETHOD.
-
-ENDCLASS.   &quot;ENDCLASS LCL_TASK_TEMPLATE
-&quot;#ANCHOR-TASK_TEMPLATE-END#
-
-&quot;#ANCHOR-SELECTION-SCREEN-BEG#
-&quot; -----------------------------------------------------------
-&quot; Paramètres Parallélisation
-&quot; -----------------------------------------------------------
-
-SELECTION-SCREEN BEGIN OF BLOCK ta WITH FRAME TITLE text-ta1.
-
-&quot; Activation Parallélisation
-PARAMETERS : p_tact AS CHECKBOX USER-COMMAND tu1.
-
-&quot; -----------------------------------------------------------
-&quot; Configuration Paraléllisation
-&quot; -----------------------------------------------------------
-
-SELECTION-SCREEN BEGIN OF BLOCK tc WITH FRAME TITLE text-tc1.
-
-&quot; Groupe de Serveur
-PARAMETERS : p_grfc_r RADIOBUTTON GROUP rfc USER-COMMAND rfc MODIF ID all #p_grfc_r_default#. &quot;#EC NOTEXT
-PARAMETERS : p_grfc TYPE bdfields-rfcgr MODIF ID all #p_grfc_default#. &quot;#EC NOTEXT
-
-&quot; Utilisation Groupe par défaut
-PARAMETERS : p_dgrfc RADIOBUTTON GROUP rfc MODIF ID all #p_dgrfc_default#. &quot;#EC NOTEXT
-
-SELECTION-SCREEN END OF BLOCK tc.
-
-SELECTION-SCREEN SKIP 1.
-
-&quot; Nombre de Tâche
-PARAMETERS : p_ntask TYPE int4 MODIF ID all OBLIGATORY #p_ntask_default#. &quot;#EC NOTEXT
-
-SELECTION-SCREEN SKIP 1.
-
-&quot; -----------------------------------------------------------
-&quot; Options supplémentaires
-&quot; -----------------------------------------------------------
-
-SELECTION-SCREEN BEGIN OF BLOCK tb WITH FRAME TITLE text-tb1.
-
-&quot; -----------------------------------------------------------
-&quot; Méthode de Compression
-&quot; -----------------------------------------------------------
-
-SELECTION-SCREEN BEGIN OF BLOCK toc WITH FRAME TITLE text-toc.
-
-&quot; Activation de la Compression
-PARAMETERS : p_tcomp AS CHECKBOX USER-COMMAND toc MODIF ID all #p_tcomp_default#. &quot;#EC NOTEXT
-
-&quot; Méthode de Compression
-SELECTION-SCREEN BEGIN OF LINE.
-
-&quot; Compression Ligne-à-Ligne
-SELECTION-SCREEN COMMENT 1(24) FOR FIELD p_tcompl.
-PARAMETERS : p_tcompl RADIOBUTTON GROUP roc USER-COMMAND roc MODIF ID all #p_tcompl_default#. &quot;#EC NOTEXT
-
-&quot; Compression Global
-SELECTION-SCREEN COMMENT 35(18) FOR FIELD p_tcompg.
-PARAMETERS : p_tcompg RADIOBUTTON GROUP roc MODIF ID all #p_tcompg_default#. &quot;#EC NOTEXT
-
-SELECTION-SCREEN   END OF LINE.
-
-SELECTION-SCREEN END OF BLOCK toc.
-
-&quot; Trace
-PARAMETERS : p_ttrace AS CHECKBOX USER-COMMAND tu4 MODIF ID all #p_ttrace_default#. &quot;#EC NOTEXT
-
-&quot; Purge de la SHM
-PARAMETERS : p_tshm AS CHECKBOX USER-COMMAND tu2 MODIF ID all #p_tshm_default#. &quot;#EC NOTEXT
-
-SELECTION-SCREEN END OF BLOCK tb.
-
-SELECTION-SCREEN END OF BLOCK ta.
-&quot;#ANCHOR-SELECTION-SCREEN-END#</source>
- </PROG>
  <TABL TABNAME="ZTEC_S_TASK_WIZARD_DATA" DDLANGUAGE="F" TABCLASS="INTTAB" DATMIN="0000000000" DATMAX="0000000000" DATAVG="0000000000" DDTEXT="Tâche - Données Assistant" AUTHCLASS="00" PROZPUFF="000" EXCLASS="1">
   <dd09l AS4VERS="0000" SCHFELDANZ="000"/>
   <dd03p TABNAME="ZTEC_S_TASK_WIZARD_DATA" FIELDNAME="GRFC" DDLANGUAGE="F" POSITION="0001" ROLLNAME="RFCGR" ADMINFIELD="0" INTTYPE="C" INTLEN="000040" DOMNAME="RZLLI_ACN" ROUTPUTLEN="000000" HEADLEN="20" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="CHAR" LENG="000020" OUTPUTLEN="000020" DECIMALS="000000" LOWERCASE="X" MASK="  CHARE" MASKLEN="0000" DDTEXT="Groupe de serveurs RFC pour traitement parallèle" REPTEXT="Groupe de serveurs" SCRTEXT_S="Grp.srv." SCRTEXT_M="Groupe serveurs" SCRTEXT_L="Groupe de serveurs" DOMNAME3L="RZLLI_ACN" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
@@ -6519,4 +6072,465 @@ ENDFORM.</include_source>
    </functionmodule>
   </functionmodules>
  </FUGR>
+ <PROG NAME="ZTASK_TEMPLATE" VARCL="X" SUBC="I" RSTAT="T" RMAND="200" RLOAD="F" UCCHECK="X">
+  <textPool>
+   <language SPRAS="F">
+    <textElement ID="R" ENTRY="Tâche - Template" LENGTH="16 "/>
+   </language>
+  </textPool>
+  <source>&quot;#ANCHOR-WIZARD_SIGN-INCLUDE-BEG#
+*----------------------------------------------------------------------*
+*   Include généré à partir de l&apos;Assistant
+*   Le #DATUM#, par #UNAME#
+*   Include a été généré avec l&apos;assistant de création
+*   de parallélisation.
+*----------------------------------------------------------------------*
+&quot;#ANCHOR-WIZARD_SIGN-INCLUDE-END#
+&quot;#ANCHOR-TASK_TEMPLATE-BEG#
+*----------------------------------------------------------------------*
+*       CLASS LCL_TASK_TEMPLATE DEFINIION
+*----------------------------------------------------------------------*
+*   Classe générée à partir de l&apos;Assistant
+*   Le #DATUM#, par #UNAME#
+*   Cette classe a été générée avec l&apos;assistant de création
+*   de parallélisation.
+*----------------------------------------------------------------------*
+CLASS lcl_task_template DEFINITION FINAL CREATE PRIVATE.
+
+*-- Publique
+  PUBLIC SECTION.
+
+***------------------------------------------------------------------***
+**                              TYPES                                 **
+***------------------------------------------------------------------***
+
+*   Déclaration de type
+
+***------------------------------------------------------------------***
+**                           MÉTHODES                                 **
+***------------------------------------------------------------------***
+
+*	Déclaration de méthodes
+
+    &quot;#ANCHOR-AT_SELECTION_SCREEN_OUTPUT-DEF-BEG#
+    &quot; Modification Ecran de Sélection
+    CLASS-METHODS at_selection_screen_output.
+    &quot;#ANCHOR-AT_SELECTION_SCREEN_OUTPUT-DEF-END#
+
+    &quot; Création Instance
+    CLASS-METHODS factory
+      RETURNING VALUE(ro_task) TYPE REF TO lcl_task_template
+      RAISING zcx_task_manager.
+
+    &quot; Tâche - Lancement d&apos;une nouvelle Tâche
+    METHODS task_start_new
+      IMPORTING
+        !iv_function_name          TYPE rs38l_fnam OPTIONAL
+        !iv_class_name             TYPE seoclsname OPTIONAL
+        !iv_method_name            TYPE seomtdname OPTIONAL
+        !is_task_configuration     TYPE zcl_task_manager=&gt;ty_task_process_configuration OPTIONAL
+        !io_task_container         TYPE REF TO zcl_task_container OPTIONAL
+        !iv_overload_compress_conf TYPE xsdboolean OPTIONAL
+      RAISING
+        zcx_task_manager .
+
+    &quot; Tâche - Traitement de fin
+    METHODS task_finish_running.
+
+    &quot; Container - Création
+    METHODS task_container_get
+      RETURNING VALUE(ro_task_container) TYPE REF TO zcl_task_container.
+
+    &quot; Handler - Evènement Fin d&apos;une Tâche
+    METHODS at_eot                                          &quot;#EC CALLED
+      IMPORTING
+        !is_task_call_process TYPE ztec_s_task_call_process
+        !it_result            TYPE zif_task_constant=&gt;ty_t_function_parameters OPTIONAL
+        !it_attached_data     TYPE zif_task_constant=&gt;ty_t_task_attached_data OPTIONAL
+        !iv_error             TYPE xsdboolean OPTIONAL.
+
+    &quot; Handler - Evènement Traitement avant début de lancement d&apos;une Tâche
+    METHODS before_task                                     &quot;#EC CALLED
+      IMPORTING
+        !is_task_call_process TYPE ztec_s_task_call_process
+        !io_task_container    TYPE REF TO zcl_task_container OPTIONAL.
+
+***------------------------------------------------------------------***
+**                            ATTRIBUTS                               **
+***------------------------------------------------------------------***
+
+*	Déclaration d&apos;attributs
+
+
+*-- Privée
+  PRIVATE SECTION.
+
+***------------------------------------------------------------------***
+**                              TYPES                                 **
+***------------------------------------------------------------------***
+
+*   Déclaration de type
+
+    TYPES :
+      BEGIN OF ty_selection_criteria,
+        parallel_activ       TYPE xsdboolean,
+        server_default       TYPE xsdboolean,
+        server_user          TYPE bdfields-rfcgr,
+        task_number          TYPE int4,
+        task_trace           TYPE xsdboolean,
+        task_manage_shm      TYPE xsdboolean,
+        task_compress_activ  TYPE xsdboolean,
+        task_compress_line   TYPE xsdboolean,
+        task_compress_global TYPE xsdboolean,
+      END OF   ty_selection_criteria.
+
+***------------------------------------------------------------------***
+**                           MÉTHODES                                 **
+***------------------------------------------------------------------***
+
+*	Déclaration de méthodes
+
+    &quot; Constructeur
+    METHODS constructor
+      RAISING
+        zcx_task_manager.
+
+***------------------------------------------------------------------***
+**                            ATTRIBUTS                               **
+***------------------------------------------------------------------***
+
+*	Déclaration d&apos;attributs
+
+    DATA : mo_task_manager TYPE REF TO zcl_task_manager.
+    DATA : ms_selection_criteria TYPE ty_selection_criteria.
+
+ENDCLASS.             &quot;LCL_TASK_TEMPLATE DEFINITION
+
+*----------------------------------------------------------------------*
+*       CLASS LCL_TASK_TEMPLATE IMPLEMENTATION
+*----------------------------------------------------------------------*
+*
+*----------------------------------------------------------------------*
+CLASS lcl_task_template IMPLEMENTATION.
+
+  &quot;#ANCHOR-AT_SELECTION_SCREEN_OUTPUT-IMPL-BEG#
+  METHOD at_selection_screen_output.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+    &quot; -----------------------------------------------------------
+    &quot; Sélection des données
+    &quot; -----------------------------------------------------------
+
+    LOOP AT SCREEN.
+
+      &quot; Suivant le Groupe d&apos;élèment
+      CASE screen-group1.
+
+        WHEN &apos;ALL&apos;.                                         &quot;#EC NOTEXT
+          &quot; Groupe &apos;TOUS&apos;
+          &quot;&quot;  --&gt; (Dés)Active les paramètres de configuration de la parallélisation
+          screen-input = SWITCH int1( p_tact
+            WHEN abap_true THEN 1   &quot;Active la saisie  // Activation Parallélisation
+            ELSE 0                  &quot;Désactive la saisie
+          ).
+
+          &quot; Suivant le Paramètre
+          CASE screen-name.
+
+            WHEN &apos;P_GRFC&apos;.                                  &quot;#EC NOTEXT
+              &quot; Groupe de Serveur
+              &quot;&quot;  --&gt; (Dés)Active la saisie de la zone Groupe de Serveur
+              screen-input = SWITCH int1( boolc( p_tact EQ abap_true AND p_grfc_r EQ abap_true )
+                WHEN abap_true THEN 1 &quot;Active la saisie  // Activation Parallélisation &amp; Groupe de Serveur spécifique
+                ELSE 0                &quot;Désactive la saisie
+              ).
+
+            WHEN &apos;P_TCOMPL&apos;                                 &quot;#EC NOTEXT
+              OR &apos;P_TCOMPG&apos;.                                &quot;#EC NOTEXT
+              &quot; Méthode de Compression
+              &quot;&quot;  --&gt; (Dés)Active la saisie de la Méthode de Compression
+              screen-input = SWITCH int1( boolc( p_tact EQ abap_true AND p_tcomp EQ abap_true )
+                WHEN abap_true THEN 1 &quot;Active la saisie  // Activation Parallélisation &amp; Compression Active
+                ELSE 0                &quot;Désactive la saisie
+              ).
+
+            WHEN OTHERS.
+              &quot; Autre
+
+          ENDCASE.
+
+        WHEN OTHERS.
+          &quot; Autres
+          &quot;&quot;  --&gt; Passe à l&apos;Itération Suivante
+          CONTINUE.
+
+      ENDCASE.
+
+      MODIFY SCREEN.
+
+    ENDLOOP.
+
+  ENDMETHOD.
+  &quot;#ANCHOR-AT_SELECTION_SCREEN_OUTPUT-IMPL-END#
+
+  METHOD factory.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+    IF p_tact EQ abap_false.
+      &quot; Parallélisation non activée
+      &quot;&quot;  --&gt; Arrêt du traitement
+      RETURN.
+
+    ENDIF.
+
+    TRY.
+        &quot; -----------------------------------------------------------
+        &quot; Création instance Manager de Tâche
+        &quot; -----------------------------------------------------------
+
+        &quot; Création instance du Manager de Tâche
+        CREATE OBJECT ro_task.
+
+      CATCH zcx_task_manager INTO DATA(lo_cx_exception).
+        &quot; Une erreur est survenue
+        &quot;&quot;  --&gt; Lève l&apos;Exception
+        RAISE EXCEPTION TYPE zcx_task_manager
+          EXPORTING
+            previous = lo_cx_exception.
+
+    ENDTRY.
+
+  ENDMETHOD.
+
+  METHOD constructor.
+
+***------------------------------------------------------------------***
+**                            STRUCTURE                               **
+***------------------------------------------------------------------***
+    DATA :
+          ls_task_manager_configuration TYPE zcl_task_manager=&gt;ty_task_manager_configuration.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+    &quot; -----------------------------------------------------------
+    &quot; Initialisation paramètre de configuration
+    &quot; -----------------------------------------------------------
+
+    &quot; Initialisation données relatives aux ressources de parallélisation
+    ls_task_manager_configuration-grfc               = #grfc#.
+    ls_task_manager_configuration-task_max           = #task_max#.
+    ls_task_manager_configuration-use_server_default = #use_server_default#.
+
+    &quot; Initialisation données relatives aux traitements - Fin d&apos;une Tâche
+    ls_task_manager_configuration-global_configuration-process_by_method-after-instance = ro_task.
+    ls_task_manager_configuration-global_configuration-process_by_method-after-method   = &apos;AT_EOT&apos;. &quot;#EC NOTEXT
+
+    &quot; Initialisation données relatives aux traitements - Avant lancement d&apos;une Tâche
+    ls_task_manager_configuration-global_configuration-process_by_method-before-instance = ro_task.
+    ls_task_manager_configuration-global_configuration-process_by_method-before-method   = &apos;BEFORE_TASK&apos;. &quot;#EC NOTEXT
+
+    &quot; Initialisation données relatives à la configuration
+    ls_task_manager_configuration-global_configuration-shm_management = #shm_management#.
+    ls_task_manager_configuration-global_configuration-task_compress_activ = #compress_activ#.
+    ls_task_manager_configuration-global_configuration-task_compress_param-data_compress_global       = #compress_g#.
+    ls_task_manager_configuration-global_configuration-task_compress_param-data_compress_line_by_line = #compress_l#.
+
+    &quot; Initialisation données relatives aux traces
+    ls_task_manager_configuration-global_configuration-task_trace_param-trace_active = #task_trace#.
+    ls_task_manager_configuration-global_configuration-task_trace_param-trace_memory = #task_trace#.
+
+    TRY.
+        &quot; -----------------------------------------------------------
+        &quot; Création du Manager de Tâche
+        &quot; -----------------------------------------------------------
+
+        &quot; Création de l&apos;instance du Manager de Tâche
+        CREATE OBJECT me-&gt;mo_task_manager
+          EXPORTING
+            is_task_manager_configuration = ls_task_manager_configuration.
+
+      CATCH zcx_task_manager INTO DATA(lo_cx_exception).
+        &quot; Une erreur est survenue
+        &quot;&quot;  --&gt; Lève une Exception
+        RAISE EXCEPTION TYPE zcx_task_manager
+          EXPORTING
+            previous = lo_cx_exception.
+
+    ENDTRY.
+
+  ENDMETHOD.
+
+  METHOD task_start_new.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+    TRY.
+        &quot; -----------------------------------------------------------
+        &quot; Lancement d&apos;une Nouvelle Tâche
+        &quot; -----------------------------------------------------------
+
+        &quot; Lancement d&apos;une Tâche
+        me-&gt;mo_task_manager-&gt;task_start_new(
+            iv_function_name          = iv_function_name
+            iv_class_name             = iv_class_name
+            iv_method_name            = iv_method_name
+            is_task_configuration     = is_task_configuration
+            io_task_container         = io_task_container
+            iv_overload_compress_conf = iv_overload_compress_conf
+        ).
+
+      CATCH zcx_task_manager INTO DATA(lo_cx_exception).
+        &quot; Une erreur est survenue
+        &quot;&quot;  --&gt; Lève une Exception
+        RAISE EXCEPTION TYPE zcx_task_manager
+          EXPORTING
+            previous = lo_cx_exception.
+
+    ENDTRY.
+
+  ENDMETHOD.
+
+  METHOD task_finish_running.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+    &quot; -----------------------------------------------------------
+    &quot; Attente fin de toutes les Tâches
+    &quot; -----------------------------------------------------------
+
+    &quot; Traitement de Fin
+    me-&gt;mo_task_manager-&gt;task_finish_running( ).
+
+  ENDMETHOD.
+
+  METHOD task_container_get.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+    &quot; -----------------------------------------------------------
+    &quot; Création instance Container de données
+    &quot; -----------------------------------------------------------
+
+    &quot; Création Container
+    ro_task_container = me-&gt;mo_task_manager-&gt;container_task_create( ).
+
+  ENDMETHOD.
+
+  METHOD at_eot.
+
+***------------------------------------------------------------------***
+**                          FIELD-SYMBOLS                             **
+***------------------------------------------------------------------***
+    FIELD-SYMBOLS :
+      &lt;lfs_value&gt;           TYPE any,
+      &lt;lfs_t_value&gt;         TYPE ANY TABLE,
+      &lt;lfs_s_result&gt;        TYPE zif_task_constant=&gt;ty_function_parameters,
+      &lt;lfs_s_attached_data&gt; TYPE zif_task_constant=&gt;ty_task_attached_data.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+    &quot;#ANCHOR-AT_EOT#
+  ENDMETHOD.
+
+  METHOD before_task.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+    &quot;#ANCHOR-BEFORE_TASK#
+  ENDMETHOD.
+
+ENDCLASS.   &quot;ENDCLASS LCL_TASK_TEMPLATE
+&quot;#ANCHOR-TASK_TEMPLATE-END#
+
+&quot;#ANCHOR-SELECTION-SCREEN-BEG#
+&quot; -----------------------------------------------------------
+&quot; Paramètres Parallélisation
+&quot; -----------------------------------------------------------
+
+SELECTION-SCREEN BEGIN OF BLOCK ta WITH FRAME TITLE text-ta1.
+
+&quot; Activation Parallélisation
+PARAMETERS : p_tact AS CHECKBOX USER-COMMAND tu1.
+
+&quot; -----------------------------------------------------------
+&quot; Configuration Paraléllisation
+&quot; -----------------------------------------------------------
+
+SELECTION-SCREEN BEGIN OF BLOCK tc WITH FRAME TITLE text-tc1.
+
+&quot; Groupe de Serveur
+PARAMETERS : p_grfc_r RADIOBUTTON GROUP rfc USER-COMMAND rfc MODIF ID all #p_grfc_r_default#. &quot;#EC NOTEXT
+PARAMETERS : p_grfc TYPE bdfields-rfcgr MODIF ID all #p_grfc_default#. &quot;#EC NOTEXT
+
+&quot; Utilisation Groupe par défaut
+PARAMETERS : p_dgrfc RADIOBUTTON GROUP rfc MODIF ID all #p_dgrfc_default#. &quot;#EC NOTEXT
+
+SELECTION-SCREEN END OF BLOCK tc.
+
+SELECTION-SCREEN SKIP 1.
+
+&quot; Nombre de Tâche
+PARAMETERS : p_ntask TYPE int4 MODIF ID all OBLIGATORY #p_ntask_default#. &quot;#EC NOTEXT
+
+SELECTION-SCREEN SKIP 1.
+
+&quot; -----------------------------------------------------------
+&quot; Options supplémentaires
+&quot; -----------------------------------------------------------
+
+SELECTION-SCREEN BEGIN OF BLOCK tb WITH FRAME TITLE text-tb1.
+
+&quot; -----------------------------------------------------------
+&quot; Méthode de Compression
+&quot; -----------------------------------------------------------
+
+SELECTION-SCREEN BEGIN OF BLOCK toc WITH FRAME TITLE text-toc.
+
+&quot; Activation de la Compression
+PARAMETERS : p_tcomp AS CHECKBOX USER-COMMAND toc MODIF ID all #p_tcomp_default#. &quot;#EC NOTEXT
+
+&quot; Méthode de Compression
+SELECTION-SCREEN BEGIN OF LINE.
+
+&quot; Compression Ligne-à-Ligne
+SELECTION-SCREEN COMMENT 1(24) FOR FIELD p_tcompl.
+PARAMETERS : p_tcompl RADIOBUTTON GROUP roc USER-COMMAND roc MODIF ID all #p_tcompl_default#. &quot;#EC NOTEXT
+
+&quot; Compression Global
+SELECTION-SCREEN COMMENT 35(18) FOR FIELD p_tcompg.
+PARAMETERS : p_tcompg RADIOBUTTON GROUP roc MODIF ID all #p_tcompg_default#. &quot;#EC NOTEXT
+
+SELECTION-SCREEN   END OF LINE.
+
+SELECTION-SCREEN END OF BLOCK toc.
+
+&quot; Trace
+PARAMETERS : p_ttrace AS CHECKBOX USER-COMMAND tu4 MODIF ID all #p_ttrace_default#. &quot;#EC NOTEXT
+
+&quot; Purge de la SHM
+PARAMETERS : p_tshm AS CHECKBOX USER-COMMAND tu2 MODIF ID all #p_tshm_default#. &quot;#EC NOTEXT
+
+SELECTION-SCREEN END OF BLOCK tb.
+
+SELECTION-SCREEN END OF BLOCK ta.
+&quot;#ANCHOR-SELECTION-SCREEN-END#</source>
+ </PROG>
 </nugget>
