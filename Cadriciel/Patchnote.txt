@@ -51,5 +51,5 @@ Possibilité d'appeller des méthodes statiques en //
 7.1 : 
 Corrections de bug 
 
-7.2 : A venir 
-Ajouter Assistant pour exploitation plus facile de la classe
+7.2 :
+Correction de bug 

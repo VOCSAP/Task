@@ -6120,7 +6120,7 @@ CLASS lcl_task_template DEFINITION FINAL CREATE PRIVATE.
     &quot; Création Instance
     CLASS-METHODS factory
       RETURNING VALUE(ro_task) TYPE REF TO lcl_task_template
-      RAISING zcx_task_manager.
+      RAISING   zcx_task_manager.
 
     &quot; Tâche - Lancement d&apos;une nouvelle Tâche
     METHODS task_start_new
@@ -6282,13 +6282,6 @@ CLASS lcl_task_template IMPLEMENTATION.
 **                           TRAITEMENT                               **
 ***==================================================================***
 
-    IF p_tact EQ abap_false.
-      &quot; Parallélisation non activée
-      &quot;&quot;  --&gt; Arrêt du traitement
-      RETURN.
-
-    ENDIF.
-
     TRY.
         &quot; -----------------------------------------------------------
         &quot; Création instance Manager de Tâche
@@ -6330,11 +6323,11 @@ CLASS lcl_task_template IMPLEMENTATION.
     ls_task_manager_configuration-use_server_default = #use_server_default#.
 
     &quot; Initialisation données relatives aux traitements - Fin d&apos;une Tâche
-    ls_task_manager_configuration-global_configuration-process_by_method-after-instance = ro_task.
+    ls_task_manager_configuration-global_configuration-process_by_method-after-instance = me.
     ls_task_manager_configuration-global_configuration-process_by_method-after-method   = &apos;AT_EOT&apos;. &quot;#EC NOTEXT
 
     &quot; Initialisation données relatives aux traitements - Avant lancement d&apos;une Tâche
-    ls_task_manager_configuration-global_configuration-process_by_method-before-instance = ro_task.
+    ls_task_manager_configuration-global_configuration-process_by_method-before-instance = me.
     ls_task_manager_configuration-global_configuration-process_by_method-before-method   = &apos;BEFORE_TASK&apos;. &quot;#EC NOTEXT
 
     &quot; Initialisation données relatives à la configuration
@@ -6443,7 +6436,24 @@ CLASS lcl_task_template IMPLEMENTATION.
 
 ***==================================================================***
 **                           TRAITEMENT                               **
+
 ***==================================================================***
+
+    &quot; -----------------------------------------------------------
+    &quot; Traitement Présence d&apos;Erreur
+    &quot; -----------------------------------------------------------
+
+    IF iv_error EQ abap_true.
+      &quot; Une erreur est survenue
+      &quot;&quot;  --&gt; Récupération de l&apos;erreur
+      ASSIGN it_result[ parameter_name = zif_task_constant=&gt;mc_parameter_name_error ]
+          TO &lt;lfs_s_result&gt;.                                &quot;#EC NOTEXT
+
+    ENDIF.
+
+    &quot; -----------------------------------------------------------
+    &quot; Traitement Fin d&apos;une Tâche
+    &quot; -----------------------------------------------------------
 
     &quot;#ANCHOR-AT_EOT#
   ENDMETHOD.
@@ -6453,6 +6463,10 @@ CLASS lcl_task_template IMPLEMENTATION.
 ***==================================================================***
 **                           TRAITEMENT                               **
 ***==================================================================***
+
+    &quot; -----------------------------------------------------------
+    &quot; Traitement Avant Lancement de la Tâche
+    &quot; -----------------------------------------------------------
 
     &quot;#ANCHOR-BEFORE_TASK#
   ENDMETHOD.

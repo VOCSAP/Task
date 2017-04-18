@@ -39,7 +39,8 @@ CLASS lcl_task_template DEFINITION FINAL CREATE PRIVATE.
 
     " Création Instance
     CLASS-METHODS factory
-      RETURNING VALUE(ro_task) TYPE REF TO lcl_task_template.
+      RETURNING VALUE(ro_task) TYPE REF TO lcl_task_template
+      RAISING   zcx_task_manager.
 
     " Tâche - Lancement d'une nouvelle Tâche
     METHODS task_start_new
@@ -111,8 +112,6 @@ CLASS lcl_task_template DEFINITION FINAL CREATE PRIVATE.
 
     " Constructeur
     METHODS constructor
-      IMPORTING
-        !is_task_manager_configuration TYPE zcl_task_manager=>ty_task_manager_configuration
       RAISING
         zcx_task_manager.
 
@@ -199,6 +198,31 @@ CLASS lcl_task_template IMPLEMENTATION.
 
   METHOD factory.
 
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+    TRY.
+        " -----------------------------------------------------------
+        " Création instance Manager de Tâche
+        " -----------------------------------------------------------
+
+        " Création instance du Manager de Tâche
+        CREATE OBJECT ro_task.
+
+      CATCH zcx_task_manager INTO DATA(lo_cx_exception).
+        " Une erreur est survenue
+        ""  --> Lève l'Exception
+        RAISE EXCEPTION TYPE zcx_task_manager
+          EXPORTING
+            previous = lo_cx_exception.
+
+    ENDTRY.
+
+  ENDMETHOD.
+
+  METHOD constructor.
+
 ***------------------------------------------------------------------***
 **                            STRUCTURE                               **
 ***------------------------------------------------------------------***
@@ -219,11 +243,11 @@ CLASS lcl_task_template IMPLEMENTATION.
     ls_task_manager_configuration-use_server_default = #use_server_default#.
 
     " Initialisation données relatives aux traitements - Fin d'une Tâche
-    ls_task_manager_configuration-global_configuration-process_by_method-after-instance = ro_task.
+    ls_task_manager_configuration-global_configuration-process_by_method-after-instance = me.
     ls_task_manager_configuration-global_configuration-process_by_method-after-method   = 'AT_EOT'. "#EC NOTEXT
 
     " Initialisation données relatives aux traitements - Avant lancement d'une Tâche
-    ls_task_manager_configuration-global_configuration-process_by_method-before-instance = ro_task.
+    ls_task_manager_configuration-global_configuration-process_by_method-before-instance = me.
     ls_task_manager_configuration-global_configuration-process_by_method-before-method   = 'BEFORE_TASK'. "#EC NOTEXT
 
     " Initialisation données relatives à la configuration
@@ -236,23 +260,6 @@ CLASS lcl_task_template IMPLEMENTATION.
     ls_task_manager_configuration-global_configuration-task_trace_param-trace_active = #task_trace#.
     ls_task_manager_configuration-global_configuration-task_trace_param-trace_memory = #task_trace#.
 
-    " -----------------------------------------------------------
-    " Création instance Manager de Tâche
-    " -----------------------------------------------------------
-
-    " Création instance du Manager de Tâche
-    CREATE OBJECT ro_task
-      EXPORTING
-        is_task_manager_configuration = ls_task_manager_configuration.
-
-  ENDMETHOD.
-
-  METHOD constructor.
-
-***==================================================================***
-**                           TRAITEMENT                               **
-***==================================================================***
-
     TRY.
         " -----------------------------------------------------------
         " Création du Manager de Tâche
@@ -261,7 +268,7 @@ CLASS lcl_task_template IMPLEMENTATION.
         " Création de l'instance du Manager de Tâche
         CREATE OBJECT me->mo_task_manager
           EXPORTING
-            is_task_manager_configuration = is_task_manager_configuration.
+            is_task_manager_configuration = ls_task_manager_configuration.
 
       CATCH zcx_task_manager INTO DATA(lo_cx_exception).
         " Une erreur est survenue
@@ -349,7 +356,24 @@ CLASS lcl_task_template IMPLEMENTATION.
 
 ***==================================================================***
 **                           TRAITEMENT                               **
+
 ***==================================================================***
+
+    " -----------------------------------------------------------
+    " Traitement Présence d'Erreur
+    " -----------------------------------------------------------
+
+    IF iv_error EQ abap_true.
+      " Une erreur est survenue
+      ""  --> Récupération de l'erreur
+      ASSIGN it_result[ parameter_name = zif_task_constant=>mc_parameter_name_error ]
+          TO <lfs_s_result>.                                "#EC NOTEXT
+
+    ENDIF.
+
+    " -----------------------------------------------------------
+    " Traitement Fin d'une Tâche
+    " -----------------------------------------------------------
 
     "#ANCHOR-AT_EOT#
   ENDMETHOD.
@@ -359,6 +383,10 @@ CLASS lcl_task_template IMPLEMENTATION.
 ***==================================================================***
 **                           TRAITEMENT                               **
 ***==================================================================***
+
+    " -----------------------------------------------------------
+    " Traitement Avant Lancement de la Tâche
+    " -----------------------------------------------------------
 
     "#ANCHOR-BEFORE_TASK#
   ENDMETHOD.
