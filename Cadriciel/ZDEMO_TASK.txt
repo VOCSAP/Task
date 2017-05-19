@@ -72,19 +72,19 @@ DATA : gv_ts_after_check TYPE timestamp.
 DATA : gv_ts_before_check TYPE timestamp.
 
 SELECTION-SCREEN BEGIN OF BLOCK b1.
-
+*
 PARAMETERS : p_grfc TYPE bdfields-rfcgr.
 PARAMETERS : p_max TYPE int4.
 PARAMETERS : p_row TYPE int4.
-
+*
 SELECTION-SCREEN END OF BLOCK b1.
 
 
 ""  --> Routine appeler lors de la fin de Tâche
 FORM form_eot USING is_task_call_process TYPE ztec_s_task_call_process
-                    it_result            TYPE zif_task_constant=>ty_t_function_parameters
-                    it_attached_data     TYPE zif_task_constant=>ty_t_task_attached_data
-                    iv_error             TYPE flag.
+                    it_result            TYPE zif_task_constant=>tt_function_parameters
+                    it_attached_data     TYPE zif_task_constant=>tt_task_attached_data
+                    iv_error             TYPE xsdboolean.
 
 
 ENDFORM.
@@ -121,9 +121,9 @@ CLASS lcl_main DEFINITION FINAL.
     METHODS at_eot
       IMPORTING
         is_task_call_process TYPE ztec_s_task_call_process
-        it_result            TYPE zif_task_constant=>ty_t_function_parameters OPTIONAL
-        it_attached_data     TYPE zif_task_constant=>ty_t_task_attached_data OPTIONAL
-        iv_error             TYPE flag OPTIONAL.
+        it_result            TYPE zif_task_constant=>tt_function_parameters OPTIONAL
+        it_attached_data     TYPE zif_task_constant=>tt_task_attached_data OPTIONAL
+        iv_error             TYPE xsdboolean OPTIONAL.
 
     METHODS before_task
       IMPORTING
@@ -202,8 +202,8 @@ CLASS lcl_main IMPLEMENTATION.
     FIELD-SYMBOLS :
       <lfs_value>           TYPE any,
       <lfs_t_value>         TYPE ANY TABLE,
-      <lfs_s_result>        TYPE zif_task_constant=>ty_function_parameters,
-      <lfs_s_attached_data> TYPE zif_task_constant=>ty_task_attached_data.
+      <lfs_s_result>        TYPE zif_task_constant=>ts_function_parameters,
+      <lfs_s_attached_data> TYPE zif_task_constant=>ts_task_attached_data.
 
 ***==================================================================***
 **                           TRAITEMENT                               **
@@ -417,38 +417,16 @@ CLASS lcl_main IMPLEMENTATION.
       lo_task_container TYPE REF TO zcl_task_container,
       lo_cx_exception   TYPE REF TO cx_root.
 
-    DATA :
-      ls_after_process_by_form    TYPE ztec_s_task_process_by_form,
-      ls_after_process_by_method  TYPE ztec_s_task_process_by_method,
-      ls_before_process_by_form   TYPE ztec_s_task_process_by_form,
-      ls_before_process_by_method TYPE ztec_s_task_process_by_method.
-
 ***==================================================================***
 **                           TRAITEMENT                               **
 ***==================================================================***
 
     " -----------------------------------------------------------
-    " Initialisation structure pour définir le traitement
-    " à appeler lorsqu'une Tâche se termine
-    " -----------------------------------------------------------
-
-    " Initialisation structure pour appel par Routine
-    ls_after_process_by_form-repid = sy-repid.      "Programme
-    ls_after_process_by_form-form  = 'FORM_EOT'.    "Nom de la Routine
-
-    " Initialisation structure pour appel par Méthode
-    ls_after_process_by_method-instance = me.       "Instance
-    ls_after_process_by_method-method = 'AT_EOT'.   "Méthode à appeler
-
-    ls_before_process_by_method-instance = me.
-    ls_before_process_by_method-method   = 'BEFORE_TASK'.
-
-    " -----------------------------------------------------------
     " Création instance gérant la //
     " -----------------------------------------------------------
 
-    DATA : ls_task_process_configuration TYPE zcl_task_manager=>ty_task_process_configuration.
-    DATA : ls_task_manager_configuration TYPE zcl_task_manager=>ty_task_manager_configuration.
+    DATA : ls_task_process_configuration TYPE zcl_task_manager=>ts_task_process_configuration.
+    DATA : ls_task_manager_configuration TYPE zcl_task_manager=>ts_task_manager_configuration.
 
     " Initialisation de la configuration du Manager de Tâche
     ls_task_manager_configuration-grfc = me->mv_grfc.

@@ -9,9 +9,9 @@ Ajout support des types génériques de table et structure (côté MF)
 Intégration d'une classe SHM pour contenir les type de définition. 
 Correction de bugs et amélioration de la statibilité 
 
-<-- Fin de rétro-comptatible V3.0 --> 
+<-- Fin de rétro-comptatible V3.X --> 
 L'implémentation des versions suivantes obligent à revoir les programmes utilisant le cadriciel
-<-- Fin de rétro-comptatible V3.0 --> 
+<-- Fin de rétro-comptatible V3.X --> 
 
 4.0 : 
 Ajout d'une classe servant de conteneur de données pour le lancement d'une Tâche.
@@ -34,16 +34,16 @@ Création d'une nouvelle SHM afin de purger la SHM de définition de type lors de 
 Ajout Activation Trace
 Ajout table paramétrage activation Trace + Purge SHM par MF
 
-<-- Fin de rétro-comptatible V5.0 --> 
+<-- Fin de rétro-comptatible V5.X --> 
 L'implémentation des versions suivantes obligent à revoir les programmes utilisant le cadriciel
-<-- Fin de rétro-comptatible V5.0 -->
+<-- Fin de rétro-comptatible V5.X -->
 
 6.0 : 
 Gain de 30% de perfomance + réduction 350% empreinte mémoire : Compression données avant appel RFC
 
-<-- Fin de rétro-comptatible V6.0 --> 
+<-- Fin de rétro-comptatible V6.X --> 
 L'implémentation des versions suivantes obligent à revoir les programmes utilisant le cadriciel
-<-- Fin de rétro-comptatible V6.0 --> 
+<-- Fin de rétro-comptatible V6.X --> 
 
 7.0 :
 Possibilité d'appeller des méthodes statiques en // 
@@ -53,3 +53,9 @@ Corrections de bug
 
 7.2 :
 Correction de bug 
+
+<-- Fin de rétro-comptatible V7.X --> 
+L'implémentation des versions suivantes obligent à revoir les programmes utilisant le cadriciel
+<-- Fin de rétro-comptatible V7.X --> 
+
+8.0 : Normalisation + correction usage Exception
