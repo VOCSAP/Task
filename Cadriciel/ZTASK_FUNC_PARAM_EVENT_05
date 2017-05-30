@@ -1,0 +1,20 @@
+FORM event_05.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+  TRY.
+      " -----------------------------------------------------------
+      " Création GUID
+      " -----------------------------------------------------------
+
+      " Création du GUID
+      ztask_func_param-param_guid = cl_system_uuid=>create_uuid_x16_static( ).
+
+    CATCH cx_uuid_error.
+      " Erreur génération GUID
+
+  ENDTRY.
+
+ENDFORM.

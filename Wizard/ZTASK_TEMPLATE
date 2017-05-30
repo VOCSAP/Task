@@ -45,10 +45,8 @@ CLASS lcl_task_template DEFINITION FINAL CREATE PRIVATE.
     " Tâche - Lancement d'une nouvelle Tâche
     METHODS task_start_new
       IMPORTING
-        !iv_function_name          TYPE rs38l_fnam OPTIONAL
-        !iv_class_name             TYPE seoclsname OPTIONAL
-        !iv_method_name            TYPE seomtdname OPTIONAL
-        !is_task_configuration     TYPE zcl_task_manager=>ty_task_process_configuration OPTIONAL
+        !is_task_call_process      TYPE ztec_s_task_call_process OPTIONAL
+        !is_task_configuration     TYPE zcl_task_manager=>ts_task_process_configuration OPTIONAL
         !io_task_container         TYPE REF TO zcl_task_container OPTIONAL
         !iv_overload_compress_conf TYPE xsdboolean OPTIONAL
       RAISING
@@ -65,8 +63,8 @@ CLASS lcl_task_template DEFINITION FINAL CREATE PRIVATE.
     METHODS at_eot                                          "#EC CALLED
       IMPORTING
         !is_task_call_process TYPE ztec_s_task_call_process
-        !it_result            TYPE zif_task_constant=>ty_t_function_parameters OPTIONAL
-        !it_attached_data     TYPE zif_task_constant=>ty_t_task_attached_data OPTIONAL
+        !it_result            TYPE zif_task_constant=>tt_function_parameters OPTIONAL
+        !it_attached_data     TYPE zif_task_constant=>tt_task_attached_data OPTIONAL
         !iv_error             TYPE xsdboolean OPTIONAL.
 
     " Handler - Evènement Traitement avant début de lancement d'une Tâche
@@ -92,7 +90,7 @@ CLASS lcl_task_template DEFINITION FINAL CREATE PRIVATE.
 *   Déclaration de type
 
     TYPES :
-      BEGIN OF ty_selection_criteria,
+      BEGIN OF ts_selection_criteria,
         parallel_activ       TYPE xsdboolean,
         server_default       TYPE xsdboolean,
         server_user          TYPE bdfields-rfcgr,
@@ -102,7 +100,7 @@ CLASS lcl_task_template DEFINITION FINAL CREATE PRIVATE.
         task_compress_activ  TYPE xsdboolean,
         task_compress_line   TYPE xsdboolean,
         task_compress_global TYPE xsdboolean,
-      END OF   ty_selection_criteria.
+      END OF   ts_selection_criteria.
 
 ***------------------------------------------------------------------***
 **                           MÉTHODES                                 **
@@ -122,7 +120,7 @@ CLASS lcl_task_template DEFINITION FINAL CREATE PRIVATE.
 *	Déclaration d'attributs
 
     DATA : mo_task_manager TYPE REF TO zcl_task_manager.
-    DATA : ms_selection_criteria TYPE ty_selection_criteria.
+    DATA : ms_selection_criteria TYPE ts_selection_criteria.
 
 ENDCLASS.             "LCL_TASK_TEMPLATE DEFINITION
 
@@ -227,7 +225,7 @@ CLASS lcl_task_template IMPLEMENTATION.
 **                            STRUCTURE                               **
 ***------------------------------------------------------------------***
     DATA :
-          ls_task_manager_configuration TYPE zcl_task_manager=>ty_task_manager_configuration.
+          ls_task_manager_configuration TYPE zcl_task_manager=>ts_task_manager_configuration.
 
 ***==================================================================***
 **                           TRAITEMENT                               **
@@ -294,9 +292,7 @@ CLASS lcl_task_template IMPLEMENTATION.
 
         " Lancement d'une Tâche
         me->mo_task_manager->task_start_new(
-            iv_function_name          = iv_function_name
-            iv_class_name             = iv_class_name
-            iv_method_name            = iv_method_name
+            is_task_call_process      = is_task_call_process
             is_task_configuration     = is_task_configuration
             io_task_container         = io_task_container
             iv_overload_compress_conf = iv_overload_compress_conf
@@ -351,8 +347,8 @@ CLASS lcl_task_template IMPLEMENTATION.
     FIELD-SYMBOLS :
       <lfs_value>           TYPE any,
       <lfs_t_value>         TYPE ANY TABLE,
-      <lfs_s_result>        TYPE zif_task_constant=>ty_function_parameters,
-      <lfs_s_attached_data> TYPE zif_task_constant=>ty_task_attached_data.
+      <lfs_s_result>        TYPE zif_task_constant=>ts_function_parameters,
+      <lfs_s_attached_data> TYPE zif_task_constant=>ts_task_attached_data.
 
 ***==================================================================***
 **                           TRAITEMENT                               **

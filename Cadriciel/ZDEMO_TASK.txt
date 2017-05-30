@@ -502,6 +502,82 @@ CLASS lcl_main IMPLEMENTATION.
 
         ENDIF.
 
+        TRY.
+            " -----------------------------------------------------------
+            " Appel sur Programme avec utilisation Ecran de Sélection
+            " -----------------------------------------------------------
+
+            TYPES : tr_zlncr TYPE RANGE OF ztmm_lc_entete-zlcnr.
+            DATA : lr_zlncr TYPE tr_zlncr.
+
+            SELECT 'I' AS sign, 'EQ' AS option, zlcnr AS low, ' ' AS high
+              FROM ztmm_lc_entete INTO TABLE @lr_zlncr.
+
+            DO 5 TIMES.
+
+              ""  --> Réinitialisation Container
+              lo_task_container->reset( ).
+
+*            ""  --> Ajout Paramètre 'LC'
+*            lo_task_container->function_parameter_add(
+*                iv_parameter_name  = 'S_ZLCNR'              "#EC NOTEXT
+*                ix_parameter_data  = lr_zlncr
+*            ).
+*
+*            ""  --> Ajout Paramètre Désactivation envoi mail
+*            lo_task_container->function_parameter_add(
+*                iv_parameter_name  = 'P_EMAIL'              "#EC NOTEXT
+*                ix_parameter_data  = abap_false
+*            ).
+*
+
+*              ""  --> Ajout utilisateur
+*              lo_task_container->function_parameter_add(
+*                  iv_parameter_name  = zif_task_constant=>mc_parameter_name_user
+*                  ix_parameter_data  = 'OVEHIER'            "#EC NOTEXT
+*              ).
+
+              " Appel sur Programme
+              lo_task_manager->task_start_new(
+*                is_task_call_process =  VALUE #( repid_name = 'ZMM_LC_COMPARE_V2' ) "#EC NOTEXT
+                  is_task_call_process =  VALUE #( repid_name = 'ZTESTOVR' ) "#EC NOTEXT
+                  io_task_container    = lo_task_container
+              ).
+
+            ENDDO.
+
+          CATCH zcx_task_manager.
+
+        ENDTRY.
+
+        RETURN.
+
+        TRY.
+            " -----------------------------------------------------------
+            " Appel sur Programme avec Variante
+            " -----------------------------------------------------------
+
+            lo_task_container->reset( ).
+
+            ""  --> Ajout Variante
+            lo_task_container->function_parameter_add(
+                iv_parameter_name  = zif_task_constant=>mc_parameter_name_variant
+                ix_parameter_data  = 'PARALLEL'             "#EC NOTEXT
+            ).
+
+
+            " Appel sur Programme
+            lo_task_manager->task_start_new(
+                is_task_call_process =  VALUE #( repid_name = 'ZMM_LC_COMPARE_V2' ) "#EC NOTEXT
+                io_task_container    = lo_task_container
+            ).
+
+          CATCH zcx_task_manager.
+
+        ENDTRY.
+
+        RETURN.
+
         " -----------------------------------------------------------
         " Initialisation des données pour appel récupération données
         " -----------------------------------------------------------
@@ -586,7 +662,6 @@ CLASS lcl_main IMPLEMENTATION.
 
         ""  --> Ajout paramètre d'export "ET_DATA"
         lo_task_container->function_parameter_add(
-          EXPORTING
             iv_parameter_name = 'ET_DATA'
             iv_type_for_none_ddic_param = cl_abap_typedescr=>describe_by_data( lt_mara )->absolute_name
            """" La définition du paramètre d'Export est de type générique (STANDARD TABLE)
@@ -607,7 +682,7 @@ CLASS lcl_main IMPLEMENTATION.
         TRY.
             " Démarre la Tâche d'utilisation SHM 'ZTEST_OVR_1'
             lo_task_manager->task_start_new(
-                iv_function_name      = 'ZTEST_OVR_1'
+                is_task_call_process  = VALUE #( function_name = 'ZTEST_OVR_1' )
                 io_task_container     = lo_task_container
                 is_task_configuration = ls_task_process_configuration
             ).
@@ -624,65 +699,46 @@ CLASS lcl_main IMPLEMENTATION.
             lo_task_container->reset( ).
             " Ajout IV_IMPORTING
             lo_task_container->function_parameter_add(
-              EXPORTING
                 iv_parameter_name = 'IV_IMPORTING'
                 ix_parameter_data = lt_matnr[ 1 ]-matnr
             ).
             " Ajout IS_IMPORTING
             lo_task_container->function_parameter_add(
-              EXPORTING
                 iv_parameter_name = 'IS_IMPORTING'
                 ix_parameter_data = lt_matnr[ 1 ]
             ).
             " Ajout IT_IMPORTING
             lo_task_container->function_parameter_add(
-              EXPORTING
                 iv_parameter_name = 'IT_IMPORTING'
                 ix_parameter_data = lt_matnr
             ).
             " Ajout CV_CHANGING
             lo_task_container->function_parameter_add(
-              EXPORTING
                 iv_parameter_name = 'CV_CHANGING'
                 ix_parameter_data = lt_matnr[ 3 ]-matnr
             ).
             " Ajout CS_CHANGING
             lo_task_container->function_parameter_add(
-              EXPORTING
                 iv_parameter_name = 'CS_CHANGING'
                 ix_parameter_data = lt_matnr[ 3 ]
             ).
             " Ajout CT_CHANGING
             lo_task_container->function_parameter_add(
-              EXPORTING
                 iv_parameter_name = 'CT_CHANGING'
                 ix_parameter_data = lt_matnr
             ).
             " Ajout EV_EXPORTING
-            lo_task_container->function_parameter_add(
-              EXPORTING
-                iv_parameter_name = 'EV_EXPORTING'
-            ).
+            lo_task_container->function_parameter_add( 'EV_EXPORTING' ).
             " Ajout ES_EXPORTING
-            lo_task_container->function_parameter_add(
-              EXPORTING
-                iv_parameter_name = 'ES_EXPORTING'
-            ).
+            lo_task_container->function_parameter_add( 'ES_EXPORTING' ).
             " Ajout ET_EXPORTING
-            lo_task_container->function_parameter_add(
-              EXPORTING
-                iv_parameter_name = 'ET_EXPORTING'
-            ).
+            lo_task_container->function_parameter_add( 'ET_EXPORTING' ).
             " Ajout RV_RETURNING
-            lo_task_container->function_parameter_add(
-              EXPORTING
-                iv_parameter_name = 'RV_RETURNING'
-            ).
+            lo_task_container->function_parameter_add( 'RV_RETURNING' ).
 
             " Démarre la Tâche d'utilisation SHM 'ZCL_TEST_OVR_1=>ONE'
             lo_task_manager->task_start_new(
-                iv_class_name         = 'ZCL_OVR_TEST_1'
-                iv_method_name        = 'ONE'
+                is_task_call_process  = VALUE #( class_name = 'ZTEST_OVR_1' method_name = 'ONE' )
                 io_task_container     = lo_task_container
                 is_task_configuration = ls_task_process_configuration
             ).
@@ -743,7 +799,7 @@ CLASS lcl_main IMPLEMENTATION.
           TRY.
               " Démarre la Tâche de contrôle d'existence
               lo_task_manager->task_start_new(
-                  iv_function_name  = 'BAPI_MATERIAL_EXISTENCECHECK'
+                is_task_call_process  = VALUE #( function_name = 'BAPI_MATERIAL_EXISTENCECHECK' )
                   io_task_container = lo_task_container
               ).
 
