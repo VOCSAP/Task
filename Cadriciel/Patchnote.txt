@@ -59,3 +59,12 @@ L'implémentation des versions suivantes obligent à revoir les programmes utilisa
 <-- Fin de rétro-comptatible V7.X --> 
 
 8.0 : Normalisation + correction usage Exception
+
+<-- Fin de rétro-comptatible V8.X --> 
+L'implémentation des versions suivantes obligent à revoir les programmes utilisant le cadriciel
+<-- Fin de rétro-comptatible V8.X --> 
+
+9.0 : Ajout parallélisation sur Programme
+
+9.1 : Corrections divers sur // Programme
+

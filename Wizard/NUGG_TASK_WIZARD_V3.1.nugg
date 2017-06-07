@@ -1,5 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<nugget name="TASK_WIZARD_V3">
+<nugget name="TASK_WIZARD_V3.1">
+ <CLAS CLSNAME="ZCL_IM_WB_OBJ_CTMENU" VERSION="1" LANGU="F" DESCRIPT="Classe d&apos;implémentation pour implémentation de Business Add-" CATEGORY="00" EXPOSURE="2" STATE="1" RELEASE="0" CLSFINAL="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 " ZSAPLINK_PLUGIN_MAJOR_VERSION="0 " ZSAPLINK_PLUGIN_MINOR_VERSION="1 " ZSAPLINK_PLUGIN_BUILD_VERSION="0 " ZSAPLINK_PLUGIN_INFO1="ZSAPLINK_CLASS is part of the main ZSAPLINK project --&gt; This plugin found there instead of ZSAPLINK_PLUGINS projects" ZSAPLINK_PLUGIN_INFO2="SAPLINK homepage: https://www.assembla.com/spaces/saplink/wiki" ZSAPLINK_PLUGIN_INFO3="Download from https://www.assembla.com/code/saplink/subversion/nodes" ZSAPLINK_PLUGIN_INFO4="and navigate to:  trunk -&gt; core -&gt; ZSAPLINK -&gt; CLAS -&gt; ZSAPLINK_CLASS.slnk">
+  <implementing CLSNAME="ZCL_IM_WB_OBJ_CTMENU" REFCLSNAME="IF_EX_WB_OBJ_CTMENU" VERSION="1" EXPOSURE="2" STATE="1" RELTYPE="1" EDITORDER="1 "/>
+  <localImplementation>*&quot;* use this source file for the definition and implementation of
+*&quot;* local helper classes, interface definitions and type
+*&quot;* declarations</localImplementation>
+  <localTypes>*&quot;* use this source file for any type of declarations (class
+*&quot;* definitions, interfaces or type declarations) you need for
+*&quot;* components in the private section</localTypes>
+  <localMacros>*&quot;* use this source file for any macro definitions you need
+*&quot;* in the implementation part of the class</localMacros>
+  <textPool>
+   <language SPRAS="F">
+    <textElement ID="I" KEY="A01" ENTRY="Assistant" LENGTH="19 "/>
+    <textElement ID="I" KEY="N01" ENTRY="Cadriciel Tâche" LENGTH="15 "/>
+   </language>
+  </textPool>
+  <attribute CLSNAME="ZCL_IM_WB_OBJ_CTMENU" CMPNAME="MC_FC_TASK_WZ" VERSION="1" LANGU="F" DESCRIPT="Code de fonction" EXPOSURE="2" STATE="1" EDITORDER="1 " ATTDECLTYP="1" ATTVALUE="&apos;Z_WZ_TASK&apos;" ATTEXPVIRT="0" TYPTYPE="1" TYPE="UI_FUNC" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+  <attribute CLSNAME="ZCL_IM_WB_OBJ_CTMENU" CMPNAME="MO_TASK_CONTEXT_MENU" VERSION="1" LANGU="F" EXPOSURE="0" STATE="1" EDITORDER="1 " ATTDECLTYP="1" ATTEXPVIRT="0" TYPTYPE="3" TYPE="CL_CTMENU" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+  <interfaceMethod CLSNAME="ZCL_IM_WB_OBJ_CTMENU" CPDNAME="IF_EX_WB_OBJ_CTMENU~UPDATE_CONTEXT_MENU">
+   <source>METHOD if_ex_wb_obj_ctmenu~update_context_menu.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+  &quot; -----------------------------------------------------------
+  &quot; Ajout Menu Contextuelle personnalisé
+  &quot; -----------------------------------------------------------
+
+  &quot; Suivant le Noeud séléctionné
+  CASE flt_val.
+
+    WHEN &apos;P&apos;.                                               &quot;#EC NOTEXT
+      &quot; Programme
+      &quot;&quot;  --&gt; Ajout Elèment Menu Contextuelle lié aux Tâches
+      me-&gt;task_ctxt_menu_add( p_context_menu ).
+
+    WHEN OTHERS.
+      &quot; Autres
+
+  ENDCASE.
+
+ENDMETHOD.</source>
+  </interfaceMethod>
+  <method CLSNAME="ZCL_IM_WB_OBJ_CTMENU" CMPNAME="CLASS_CONSTRUCTOR" VERSION="1" LANGU="F" DESCRIPT="CLASS_CONSTRUCTOR" EXPOSURE="2" STATE="1" EDITORDER="1 " DISPID="0 " MTDTYPE="2" MTDDECLTYP="1" BCMTDCAT="00" BCMTDSYN="0">
+   <source>METHOD class_constructor.
+*&amp;---------------------------------------------------------------------*
+*&amp; Méthode         : CLASS_CONSTRUCTOR                                 *
+*&amp; Classe          : ZCL_IM_WB_OBJ_CTMENU                              *
+*&amp; Description     : Constructeur Statique - Menu Contextuel           *
+*                                                                      *
+*&amp;---------------------------------------------------------------------*
+*&amp;---------------------------------------------------------------------*
+*&amp; Créé par     : Olivier Véhier                                       *
+*                                                                      *
+*&amp; Créé le      : 22/07/2015                                           *
+*                                                                      *
+*&amp;---------------------------------------------------------------------*
+*&amp;---------------------------------------------------------------------*
+*&amp; Liste des modifications                                             *
+*&amp; Auteur      Date       Signature  Objet de la modification          *
+*&amp;---------------------------------------------------------------------*
+*&amp;---------------------------------------------------------------------*
+*                                                                      *
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+  &quot; -----------------------------------------------------------
+  &quot; Initialisation Attributs
+  &quot; -----------------------------------------------------------
+
+  IF NOT zcl_im_wb_obj_ctmenu=&gt;mo_task_context_menu IS BOUND.
+    &quot; Menu Contextuel Tâche non créé
+    &quot;&quot;  --&gt; Création du Menu Contextuel
+    zcl_im_wb_obj_ctmenu=&gt;task_ctxt_menu_set( ).
+
+  ENDIF.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_IM_WB_OBJ_CTMENU" CMPNAME="CONSTRUCTOR" VERSION="1" LANGU="F" DESCRIPT="CONSTRUCTOR" EXPOSURE="2" STATE="1" EDITORDER="2 " DISPID="0 " MTDTYPE="2" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+   <source>METHOD constructor.
+*&amp;---------------------------------------------------------------------*
+*&amp; Méthode         : CONSTRUCTOR                                       *
+*&amp; Classe          : ZCL_IM_WB_OBJ_CTMENU                              *
+*&amp; Description     : Constructeur BADI Modif. Menu Contextuel          *
+*                                                                      *
+*&amp;---------------------------------------------------------------------*
+*&amp;---------------------------------------------------------------------*
+*&amp; Créé par     : Olivier Véhier                                       *
+*                                                                      *
+*&amp; Créé le      : 22/07/2015                                           *
+*                                                                      *
+*&amp;---------------------------------------------------------------------*
+*&amp;---------------------------------------------------------------------*
+*&amp; Liste des modifications                                             *
+*&amp; Auteur      Date       Signature  Objet de la modification          *
+*&amp;---------------------------------------------------------------------*
+*&amp;---------------------------------------------------------------------*
+*                                                                      *
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+  &quot; -----------------------------------------------------------
+  &quot; Initialisation Attributs
+  &quot; -----------------------------------------------------------
+
+  IF NOT zcl_im_wb_obj_ctmenu=&gt;mo_task_context_menu IS BOUND.
+    &quot; Menu Contextuel Tâche non créé
+    &quot;&quot;  --&gt; Création du Menu Contextuel
+    zcl_im_wb_obj_ctmenu=&gt;task_ctxt_menu_set( ).
+
+  ENDIF.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_IM_WB_OBJ_CTMENU" CMPNAME="TASK_CTXT_MENU_ADD" VERSION="1" LANGU="F" DESCRIPT="Tâche - Menu Contextuel - Ajout" EXPOSURE="0" STATE="1" EDITORDER="3 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_IM_WB_OBJ_CTMENU" CMPNAME="TASK_CTXT_MENU_ADD" SCONAME="IO_CONTEXT_MENU" VERSION="1" LANGU="F" DESCRIPT="Context Menu" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="3" TYPE="CL_CTMENU"/>
+   <source>METHOD task_ctxt_menu_add.
+*&amp;---------------------------------------------------------------------*
+*&amp; Méthode         : TASK_CTXT_MENU_ADD                                *
+*&amp; Classe          : ZCL_IM_WB_OBJ_CTMENU                              *
+*&amp; Description     : Tâche - Menu Contextuel - Ajout au Standard       *
+*                                                                      *
+*&amp;---------------------------------------------------------------------*
+*&amp;---------------------------------------------------------------------*
+*&amp; Créé par     : Olivier Véhier                                       *
+*                                                                      *
+*&amp; Créé le      : 22/07/2015                                           *
+*                                                                      *
+*&amp;---------------------------------------------------------------------*
+*&amp;---------------------------------------------------------------------*
+*&amp; Liste des modifications                                             *
+*&amp; Auteur      Date       Signature  Objet de la modification          *
+*&amp;---------------------------------------------------------------------*
+*&amp;---------------------------------------------------------------------*
+*                                                                      *
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+  &quot; -----------------------------------------------------------
+  &quot; Ajout du Groupe Tâche dans le Menu Contextuel
+  &quot; -----------------------------------------------------------
+
+  IF NOT zcl_im_wb_obj_ctmenu=&gt;mo_task_context_menu IS BOUND.
+    &quot; Menu Contextuel Tâche non créé
+    &quot;&quot;  --&gt; Création du Menu Contextuel
+    zcl_im_wb_obj_ctmenu=&gt;task_ctxt_menu_set( ).
+
+  ENDIF.
+
+  &quot; Ajout Sous-Menu Tâche
+  io_context_menu-&gt;add_separator( ).
+  io_context_menu-&gt;add_submenu(
+      menu = zcl_im_wb_obj_ctmenu=&gt;mo_task_context_menu
+      text = text-n01
+  ).
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_IM_WB_OBJ_CTMENU" CMPNAME="TASK_CTXT_MENU_SET" VERSION="1" LANGU="F" DESCRIPT="Tâche - Menu Contextuel - Initialisation" EXPOSURE="0" STATE="1" EDITORDER="4 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="1" BCMTDCAT="00" BCMTDSYN="0">
+   <source>METHOD task_ctxt_menu_set.
+*&amp;---------------------------------------------------------------------*
+*&amp; Méthode         : TASK_CTXT_MENU_SET                                *
+*&amp; Classe          : ZCL_IM_WB_OBJ_CTMENU                              *
+*&amp; Description     : Tâche - Menu Contextuel - Initialisation          *
+*                                                                      *
+*&amp;---------------------------------------------------------------------*
+*&amp;---------------------------------------------------------------------*
+*&amp; Créé par     : Olivier Véhier                                       *
+*                                                                      *
+*&amp; Créé le      : 22/07/2015                                           *
+*                                                                      *
+*&amp;---------------------------------------------------------------------*
+*&amp;---------------------------------------------------------------------*
+*&amp; Liste des modifications                                             *
+*&amp; Auteur      Date       Signature  Objet de la modification          *
+*&amp;---------------------------------------------------------------------*
+*&amp;---------------------------------------------------------------------*
+*                                                                      *
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+  &quot; -----------------------------------------------------------
+  &quot; Tâche - Création du Menu Contextuel
+  &quot; -----------------------------------------------------------
+
+  IF zcl_im_wb_obj_ctmenu=&gt;mo_task_context_menu IS BOUND.
+    &quot; Menu Contextuel déjà initialisé
+    &quot;&quot;  --&gt; Arrêt du traitemetn
+    RETURN.
+
+  ENDIF.
+
+  &quot; Création instance du Menu Contextuel
+  zcl_im_wb_obj_ctmenu=&gt;mo_task_context_menu = NEW cl_ctmenu( ).
+
+  &quot; -----------------------------------------------------------
+  &quot; Ajout des Fonctions
+  &quot; -----------------------------------------------------------
+
+  &quot; Ajout Fonction - Assistant
+  zcl_im_wb_obj_ctmenu=&gt;mo_task_context_menu-&gt;add_function(
+      fcode             = mc_fc_task_wz
+      text              = text-a01
+  ).
+
+ENDMETHOD.</source>
+  </method>
+ </CLAS>
  <CLAS CLSNAME="ZCL_TASK_WIZARD" VERSION="1" LANGU="F" DESCRIPT="Tâche - Assistant utilisation Cadriciel" CATEGORY="00" EXPOSURE="2" STATE="1" RELEASE="0" CLSFINAL="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" CLSBCCAT="00" MSG_ID="ZTASK" DURATION_TYPE="0 " RISK_LEVEL="0 " ZSAPLINK_PLUGIN_MAJOR_VERSION="0 " ZSAPLINK_PLUGIN_MINOR_VERSION="1 " ZSAPLINK_PLUGIN_BUILD_VERSION="0 " ZSAPLINK_PLUGIN_INFO1="ZSAPLINK_CLASS is part of the main ZSAPLINK project --&gt; This plugin found there instead of ZSAPLINK_PLUGINS projects" ZSAPLINK_PLUGIN_INFO2="SAPLINK homepage: https://www.assembla.com/spaces/saplink/wiki" ZSAPLINK_PLUGIN_INFO3="Download from https://www.assembla.com/code/saplink/subversion/nodes" ZSAPLINK_PLUGIN_INFO4="and navigate to:  trunk -&gt; core -&gt; ZSAPLINK -&gt; CLAS -&gt; ZSAPLINK_CLASS.slnk">
   <implementing CLSNAME="ZCL_TASK_WIZARD" REFCLSNAME="IF_WB_PROGRAM" VERSION="1" EXPOSURE="2" STATE="1" RELTYPE="1" EDITORDER="1 "/>
   <localImplementation>*&quot;* use this source file for the definition and implementation of
@@ -113,19 +331,22 @@ CLASS lcl_source_code DEFINITION FINAL.
 *   Déclaration de type
 
     TYPES :
-      BEGIN OF ty_source_code_check,
+      BEGIN OF ts_source_code_check,
         subrc     TYPE sy-subrc,
         message   TYPE string,
         line      TYPE i,
         word      TYPE string,
         t_warning TYPE tab_rslinlmsg,
-      END OF   ty_source_code_check.
+      END OF   ts_source_code_check.
 
 ***------------------------------------------------------------------***
 **                           MÉTHODES                                 **
 ***------------------------------------------------------------------***
 
 *	Déclaration de méthodes
+
+    &quot; Constructeur Statique
+    CLASS-METHODS class_constructor.
 
     &quot; Programme - Création
     CLASS-METHODS repid_create
@@ -142,13 +363,16 @@ CLASS lcl_source_code DEFINITION FINAL.
     CLASS-METHODS source_code_get
       IMPORTING
                 !iv_repid             TYPE sy-repid
+      EXPORTING
+                !eo_abap_pgeditor     TYPE REF TO cl_wb_pgeditor
       RETURNING VALUE(rt_source_code) TYPE stringtab.
 
     &quot; Code Source - Modification
     CLASS-METHODS source_code_set
       IMPORTING
-        !iv_repid       TYPE sy-repid
-        !it_source_code TYPE stringtab.
+                !iv_repid             TYPE sy-repid
+                !it_source_code       TYPE stringtab
+      RETURNING VALUE(rt_source_code) TYPE stringtab.
 
     &quot; Code Source - Contrôle
     CLASS-METHODS source_code_check
@@ -156,7 +380,7 @@ CLASS lcl_source_code DEFINITION FINAL.
                 !iv_repid       TYPE sy-repid
                 !iv_include     TYPE sy-repid OPTIONAL
                 !it_source_code TYPE stringtab
-      RETURNING VALUE(rs_check) TYPE lcl_source_code=&gt;ty_source_code_check.
+      RETURNING VALUE(rs_check) TYPE lcl_source_code=&gt;ts_source_code_check.
 
 ***------------------------------------------------------------------***
 **                            ATTRIBUTS                               **
@@ -186,7 +410,6 @@ CLASS lcl_source_code DEFINITION FINAL.
 
 *	Déclaration d&apos;attributs
 
-
 ENDCLASS.             &quot;lcl_source_code DEFINITION
 
 *----------------------------------------------------------------------*
@@ -195,6 +418,14 @@ ENDCLASS.             &quot;lcl_source_code DEFINITION
 *
 *----------------------------------------------------------------------*
 CLASS lcl_source_code IMPLEMENTATION.
+
+  METHOD class_constructor.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+  ENDMETHOD.
 
   METHOD repid_create.
 
@@ -264,6 +495,12 @@ CLASS lcl_source_code IMPLEMENTATION.
 
   METHOD source_code_get.
 
+***------------------------------------------------------------------***
+**                            INSTANCES                               **
+***------------------------------------------------------------------***
+    DATA :
+          lo_abap_pgeditor TYPE REF TO cl_wb_pgeditor.
+
 ***==================================================================***
 **                             TRAITEMENT                             **
 ***==================================================================***
@@ -273,17 +510,41 @@ CLASS lcl_source_code IMPLEMENTATION.
     &quot; -----------------------------------------------------------
 
     &quot; Récupération du Code Source
-    READ REPORT iv_repid INTO rt_source_code.
+    CREATE OBJECT lo_abap_pgeditor.
+    lo_abap_pgeditor-&gt;read_source(
+      EXPORTING
+        source_name             = iv_repid
+*         status                  = SPACE       &quot; Active (&apos;A&apos;)/Inactive (&apos;I&apos;)
+        with_conversion         = abap_true     &quot; Conversion If Necessary
+        with_enhancements       = abap_true     &quot; with enhancements
+        with_impl_enhancements  = abap_false    &quot; without implicit enhancements
+      IMPORTING
+        source_tab              = rt_source_code
+      EXCEPTIONS
+        cancelled               = 1
+        not_found               = 2
+        read_protected          = 3
+        OTHERS                  = 4
+    ).
+    IF sy-subrc NE 0.
+      &quot; Une erreur est survenue
+      &quot;&quot;  --&gt; Affiche message d&apos;erreur
+      FREE : rt_source_code.
+      MESSAGE ID sy-msgid TYPE &apos;S&apos;                          &quot;#EC NOTEXT
+                        NUMBER sy-msgno
+                          WITH sy-msgv1 sy-msgv2
+                               sy-msgv3 sy-msgv4
+                  DISPLAY LIKE sy-msgty.
+    ENDIF.
+
+    IF eo_abap_pgeditor IS SUPPLIED.
+      eo_abap_pgeditor = lo_abap_pgeditor.
+
+    ENDIF.
 
   ENDMETHOD.
 
   METHOD source_code_set.
-
-***------------------------------------------------------------------***
-**                             TABLES                                 **
-***------------------------------------------------------------------***
-    DATA :
-          lt_source_code TYPE stringtab.
 
 ***==================================================================***
 **                             TRAITEMENT                             **
@@ -299,26 +560,25 @@ CLASS lcl_source_code IMPLEMENTATION.
         inctoo             = abap_false
       TABLES
         otext              = it_source_code
-        ntext              = lt_source_code
+        ntext              = rt_source_code
       EXCEPTIONS
         include_enqueued   = 1
         include_readerror  = 2
         include_writeerror = 3
         enqueue_table_full = 4.
+    IF sy-subrc NE 0.
+      &quot; Une erreur est survenue
+      &quot;&quot;  --&gt; Initialisation Code Source comme l&apos;entrée
+      rt_source_code[] = it_source_code[].
+
+    ENDIF.
 
     &quot; -----------------------------------------------------------
     &quot; Modification du Code Source du Programme
     &quot; -----------------------------------------------------------
 
-    IF sy-subrc EQ 0.
-      &quot; Modification du Code Source (Pretty Printer)
-      INSERT REPORT iv_repid FROM lt_source_code.
-
-    ELSE.
-      &quot; Modification du Code Source (Sans mise en forme)
-      INSERT REPORT iv_repid FROM it_source_code.
-
-    ENDIF.
+    &quot; Modification du Code Source (Pretty Printer)
+    INSERT REPORT iv_repid FROM rt_source_code.
 
   ENDMETHOD.
 
@@ -456,48 +716,55 @@ CLASS lcl_injector DEFINITION FINAL.
 *   Déclaration de type
 
     TYPES :
-      BEGIN OF ty_template_anchor_detail,
+      BEGIN OF ts_template_anchor_detail,
         header     TYPE stringtab,
         header_set TYPE xsdboolean,
         body       TYPE stringtab,
         end        TYPE stringtab,
-      END OF   ty_template_anchor_detail.
+      END OF   ts_template_anchor_detail.
 
     TYPES :
-      BEGIN OF ty_template_anchor_function,
-        at_eot      TYPE ty_template_anchor_detail,
-        before_task TYPE ty_template_anchor_detail,
-      END OF   ty_template_anchor_function.
+      BEGIN OF ts_template_anchor_function,
+        at_eot      TYPE ts_template_anchor_detail,
+        before_task TYPE ts_template_anchor_detail,
+      END OF   ts_template_anchor_function.
 
     TYPES :
-      BEGIN OF ty_template_anchor_method_det,
-        classname  TYPE      ty_template_anchor_detail,
-        methodname TYPE       ty_template_anchor_detail,
-      END OF   ty_template_anchor_method_det.
+      BEGIN OF ts_template_anchor_method_det,
+        classname  TYPE ts_template_anchor_detail,
+        methodname TYPE ts_template_anchor_detail,
+      END OF   ts_template_anchor_method_det.
 
     TYPES :
-      BEGIN OF ty_template_anchor_method,
-        at_eot      TYPE ty_template_anchor_method_det,
-        before_task TYPE ty_template_anchor_method_det,
-      END OF   ty_template_anchor_method.
+      BEGIN OF ts_template_anchor_method,
+        at_eot      TYPE ts_template_anchor_method_det,
+        before_task TYPE ts_template_anchor_method_det,
+      END OF   ts_template_anchor_method.
 
     TYPES :
-      BEGIN OF ty_template_anchor,
-        method   TYPE ty_template_anchor_method,
-        function TYPE ty_template_anchor_function,
-      END OF   ty_template_anchor.
+      BEGIN OF ts_template_anchor_repid,
+        at_eot      TYPE ts_template_anchor_detail,
+        before_task TYPE ts_template_anchor_detail,
+      END OF   ts_template_anchor_repid.
 
     TYPES :
-      BEGIN OF ty_classname_list,
+      BEGIN OF ts_template_anchor,
+        repid    TYPE ts_template_anchor_repid,
+        method   TYPE ts_template_anchor_method,
+        function TYPE ts_template_anchor_function,
+      END OF   ts_template_anchor.
+
+    TYPES :
+      BEGIN OF ts_classname_list,
         event     TYPE string,
         classname TYPE string,
-      END OF   ty_classname_list.
+      END OF   ts_classname_list.
 
-    TYPES : ty_t_classname_list TYPE SORTED TABLE OF ty_classname_list
+    TYPES : tt_classname_list TYPE SORTED TABLE OF ts_classname_list
             WITH UNIQUE KEY primary_key COMPONENTS event classname.
 
     TYPES :
-      BEGIN OF ty_source_code,
+      BEGIN OF ts_source_code,
         t_target_repid                 TYPE stringtab,
         t_target_incl_framework        TYPE stringtab,
         t_target_incl_selscreen        TYPE stringtab,
@@ -505,17 +772,15 @@ CLASS lcl_injector DEFINITION FINAL.
         t_template_framework           TYPE stringtab,
         t_template_selscreen           TYPE stringtab,
         t_template_wizard_include_sign TYPE stringtab,
-      END OF   ty_source_code.
+      END OF   ts_source_code.
 
     TYPES :
-      BEGIN OF ty_transport_request,
-        corrnum  TYPE e070-trkorr,
-        ordernum TYPE e070-trkorr,
-        devclass TYPE tadir-devclass,
-        t_e071k  TYPE e071k_t,
-        t_ko200  TYPE skwf_ko200s,
-        t_tadir  TYPE scts_tadir,
-      END OF   ty_transport_request.
+      BEGIN OF ts_transport_request,
+        corrnum       TYPE e070-trkorr,
+        ordernum      TYPE e070-trkorr,
+        devclass      TYPE tadir-devclass,
+        transport_key TYPE trkey,
+      END OF   ts_transport_request.
 
 ***------------------------------------------------------------------***
 **                           MÉTHODES                                 **
@@ -534,7 +799,7 @@ CLASS lcl_injector DEFINITION FINAL.
     METHODS template_source_code_check
       EXPORTING
                 ev_include_used TYPE xsdboolean
-      RETURNING VALUE(rs_check) TYPE lcl_source_code=&gt;ty_source_code_check.
+      RETURNING VALUE(rs_check) TYPE lcl_source_code=&gt;ts_source_code_check.
 
     &quot; Template - Injection
     METHODS template_source_code_inject.
@@ -596,6 +861,9 @@ CLASS lcl_injector DEFINITION FINAL.
     &quot; Template - Anchor - Chargement
     METHODS template_anchor_load.
 
+    &quot; Template - Anchor - Chargement - Programme
+    METHODS template_anchor_load_repid.
+
     &quot; Template - Anchor - Chargement - Méthode
     METHODS template_anchor_load_method.
 
@@ -605,17 +873,11 @@ CLASS lcl_injector DEFINITION FINAL.
     &quot; Template - Anchor - Nettoyage
     METHODS template_anchor_clean.
 
-    &quot; Ordre de Transport - Création
-    METHODS transport_request_create
-      IMPORTING
-        iv_repid    TYPE sy-repid
-        iv_creation TYPE xsdboolean OPTIONAL.
-
     &quot; Ordre de Transport - Ajout
     METHODS transport_request_add
       IMPORTING
-        iv_repid    TYPE sy-repid
-        iv_creation TYPE xsdboolean.
+                !iv_repid       TYPE sy-repid
+      RETURNING VALUE(rv_subrc) TYPE sy-subrc.
 
 ***------------------------------------------------------------------***
 **                            ATTRIBUTS                               **
@@ -658,13 +920,13 @@ CLASS lcl_injector DEFINITION FINAL.
     CONSTANTS : mc_anchor_template_outputi_end TYPE string VALUE &apos;#ANCHOR-AT_SELECTION_SCREEN_OUTPUT-IMPL-END#&apos;. &quot;#EC NOTEXT
 
 *	Déclaration d&apos;attributs
-    DATA : ms_source_code TYPE ty_source_code.
+    DATA : ms_source_code TYPE ts_source_code.
     DATA : mv_repid_target TYPE sy-repid.
-    DATA : mt_classname_list TYPE ty_t_classname_list.
+    DATA : mt_classname_list TYPE tt_classname_list.
     DATA : mv_task_classname TYPE string.
-    DATA : ms_template_anchor TYPE ty_template_anchor.
+    DATA : ms_template_anchor TYPE ts_template_anchor.
     DATA : ms_task_wizard_data TYPE ztec_s_task_wizard_data.
-    DATA : ms_transport_request TYPE ty_transport_request.
+    DATA : ms_transport_request TYPE ts_transport_request.
     DATA : mt_task_call_process TYPE ztec_t_task_call_process.
 
 ENDCLASS.             &quot;lcl_injector DEFINITION
@@ -683,6 +945,12 @@ CLASS lcl_injector IMPLEMENTATION.
 ***------------------------------------------------------------------***
     DATA :
           ls_textid TYPE scx_t100key.
+
+***------------------------------------------------------------------***
+**                          FIELD-SYMBOLS                             **
+***------------------------------------------------------------------***
+    FIELD-SYMBOLS :
+                   &lt;lfs_instance&gt; TYPE any.
 
 ***==================================================================***
 **                             TRAITEMENT                             **
@@ -735,7 +1003,7 @@ CLASS lcl_injector IMPLEMENTATION.
 ***------------------------------------------------------------------***
     DATA :
       ls_textid            TYPE scx_t100key,
-      ls_code_source_check TYPE lcl_source_code=&gt;ty_source_code_check.
+      ls_code_source_check TYPE lcl_source_code=&gt;ts_source_code_check.
 
 ***==================================================================***
 **                             TRAITEMENT                             **
@@ -785,28 +1053,19 @@ CLASS lcl_injector IMPLEMENTATION.
 
     LOOP AT me-&gt;mt_task_call_process ASSIGNING FIELD-SYMBOL(&lt;lfs_s_task_call_process&gt;).
 
-      IF  &lt;lfs_s_task_call_process&gt;-class_name  IS INITIAL
-      AND &lt;lfs_s_task_call_process&gt;-method_name IS INITIAL
-      AND &lt;lfs_s_task_call_process&gt;-function_name IS INITIAL.
-        &quot; Aucun Traitement
-        &quot;&quot;  --&gt; Passe à l&apos;itération suivante
-        CONTINUE.
-
-      ENDIF.
-
       &quot; -----------------------------------------------------------
       &quot; Modification Template Traitement AT_EOT
       &quot; -----------------------------------------------------------
 
       &quot; Ajout Template Evènement - AT_EOT
       me-&gt;template_handler_add(
-        iv_event             = mc_event_at_eot
+        iv_event             = lcl_injector=&gt;mc_event_at_eot
         is_task_call_process = &lt;lfs_s_task_call_process&gt;
       ).
 
       &quot; Ajout Template Evènement - BEFORE_TASK
       me-&gt;template_handler_add(
-        iv_event             = mc_event_before_task
+        iv_event             = lcl_injector=&gt;mc_event_before_task
         is_task_call_process = &lt;lfs_s_task_call_process&gt;
       ).
 
@@ -819,6 +1078,12 @@ CLASS lcl_injector IMPLEMENTATION.
 ***==================================================================***
 **                             TRAITEMENT                             **
 ***==================================================================***
+
+    &quot; -----------------------------------------------------------
+    &quot; Charge les Templates liées aux Anchors Programme
+    &quot; -----------------------------------------------------------
+
+    me-&gt;template_anchor_load_repid( ).
 
     &quot; -----------------------------------------------------------
     &quot; Charge les Templates liées aux Anchors Méthode
@@ -961,6 +1226,53 @@ CLASS lcl_injector IMPLEMENTATION.
 
   ENDMETHOD.
 
+  METHOD template_anchor_load_repid.
+
+***==================================================================***
+**                             TRAITEMENT                             **
+***==================================================================***
+
+    &quot; -----------------------------------------------------------
+    &quot; Charge les Templates liées aux Anchors Programme - AT_EOT
+    &quot; -----------------------------------------------------------
+
+    &quot; BEFORE_TASK &amp; AT_EOT - Entête
+    me-&gt;ms_template_anchor-function-before_task-header = me-&gt;ms_template_anchor-repid-at_eot-header
+      = VALUE stringtab(
+      ( |&quot; -----------------------------------------------------------| ) &quot;#EC NOTEXT
+      ( |&quot; Traitement sur Programme| )                      &quot;#EC NOTEXT
+      ( |&quot; -----------------------------------------------------------| ) &quot;#EC NOTEXT
+      ( )
+      ( |&quot; Suivant le Programme appelé| )                   &quot;#EC NOTEXT
+      ( |CASE is_task_call_process-repid_name.| )           &quot;#EC NOTEXT
+      ( )
+    ).
+
+    &quot; Ajout Anchor pour positionner les Programmes
+    APPEND |//ANCHOR-AT_EOT-REPIDLIST|      TO me-&gt;ms_template_anchor-repid-at_eot-header. &quot;#EC NOTEXT
+    APPEND |//ANCHOR-BEFORE_TASK-REPIDLIST| TO me-&gt;ms_template_anchor-repid-before_task-header. &quot;#EC NOTEXT
+
+    &quot; BEFORE_TASK &amp; AT_EOT - Corps
+    me-&gt;ms_template_anchor-function-before_task-body = me-&gt;ms_template_anchor-repid-at_eot-body
+      = VALUE stringtab(
+      ( |WHEN &apos;&lt;&amp;PROCESS&amp;&gt;&apos;. &quot;#EC NOTEXT| )                 &quot;#EC NOTEXT
+      ( |&quot;&quot;  --&gt; Traitement sur Programme &lt;&amp;PROCESS&amp;&gt;| )    &quot;#EC NOTEXT
+      ( |&quot;ToDo | )                                          &quot;#EC NOTEXT
+      ( )
+    ).
+
+    &quot; BEFORE_TASK &amp; AT_EOT - Fin
+    me-&gt;ms_template_anchor-function-before_task-end = me-&gt;ms_template_anchor-repid-at_eot-end
+      = VALUE stringtab(
+      ( |WHEN OTHERS.| )                                    &quot;#EC NOTEXT
+      ( | &quot; Autre cas| )                                    &quot;#EC NOTEXT
+      ( )
+      ( |ENDCASE.| )                                        &quot;#EC NOTEXT
+      ( )
+    ).
+
+  ENDMETHOD.
+
   METHOD template_anchor_clean.
 
 ***==================================================================***
@@ -972,8 +1284,9 @@ CLASS lcl_injector IMPLEMENTATION.
     &quot; -----------------------------------------------------------
 
     &quot; Recherche position de tous les Anchor AT_EOT
-    FIND ALL OCCURRENCES OF mc_anchor_at_eot IN TABLE me-&gt;ms_source_code-t_template_task
-                                              RESULTS DATA(lt_results).
+    FIND ALL OCCURRENCES OF lcl_injector=&gt;mc_anchor_at_eot
+                   IN TABLE me-&gt;ms_source_code-t_template_task
+                    RESULTS DATA(lt_results).
     IF sy-subrc EQ 0.
       &quot; Suppression des Anchors
       SORT lt_results BY line DESCENDING.
@@ -986,8 +1299,9 @@ CLASS lcl_injector IMPLEMENTATION.
     ENDIF.
 
     &quot; Recherche position de tous les Anchor BEFORE_TASK
-    FIND ALL OCCURRENCES OF mc_anchor_before_task IN TABLE me-&gt;ms_source_code-t_template_task
-                                                   RESULTS lt_results.
+    FIND ALL OCCURRENCES OF lcl_injector=&gt;mc_anchor_before_task
+                   IN TABLE me-&gt;ms_source_code-t_template_task
+                    RESULTS lt_results.
     IF sy-subrc EQ 0.
       &quot; Suppression des Anchors
       SORT lt_results BY line DESCENDING.
@@ -1004,22 +1318,22 @@ CLASS lcl_injector IMPLEMENTATION.
     &quot; -----------------------------------------------------------
 
     &quot; Recherche Anchor Définition - Début
-    FIND mc_anchor_template_outputd_beg IN TABLE me-&gt;ms_source_code-t_template_task
-                                      MATCH LINE DATA(lv_line_def_beg).
+    FIND lcl_injector=&gt;mc_anchor_template_outputd_beg IN TABLE me-&gt;ms_source_code-t_template_task
+                                                    MATCH LINE DATA(lv_line_def_beg).
     IF sy-subrc EQ 0.
       &quot; Recherche Anchor Définition - Fin
-      FIND mc_anchor_template_outputd_end IN TABLE me-&gt;ms_source_code-t_template_task
-                                        MATCH LINE DATA(lv_line_def_end).
+      FIND lcl_injector=&gt;mc_anchor_template_outputd_end IN TABLE me-&gt;ms_source_code-t_template_task
+                                                      MATCH LINE DATA(lv_line_def_end).
 
     ENDIF.
 
     &quot; Recherche Anchor Implémentation - Début
-    FIND mc_anchor_template_outputi_beg IN TABLE me-&gt;ms_source_code-t_template_task
-                                      MATCH LINE DATA(lv_line_impl_beg).
+    FIND lcl_injector=&gt;mc_anchor_template_outputi_beg IN TABLE me-&gt;ms_source_code-t_template_task
+                                                    MATCH LINE DATA(lv_line_impl_beg).
     IF sy-subrc EQ 0.
       &quot; Recherche Anchor Implémentation - Fin
-      FIND mc_anchor_template_outputi_end IN TABLE me-&gt;ms_source_code-t_template_task
-                                         MATCH LINE DATA(lv_line_impl_end).
+      FIND lcl_injector=&gt;mc_anchor_template_outputi_end IN TABLE me-&gt;ms_source_code-t_template_task
+                                                      MATCH LINE DATA(lv_line_impl_end).
 
     ENDIF.
 
@@ -1060,12 +1374,12 @@ CLASS lcl_injector IMPLEMENTATION.
     IF me-&gt;ms_task_wizard_data-target_framework_incl_use EQ abap_true.
       &quot; Recherche position de début
       CLEAR : lv_line_def_end, lv_line_def_beg.
-      FIND mc_anchor_template_sign_beg IN TABLE me-&gt;ms_source_code-t_target_incl_framework
-                                     MATCH LINE lv_line_def_beg.
+      FIND lcl_injector=&gt;mc_anchor_template_sign_beg IN TABLE me-&gt;ms_source_code-t_target_incl_framework
+                                                   MATCH LINE lv_line_def_beg.
       IF sy-subrc EQ 0.
         &quot; Recherche position de Fin
-        FIND mc_anchor_template_sign_beg IN TABLE me-&gt;ms_source_code-t_target_incl_framework
-                                       MATCH LINE lv_line_def_end.
+        FIND lcl_injector=&gt;mc_anchor_template_sign_beg IN TABLE me-&gt;ms_source_code-t_target_incl_framework
+                                                     MATCH LINE lv_line_def_end.
 
       ENDIF.
       IF NOT lv_line_def_end IS INITIAL AND NOT lv_line_def_beg IS INITIAL.
@@ -1080,12 +1394,12 @@ CLASS lcl_injector IMPLEMENTATION.
     AND me-&gt;ms_task_wizard_data-target_selscreen_incl_use EQ abap_true.
       &quot; Recherche position de début
       CLEAR : lv_line_def_end, lv_line_def_beg.
-      FIND mc_anchor_template_sign_beg IN TABLE me-&gt;ms_source_code-t_target_incl_selscreen
-                                     MATCH LINE lv_line_def_beg.
+      FIND lcl_injector=&gt;mc_anchor_template_sign_beg IN TABLE me-&gt;ms_source_code-t_target_incl_selscreen
+                                                   MATCH LINE lv_line_def_beg.
       IF sy-subrc EQ 0.
         &quot; Recherche position de Fin
-        FIND mc_anchor_template_sign_beg IN TABLE me-&gt;ms_source_code-t_target_incl_selscreen
-                                       MATCH LINE lv_line_def_end.
+        FIND lcl_injector=&gt;mc_anchor_template_sign_beg IN TABLE me-&gt;ms_source_code-t_target_incl_selscreen
+                                                     MATCH LINE lv_line_def_end.
 
       ENDIF.
       IF NOT lv_line_def_end IS INITIAL AND NOT lv_line_def_beg IS INITIAL.
@@ -1203,8 +1517,8 @@ CLASS lcl_injector IMPLEMENTATION.
 
     &quot; Retourne le Template du Cadriciel de Tâche
     me-&gt;ms_source_code-t_template_task = me-&gt;template_get_by_anchor(
-      iv_anchor_beg = mc_anchor_template_task_beg
-      iv_anchor_end = mc_anchor_template_task_end
+      iv_anchor_beg = lcl_injector=&gt;mc_anchor_template_task_beg
+      iv_anchor_end = lcl_injector=&gt;mc_anchor_template_task_end
     ).
 
     &quot; -----------------------------------------------------------
@@ -1213,8 +1527,8 @@ CLASS lcl_injector IMPLEMENTATION.
 
     &quot; Retourne le Template d&apos;Ecran de sélection
     me-&gt;ms_source_code-t_template_selscreen = me-&gt;template_get_by_anchor(
-      iv_anchor_beg = mc_anchor_template_selscre_beg
-      iv_anchor_end = mc_anchor_template_selscre_end
+      iv_anchor_beg = lcl_injector=&gt;mc_anchor_template_selscre_beg
+      iv_anchor_end = lcl_injector=&gt;mc_anchor_template_selscre_end
     ).
 
     &quot; -----------------------------------------------------------
@@ -1223,8 +1537,8 @@ CLASS lcl_injector IMPLEMENTATION.
 
     &quot; Retourne le Template de Signature
     me-&gt;ms_source_code-t_template_wizard_include_sign = me-&gt;template_get_by_anchor(
-      iv_anchor_beg = mc_anchor_template_sign_beg
-      iv_anchor_end = mc_anchor_template_sign_end
+      iv_anchor_beg = lcl_injector=&gt;mc_anchor_template_sign_beg
+      iv_anchor_end = lcl_injector=&gt;mc_anchor_template_sign_end
     ).
 
     &quot; -----------------------------------------------------------
@@ -1318,14 +1632,15 @@ CLASS lcl_injector IMPLEMENTATION.
     &quot; Modification des attributs de génération du Template
     &quot; -----------------------------------------------------------
 
-    FIND mc_anchor_uname IN TABLE me-&gt;ms_source_code-t_template_task MATCH LINE DATA(lv_line).
+    FIND lcl_injector=&gt;mc_anchor_uname IN TABLE me-&gt;ms_source_code-t_template_task
+                                     MATCH LINE DATA(lv_line).
     IF sy-subrc EQ 0.
       ASSIGN me-&gt;ms_source_code-t_template_task[ lv_line ] TO FIELD-SYMBOL(&lt;lfs_s_template_task&gt;).
       IF sy-subrc EQ 0.
         &quot; Modification Attribut
         lv_attribute = |{ sy-datum DATE = USER }|.
-        REPLACE mc_anchor_datum WITH lv_attribute INTO &lt;lfs_s_template_task&gt;.
-        REPLACE mc_anchor_uname WITH sy-uname INTO &lt;lfs_s_template_task&gt;.
+        REPLACE lcl_injector=&gt;mc_anchor_datum WITH lv_attribute INTO &lt;lfs_s_template_task&gt;.
+        REPLACE lcl_injector=&gt;mc_anchor_uname WITH sy-uname INTO &lt;lfs_s_template_task&gt;.
 
       ENDIF.
 
@@ -1336,7 +1651,7 @@ CLASS lcl_injector IMPLEMENTATION.
     IF me-&gt;ms_task_wizard_data-task_class_replace IS INITIAL.
       &quot; Pas de nom
       &quot;&quot;  --&gt; Utilisation nom générique
-      me-&gt;mv_task_classname = mc_template_classname.
+      me-&gt;mv_task_classname = lcl_injector=&gt;mc_template_classname.
 
     ELSEIF strlen( me-&gt;ms_task_wizard_data-task_class_replace ) GT 4
        AND |{ me-&gt;ms_task_wizard_data-task_class_replace(4) CASE = UPPER }|  EQ &apos;LCL_&apos;. &quot;#EC NOTEXT
@@ -1351,9 +1666,9 @@ CLASS lcl_injector IMPLEMENTATION.
 
     ENDIF.
     IF  NOT me-&gt;mv_task_classname IS INITIAL
-    AND me-&gt;mv_task_classname NE mc_template_classname.
+    AND me-&gt;mv_task_classname NE lcl_injector=&gt;mc_template_classname.
       &quot; Remplace le Nom générique par le nom fourni
-      lv_template_task_classname = mc_template_classname.
+      lv_template_task_classname = lcl_injector=&gt;mc_template_classname.
       REPLACE ALL OCCURRENCES OF lv_template_task_classname IN TABLE me-&gt;ms_source_code-t_template_task
                                                                 WITH me-&gt;mv_task_classname.
       lv_template_task_classname = |{ lv_template_task_classname CASE = LOWER }|.
@@ -1371,21 +1686,21 @@ CLASS lcl_injector IMPLEMENTATION.
 ***------------------------------------------------------------------***
 
     TYPES :
-      BEGIN OF lty_template_task_config,
+      BEGIN OF lts_template_task_config,
         anchor  TYPE string,
         value   TYPE string,
         default TYPE string,
         all     TYPE xsdboolean,
-      END OF   lty_template_task_config.
+      END OF   lts_template_task_config.
 
-    TYPES : lty_t_template_task_config TYPE STANDARD TABLE OF lty_template_task_config
+    TYPES : ltt_template_task_config TYPE STANDARD TABLE OF lts_template_task_config
            WITH NON-UNIQUE KEY primary_key COMPONENTS anchor.
 
 ***------------------------------------------------------------------***
 **                             TABLES                                 **
 ***------------------------------------------------------------------***
     DATA :
-          lt_configuration TYPE lty_t_template_task_config.
+          lt_configuration TYPE ltt_template_task_config.
 
 ***------------------------------------------------------------------***
 **                            VARIABLES                               **
@@ -1407,49 +1722,49 @@ CLASS lcl_injector IMPLEMENTATION.
       &quot;&quot;  --&gt; Initialisation variables portant sur les élèments de l&apos;Ecran de Sélection
       lt_configuration = VALUE #(
         (
-          anchor  = mc_anchor_grfc
+          anchor  = lcl_injector=&gt;mc_anchor_grfc
           value   = &apos;P_GRFC&apos;                                &quot;#EC NOTEXT
           default = me-&gt;ms_task_wizard_data-grfc
         )
         (
-          anchor  = mc_anchor_grfc_r
+          anchor  = lcl_injector=&gt;mc_anchor_grfc_r
           value   = &apos;P_GRFC_R&apos;                              &quot;#EC NOTEXT
           default = me-&gt;ms_task_wizard_data-server_user
         )
         (
-          anchor  = mc_anchor_task_max
+          anchor  = lcl_injector=&gt;mc_anchor_task_max
           value   = &apos;P_NTASK&apos;                               &quot;#EC NOTEXT
           default = me-&gt;ms_task_wizard_data-task_max
         )
         (
-          anchor  = mc_anchor_task_trace
+          anchor  = lcl_injector=&gt;mc_anchor_task_trace
           value   = &apos;P_TTRACE&apos;                              &quot;#EC NOTEXT
           all     = abap_true
           default = me-&gt;ms_task_wizard_data-trace_activ
 
         )
         (
-          anchor  = mc_anchor_compress_l
+          anchor  = lcl_injector=&gt;mc_anchor_compress_l
           value   = &apos;P_TCOMPG&apos;                              &quot;#EC NOTEXT
           default = me-&gt;ms_task_wizard_data-compress_mode-data_compress_global
         )
         (
-          anchor  = mc_anchor_compress_g
+          anchor  = lcl_injector=&gt;mc_anchor_compress_g
           value   = &apos;P_TCOMPL&apos;                              &quot;#EC NOTEXT
           default = me-&gt;ms_task_wizard_data-compress_mode-data_compress_line_by_line
         )
         (
-          anchor  = mc_anchor_shm_management
+          anchor  = lcl_injector=&gt;mc_anchor_shm_management
           value   = &apos;P_TSHM&apos;                                &quot;#EC NOTEXT
           default = me-&gt;ms_task_wizard_data-shm_management
         )
         (
-          anchor  = mc_anchor_compress_activ
+          anchor  = lcl_injector=&gt;mc_anchor_compress_activ
           value   = &apos;P_TCOMP&apos;                               &quot;#EC NOTEXT
           default = me-&gt;ms_task_wizard_data-compress_activ
         )
         (
-          anchor  = mc_anchor_use_server_default
+          anchor  = lcl_injector=&gt;mc_anchor_use_server_default
           value   = &apos;P_DGRFC&apos;                               &quot;#EC NOTEXT
           default = me-&gt;ms_task_wizard_data-server_default
         )
@@ -1460,37 +1775,37 @@ CLASS lcl_injector IMPLEMENTATION.
       &quot;&quot;  --&gt; Initialisation variables portant sur les choix de l&apos;utilisateur
       lt_configuration = VALUE #(
         (
-          anchor = mc_anchor_grfc
+          anchor = lcl_injector=&gt;mc_anchor_grfc
           value  = |&apos;{ me-&gt;ms_task_wizard_data-grfc }&apos;|     &quot;#EC NOTEXT
         )
         (
-          anchor = mc_anchor_task_max
+          anchor = lcl_injector=&gt;mc_anchor_task_max
           value  = |&apos;{ me-&gt;ms_task_wizard_data-task_max }&apos;| &quot;#EC NOTEXT
         )
         (
-          anchor = mc_anchor_task_trace
+          anchor = lcl_injector=&gt;mc_anchor_task_trace
           value  = lcl_convert=&gt;boolean_convert_to_string( me-&gt;ms_task_wizard_data-trace_activ )
           all    = abap_true
 
         )
         (
-          anchor = mc_anchor_compress_l
+          anchor = lcl_injector=&gt;mc_anchor_compress_l
           value  = lcl_convert=&gt;boolean_convert_to_string( me-&gt;ms_task_wizard_data-compress_mode-data_compress_line_by_line )
         )
         (
-          anchor = mc_anchor_compress_g
+          anchor = lcl_injector=&gt;mc_anchor_compress_g
           value  = lcl_convert=&gt;boolean_convert_to_string( me-&gt;ms_task_wizard_data-compress_mode-data_compress_global )
         )
         (
-          anchor = mc_anchor_shm_management
+          anchor = lcl_injector=&gt;mc_anchor_shm_management
           value  = lcl_convert=&gt;boolean_convert_to_string( me-&gt;ms_task_wizard_data-shm_management )
         )
         (
-          anchor = mc_anchor_compress_activ
+          anchor = lcl_injector=&gt;mc_anchor_compress_activ
           value  = lcl_convert=&gt;boolean_convert_to_string( me-&gt;ms_task_wizard_data-compress_activ )
         )
         (
-          anchor = mc_anchor_use_server_default
+          anchor = lcl_injector=&gt;mc_anchor_use_server_default
           value  = lcl_convert=&gt;boolean_convert_to_string( me-&gt;ms_task_wizard_data-server_default )
         )
       ).
@@ -1549,7 +1864,7 @@ CLASS lcl_injector IMPLEMENTATION.
 **                            STRUCTURE                               **
 ***------------------------------------------------------------------***
     DATA :
-          ls_classname_list TYPE ty_classname_list.
+          ls_classname_list TYPE ts_classname_list.
 
 ***------------------------------------------------------------------***
 **                            VARIABLES                               **
@@ -1562,7 +1877,7 @@ CLASS lcl_injector IMPLEMENTATION.
 ***------------------------------------------------------------------***
     FIELD-SYMBOLS :
       &lt;lfs_process&gt;         TYPE clike,
-      &lt;lfs_template_anchor&gt; TYPE ty_template_anchor_detail.
+      &lt;lfs_template_anchor&gt; TYPE ts_template_anchor_detail.
 
 ***==================================================================***
 **                           TRAITEMENT                               **
@@ -1584,6 +1899,14 @@ CLASS lcl_injector IMPLEMENTATION.
 
       &quot;&quot;  --&gt; Initialisation pointeur sur Nom du MF
       ASSIGN is_task_call_process-function_name TO &lt;lfs_process&gt;.
+
+    ELSEIF NOT is_task_call_process-repid_name IS INITIAL.
+      &quot; Traitement sur Programme
+      &quot;&quot;  --&gt; Initialisation pointeur sur AT_EOT - Programme
+      lv_component = |me-&gt;ms_template_anchor-repid-{ iv_event }|. &quot;#EC NOTEXT
+
+      &quot;&quot;  --&gt; Initialisation pointeur sur Nom du Programme
+      ASSIGN is_task_call_process-repid_name TO &lt;lfs_process&gt;.
 
     ELSE.
       &quot; Aucun appel
@@ -1674,6 +1997,11 @@ CLASS lcl_injector IMPLEMENTATION.
       FIND |//ANCHOR-{ iv_event }-FUNCTIONLIST|             &quot;#EC NOTEXT
         IN TABLE me-&gt;ms_source_code-t_template_task MATCH LINE lv_line.
 
+    ELSEIF NOT is_task_call_process-repid_name IS INITIAL.
+      &quot; Récupération position Anchor Liste des Programmes
+      FIND |//ANCHOR-{ iv_event }-REPIDLIST|                &quot;#EC NOTEXT
+        IN TABLE me-&gt;ms_source_code-t_template_task MATCH LINE lv_line.
+
     ELSE.
       &quot; Autre
       &quot;&quot;  --&gt; Arrêt du traitement
@@ -1692,7 +2020,7 @@ CLASS lcl_injector IMPLEMENTATION.
     lt_template[] = &lt;lfs_template_anchor&gt;-body[].
 
     &quot; Modification de la Variable de Traitement
-    REPLACE &apos;&lt;&amp;PROCESS&amp;&gt;&apos; IN TABLE lt_template WITH &lt;lfs_process&gt;. &quot;#EC NOTEXT
+    REPLACE ALL OCCURRENCES OF &apos;&lt;&amp;PROCESS&amp;&gt;&apos; IN TABLE lt_template WITH &lt;lfs_process&gt;. &quot;#EC NOTEXT
 
     &quot; Ajout dans le Template
     INSERT LINES OF lt_template INTO me-&gt;ms_source_code-t_template_task INDEX lv_line.
@@ -1760,18 +2088,9 @@ CLASS lcl_injector IMPLEMENTATION.
               WHERE task~obj_name  EQ @me-&gt;ms_task_wizard_data-target_repid
                 AND order~trstatus EQ &apos;D&apos;                   &quot;#EC NOTEXT
                INTO (@me-&gt;ms_transport_request-corrnum, @me-&gt;ms_transport_request-ordernum).
-      IF sy-subrc NE 0.
-        &quot; Aucun OT ouvert sur cet objet
-        &quot;&quot;  --&gt; Création d&apos;un nouvel OT
-        me-&gt;transport_request_create( me-&gt;ms_task_wizard_data-target_repid ).
-
-      ENDIF.
 
       &quot; Ajout de l&apos;Include dans l&apos;OT
-      me-&gt;transport_request_add(
-          iv_repid    = iv_include_name
-          iv_creation = abap_true
-      ).
+      me-&gt;transport_request_add( iv_include_name ).
 
     ENDIF.
 
@@ -1812,7 +2131,7 @@ CLASS lcl_injector IMPLEMENTATION.
     &quot; -----------------------------------------------------------
 
     &quot; Recherche présence de l&apos;Include dans le Programme Cadre
-    FIND REGEX |(^\\s*INCLUDE[: \\s]*{ iv_include })| IN TABLE me-&gt;ms_source_code-t_target_repid.
+    FIND REGEX |(^\\s*INCLUDE[: \\s]*{ iv_include })| IN TABLE me-&gt;ms_source_code-t_target_repid. &quot;#EC NOTEXT
     IF sy-subrc EQ 0.
       &quot; Include déjà présent dans le Programme Cadre
       &quot;&quot;  --&gt; arrêt du traitement
@@ -1825,7 +2144,7 @@ CLASS lcl_injector IMPLEMENTATION.
     &quot; -----------------------------------------------------------
 
     &quot; Ajout de l&apos;Include dans le Programme Cadre
-    APPEND |INCLUDE { iv_include }. &quot;{ &apos;Ajouté par l&apos;&apos;Assistant&apos;(i01) } | TO me-&gt;ms_source_code-t_target_repid.
+    APPEND |INCLUDE { iv_include }. &quot;{ &apos;Ajouté par l&apos;&apos;Assistant&apos;(i01) } | TO me-&gt;ms_source_code-t_target_repid. &quot;#EC NOTEXT
 
   ENDMETHOD.
 
@@ -1878,7 +2197,7 @@ CLASS lcl_injector IMPLEMENTATION.
 
     ELSE.
       &quot; Ligne d&apos;Ajout défini
-      &quot;&quot;  --&gt; Insert au bon endroit
+      &quot;&quot;  --&gt; Insertion à l&apos;Emplacement trouvé
       INSERT LINES OF me-&gt;ms_source_code-t_template_selscreen INTO ct_source_code INDEX lv_line_inject.
 
     ENDIF.
@@ -1886,6 +2205,12 @@ CLASS lcl_injector IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD template_task_add.
+
+***------------------------------------------------------------------***
+**                            VARIABLES                               **
+***------------------------------------------------------------------***
+    DATA :
+          lv_line_inject TYPE i.
 
 ***==================================================================***
 **                           TRAITEMENT                               **
@@ -1908,7 +2233,17 @@ CLASS lcl_injector IMPLEMENTATION.
     &quot; -----------------------------------------------------------
 
     &quot; Ajout du Cadriciel
-    APPEND LINES OF me-&gt;ms_source_code-t_template_task TO ct_source_code.
+    IF lv_line_inject IS INITIAL.
+      &quot; Pas de ligne précise déterminée
+      &quot;&quot;  --&gt; Ajout à la fin
+      APPEND LINES OF me-&gt;ms_source_code-t_template_task TO ct_source_code.
+
+    ELSE.
+      &quot; Ligne d&apos;Ajout définie
+      &quot;&quot;  --&gt; Insertion à l&apos;Emplacement trouvé
+      INSERT LINES OF me-&gt;ms_source_code-t_template_task INTO ct_source_code INDEX lv_line_inject.
+
+    ENDIF.
 
   ENDMETHOD.
 
@@ -2163,9 +2498,9 @@ CLASS lcl_injector IMPLEMENTATION.
     &quot; -----------------------------------------------------------
 
     &quot; Modification du Code Source du programme Cadre
-    lcl_source_code=&gt;source_code_set(
-      iv_repid       = me-&gt;mv_repid_target
-      it_source_code = me-&gt;ms_source_code-t_target_repid
+    me-&gt;ms_source_code-t_target_repid = lcl_source_code=&gt;source_code_set(
+      iv_repid         = me-&gt;mv_repid_target
+      it_source_code   = me-&gt;ms_source_code-t_target_repid
     ).
 
     IF  me-&gt;ms_task_wizard_data-target_selscreen_add      EQ abap_true
@@ -2187,117 +2522,64 @@ CLASS lcl_injector IMPLEMENTATION.
 
     ENDIF.
 
-  ENDMETHOD.
-
-  METHOD transport_request_create.
-
-***==================================================================***
-**                           TRAITEMENT                               **
-***==================================================================***
-
-    CLEAR : me-&gt;ms_transport_request.
-
     &quot; -----------------------------------------------------------
-    &quot; Création nouvel OT
+    &quot; Rafraichissement de l&apos;Editeur
     &quot; -----------------------------------------------------------
 
-    me-&gt;transport_request_add(
-      iv_repid    = iv_repid
-      iv_creation = iv_creation
-    ).
+    DATA : lo_abap_pgeditor TYPE REF TO cl_wb_pgeditor.
+    ASSIGN (&apos;(SAPLS38E)ABAP_PGEDITOR&apos;) TO FIELD-SYMBOL(&lt;lfs_instance&gt;).
+    IF sy-subrc EQ 0.
+      &quot; Instance de Programme transmise
+      &quot;&quot;  --&gt; Move-Cast
+      lo_abap_pgeditor ?= &lt;lfs_instance&gt;.
+
+      IF lo_abap_pgeditor-&gt;source_id EQ me-&gt;mv_repid_target.
+        &quot;&quot;  --&gt; Modification de l&apos;Affichage
+        lo_abap_pgeditor-&gt;source_instance-&gt;set_source_tab( me-&gt;ms_source_code-t_target_repid ).
+        lo_abap_pgeditor-&gt;source_instance-&gt;set_lineindex( mode_changed = abap_true ).
+        lo_abap_pgeditor-&gt;source_instance-&gt;set_linenumbers( ).
+        lo_abap_pgeditor-&gt;abap_editor-&gt;visualize_source( ).
+
+      ENDIF.
+
+    ENDIF.
 
   ENDMETHOD.
 
   METHOD transport_request_add.
 
-***------------------------------------------------------------------***
-**                            STRUCTURE                               **
-***------------------------------------------------------------------***
-    DATA :
-      ls_tadir TYPE tadir,
-      ls_e071k TYPE e071k,
-      ls_ko200 TYPE ko200.
-
 ***==================================================================***
 **                           TRAITEMENT                               **
 ***==================================================================***
 
     &quot; -----------------------------------------------------------
-    &quot; Génération des Clefs à transporter
+    &quot; Sélection de l&apos;OT
     &quot; -----------------------------------------------------------
 
-    &quot; Initialisation des données interface CTS
-    ls_ko200-pgmid = ls_e071k-pgmid = ls_tadir-object = SWITCH string( iv_creation
-      WHEN abap_true THEN &apos;R3TR&apos;                            &quot;#EC NOTEXT
-      ELSE &apos;LIMU&apos;                                           &quot;#EC NOTEXT
-    ).
-    ls_ko200-object = ls_e071k-object = ls_tadir-object = SWITCH string( iv_creation
-      WHEN abap_true THEN &apos;PROG&apos;                            &quot;#EC NOTEXT
-      ELSE &apos;REPS&apos;                                           &quot;#EC NOTEXT
-    ).
-    ls_ko200-lockflag = SWITCH string( iv_creation
-      WHEN abap_true THEN abap_true
-      ELSE &apos;3&apos;                                              &quot;#EC NOTEXT
-    ).
-    ls_ko200-operation = SWITCH string( iv_creation
-      WHEN abap_true THEN &apos;I&apos;                               &quot;#EC NOTEXT
-      ELSE space
-    ).
-    ls_ko200-author     = ls_tadir-author     = sy-uname.
-    ls_ko200-as4pos     = ls_e071k-as4pos     = lines( me-&gt;ms_transport_request-t_ko200 ).
-    ls_ko200-obj_name   = ls_e071k-objname    = ls_tadir-obj_name   = iv_repid.
-    ls_ko200-masterlang = ls_tadir-masterlang = sy-langu.
-
-    &quot; Initialisation données Programme
-    ls_tadir-korrnum   = me-&gt;ms_transport_request-corrnum.
-    ls_tadir-devclass  = me-&gt;ms_transport_request-devclass.
-    ls_tadir-srcsystem = sy-sysid.
-
-    &quot; Ajout dans les tables de Transport
-    APPEND ls_ko200 TO me-&gt;ms_transport_request-t_ko200.
-    APPEND ls_e071k TO me-&gt;ms_transport_request-t_e071k.
-    APPEND ls_tadir TO me-&gt;ms_transport_request-t_tadir.
-
-    &quot; -----------------------------------------------------------
-    &quot; Création / Sélection de l&apos;OT
-    &quot; -----------------------------------------------------------
-
-    &quot; Contrôle les élèments
-    CALL FUNCTION &apos;TR_OBJECTS_CHECK&apos;
+    &quot; Ajout du Programme dans l&apos;OT
+    CALL FUNCTION &apos;RS_CORR_INSERT&apos;
       EXPORTING
-        iv_no_show_option = abap_true
+        object              = iv_repid
+        object_class        = &apos;REPS&apos;  &quot;#EC NOTEXT
+        mode                = space
+        global_lock         = space
+        devclass            = me-&gt;ms_transport_request-devclass
+        extend              = space
+        activation_call     = abap_true
+        suppress_dialog     = space
       IMPORTING
-*        we_order          = me-&gt;ms_transport_request-corrnum
-*        we_task           = me-&gt;ms_transport_request-ordernum
-        we_order          = me-&gt;ms_transport_request-ordernum
-        we_task           = me-&gt;ms_transport_request-corrnum
-      TABLES
-        wt_ko200          = me-&gt;ms_transport_request-t_ko200
-        wt_e071k          = me-&gt;ms_transport_request-t_e071k
+        korrnum             = me-&gt;ms_transport_request-corrnum
+        ordernum            = me-&gt;ms_transport_request-ordernum
+        transport_key       = me-&gt;ms_transport_request-transport_key
       EXCEPTIONS
-        OTHERS            = 1.
-    IF sy-subrc EQ 0.
-      &quot; Sélection / Création de l&apos;OT
-      CALL FUNCTION &apos;TR_OBJECTS_INSERT&apos;
-        EXPORTING
-          wi_order          = me-&gt;ms_transport_request-corrnum
-*          wi_order          = me-&gt;ms_transport_request-ordernum
-          iv_no_show_option = abap_true
-        IMPORTING
-*          we_order          = me-&gt;ms_transport_request-corrnum
-*          we_task           = me-&gt;ms_transport_request-ordernum
-          we_order          = me-&gt;ms_transport_request-ordernum
-          we_task           = me-&gt;ms_transport_request-corrnum
-        TABLES
-          wt_ko200          = me-&gt;ms_transport_request-t_ko200
-          wt_e071k          = me-&gt;ms_transport_request-t_e071k
-          tt_tadir          = me-&gt;ms_transport_request-t_tadir
-        EXCEPTIONS
-          OTHERS            = 1.
-
-    ENDIF.
+        cancelled           = 1
+        permission_failure  = 2
+        unknown_objectclass = 3
+        OTHERS              = 4.
     IF sy-subrc NE 0.
-      &quot; Erreur ajout dans l&apos;OT
+      &quot; Une erreur est survenue
+      &quot;&quot;  --&gt; Retourne Code d&apos;erreur
+      rv_subrc = sy-subrc.
 
     ENDIF.
 
@@ -2603,6 +2885,42 @@ ENDMETHOD.</source>
 *&quot;* in the implementation part of the class</localMacros>
   <inheritance CLSNAME="ZCX_TASK_WIZARD" REFCLSNAME="CX_DYNAMIC_CHECK" VERSION="1" STATE="1"/>
  </CLAS>
+ <DOCV OBJNAME="DTZTASK_WIZARD_001" ID="DT" OBJECT="ZTASK_WIZARD_001" TYP="E" DOKVERSION="0001">
+  <TextLines TDFORMAT="*" TDLINE="Bienvenue dans l&apos;assistant d&apos;implémentation de parallélisation."/>
+  <TextLines TDFORMAT="*" TDLINE="Cet assistant va vous permettre de générer les élèments permettant de"/>
+  <TextLines TDLINE="gérer la parallélisation des traitements sur des modules fonctions et/ou"/>
+  <TextLines TDLINE="méthodes statiques."/>
+ </DOCV>
+ <DOCV OBJNAME="DTZTASK_WIZARD_002" ID="DT" OBJECT="ZTASK_WIZARD_002" TYP="E" DOKVERSION="0001">
+  <TextLines TDFORMAT="*" TDLINE="Sélection du programme cadre"/>
+  <TextLines TDFORMAT="*" TDLINE="Dans cette étape vous devez spécifier le programme (spécifique) dans"/>
+  <TextLines TDLINE="lequel vous souhaitez implémenter le cadriciel."/>
+  <TextLines TDFORMAT="*" TDLINE="Vous avez la possibilité d&apos;ajouter, dans l&apos;écran de sélection, les"/>
+  <TextLines TDLINE="élèments pertinents pour la configuration. A savoir :"/>
+  <TextLines TDFORMAT="*" TDLINE=",,,,- Groupe de Serveur"/>
+  <TextLines TDFORMAT="*" TDLINE=",,,,- Nombre de Tâche"/>
+  <TextLines TDFORMAT="*"/>
+  <TextLines TDFORMAT="*" TDLINE="Le programme contenant le template du cadriciel est aussi spécifié mais"/>
+  <TextLines TDLINE="non modifiable depuis cet assistant."/>
+ </DOCV>
+ <DOCV OBJNAME="DTZTASK_WIZARD_003" ID="DT" OBJECT="ZTASK_WIZARD_003" TYP="E" DOKVERSION="0001">
+  <TextLines TDFORMAT="*" TDLINE="Sélection des traitements à paralléliser"/>
+  <TextLines TDFORMAT="*" TDLINE="Cette étape vous permet de sélection les modules fonctions à"/>
+  <TextLines TDLINE="paralléliser."/>
+ </DOCV>
+ <DOCV OBJNAME="DTZTASK_WIZARD_004" ID="DT" OBJECT="ZTASK_WIZARD_004" TYP="E" DOKVERSION="0001">
+  <TextLines TDFORMAT="*" TDLINE="Sélection des traitements à paralléliser"/>
+  <TextLines TDFORMAT="*" TDLINE="Cette étape vous permet de sélection les méthodes statiques à"/>
+  <TextLines TDLINE="paralléliser."/>
+ </DOCV>
+ <DOCV OBJNAME="DTZTASK_WIZARD_005" ID="DT" OBJECT="ZTASK_WIZARD_005" TYP="E" DOKVERSION="0002">
+  <TextLines TDFORMAT="*" TDLINE="Sélection Groupe de Serveur"/>
+  <TextLines TDFORMAT="*"/>
+  <TextLines TDFORMAT="*" TDLINE="Cette étape vous permet de choisir le Groupe de Serveur sur lequel"/>
+  <TextLines TDLINE="seront exécutés les traitements."/>
+  <TextLines TDFORMAT="*" TDLINE="Vous avez la possibilité d&apos;utiliser le serveur par défaut ou d&apos;en"/>
+  <TextLines TDLINE="choisir un précis."/>
+ </DOCV>
  <FUGR AREA="ZTASK_WIZARD" SPRAS="F" AREAT="ZTASK_WIZARD">
   <functionGroupDocumentation/>
   <mainprogram NAME="SAPLZTASK_WIZARD" VARCL="X" DBAPL="S" DBNA="D$" SUBC="F" APPL="S" RMAND="000" RLOAD="F" FIXPT="X" LDBNAME="D$S" UCCHECK="X">
@@ -2612,8 +2930,9 @@ ENDMETHOD.</source>
      <textElement ID="I" KEY="002" ENTRY="Sélection programme" LENGTH="60 "/>
      <textElement ID="I" KEY="003" ENTRY="Sélection Traitement à paralléliser - MF" LENGTH="60 "/>
      <textElement ID="I" KEY="004" ENTRY="Sélection Traitement à paralléliser - Méthode" LENGTH="60 "/>
-     <textElement ID="I" KEY="005" ENTRY="Configuration de la parallélisation" LENGTH="60 "/>
-     <textElement ID="I" KEY="006" ENTRY="Terminer" LENGTH="18 "/>
+     <textElement ID="I" KEY="005" ENTRY="Sélection Traitement à paralléliser - Programme" LENGTH="60 "/>
+     <textElement ID="I" KEY="006" ENTRY="Configuration de la parallélisation" LENGTH="60 "/>
+     <textElement ID="I" KEY="007" ENTRY="Terminer" LENGTH="18 "/>
      <textElement ID="I" KEY="TTL" ENTRY="Tâche - Assistant de création" LENGTH="60 "/>
     </language>
    </textPool>
@@ -2677,7 +2996,19 @@ PROCESS AFTER INPUT.
 
   MODULE usr_check_consistency_0400.</dynproflowsource>
     </dynpro>
-    <dynpro PROG="SAPLZTASK_WIZARD" DNUM="0500" TYPE="I" FNUM="0000" BZMX="12 " BZBR="48 " MILI="192 " MICO="37 " MALI="0 " MACO="0 " NOLI="12 " NOCO="64 " VALP="0 " CUAN="G" SPRA="F" DTEXT="Configuration de la parallélisation">
+    <dynpro PROG="SAPLZTASK_WIZARD" DNUM="0500" TYPE="I" FNUM="0000" BZMX="11 " BZBR="64 " MILI="192 " MICO="37 " MALI="0 " MACO="0 " NOLI="11 " NOCO="64 " VALP="0 " CUAN="G" SPRA="F" DTEXT="Sélection des traitements à paralléliser - Programme">
+     <dynprofield FNAM="CC_ALV_0500" DIDX="000B" FLG1="00" FLG2="00" FLG3="00" FILL="U" FMB1="30" FMB2="00" LENG="40" LINE="01" COLN="02" LANF="00" LBLK="00" LREP="00" AUTH="101" AGLT="01" ADEZ="01"/>
+     <dynprofield DIDX="0000" FLG1="80" FLG2="10" FLG3="08" FMB1="00" FMB2="00" LENG="14" LINE="FF" COLN="01" LTYP="O" LANF="00" LBLK="00" LREP="00" TYPE="CHAR" AGLT="00" ADEZ="00" STXT="____________________"/>
+     <dynproflowsource>PROCESS BEFORE OUTPUT.
+  MODULE pbo_0500.
+
+PROCESS AFTER INPUT.
+  MODULE wz_user_command_wizard.
+* user defined modules
+
+  MODULE usr_check_consistency_0500.</dynproflowsource>
+    </dynpro>
+    <dynpro PROG="SAPLZTASK_WIZARD" DNUM="0600" TYPE="I" FNUM="0000" BZMX="12 " BZBR="48 " MILI="192 " MICO="37 " MALI="0 " MACO="0 " NOLI="12 " NOCO="64 " VALP="0 " CUAN="G" SPRA="F" DTEXT="Configuration de la parallélisation">
      <dynprofield FNAM="CADRE_GRFC" DIDX="0006" FLG1="00" FLG2="00" FLG3="00" FILL="R" FMB1="30" FMB2="00" LENG="30" LINE="01" COLN="02" LANF="00" LBLK="00" LREP="00" TYPE="CHAR" AUTH="101" AGLT="00" ADEZ="00" STXT="Groupe de Serveur"/>
      <dynprofield FNAM="GS_GLOBAL_DATA-S_TASK_WIZARD_DATA-SERVER_DEFAULT" DIDX="0000" FLG1="80" FLG2="00" FLG3="80" FILL="A" FMB1="00" FMB2="00" LENG="01" LINE="02" COLN="04" LANF="00" LBLK="00" LREP="00" TYPE="CHAR" AUTH="102" ITYP="C" AGLT="00" ADEZ="00" RES1="                                                                                                                                                                       PGRFC_SEL"/>
      <dynprofield FNAM="SERVER_DEFAULT_TITLE" DIDX="0000" FLG1="00" FLG2="00" FLG3="00" FMB1="30" FMB2="00" LENG="25" LINE="02" COLN="06" LANF="00" LBLK="00" LREP="00" TYPE="CHAR" ITYP="0" AGLT="00" ADEZ="00" STXT="Utiliser Groupe de Serveur par défaut" RES1="                                                                                                                                                                                                                                                         X"/>
@@ -2700,13 +3031,13 @@ PROCESS AFTER INPUT.
      <dynprofield FNAM="TRACE_ACTIV_TITLE" DIDX="0000" FLG1="00" FLG2="00" FLG3="00" FMB1="30" FMB2="00" LENG="0D" LINE="0B" COLN="23" LANF="00" LBLK="00" LREP="00" TYPE="CHAR" ITYP="0" AGLT="00" ADEZ="00" STXT="Activer Trace" RES1="                                                                                                                                                                                                                                                         X"/>
      <dynprofield DIDX="0000" FLG1="80" FLG2="10" FLG3="08" FMB1="00" FMB2="00" LENG="14" LINE="FF" COLN="01" LTYP="O" LANF="00" LBLK="00" LREP="00" TYPE="CHAR" AGLT="00" ADEZ="00" STXT="____________________"/>
      <dynproflowsource>PROCESS BEFORE OUTPUT.
-  MODULE pbo_0500.
+  MODULE pbo_0600.
 
 PROCESS AFTER INPUT.
   MODULE wz_user_command_wizard.
 * user defined modules
 
-  MODULE usr_check_consistency_0500.</dynproflowsource>
+  MODULE usr_check_consistency_0600.</dynproflowsource>
     </dynpro>
    </dynpros>
    <pfstatus>
@@ -3039,7 +3370,6 @@ FORM cb_process_step_start                                  &quot;#EC CALLED
       back                        = 02.
   swf_evaluate command.
 
-
 ENDFORM.                    &quot; CB_PROCESS_STEP_START
 *&amp;---------------------------------------------------------------
 *&amp;      FORM  CB_PROCESS_STEP_0200
@@ -3078,7 +3408,6 @@ FORM cb_process_step_0200                                   &quot;#EC CALLED
 * set subscreen data from global screen data back to the global
 * wizard area
   PERFORM usr_get_subscreen_data_0200.
-
 
 ENDFORM.                    &quot; CB_PROCESS_STEP_0200
 *&amp;---------------------------------------------------------------
@@ -3119,7 +3448,6 @@ FORM cb_process_step_0300                                   &quot;#EC CALLED
 * wizard area
   PERFORM usr_get_subscreen_data_0300.
 
-
 ENDFORM.                    &quot; CB_PROCESS_STEP_0300
 
 *&amp;---------------------------------------------------------------
@@ -3159,7 +3487,6 @@ FORM cb_process_step_0400                                   &quot;#EC CALLED
 * set subscreen data from global screen data back to the global
 * wizard area
   PERFORM usr_get_subscreen_data_0400.
-
 
 ENDFORM.                    &quot; CB_PROCESS_STEP_0400
 
@@ -3202,8 +3529,47 @@ FORM cb_process_step_0500                                   &quot;#EC CALLED
 * wizard area
   PERFORM usr_get_subscreen_data_0500.
 
-
 ENDFORM.                    &quot; CB_PROCESS_STEP_0400
+
+*&amp;---------------------------------------------------------------
+*&amp;      FORM  CB_PROCESS_STEP_0600
+*&amp;---------------------------------------------------------------
+FORM cb_process_step_0600                                   &quot;#EC CALLED
+        TABLES
+           container
+        USING
+           command.
+* begin of local data definition
+  DATA:
+    l_wizard    TYPE swf_wizard.
+* end of local data definition
+
+* initialize wizard step
+* the wizard has one unique title while it is running
+  l_wizard-title      = text-ttl.
+  l_wizard-descobject = &apos;ZTASK_WIZARD_006&apos;
+  . &quot;this is a text in dialog (SE61)
+  l_wizard-subscreen1 = &apos;0600&apos;.
+  l_wizard-subscpool1 = &apos;SAPLZTASK_WIZARD&apos;.
+
+* set subscreen data (transport data out of global wizard data
+* to global screen data )
+  PERFORM usr_set_subscreen_data_0600.
+
+* call wizard screen
+  CALL FUNCTION &apos;SWF_WIZARD_CALL&apos;
+    EXPORTING
+      wizard_data                 = l_wizard
+    EXCEPTIONS
+      operation_cancelled_by_user = 01
+      back                        = 02.
+  swf_evaluate command.
+
+* set subscreen data from global screen data back to the global
+* wizard area
+  PERFORM usr_get_subscreen_data_0600.
+
+ENDFORM.                    &quot; CB_PROCESS_STEP_0600
 
 *&amp;---------------------------------------------------------------
 *&amp;      FORM  CB_PROCESS_STEP_FINISH
@@ -3257,8 +3623,7 @@ ENDFORM.                    &quot; CB_PROCESS_STEP_FINISH</include_source>
 *&amp;---------------------------------------------------------------------*
 *&amp;      Form  WZ_DEFINE_WIZARD_STEPS
 *&amp;---------------------------------------------------------------------*
-FORM wz_define_wizard_steps
-        TABLES
+FORM wz_define_wizard_steps TABLES
            p_wizard_steps   STRUCTURE swf_wizdef.
   DATA:
     l_wizard_step   TYPE swf_wizdef.
@@ -3286,11 +3651,15 @@ FORM wz_define_wizard_steps
   l_wizard_step-text      = text-005.
   APPEND l_wizard_step TO p_wizard_steps.
 
-  l_wizard_step-form      = &apos;CB_PROCESS_STEP_FINISH&apos;.       &quot;#EC NOTEXT
+  l_wizard_step-form      = &apos;CB_PROCESS_STEP_0600&apos;.         &quot;#EC NOTEXT
   l_wizard_step-text      = text-006.
   APPEND l_wizard_step TO p_wizard_steps.
 
+  l_wizard_step-form      = &apos;CB_PROCESS_STEP_FINISH&apos;.       &quot;#EC NOTEXT
+  l_wizard_step-text      = text-007.
+  APPEND l_wizard_step TO p_wizard_steps.
 *&amp;WZ_PATTERN_WIZARD_STEPS_END&amp;
+
 ENDFORM.                    &quot; WZ_DEFINE_WIZARD_STEPS
 
 *&amp;---------------------------------------------------------------------*
@@ -3469,6 +3838,25 @@ ENDMODULE.
 *       Module Affichage Ecran 0500
 *----------------------------------------------------------------------*
 MODULE pbo_0500 OUTPUT.
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+  &quot; -----------------------------------------------------------
+  &quot; Affichage de l&apos;ALV
+  &quot; -----------------------------------------------------------
+
+  PERFORM 0500_alv_display.
+
+ENDMODULE.
+
+*&amp;---------------------------------------------------------------------*
+*&amp;      Module  PBO_0600  OUTPUT
+*&amp;---------------------------------------------------------------------*
+*       Module Affichage Ecran 0600
+*----------------------------------------------------------------------*
+MODULE pbo_0600 OUTPUT.
 
 ***==================================================================***
 **                           TRAITEMENT                               **
@@ -3771,6 +4159,136 @@ FORM 0400_fieldcatalog_set.
 
 ENDFORM.
 
+
+*&amp;---------------------------------------------------------------------*
+*&amp;      Form  0500_ALV_DISPLAY
+*&amp;---------------------------------------------------------------------*
+*       Affichage de l&apos;ALV
+*----------------------------------------------------------------------*
+FORM 0500_alv_display .
+
+***==================================================================***
+**                           TRAITEMENT                               **
+***==================================================================***
+
+  &quot; -----------------------------------------------------------
+  &quot; Affichage de l&apos;ALV
+  &quot; -----------------------------------------------------------
+
+  IF NOT gs_global_data-s_alv_container-s_alv_container_0500-o_alv IS BOUND.
+    TRY.
+        &quot; -----------------------------------------------------------
+        &quot; Initialisation de l&apos;ALV
+        &quot; -----------------------------------------------------------
+
+        &quot; Création de l&apos;instance de l&apos;ALV
+        CREATE OBJECT gs_global_data-s_alv_container-s_alv_container_0500-o_alv
+          EXPORTING
+            iv_container_name = &apos;CC_ALV_0500&apos;.  &quot;#EC NOTEXT
+
+      CATCH cx_create_error.
+        &quot; Une erreur est survenue
+        &quot;&quot;  --&gt; Arrêt du traitement
+        RETURN.
+
+    ENDTRY.
+
+    &quot; -----------------------------------------------------------
+    &quot; Initialisation du FC
+    &quot; -----------------------------------------------------------
+
+    PERFORM 0500_fieldcatalog_set.
+
+  ENDIF.
+
+  TRY.
+      &quot; -----------------------------------------------------------
+      &quot; Affichage de l&apos;ALV
+      &quot; -----------------------------------------------------------
+
+      &quot; Affichage des données
+      gs_global_data-s_alv_container-s_alv_container_0500-o_alv-&gt;display(
+        EXPORTING
+          it_fieldcatalog = gs_global_data-s_alv_container-s_alv_container_0500-t_fieldcatalog
+        CHANGING
+          ct_display_data = gs_global_data-s_alv_container-s_alv_container_0500-t_data
+      ).
+
+    CATCH cx_salv_call_after_1st_display.
+      &quot; Une erreur est survenue
+      &quot;&quot;  --&gt; Arrêt du traitement
+      RETURN.
+
+  ENDTRY.
+
+ENDFORM.
+
+*&amp;---------------------------------------------------------------------*
+*&amp;      Form  0500_FIELDCATALOG_SET
+*&amp;---------------------------------------------------------------------*
+*       Initialisation du FC
+*----------------------------------------------------------------------*
+FORM 0500_fieldcatalog_set.
+
+***------------------------------------------------------------------***
+**                            STRUCTURE                               **
+***------------------------------------------------------------------***
+  DATA :
+        ls_fieldcatalog TYPE lvc_s_fcat.
+
+***------------------------------------------------------------------***
+**                            INSTANCES                               **
+***------------------------------------------------------------------***
+  DATA :
+    lo_tabledescr  TYPE REF TO cl_abap_tabledescr,
+    lo_structdescr TYPE REF TO cl_abap_structdescr.
+
+***==================================================================***
+**                             TRAITEMENT                             **
+***==================================================================***
+
+  &quot; -----------------------------------------------------------
+  &quot; Sélection des données
+  &quot; -----------------------------------------------------------
+
+  lo_tabledescr ?= cl_abap_structdescr=&gt;describe_by_data( gs_global_data-s_alv_container-s_alv_container_0500-t_data ).
+  lo_structdescr ?= lo_tabledescr-&gt;get_table_line_type( ).
+
+  &quot;&quot;  --&gt; Initialisation du FC
+  LOOP AT cl_salv_data_descr=&gt;read_structdescr( lo_structdescr )
+      ASSIGNING FIELD-SYMBOL(&lt;lfs_s_dfies&gt;).
+
+    CLEAR : ls_fieldcatalog.
+
+    &quot; Initialisation des données
+    MOVE-CORRESPONDING &lt;lfs_s_dfies&gt; TO ls_fieldcatalog.
+
+    &quot; Initialisation de la Position
+    ls_fieldcatalog-col_pos = sy-tabix.
+
+    &quot; Initialisatino Indicateur Aide à la Recherche Disponible
+    ls_fieldcatalog-f4availabl = abap_true.
+
+    CASE &lt;lfs_s_dfies&gt;-fieldname.
+
+      WHEN &apos;REPID&apos;.                                         &quot;#EC NOTEXT
+        &quot; Progamme
+        &quot;&quot;  -&gt; Initialisation Référence DDIC
+        ls_fieldcatalog-ref_table = &apos;TRDIR&apos;.       &quot;#EC NOTEXT
+        ls_fieldcatalog-ref_field = &apos;NAME&apos;.                 &quot;#EC NOTEXT
+
+      WHEN OTHERS.
+        &quot; Autres
+
+    ENDCASE.
+
+    &quot; Ajout de l&apos;entrée
+    APPEND ls_fieldcatalog TO gs_global_data-s_alv_container-s_alv_container_0500-t_fieldcatalog.
+
+  ENDLOOP.
+
+ENDFORM.
+
 *&amp;---------------------------------------------------------------------*
 *&amp;      Form  USR_WIZARD_RETURN_DATA_SET
 *&amp;---------------------------------------------------------------------*
@@ -3828,6 +4346,19 @@ FORM usr_wizard_return_data_set CHANGING es_task_wizard_data TYPE ztec_s_task_wi
     &quot; Initialisation
     ls_task_call_process-class_name  = &lt;lfs_s_data_0400&gt;-classname.
     ls_task_call_process-method_name = &lt;lfs_s_data_0400&gt;-methodname.
+
+    &quot; Ajout de l&apos;entrée
+    APPEND ls_task_call_process TO es_task_wizard_data-t_task_call_process.
+
+  ENDLOOP.
+
+  &quot; Alimentation table des traitements Programme
+  LOOP AT gs_global_data-s_alv_container-s_alv_container_0500-t_data ASSIGNING FIELD-SYMBOL(&lt;lfs_s_data_0500&gt;).
+
+    CLEAR : ls_task_call_process.
+
+    &quot; Initialisation
+    ls_task_call_process-repid_name = &lt;lfs_s_data_0500&gt;-repid.
 
     &quot; Ajout de l&apos;entrée
     APPEND ls_task_call_process TO es_task_wizard_data-t_task_call_process.
@@ -4727,6 +5258,14 @@ TYPES : tt_alv_display_data_0400 TYPE STANDARD TABLE OF ts_alv_display_data_0400
         WITH NON-UNIQUE KEY primary_key COMPONENTS classname methodname.
 
 TYPES :
+  BEGIN OF ts_alv_display_data_0500,
+    repid TYPE trdir-name,
+  END OF   ts_alv_display_data_0500.
+
+TYPES : tt_alv_display_data_0500 TYPE STANDARD TABLE OF ts_alv_display_data_0500
+        WITH NON-UNIQUE KEY primary_key COMPONENTS repid.
+
+TYPES :
   BEGIN OF ts_alv_container_0300,
     o_alv          TYPE REF TO lcl_alv_generic,
     t_data         TYPE tt_alv_display_data_0300,
@@ -4741,9 +5280,17 @@ TYPES :
   END OF   ts_alv_container_0400.
 
 TYPES :
+  BEGIN OF ts_alv_container_0500,
+    o_alv          TYPE REF TO lcl_alv_generic,
+    t_data         TYPE tt_alv_display_data_0500,
+    t_fieldcatalog TYPE lvc_t_fcat,
+  END OF   ts_alv_container_0500.
+
+TYPES :
   BEGIN OF ts_alv_container,
     s_alv_container_0300 TYPE ts_alv_container_0300,
     s_alv_container_0400 TYPE ts_alv_container_0400,
+    s_alv_container_0500 TYPE ts_alv_container_0500,
   END OF   ts_alv_container.
 
 TYPES :
@@ -4757,7 +5304,7 @@ TYPES :
 DATA : gs_global_data TYPE ts_global_data.
 
 
-CONSTANTS : gc_display_like TYPE sy-msgty VALUE &apos;E&apos;. &quot;#EC NOTEXT</include_source>
+CONSTANTS : gc_display_like TYPE sy-msgty VALUE &apos;E&apos;.        &quot;#EC NOTEXT</include_source>
    </include>
    <include NAME="LZTASK_WIZARDUSR" VARCL="X" SUBC="I" LEVL="740" RMAND="000" RLOAD="D" LDBNAME="D$S" UCCHECK="X">
     <include_source>*----------------------------------------------------------------------*
@@ -5261,6 +5808,88 @@ FORM usr_check_consistency_0500 CHANGING p_error TYPE sy-input.
 * initialize error indicator
   CLEAR: p_error.
 
+ENDFORM.                    &quot; USR_CHECK_CONSISTENCY_0500
+
+***==================================================================***
+**                              0600                                  **
+***==================================================================***
+
+*&amp;--------------------------------------------------------------*
+*&amp;      Form  USR_SET_SUBSCREEN_DATA_0600
+*&amp;--------------------------------------------------------------*
+FORM usr_set_subscreen_data_0600.
+
+***===========================================================***
+**                       TRAITEMENT                            **
+***===========================================================***
+
+ENDFORM.                    &quot; USR_SET_SUBSCREEN_DATA_0600
+
+*&amp;--------------------------------------------------------------*
+*&amp;      Form  USR_GET_SUBSCREEN_DATA_0600
+*&amp;--------------------------------------------------------------*
+FORM usr_get_subscreen_data_0600.
+
+***===========================================================***
+**                       TRAITEMENT                            **
+***===========================================================***
+
+ENDFORM.                    &quot; USR_GET_SUBSCREEN_DATA_0600
+
+*&amp;--------------------------------------------------------------*
+*&amp;      Module  USR_CHECK_CONSISTENCY_0600
+*&amp;--------------------------------------------------------------*
+MODULE usr_check_consistency_0600 INPUT.
+
+***===========================================================***
+**                       TRAITEMENT                            **
+***===========================================================***
+
+  &quot; -----------------------------------------------------------
+  &quot; Traitement après Action Utilisateur
+  &quot; -----------------------------------------------------------
+
+  &quot; Suivant l&apos;Action utilisateur
+  CASE g_save_ok_code.
+
+    WHEN wizard_command_continue.
+      &quot; L&apos;utilisateur appuie sur &quot;Continuer&quot;
+      &quot;&quot;  --&gt; Contrôle saisie utilisateur
+      PERFORM usr_check_consistency_0600 CHANGING g_error.
+
+    WHEN OTHERS.
+      &quot; Autres commande
+
+  ENDCASE.
+
+  &quot; -----------------------------------------------------------
+  &quot; Traitement de Fin
+  &quot; -----------------------------------------------------------
+
+  IF NOT g_error IS INITIAL.
+    &quot; Une erreur est survenue
+    &quot;&quot;  --&gt; Reste sur l&apos;écran actuel
+    swf_refresh.
+
+  ENDIF.
+
+ENDMODULE.                  &quot; USR_CHECK_CONSISTENCY_0600 INPUT
+
+*&amp;--------------------------------------------------------------*
+*&amp;      Form  USR_CHECK_CONSISTENCY_0600
+*&amp;--------------------------------------------------------------*
+FORM usr_check_consistency_0600 CHANGING p_error TYPE sy-input.
+
+***===========================================================***
+**                       TRAITEMENT                            **
+***===========================================================***
+
+* here we check if all entries on this screen are consistent
+* (field checks have to be done on the screen, not here)
+
+* initialize error indicator
+  CLEAR: p_error.
+
   IF gs_global_data-s_task_wizard_data-server_user EQ abap_true.
     &quot; Groupe de Serveur choisi manuellement
     &quot;&quot;  --&gt; Contrôle Groupe de Serveur saisie
@@ -5268,7 +5897,7 @@ FORM usr_check_consistency_0500 CHANGING p_error TYPE sy-input.
 
   ENDIF.
 
-ENDFORM.                    &quot; USR_CHECK_CONSISTENCY_0500
+ENDFORM.                    &quot; USR_CHECK_CONSISTENCY_0600
 
 *&amp;---------------------------------------------------------------------*
 *&amp;      Form  GRFC_CHECK
@@ -5482,7 +6111,7 @@ FORM target_selscreen_data_set USING iv_target_repid TYPE sy-repid
         &quot; Include Existant
         &quot;&quot;  --&gt; Initialisation Nom Incrémenter
         lv_iteration = lv_count + 1.
-        lv_progname  = |{ iv_target_repid }_SEL{ lv_iteration WIDTH = 2 }|.        &quot;#EC NOTEXT
+        lv_progname  = |{ iv_target_repid }_SEL{ lv_iteration WIDTH = 2 }|. &quot;#EC NOTEXT
 
       ENDIF.
 
@@ -6383,12 +7012,6 @@ SELECTION-SCREEN END OF BLOCK tb.
 SELECTION-SCREEN END OF BLOCK ta.
 &quot;#ANCHOR-SELECTION-SCREEN-END#</source>
  </PROG>
- <TABL TABNAME="ZTEC_S_TASK_WIZARD_INCL" DDLANGUAGE="F" TABCLASS="INTTAB" DATMIN="0000000000" DATMAX="0000000000" DATAVG="0000000000" DDTEXT="Tâche - Données Assistant - Pour Gestion Include" AUTHCLASS="00" PROZPUFF="000" EXCLASS="1">
-  <dd09l AS4VERS="0000" SCHFELDANZ="000"/>
-  <dd03p TABNAME="ZTEC_S_TASK_WIZARD_INCL" FIELDNAME="INCLUDE_NAME" DDLANGUAGE="F" POSITION="0001" ROLLNAME="PROGNAME" ADMINFIELD="0" INTTYPE="C" INTLEN="000080" DOMNAME="PROGNAME" ROUTPUTLEN="000000" HEADLEN="40" SCRLEN1="08" SCRLEN2="12" SCRLEN3="12" DTELMASTER="D" DATATYPE="CHAR" LENG="000040" OUTPUTLEN="000040" DECIMALS="000000" MASK="  CHARE" MASKLEN="0000" DDTEXT="Nom du programme ABAP" REPTEXT="Progr." SCRTEXT_S="Program." SCRTEXT_M="Nom de progr" SCRTEXT_L="Programme" DOMNAME3L="PROGNAME" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
-  <dd03p TABNAME="ZTEC_S_TASK_WIZARD_INCL" FIELDNAME="INCLUDE_CREATE" DDLANGUAGE="F" POSITION="0002" ROLLNAME="XSDBOOLEAN" ADMINFIELD="0" INTTYPE="C" INTLEN="000002" DOMNAME="XSDBOOLEAN" ROUTPUTLEN="000000" HEADLEN="13" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="CHAR" LENG="000001" OUTPUTLEN="000001" DECIMALS="000000" VALEXI="X" MASK="  CHARE" MASKLEN="0000" DDTEXT="Valeur de vérité XSD : vrai/faux [ext.]" REPTEXT="Val. vérité" SCRTEXT_S="Val.vérité" SCRTEXT_M="Val. de vérité" SCRTEXT_L="Valeur de vérité" DOMNAME3L="XSDBOOLEAN" SHLPORIGIN="F" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
-  <dd03p TABNAME="ZTEC_S_TASK_WIZARD_INCL" FIELDNAME="INCLUDE_CHANGE" DDLANGUAGE="F" POSITION="0003" ROLLNAME="XSDBOOLEAN" ADMINFIELD="0" INTTYPE="C" INTLEN="000002" DOMNAME="XSDBOOLEAN" ROUTPUTLEN="000000" HEADLEN="13" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="CHAR" LENG="000001" OUTPUTLEN="000001" DECIMALS="000000" VALEXI="X" MASK="  CHARE" MASKLEN="0000" DDTEXT="Valeur de vérité XSD : vrai/faux [ext.]" REPTEXT="Val. vérité" SCRTEXT_S="Val.vérité" SCRTEXT_M="Val. de vérité" SCRTEXT_L="Valeur de vérité" DOMNAME3L="XSDBOOLEAN" SHLPORIGIN="F" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
- </TABL>
  <TABL TABNAME="ZTEC_S_TASK_WIZARD_DATA" DDLANGUAGE="F" TABCLASS="INTTAB" DATMIN="0000000000" DATMAX="0000000000" DATAVG="0000000000" DDTEXT="Tâche - Données Assistant" AUTHCLASS="00" PROZPUFF="000" EXCLASS="1">
   <dd09l AS4VERS="0000" SCHFELDANZ="000"/>
   <dd03p TABNAME="ZTEC_S_TASK_WIZARD_DATA" FIELDNAME="GRFC" DDLANGUAGE="F" POSITION="0001" ROLLNAME="RFCGR" ADMINFIELD="0" INTTYPE="C" INTLEN="000040" DOMNAME="RZLLI_ACN" ROUTPUTLEN="000000" HEADLEN="20" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="CHAR" LENG="000020" OUTPUTLEN="000020" DECIMALS="000000" LOWERCASE="X" MASK="  CHARE" MASKLEN="0000" DDTEXT="Groupe de serveurs RFC pour traitement parallèle" REPTEXT="Groupe de serveurs" SCRTEXT_S="Grp.srv." SCRTEXT_M="Groupe serveurs" SCRTEXT_L="Groupe de serveurs" DOMNAME3L="RZLLI_ACN" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
@@ -6417,222 +7040,10 @@ SELECTION-SCREEN END OF BLOCK ta.
   <dd03p TABNAME="ZTEC_S_TASK_WIZARD_DATA" FIELDNAME="DATA_COMPRESS_LINE_BY_LINE" DDLANGUAGE="F" POSITION="0024" ROLLNAME="ZTASK_DATA_COMPRESS_LINE" ADMINFIELD="0" INTTYPE="C" INTLEN="000002" DOMNAME="XSDBOOLEAN" ROUTPUTLEN="000000" HEADLEN="55" SCRLEN1="10" SCRLEN2="20" SCRLEN3="40" DTELMASTER="F" DATATYPE="CHAR" LENG="000001" OUTPUTLEN="000001" DECIMALS="000000" VALEXI="X" MASK="  CHARE" MASKLEN="0000" DDTEXT="Tâche - Données - Compression données (ligne)" REPTEXT="Compression données lignes / lignes" SCRTEXT_S="Comp." SCRTEXT_M="Comp. L/L" SCRTEXT_L="Compression données" DOMNAME3L="XSDBOOLEAN" SHLPORIGIN="F" DEPTH="01" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
   <dd03p TABNAME="ZTEC_S_TASK_WIZARD_DATA" FIELDNAME="DATA_COMPRESS_GLOBAL" DDLANGUAGE="F" POSITION="0025" ROLLNAME="ZTASK_DATA_COMPRESS_GLOBAL" ADMINFIELD="0" INTTYPE="C" INTLEN="000002" DOMNAME="XSDBOOLEAN" ROUTPUTLEN="000000" HEADLEN="28" SCRLEN1="09" SCRLEN2="15" SCRLEN3="20" DTELMASTER="F" DATATYPE="CHAR" LENG="000001" OUTPUTLEN="000001" DECIMALS="000000" VALEXI="X" MASK="  CHARE" MASKLEN="0000" DDTEXT="Tâche - Données - Compression données globales" REPTEXT="Compression données globales" SCRTEXT_S="Comp. glb" SCRTEXT_M="Comp. globale" SCRTEXT_L="Compression globale" DOMNAME3L="XSDBOOLEAN" SHLPORIGIN="F" DEPTH="01" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
  </TABL>
- <CLAS CLSNAME="ZCL_IM_WB_OBJ_CTMENU" VERSION="1" LANGU="F" DESCRIPT="Classe d&apos;implémentation pour implémentation de Business Add-" CATEGORY="00" EXPOSURE="2" STATE="1" RELEASE="0" CLSFINAL="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 " ZSAPLINK_PLUGIN_MAJOR_VERSION="0 " ZSAPLINK_PLUGIN_MINOR_VERSION="1 " ZSAPLINK_PLUGIN_BUILD_VERSION="0 " ZSAPLINK_PLUGIN_INFO1="ZSAPLINK_CLASS is part of the main ZSAPLINK project --&gt; This plugin found there instead of ZSAPLINK_PLUGINS projects" ZSAPLINK_PLUGIN_INFO2="SAPLINK homepage: https://www.assembla.com/spaces/saplink/wiki" ZSAPLINK_PLUGIN_INFO3="Download from https://www.assembla.com/code/saplink/subversion/nodes" ZSAPLINK_PLUGIN_INFO4="and navigate to:  trunk -&gt; core -&gt; ZSAPLINK -&gt; CLAS -&gt; ZSAPLINK_CLASS.slnk">
-  <implementing CLSNAME="ZCL_IM_WB_OBJ_CTMENU" REFCLSNAME="IF_EX_WB_OBJ_CTMENU" VERSION="1" EXPOSURE="2" STATE="1" RELTYPE="1" EDITORDER="1 "/>
-  <localImplementation>*&quot;* use this source file for the definition and implementation of
-*&quot;* local helper classes, interface definitions and type
-*&quot;* declarations</localImplementation>
-  <localTypes>*&quot;* use this source file for any type of declarations (class
-*&quot;* definitions, interfaces or type declarations) you need for
-*&quot;* components in the private section</localTypes>
-  <localMacros>*&quot;* use this source file for any macro definitions you need
-*&quot;* in the implementation part of the class</localMacros>
-  <textPool>
-   <language SPRAS="F">
-    <textElement ID="I" KEY="A01" ENTRY="Assistant" LENGTH="19 "/>
-    <textElement ID="I" KEY="N01" ENTRY="Cadriciel Tâche" LENGTH="15 "/>
-   </language>
-  </textPool>
-  <attribute CLSNAME="ZCL_IM_WB_OBJ_CTMENU" CMPNAME="MC_FC_TASK_WZ" VERSION="1" LANGU="F" DESCRIPT="Code de fonction" EXPOSURE="2" STATE="1" EDITORDER="1 " ATTDECLTYP="1" ATTVALUE="&apos;Z_WZ_TASK&apos;" ATTEXPVIRT="0" TYPTYPE="1" TYPE="UI_FUNC" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
-  <attribute CLSNAME="ZCL_IM_WB_OBJ_CTMENU" CMPNAME="MO_TASK_CONTEXT_MENU" VERSION="1" LANGU="F" EXPOSURE="0" STATE="1" EDITORDER="1 " ATTDECLTYP="1" ATTEXPVIRT="0" TYPTYPE="3" TYPE="CL_CTMENU" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
-  <interfaceMethod CLSNAME="ZCL_IM_WB_OBJ_CTMENU" CPDNAME="IF_EX_WB_OBJ_CTMENU~UPDATE_CONTEXT_MENU">
-   <source>METHOD if_ex_wb_obj_ctmenu~update_context_menu.
-
-***==================================================================***
-**                           TRAITEMENT                               **
-***==================================================================***
-
-  &quot; -----------------------------------------------------------
-  &quot; Ajout Menu Contextuelle personnalisé
-  &quot; -----------------------------------------------------------
-
-  &quot; Suivant le Noeud séléctionné
-  CASE flt_val.
-
-    WHEN &apos;P&apos;.                                               &quot;#EC NOTEXT
-      &quot; Programme
-      &quot;&quot;  --&gt; Ajout Elèment Menu Contextuelle lié aux Tâches
-      me-&gt;task_ctxt_menu_add( p_context_menu ).
-
-    WHEN OTHERS.
-      &quot; Autres
-
-  ENDCASE.
-
-ENDMETHOD.</source>
-  </interfaceMethod>
-  <method CLSNAME="ZCL_IM_WB_OBJ_CTMENU" CMPNAME="CLASS_CONSTRUCTOR" VERSION="1" LANGU="F" DESCRIPT="CLASS_CONSTRUCTOR" EXPOSURE="2" STATE="1" EDITORDER="1 " DISPID="0 " MTDTYPE="2" MTDDECLTYP="1" BCMTDCAT="00" BCMTDSYN="0">
-   <source>METHOD class_constructor.
-*&amp;---------------------------------------------------------------------*
-*&amp; Méthode         : CLASS_CONSTRUCTOR                                 *
-*&amp; Classe          : ZCL_IM_WB_OBJ_CTMENU                              *
-*&amp; Description     : Constructeur Statique - Menu Contextuel           *
-*                                                                      *
-*&amp;---------------------------------------------------------------------*
-*&amp;---------------------------------------------------------------------*
-*&amp; Créé par     : Olivier Véhier                                       *
-*                                                                      *
-*&amp; Créé le      : 22/07/2015                                           *
-*                                                                      *
-*&amp;---------------------------------------------------------------------*
-*&amp;---------------------------------------------------------------------*
-*&amp; Liste des modifications                                             *
-*&amp; Auteur      Date       Signature  Objet de la modification          *
-*&amp;---------------------------------------------------------------------*
-*&amp;---------------------------------------------------------------------*
-*                                                                      *
-
-***==================================================================***
-**                           TRAITEMENT                               **
-***==================================================================***
-
-  &quot; -----------------------------------------------------------
-  &quot; Initialisation Attributs
-  &quot; -----------------------------------------------------------
-
-  IF NOT zcl_im_wb_obj_ctmenu=&gt;mo_task_context_menu IS BOUND.
-    &quot; Menu Contextuel Tâche non créé
-    &quot;&quot;  --&gt; Création du Menu Contextuel
-    zcl_im_wb_obj_ctmenu=&gt;task_ctxt_menu_set( ).
-
-  ENDIF.
-
-ENDMETHOD.</source>
-  </method>
-  <method CLSNAME="ZCL_IM_WB_OBJ_CTMENU" CMPNAME="CONSTRUCTOR" VERSION="1" LANGU="F" DESCRIPT="CONSTRUCTOR" EXPOSURE="2" STATE="1" EDITORDER="2 " DISPID="0 " MTDTYPE="2" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
-   <source>METHOD constructor.
-*&amp;---------------------------------------------------------------------*
-*&amp; Méthode         : CONSTRUCTOR                                       *
-*&amp; Classe          : ZCL_IM_WB_OBJ_CTMENU                              *
-*&amp; Description     : Constructeur BADI Modif. Menu Contextuel          *
-*                                                                      *
-*&amp;---------------------------------------------------------------------*
-*&amp;---------------------------------------------------------------------*
-*&amp; Créé par     : Olivier Véhier                                       *
-*                                                                      *
-*&amp; Créé le      : 22/07/2015                                           *
-*                                                                      *
-*&amp;---------------------------------------------------------------------*
-*&amp;---------------------------------------------------------------------*
-*&amp; Liste des modifications                                             *
-*&amp; Auteur      Date       Signature  Objet de la modification          *
-*&amp;---------------------------------------------------------------------*
-*&amp;---------------------------------------------------------------------*
-*                                                                      *
-
-***==================================================================***
-**                           TRAITEMENT                               **
-***==================================================================***
-
-  &quot; -----------------------------------------------------------
-  &quot; Initialisation Attributs
-  &quot; -----------------------------------------------------------
-
-  IF NOT zcl_im_wb_obj_ctmenu=&gt;mo_task_context_menu IS BOUND.
-    &quot; Menu Contextuel Tâche non créé
-    &quot;&quot;  --&gt; Création du Menu Contextuel
-    zcl_im_wb_obj_ctmenu=&gt;task_ctxt_menu_set( ).
-
-  ENDIF.
-
-ENDMETHOD.</source>
-  </method>
-  <method CLSNAME="ZCL_IM_WB_OBJ_CTMENU" CMPNAME="TASK_CTXT_MENU_ADD" VERSION="1" LANGU="F" DESCRIPT="Tâche - Menu Contextuel - Ajout" EXPOSURE="0" STATE="1" EDITORDER="3 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
-   <parameter CLSNAME="ZCL_IM_WB_OBJ_CTMENU" CMPNAME="TASK_CTXT_MENU_ADD" SCONAME="IO_CONTEXT_MENU" VERSION="1" LANGU="F" DESCRIPT="Context Menu" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="3" TYPE="CL_CTMENU"/>
-   <source>METHOD task_ctxt_menu_add.
-*&amp;---------------------------------------------------------------------*
-*&amp; Méthode         : TASK_CTXT_MENU_ADD                                *
-*&amp; Classe          : ZCL_IM_WB_OBJ_CTMENU                              *
-*&amp; Description     : Tâche - Menu Contextuel - Ajout au Standard       *
-*                                                                      *
-*&amp;---------------------------------------------------------------------*
-*&amp;---------------------------------------------------------------------*
-*&amp; Créé par     : Olivier Véhier                                       *
-*                                                                      *
-*&amp; Créé le      : 22/07/2015                                           *
-*                                                                      *
-*&amp;---------------------------------------------------------------------*
-*&amp;---------------------------------------------------------------------*
-*&amp; Liste des modifications                                             *
-*&amp; Auteur      Date       Signature  Objet de la modification          *
-*&amp;---------------------------------------------------------------------*
-*&amp;---------------------------------------------------------------------*
-*                                                                      *
-
-***==================================================================***
-**                           TRAITEMENT                               **
-***==================================================================***
-
-  &quot; -----------------------------------------------------------
-  &quot; Ajout du Groupe Tâche dans le Menu Contextuel
-  &quot; -----------------------------------------------------------
-
-  IF NOT zcl_im_wb_obj_ctmenu=&gt;mo_task_context_menu IS BOUND.
-    &quot; Menu Contextuel Tâche non créé
-    &quot;&quot;  --&gt; Création du Menu Contextuel
-    zcl_im_wb_obj_ctmenu=&gt;task_ctxt_menu_set( ).
-
-  ENDIF.
-
-  &quot; Ajout Sous-Menu Tâche
-  io_context_menu-&gt;add_separator( ).
-  io_context_menu-&gt;add_submenu(
-      menu = zcl_im_wb_obj_ctmenu=&gt;mo_task_context_menu
-      text = text-n01
-  ).
-
-ENDMETHOD.</source>
-  </method>
-  <method CLSNAME="ZCL_IM_WB_OBJ_CTMENU" CMPNAME="TASK_CTXT_MENU_SET" VERSION="1" LANGU="F" DESCRIPT="Tâche - Menu Contextuel - Initialisation" EXPOSURE="0" STATE="1" EDITORDER="4 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="1" BCMTDCAT="00" BCMTDSYN="0">
-   <source>METHOD task_ctxt_menu_set.
-*&amp;---------------------------------------------------------------------*
-*&amp; Méthode         : TASK_CTXT_MENU_SET                                *
-*&amp; Classe          : ZCL_IM_WB_OBJ_CTMENU                              *
-*&amp; Description     : Tâche - Menu Contextuel - Initialisation          *
-*                                                                      *
-*&amp;---------------------------------------------------------------------*
-*&amp;---------------------------------------------------------------------*
-*&amp; Créé par     : Olivier Véhier                                       *
-*                                                                      *
-*&amp; Créé le      : 22/07/2015                                           *
-*                                                                      *
-*&amp;---------------------------------------------------------------------*
-*&amp;---------------------------------------------------------------------*
-*&amp; Liste des modifications                                             *
-*&amp; Auteur      Date       Signature  Objet de la modification          *
-*&amp;---------------------------------------------------------------------*
-*&amp;---------------------------------------------------------------------*
-*                                                                      *
-
-***==================================================================***
-**                           TRAITEMENT                               **
-***==================================================================***
-
-  &quot; -----------------------------------------------------------
-  &quot; Tâche - Création du Menu Contextuel
-  &quot; -----------------------------------------------------------
-
-  IF zcl_im_wb_obj_ctmenu=&gt;mo_task_context_menu IS BOUND.
-    &quot; Menu Contextuel déjà initialisé
-    &quot;&quot;  --&gt; Arrêt du traitemetn
-    RETURN.
-
-  ENDIF.
-
-  &quot; Création instance du Menu Contextuel
-  zcl_im_wb_obj_ctmenu=&gt;mo_task_context_menu = NEW cl_ctmenu( ).
-
-  &quot; -----------------------------------------------------------
-  &quot; Ajout des Fonctions
-  &quot; -----------------------------------------------------------
-
-  &quot; Ajout Fonction - Assistant
-  zcl_im_wb_obj_ctmenu=&gt;mo_task_context_menu-&gt;add_function(
-      fcode             = mc_fc_task_wz
-      text              = text-a01
-  ).
-
-ENDMETHOD.</source>
-  </method>
- </CLAS>
+ <TABL TABNAME="ZTEC_S_TASK_WIZARD_INCL" DDLANGUAGE="F" TABCLASS="INTTAB" DATMIN="0000000000" DATMAX="0000000000" DATAVG="0000000000" DDTEXT="Tâche - Données Assistant - Pour Gestion Include" AUTHCLASS="00" PROZPUFF="000" EXCLASS="1">
+  <dd09l AS4VERS="0000" SCHFELDANZ="000"/>
+  <dd03p TABNAME="ZTEC_S_TASK_WIZARD_INCL" FIELDNAME="INCLUDE_NAME" DDLANGUAGE="F" POSITION="0001" ROLLNAME="PROGNAME" ADMINFIELD="0" INTTYPE="C" INTLEN="000080" DOMNAME="PROGNAME" ROUTPUTLEN="000000" HEADLEN="40" SCRLEN1="08" SCRLEN2="12" SCRLEN3="12" DTELMASTER="D" DATATYPE="CHAR" LENG="000040" OUTPUTLEN="000040" DECIMALS="000000" MASK="  CHARE" MASKLEN="0000" DDTEXT="Nom du programme ABAP" REPTEXT="Progr." SCRTEXT_S="Program." SCRTEXT_M="Nom de progr" SCRTEXT_L="Programme" DOMNAME3L="PROGNAME" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTEC_S_TASK_WIZARD_INCL" FIELDNAME="INCLUDE_CREATE" DDLANGUAGE="F" POSITION="0002" ROLLNAME="XSDBOOLEAN" ADMINFIELD="0" INTTYPE="C" INTLEN="000002" DOMNAME="XSDBOOLEAN" ROUTPUTLEN="000000" HEADLEN="13" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="CHAR" LENG="000001" OUTPUTLEN="000001" DECIMALS="000000" VALEXI="X" MASK="  CHARE" MASKLEN="0000" DDTEXT="Valeur de vérité XSD : vrai/faux [ext.]" REPTEXT="Val. vérité" SCRTEXT_S="Val.vérité" SCRTEXT_M="Val. de vérité" SCRTEXT_L="Valeur de vérité" DOMNAME3L="XSDBOOLEAN" SHLPORIGIN="F" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+  <dd03p TABNAME="ZTEC_S_TASK_WIZARD_INCL" FIELDNAME="INCLUDE_CHANGE" DDLANGUAGE="F" POSITION="0003" ROLLNAME="XSDBOOLEAN" ADMINFIELD="0" INTTYPE="C" INTLEN="000002" DOMNAME="XSDBOOLEAN" ROUTPUTLEN="000000" HEADLEN="13" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="CHAR" LENG="000001" OUTPUTLEN="000001" DECIMALS="000000" VALEXI="X" MASK="  CHARE" MASKLEN="0000" DDTEXT="Valeur de vérité XSD : vrai/faux [ext.]" REPTEXT="Val. vérité" SCRTEXT_S="Val.vérité" SCRTEXT_M="Val. de vérité" SCRTEXT_L="Valeur de vérité" DOMNAME3L="XSDBOOLEAN" SHLPORIGIN="F" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000" OUTPUTSTYLE="00" STRORLOCPOS="00"/>
+ </TABL>
 </nugget>
